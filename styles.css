@@ -1,18 +1,15 @@
 :root {
-    --primary-color: #1a365d; /* כחול עמוק */
-    --accent-color: #c05621; /* כתום-זהב */
+    --primary-color: #1a365d;
+    --accent-color: #c05621;
     --bg-color: #f7fafc;
     --card-bg: #ffffff;
     --text-color: #2d3748;
     --light-blue: #ebf8ff;
 }
 
-/* ------------------------------------- */
-/* --- BODY ורקע --- */
-/* ------------------------------------- */
 body {
     font-family: 'Rubik', sans-serif;
-    background-color: #2d3748; 
+    background-color: #2d3748;
     color: var(--text-color);
     margin: 0;
     padding: 0;
@@ -24,18 +21,12 @@ body {
     background-repeat: no-repeat;
 }
 
-/* ------------------------------------- */
-/* --- שכבת כיסוי לשיפור הקריאות --- */
-/* ------------------------------------- */
 .content-wrapper {
-    background-color: rgba(255, 255, 255, 0.85);
+    background-color: rgba(255,255,255,0.85);
     min-height: 100vh;
     padding: 1px;
 }
 
-/* ------------------------------------- */
-/* --- כותרת ראשית --- */
-/* ------------------------------------- */
 header {
     background: linear-gradient(135deg, var(--primary-color), #2c5282);
     color: white;
@@ -44,31 +35,11 @@ header {
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
-header h1 {
-    margin: 0;
-    font-size: 2.5rem;
-}
+header h1 { margin: 0; font-size: 2.5rem; }
+header h2 { margin-top: 0.5rem; font-weight: 400; opacity: 0.9; }
 
-header h2 {
-    margin-top: 0.5rem;
-    font-weight: 400;
-    opacity: 0.9;
-}
+.container { max-width: 900px; margin: 2rem auto; padding: 0 1rem; display: grid; gap: 2rem; }
 
-/* ------------------------------------- */
-/* --- מיכל ראשי --- */
-/* ------------------------------------- */
-.container {
-    max-width: 900px;
-    margin: 2rem auto;
-    padding: 0 1rem;
-    display: grid;
-    gap: 2rem;
-}
-
-/* ------------------------------------- */
-/* --- כרטיסים --- */
-/* ------------------------------------- */
 .card {
     background: var(--card-bg);
     border-radius: 12px;
@@ -78,10 +49,7 @@ header h2 {
     transition: transform 0.2s;
 }
 
-.card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 15px rgba(0,0,0,0.1);
-}
+.card:hover { transform: translateY(-3px); box-shadow: 0 10px 15px rgba(0,0,0,0.1); }
 
 .section-title {
     color: var(--primary-color);
@@ -94,107 +62,24 @@ header h2 {
     gap: 10px;
 }
 
-/* ------------------------------------- */
-/* --- טבלאות זמנים --- */
-/* ------------------------------------- */
-.time-row {
-    display: flex;
-    justify-content: space-between;
-    padding: 0.5rem 0;
-    border-bottom: 1px solid #edf2f7;
-}
+.time-row { display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid #edf2f7; }
+.time-row:last-child { border-bottom: none; }
+.time-label { font-weight: 500; }
+.time-value { font-weight: 700; color: var(--primary-color); background: var(--light-blue); padding: 2px 8px; border-radius: 4px; }
 
-.time-row:last-child {
-    border-bottom: none;
-}
+.shabbat-times { display: grid; grid-template-columns: 1fr; gap: 2rem; }
+@media (min-width: 768px) { .shabbat-times { grid-template-columns: 1fr 1fr; } }
 
-.time-label {
-    font-weight: 500;
-}
+.shiur-item { background: #fffaf0; border-right: 4px solid var(--accent-color); padding: 1rem; margin-bottom: 1rem; border-radius: 4px; }
+.shiur-title { font-weight: 700; color: var(--accent-color); margin-bottom: 0.2rem; }
 
-.time-value {
-    font-weight: 700;
-    color: var(--primary-color);
-    background: var(--light-blue);
-    padding: 2px 8px;
-    border-radius: 4px;
-}
+.donation-box { text-align: center; background: linear-gradient(to bottom, #ffffff, #f7fafc); }
+.bank-details { font-size: 1.1rem; background: var(--light-blue); padding: 1rem; border-radius: 8px; margin: 1rem 0; display: inline-block; width: 100%; box-sizing: border-box; }
+.paybox-btn { background-color: #00a0e9; color: white; text-decoration: none; padding: 12px 24px; border-radius: 50px; font-weight: bold; display: inline-block; margin-top: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
 
-/* הדגשה לזמני שבת */
-.shabbat-times {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 2rem;
-}
+.footer { text-align: center; padding: 1rem; color: #718096; font-size: 0.9rem; background-color: #e2e8f0; }
 
-@media (min-width: 768px) {
-    .shabbat-times {
-        grid-template-columns: 1fr 1fr;
-    }
-}
-
-/* ------------------------------------- */
-/* --- שיעורים --- */
-/* ------------------------------------- */
-.shiur-item {
-    background: #fffaf0;
-    border-right: 4px solid var(--accent-color);
-    padding: 1rem;
-    margin-bottom: 1rem;
-    border-radius: 4px;
-}
-
-.shiur-title {
-    font-weight: 700;
-    color: var(--accent-color);
-    margin-bottom: 0.2rem;
-}
-
-/* ------------------------------------- */
-/* --- תרומות --- */
-/* ------------------------------------- */
-.donation-box {
-    text-align: center;
-    background: linear-gradient(to bottom, #ffffff, #f7fafc);
-}
-
-.bank-details {
-    font-size: 1.1rem;
-    background: var(--light-blue);
-    padding: 1rem;
-    border-radius: 8px;
-    margin: 1rem 0;
-    display: inline-block;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-.paybox-btn {
-    background-color: #00a0e9; 
-    color: white;
-    text-decoration: none;
-    padding: 12px 24px;
-    border-radius: 50px;
-    font-weight: bold;
-    display: inline-block;
-    margin-top: 10px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-}
-
-/* ------------------------------------- */
-/* --- פוטר --- */
-/* ------------------------------------- */
-.footer {
-    text-align: center;
-    padding: 1rem;
-    color: #718096;
-    font-size: 0.9rem;
-    background-color: #e2e8f0;
-}
-
-/* ------------------------------------- */
-/* --- פס הנצחה רץ --- */
-/* ------------------------------------- */
+/* פס הנצחה רץ */
 .memorial-ticker-container {
     width: 100%;
     overflow: hidden;
@@ -213,17 +98,8 @@ header h2 {
     animation: scroll-ticker 25s linear infinite;
 }
 
-.memorial-text span {
-    display: inline-block;
-    margin: 0 50px;
-}
+.memorial-text span { display: inline-block; margin: 0 50px; }
 
-@keyframes scroll-ticker {
-    0% { transform: translateX(100%); }
-    100% { transform: translateX(-100%); }
-}
+@keyframes scroll-ticker { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
 
-.candle-icon {
-    margin-left: 8px;
-    color: #f6ad55;
-}
+.candle-icon { margin-left: 8px; color: #f6ad55; }
