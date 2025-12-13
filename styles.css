@@ -1,105 +1,93 @@
 :root {
-    --primary-color: #1a365d;
-    --accent-color: #c05621;
-    --bg-color: #f7fafc;
-    --card-bg: #ffffff;
-    --text-color: #2d3748;
-    --light-blue: #ebf8ff;
+  --primary-color: #1a365d;
+  --accent-color: #c05621;
+  --bg-color: #f7fafc;
+  --card-bg: #ffffff;
+  --text-color: #2d3748;
+  --light-blue: #ebf8ff;
 }
 
 body {
-    font-family: 'Rubik', sans-serif;
-    background-color: #2d3748;
-    color: var(--text-color);
-    margin: 0;
-    padding: 0;
-    line-height: 1.6;
-    background-image: url('background.jpg');
-    background-size: cover;
-    background-attachment: fixed;
-    background-position: center top;
-    background-repeat: no-repeat;
+  font-family: 'Rubik', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #2d3748;
+  color: var(--text-color);
+  line-height: 1.6;
+  background-image: url('background.jpg');
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center top;
 }
 
 .content-wrapper {
-    background-color: rgba(255,255,255,0.85);
-    min-height: 100vh;
-    padding: 1px;
+  background-color: rgba(255,255,255,0.85);
+  min-height: 100vh;
+  padding: 1px;
 }
 
 header {
-    background: linear-gradient(135deg, var(--primary-color), #2c5282);
-    color: white;
-    text-align: center;
-    padding: 2rem 1rem;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  background: linear-gradient(135deg, var(--primary-color), #2c5282);
+  color: white;
+  text-align: center;
+  padding: 2rem 1rem;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
-header h1 { margin: 0; font-size: 2.5rem; }
-header h2 { margin-top: 0.5rem; font-weight: 400; opacity: 0.9; }
+header h1 { margin:0; font-size:2.5rem; }
+header h2 { margin-top:0.5rem; font-weight:400; opacity:0.9; }
 
-.container { max-width: 900px; margin: 2rem auto; padding: 0 1rem; display: grid; gap: 2rem; }
+.container { max-width:900px; margin:2rem auto; padding:0 1rem; display:grid; gap:2rem; }
 
 .card {
-    background: var(--card-bg);
-    border-radius: 12px;
-    padding: 1.5rem;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-    border-top: 5px solid var(--primary-color);
-    transition: transform 0.2s;
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  border-top: 5px solid var(--primary-color);
+  transition: transform 0.2s;
 }
 
-.card:hover { transform: translateY(-3px); box-shadow: 0 10px 15px rgba(0,0,0,0.1); }
+.card:hover { transform: translateY(-3px); box-shadow:0 10px 15px rgba(0,0,0,0.1); }
 
-.section-title {
-    color: var(--primary-color);
-    font-size: 1.5rem;
-    border-bottom: 2px solid var(--light-blue);
-    padding-bottom: 0.5rem;
-    margin-bottom: 1.2rem;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
+.section-title { color: var(--primary-color); font-size:1.5rem; border-bottom:2px solid var(--light-blue); padding-bottom:0.5rem; margin-bottom:1.2rem; display:flex; align-items:center; gap:10px; }
 
-.time-row { display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid #edf2f7; }
-.time-row:last-child { border-bottom: none; }
-.time-label { font-weight: 500; }
-.time-value { font-weight: 700; color: var(--primary-color); background: var(--light-blue); padding: 2px 8px; border-radius: 4px; }
+.footer { text-align:center; padding:1rem; color:#718096; font-size:0.9rem; background-color:#e2e8f0; }
 
-.shabbat-times { display: grid; grid-template-columns: 1fr; gap: 2rem; }
-@media (min-width: 768px) { .shabbat-times { grid-template-columns: 1fr 1fr; } }
-
-.shiur-item { background: #fffaf0; border-right: 4px solid var(--accent-color); padding: 1rem; margin-bottom: 1rem; border-radius: 4px; }
-.shiur-title { font-weight: 700; color: var(--accent-color); margin-bottom: 0.2rem; }
-
-.donation-box { text-align: center; background: linear-gradient(to bottom, #ffffff, #f7fafc); }
-.bank-details { font-size: 1.1rem; background: var(--light-blue); padding: 1rem; border-radius: 8px; margin: 1rem 0; display: inline-block; width: 100%; box-sizing: border-box; }
-.paybox-btn { background-color: #00a0e9; color: white; text-decoration: none; padding: 12px 24px; border-radius: 50px; font-weight: bold; display: inline-block; margin-top: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
-
-.footer { text-align: center; padding: 1rem; color: #718096; font-size: 0.9rem; background-color: #e2e8f0; }
-
-/* פס הנצחה רץ */
+/* פס הנצחה עם אנימציית fade-in/out */
 .memorial-ticker-container {
-    width: 100%;
-    overflow: hidden;
-    background-color: #2d3748;
-    color: #fff;
-    padding: 12px 0;
-    box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
-    font-size: 1.1rem;
-    font-weight: 500;
-    position: relative;
+  width:100%;
+  background-color:#2d3748;
+  color:#fff;
+  padding:12px 0;
+  text-align:center;
+  font-size:1.2rem;
+  font-weight:500;
+  position:relative;
+  height:35px;
+  overflow:hidden;
 }
 
-.memorial-text {
-    display: inline-block;
-    white-space: nowrap;
-    animation: scroll-ticker 25s linear infinite;
+.memorial-text span {
+  position:absolute;
+  width:100%;
+  left:0;
+  opacity:0;
+  animation: fadeCycle 25s linear infinite;
 }
 
-.memorial-text span { display: inline-block; margin: 0 50px; }
+.memorial-text span:nth-child(1) { animation-delay:0s; }
+.memorial-text span:nth-child(2) { animation-delay:5s; }
+.memorial-text span:nth-child(3) { animation-delay:10s; }
+.memorial-text span:nth-child(4) { animation-delay:15s; }
+.memorial-text span:nth-child(5) { animation-delay:20s; }
 
-@keyframes scroll-ticker { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
+@keyframes fadeCycle {
+  0% { opacity:0; }
+  5% { opacity:1; }
+  20% { opacity:1; }
+  25% { opacity:0; }
+  100% { opacity:0; }
+}
 
-.candle-icon { margin-left: 8px; color: #f6ad55; }
+.candle-icon { margin-left:8px; color:#f6ad55; }
