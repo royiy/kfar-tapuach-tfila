@@ -1,147 +1,59 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>בית הכנסת המרכזי כפר תפוח</title>
-    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>בית הכנסת המרכזי כפר תפוח</title>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
 <header>
-    <h1>בית הכנסת המרכזי</h1>
-    <h2>כפר תפוח</h2>
+  <h1>בית הכנסת המרכזי</h1>
+  <h2>כפר תפוח</h2>
 </header>
 
 <div class="content-wrapper">
-    <div class="container">
+  <div class="container">
 
-        <!-- כרטיס זמני שבת -->
-        <div class="card">
-            <h3 class="section-title">🕯️ זמני השבת - פרשת מקץ</h3>
-            <div class="shabbat-times">
-                <div>
-                    <h4 style="color: var(--accent-color);">ערב שבת</h4>
-                    <div class="time-row">
-                        <span class="time-label">מנחה גדולה</span>
-                        <span class="time-value">12:20</span>
-                    </div>
-                    <div class="time-row" style="background-color: #fff5f5;">
-                        <span class="time-label">הדלקת נרות</span>
-                        <span class="time-value">16:12</span>
-                    </div>
-                    <div class="time-row">
-                        <span class="time-label">מנחה ערב שבת</span>
-                        <span class="time-value">16:24</span>
-                    </div>
-                    <div class="time-row">
-                        <span class="time-label">צאת הכוכבים</span>
-                        <span class="time-value">17:00</span>
-                    </div>
-                </div>
+    <!-- כרטיסי תוכן: שבת, חול, שיעורים, תרומות -->
+    <div class="card">
+      <h3 class="section-title">🕯️ זמני השבת - פרשת מקץ</h3>
+      <!-- תוכן זמני שבת כאן -->
+    </div>
 
-                <div>
-                    <h4 style="color: var(--accent-color);">יום השבת</h4>
-                    <div class="time-row">
-                        <span class="time-label">שחרית (ותפילת ילדים)</span>
-                        <span class="time-value">08:00</span>
-                    </div>
-                    <div class="time-row">
-                        <span class="time-label">מנחה גדולה</span>
-                        <span class="time-value">12:30</span>
-                    </div>
-                    <div class="time-row">
-                        <span class="time-label">לימוד הלכה</span>
-                        <span class="time-value">13:00</span>
-                    </div>
-                    <div class="time-row">
-                        <span class="time-label">מנחה של שבת</span>
-                        <span class="time-value">15:15</span>
-                    </div>
-                    <div class="time-row">
-                        <span class="time-label">שיעור הרב שמעון רוזנצוויג</span>
-                        <span class="time-value">אחרי מנחה</span>
-                    </div>
-                    <div class="time-row">
-                        <span class="time-label">שקיעה</span>
-                        <span class="time-value">16:43</span>
-                    </div>
-                    <div class="time-row" style="background-color: #ebf8ff;">
-                        <span class="time-label">צאת שבת וערבית</span>
-                        <span class="time-value">17:18</span>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="card">
+      <h3 class="section-title">📅 זמני תפילות חול</h3>
+      <!-- תוכן זמני חול כאן -->
+    </div>
 
-        <!-- כרטיס זמני חול -->
-        <div class="card">
-            <h3 class="section-title">📅 זמני תפילות חול</h3>
-            <div class="time-row">
-                <span class="time-label">שחרית</span>
-                <span class="time-value">06:15 | 07:50 | 08:00 (בשישי)</span>
-            </div>
-            <div class="time-row">
-                <span class="time-label">מנחה</span>
-                <span class="time-value">13:15 | 16:25</span>
-            </div>
-            <div class="time-row">
-                <span class="time-label">ערבית</span>
-                <span class="time-value">17:00 | 20:00 | 21:00</span>
-            </div>
-        </div>
+    <div class="card">
+      <h3 class="section-title">📚 שיעורים בימות השבוע</h3>
+      <!-- תוכן שיעורים כאן -->
+    </div>
 
-        <!-- כרטיס שיעורים -->
-        <div class="card">
-            <h3 class="section-title">📚 שיעורים בימות השבוע</h3>
-            <div class="shiur-item">
-                <div class="shiur-title">שיעור בדף היומי</div>
-                <div>ראשון עד חמישי בשעה <strong>20:30</strong></div>
-                <div style="font-size: 0.9em; color: #666;">אלעד אמסטרדם</div>
-            </div>
-            <div class="shiur-item">
-                <div class="shiur-title">שיעור באורות</div>
-                <div>יום רביעי בשעה <strong>21:15</strong></div>
-                <div style="font-size: 0.9em; color: #666;">הרב שמעון רוזנצוויג</div>
-            </div>
-            <div class="shiur-item">
-                <div class="shiur-title">כולל יום שישי</div>
-                <div>בין השעות <strong>09:00 - 11:00</strong></div>
-                <div style="font-size: 0.9em; color: #666;">סוגיה בפרשת שבוע - הרב צביקה הרץ</div>
-            </div>
-        </div>
+    <div class="card donation-box">
+      <h3 class="section-title">💎 תרומות לבית הכנסת</h3>
+      <!-- תוכן תרומות כאן -->
+    </div>
 
-        <!-- כרטיס תרומות -->
-        <div class="card donation-box">
-            <h3 class="section-title" style="justify-content: center;">💎 תרומות לבית הכנסת</h3>
-            <p>נודה לכל תרומה להחזקת ופיתוח בית הכנסת</p>
-            <div class="bank-details">
-                <strong>העברה בנקאית:</strong><br>
-                בנק הפועלים (12)<br>
-                סניף 286<br>
-                מספר חשבון: <strong>126982</strong><br>
-                ע"ש בית הכנסת המרכזי כפר תפוח
-            </div>
-            <a href="https://links.payboxapp.com/rBbQDcbaPVb" class="paybox-btn">לתרומה ב-PayBox</a>
-        </div>
-
-    </div> <!-- container -->
+  </div> <!-- container -->
 </div> <!-- content-wrapper -->
 
 <!-- פס הנצחה רץ -->
 <div class="memorial-ticker-container">
-    <div class="memorial-text">
-        <span>🕯️ לעילוי נשמת סעדיה בן יחיא</span>
-        <span>🕯️ לעילוי נשמת עוואד בן יחיא</span>
-        <span>🕯️ לעילוי נשמת טרנג'ה בת חביבה</span>
-        <span>🕯️ לעילוי נשמת שלמה זלמן בן מרדכי אלעזר הלוי</span>
-        <span>🕯️ לעילוי נשמת רחל בת יוסף הכהן</span>
-    </div>
+  <div class="memorial-text">
+    <span>🕯️ לעילוי נשמת סעדיה בן יחיא</span>
+    <span>🕯️ לעילוי נשמת עוואד בן יחיא</span>
+    <span>🕯️ לעילוי נשמת טרנג'ה בת חביבה</span>
+    <span>🕯️ לעילוי נשמת שלמה זלמן בן מרדכי אלעזר הלוי</span>
+    <span>🕯️ לעילוי נשמת רחל בת יוסף הכהן</span>
+  </div>
 </div>
 
 <footer class="footer">
-    נבנה באהבה לרווחת המתפללים | בית הכנסת המרכזי כפר תפוח
+  נבנה באהבה לרווחת המתפללים | בית הכנסת המרכזי כפר תפוח
 </footer>
 
 </body>
