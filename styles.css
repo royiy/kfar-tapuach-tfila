@@ -8,30 +8,14 @@
 }
 
 /* ------------------------------------- */
-/* --- BODY + רקע --- */
+/* --- BODY ורקע --- */
 /* ------------------------------------- */
 body {
     font-family: 'Rubik', sans-serif;
-    background-color: #2d3748; /* צבע גיבוי כהה */
+    background-color: #2d3748; 
     color: var(--text-color);
     margin: 0;
+    padding: 0;
     line-height: 1.6;
     background-image: url('background.jpg');
-    background-size: cover;
-    background-attachment: fixed;
-    background-position: center top;
-    background-repeat: no-repeat;
-}
-
-/* ------------------------------------- */
-/* --- שכבת כיסוי --- */
-/* ------------------------------------- */
-.content-wrapper {
-    background-color: rgba(255, 255, 255, 0.85);
-    min-height: 100vh;
-    padding-top: 1px;
-    padding-bottom: 1px;
-}
-
-/* ------------------------------------- */
-/
+    background-size: cov
