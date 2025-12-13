@@ -1,6 +1,6 @@
 :root {
-    --primary-color: #1a365d;
-    --accent-color: #c05621;
+    --primary-color: #1a365d; /* כחול עמוק */
+    --accent-color: #c05621; /* כתום-זהב */
     --bg-color: #f7fafc;
     --card-bg: #ffffff;
     --text-color: #2d3748;
@@ -12,11 +12,10 @@
 /* ------------------------------------- */
 body {
     font-family: 'Rubik', sans-serif;
-    background-color: #2d3748;
+    background-color: #2d3748; /* צבע גיבוי כהה */
     color: var(--text-color);
     margin: 0;
     line-height: 1.6;
-
     background-image: url('background.jpg');
     background-size: cover;
     background-attachment: fixed;
@@ -35,20 +34,4 @@ body {
 }
 
 /* ------------------------------------- */
-/* --- כותרת --- */
-/* ------------------------------------- */
-header {
-    background: linear-gradient(135deg, var(--primary-color), #2c5282);
-    color: white;
-    text-align: center;
-    padding: 2rem 1rem;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-}
-
-header h1 {
-    margin: 0;
-    font-size: 2.5rem;
-}
-
-header h2 {
-    ma
+/
