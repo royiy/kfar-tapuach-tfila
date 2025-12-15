@@ -22,7 +22,7 @@
             margin: 0;
             padding: 0;
             line-height: 1.6;
-            padding-bottom: 60px;
+            padding-bottom: 60px; /* הושאר 60px כפי שהיה בקוד המקורי, כעת יש גלילה כצפוי */
         }
 
         /* כותרת ראשית */
@@ -170,7 +170,7 @@
             margin-top: 0;
         }
 
-        /* --- עיצוב פס הנצחה --- */
+        /* --- עיצוב פס הנצחה (מתוקן) --- */
         .memorial-ticker-container {
             background-color: #2d3748;
             color: #fff;
@@ -178,7 +178,8 @@
             text-align: center;
             overflow: hidden;
             position: relative;
-            height: 30px;
+            /* התיקון הקריטי: הגדלת גובה התיבה כדי למנוע חיתוך טקסט */
+            height: 40px; 
             display: flex;
             align-items: center;
             justify-content: center;
@@ -192,20 +193,21 @@
             opacity: 0;
             font-weight: 500;
             font-size: 1.1rem;
-            /* שינוי מהירות: 3 משפטים * 6 שניות למשפט = 18 שניות סך הכל */
-            animation: cycleText 18s infinite; 
+            /* עדכון התזמון ל-4 משפטים: 4 שמות * 5 שניות = 20 שניות סך הכל */
+            animation: cycleText4 20s infinite;
         }
 
-        /* תזמון מעודכן (כל 6 שניות משפט מתחלף) */
+        /* תזמון מעודכן (כל 5 שניות משפט מתחלף) */
         .memorial-text:nth-child(1) { animation-delay: 0s; }
-        .memorial-text:nth-child(2) { animation-delay: 6s; }
-        .memorial-text:nth-child(3) { animation-delay: 12s; }
+        .memorial-text:nth-child(2) { animation-delay: 5s; }
+        .memorial-text:nth-child(3) { animation-delay: 10s; }
+        .memorial-text:nth-child(4) { animation-delay: 15s; } /* נוסף תזמון לשם הרביעי */
 
-        @keyframes cycleText {
+        @keyframes cycleText4 {
             0% { opacity: 0; transform: translateY(10px); }
             5% { opacity: 1; transform: translateY(0); }
-            28% { opacity: 1; transform: translateY(0); } /* נשאר מוצג */
-            33% { opacity: 0; transform: translateY(-10px); } /* נעלם */
+            20% { opacity: 1; transform: translateY(0); } /* נשאר מוצג ל-15% (3 שניות) */
+            25% { opacity: 0; transform: translateY(-10px); } /* נעלם */
             100% { opacity: 0; }
         }
 
@@ -226,7 +228,7 @@
     <div class="container">
 
         <div class="card">
-            <h3 class="section-title">🕯️  זמני השבת - פרשת מקץ - שבת ראש חודש ו' דחנוכה</h3>
+            <h3 class="section-title">🕯️  זמני השבת - פרשת מקץ - שבת ראש חודש ו' דחנוכה</h3>
             
             <div class="shabbat-times">
                 <div>
@@ -275,7 +277,7 @@
                         <span class="time-label">מנחה נוספת (בחדר לימוד)</span>
                         <span class="time-value">16:12</span>
                     </div>
-                     <div class="time-row">
+                    <div class="time-row">
                         <span class="time-label">שקיעה</span>
                         <span class="time-value">16:43</span>
                     </div>
@@ -342,7 +344,7 @@
                 <a href="https://links.payboxapp.com/rBbQDcbaPVb" class="paybox-btn">לתרומה ב-PayBox</a>
             </div>
             
-             <div style="margin-top: 15px;">
+            <div style="margin-top: 15px;">
                 </div>
         </div>
 
@@ -360,7 +362,4 @@
     </footer>
 
 </body>
-
 </html>
-
-
