@@ -22,7 +22,7 @@
             margin: 0;
             padding: 0;
             line-height: 1.6;
-            padding-bottom: 60px; /* הושאר 60px כפי שהיה בקוד המקורי, כעת יש גלילה כצפוי */
+            padding-bottom: 60px; 
         }
 
         /* כותרת ראשית */
@@ -170,16 +170,15 @@
             margin-top: 0;
         }
 
-        /* --- עיצוב פס הנצחה (מתוקן) --- */
+        /* --- עיצוב פס הנצחה (מתוקן ל-5 שמות) --- */
         .memorial-ticker-container {
             background-color: #2d3748;
             color: #fff;
-            padding: 15px 0;
+            padding: 20px 0; 
             text-align: center;
             overflow: hidden;
             position: relative;
-            /* התיקון הקריטי: הגדלת גובה התיבה כדי למנוע חיתוך טקסט */
-            height: 40px; 
+            height: 50px; 
             display: flex;
             align-items: center;
             justify-content: center;
@@ -193,21 +192,22 @@
             opacity: 0;
             font-weight: 500;
             font-size: 1.1rem;
-            /* עדכון התזמון ל-4 משפטים: 4 שמות * 5 שניות = 20 שניות סך הכל */
-            animation: cycleText4 20s infinite;
+            /* עדכון ל-5 שמות: 5 שמות * 5 שניות = 25 שניות סך הכל */
+            animation: cycleText5 25s infinite;
         }
 
-        /* תזמון מעודכן (כל 5 שניות משפט מתחלף) */
+        /* תזמון מעודכן ל-5 שמות (כל 5 שניות משפט מתחלף) */
         .memorial-text:nth-child(1) { animation-delay: 0s; }
         .memorial-text:nth-child(2) { animation-delay: 5s; }
         .memorial-text:nth-child(3) { animation-delay: 10s; }
-        .memorial-text:nth-child(4) { animation-delay: 15s; } /* נוסף תזמון לשם הרביעי */
+        .memorial-text:nth-child(4) { animation-delay: 15s; }
+        .memorial-text:nth-child(5) { animation-delay: 20s; } /* השם החדש */
 
-        @keyframes cycleText4 {
+        @keyframes cycleText5 {
             0% { opacity: 0; transform: translateY(10px); }
-            5% { opacity: 1; transform: translateY(0); }
-            20% { opacity: 1; transform: translateY(0); } /* נשאר מוצג ל-15% (3 שניות) */
-            25% { opacity: 0; transform: translateY(-10px); } /* נעלם */
+            4% { opacity: 1; transform: translateY(0); } /* עלייה מהירה יותר */
+            16% { opacity: 1; transform: translateY(0); } /* נשאר מוצג */
+            20% { opacity: 0; transform: translateY(-10px); } /* נעלם */
             100% { opacity: 0; }
         }
 
@@ -215,7 +215,6 @@
             margin-left: 8px;
             color: #f6ad55; /* צבע להבה */
         }
-
     </style>
 </head>
 <body>
@@ -351,7 +350,8 @@
     </div>
 
     <div class="memorial-ticker-container">
-        <div class="memorial-text"><span class="candle-icon">🕯️</span>לעילוי נשמת רחל בת יוסף הכהן</div>
+        <div class="memorial-text"><span class="candle-icon">🕯️</span>לעילוי נשמת שלמה זלמן בן מרדכי אלעזר הלוי</div>
+        <div class="memorial-text"><span class="candle-icon">🕯️</span>לעילוי נשמת רחל בת יוסף</div>
         <div class="memorial-text"><span class="candle-icon">🕯️</span>לעילוי נשמת סעדיה בן יחיא</div>
         <div class="memorial-text"><span class="candle-icon">🕯️</span>לעילוי נשמת עוואד בן יחיא</div>
         <div class="memorial-text"><span class="candle-icon">🕯️</span>לעילוי נשמת טרנג'ה בת חביבה</div>
@@ -363,4 +363,3 @@
 
 </body>
 </html>
-
