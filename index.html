@@ -7,8 +7,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #1a365d;
-            --accent-color: #c05621;
+            --primary-color: #1a365d; /* כחול עמוק */
+            --accent-color: #c05621; /* כתום-זהב */
             --bg-color: #f7fafc;
             --card-bg: #ffffff;
             --text-color: #2d3748;
@@ -25,6 +25,7 @@
             padding-bottom: 60px;
         }
 
+        /* כותרת ראשית */
         header {
             background: linear-gradient(135deg, var(--primary-color), #2c5282);
             color: white;
@@ -44,6 +45,7 @@
             opacity: 0.9;
         }
 
+        /* מיכל ראשי */
         .container {
             max-width: 900px;
             margin: 2rem auto;
@@ -52,6 +54,7 @@
             gap: 2rem;
         }
 
+        /* כרטיסים */
         .card {
             background: var(--card-bg);
             border-radius: 12px;
@@ -77,11 +80,16 @@
             gap: 10px;
         }
 
+        /* טבלאות זמנים */
         .time-row {
             display: flex;
             justify-content: space-between;
             padding: 0.5rem 0;
             border-bottom: 1px solid #edf2f7;
+        }
+
+        .time-row:last-child {
+            border-bottom: none;
         }
 
         .time-label {
@@ -96,6 +104,7 @@
             border-radius: 4px;
         }
 
+        /* הדגשה לזמני שבת */
         .shabbat-times {
             display: grid;
             grid-template-columns: 1fr;
@@ -108,25 +117,7 @@
             }
         }
 
-        /* ===== הדגשת קידוש ===== */
-        .kiddush {
-            background: #fff5e6;
-            color: var(--accent-color);
-            font-weight: 700;
-            padding: 4px 10px;
-            border-radius: 8px;
-            margin-right: 6px;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.15);
-        }
-
-        .kiddush::before {
-            content: "🍷";
-        }
-        /* ======================= */
-
+        /* שיעורים */
         .shiur-item {
             background: #fffaf0;
             border-right: 4px solid var(--accent-color);
@@ -141,6 +132,7 @@
             margin-bottom: 0.2rem;
         }
 
+        /* תרומות */
         .donation-box {
             text-align: center;
             background: linear-gradient(to bottom, #ffffff, #f7fafc);
@@ -152,12 +144,13 @@
             padding: 1rem;
             border-radius: 8px;
             margin: 1rem 0;
+            display: inline-block;
             width: 100%;
             box-sizing: border-box;
         }
 
         .paybox-btn {
-            background-color: #00a0e9;
+            background-color: #00a0e9; /* צבע פייבוקס */
             color: white;
             text-decoration: none;
             padding: 12px 24px;
@@ -165,6 +158,7 @@
             font-weight: bold;
             display: inline-block;
             margin-top: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
 
         .footer {
@@ -173,46 +167,290 @@
             color: #718096;
             font-size: 0.9rem;
             background-color: #e2e8f0;
+            margin-top: 0;
+        }
+
+        /* --- עיצוב פס הנצחה  --- */
+        .memorial-ticker-container {
+            background-color: #2d3748;
+            color: #fff;
+            padding: 20px 0; 
+            text-align: center;
+            overflow: hidden;
+            position: relative;
+            height: 50px; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 2rem;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+        }
+
+        .memorial-text {
+            position: absolute;
+            width: 100%;
+            opacity: 0;
+            font-weight: 500;
+            font-size: 1.1rem;
+            animation: cycleText5 25s infinite;
+        }
+
+        .memorial-text:nth-child(1) { animation-delay: 0s; }
+        .memorial-text:nth-child(2) { animation-delay: 5s; }
+        .memorial-text:nth-child(3) { animation-delay: 10s; }
+        .memorial-text:nth-child(4) { animation-delay: 15s; }
+        .memorial-text:nth-child(5) { animation-delay: 20s; }
+
+        @keyframes cycleText5 {
+            0% { opacity: 0; transform: translateY(10px); }
+            4% { opacity: 1; transform: translateY(0); } 
+            16% { opacity: 1; transform: translateY(0); } 
+            20% { opacity: 0; transform: translateY(-10px); } 
+            100% { opacity: 0; }
+        }
+
+        .candle-icon {
+            margin-left: 8px;
+            color: #f6ad55;
+        }
+
+        /* --- עיצוב הפופ-אפ (Modal) --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            visibility: hidden;
+            opacity: 0;
+            transition: all 0.4s ease;
+        }
+
+        .modal-overlay.active {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            max-width: 500px;
+            width: 85%;
+            text-align: center;
+            position: relative;
+            border-top: 8px solid var(--accent-color);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            transform: scale(0.8);
+            transition: all 0.4s ease;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-content h3 {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .modal-content p {
+            font-size: 1.15rem;
+            color: var(--text-color);
+            line-height: 1.5;
+        }
+
+        .modal-close-btn {
+            margin-top: 1.5rem;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-family: 'Rubik', sans-serif;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.2s;
+        }
+
+        .modal-close-btn:hover {
+            background-color: #2c5282;
         }
     </style>
 </head>
 <body>
 
-<header>
-    <h1>בית הכנסת המרכזי</h1>
-    <h2>כפר תפוח</h2>
-</header>
+    <div class="modal-overlay" id="thankYouModal">
+        <div class="modal-content">
+            <h3>יישר כוח! 🌟</h3>
+            <p>
+                תודה גדולה על סידור הספריה  <br><br>
+                <strong>נעמי הכהן, רותם מסינגר, נטע גסנר, אלה נחמני, כרמל יפת, יעל שטיין ואלישבע גפרי</strong><br><br>
+                בנות מצווה שכבה ו'
+            </p>
+            <button class="modal-close-btn" onclick="closePopup()">סגור הודעה</button>
+        </div>
+    </div>
 
-<div class="container">
+    <header>
+        <h1>בית הכנסת המרכזי</h1>
+        <h2>כפר תפוח</h2>
+    </header>
 
-    <div class="card">
-        <h3 class="section-title">🕯️ זמני השבת - פרשת ויחי</h3>
+    <div class="container">
 
-        <div class="shabbat-times">
+        <div class="card">
+            <h3 class="section-title">🕯️  זמני השבת - פרשת ויחי</h3>
+            <div class="shabbat-times">
+                <div>
+                    <h4 style="color: var(--accent-color);">ערב שבת</h4>
+                    <div class="time-row">
+                        <span class="time-label">מנחה גדולה</span>
+                        <span class="time-value">12:20</span>
+                    </div>
+                    <div class="time-row" style="background-color: #fff5f5;">
+                        <span class="time-label">הדלקת נרות</span>
+                        <span class="time-value">16:20</span>
+                    </div>
+                    <div class="time-row">
+                        <span class="time-label">מנחה ערב שבת</span>
+                        <span class="time-value">16:34</span>
+                    </div>
+                    <div class="time-row">
+                        <span class="time-label">צאת הכוכבים</span>
+                        <span class="time-value">17:09</span>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 style="color: var(--accent-color);">יום השבת</h4>
+                    <div class="time-row">
+                        <span class="time-label">שחרית (ותפילת ילדים) <strong>20:30</strong>קידוש</span>
+                        <span class="time-value">08:00</span>
+                    </div>
+                    <div class="time-row">
+                        <span class="time-label">מנחה גדולה</span>
+                        <span class="time-value">12:30</span>
+                    </div>
+                    <div class="time-row">
+                        <span class="time-label">לימוד הלכה </span>
+                        <span class="time-value">13:00</span>
+                    </div>
+                    <div class="time-row">
+                        <span class="time-label">מנחה של שבת</span>
+                        <span class="time-value">15:15</span>
+                    </div>
+                    <div class="time-row">
+                        <span class="time-label">שיעור הרב שמעון רוזנצוויג</span>
+                        <span class="time-value">אחרי מנחה</span>
+                    </div>
+                    <div class="time-row">
+                        <span class="time-label">מנחה נוספת (בחדר לימוד)</span>
+                        <span class="time-value">16:20</span>
+                    </div>
+                    <div class="time-row">
+                        <span class="time-label">שקיעה</span>
+                        <span class="time-value">16:52</span>
+                    </div>
+                    <div class="time-row" style="background-color: #ebf8ff;">
+                        <span class="time-label">צאת שבת וערבית</span>
+                        <span class="time-value">17:27</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3 class="section-title">📅 זמני תפילות חול</h3>
+            <div class="time-row">
+                <span class="time-label">שחרית</span>
+                <span class="time-value">06:15 | 07:50 | 08:00 (בשישי)</span>
+            </div>
+            <div class="time-row">
+                <span class="time-label">מנחה</span>
+                <span class="time-value">13:15 | 16:30</span>
+            </div>
+            <div class="time-row">
+                <span class="time-label">ערבית</span>
+                <span class="time-value">17:10 | 20:00 | 21:00</span>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3 class="section-title">📚 שיעורים בימות השבוע</h3>
+            <div class="shiur-item">
+                <div class="shiur-title">שיעור בדף היומי</div>
+                <div>ראשון עד חמישי בשעה <strong>20:30</strong></div>
+                <div style="font-size: 0.9em; color: #666;">אלעד אמסטרדם</div>
+            </div>
+
+            <div class="shiur-item">
+                <div class="shiur-title">שיעור באורות</div>
+                <div>יום רביעי בשעה <strong>21:15</strong></div>
+                <div style="font-size: 0.9em; color: #666;">הרב שמעון רוזנצוויג</div>
+            </div>
+
+            <div class="shiur-item">
+                <div class="shiur-title">כולל יום שישי</div>
+                <div>בין השעות <strong>09:00 - 11:00</strong></div>
+                <div style="font-size: 0.9em; color: #666;">סוגיה בפרשת שבוע - הרב צביקה הרץ</div>
+            </div>
+        </div>
+
+        <div class="card donation-box" id="donate">
+            <h3 class="section-title" style="justify-content: center;">💎 תרומות לבית הכנסת</h3>
+            <p>נודה לכל תרומה להחזקת ופיתוח בית הכנסת</p>
+            <div class="bank-details">
+                <strong>העברה בנקאית:</strong><br>
+                בנק הפועלים (12)<br>
+                סניף 286<br>
+                מספר חשבון: <strong>126982</strong><br>
+                ע"ש בית הכנסת המרכזי כפר תפוח            
+            </div>
             <div>
-                <h4 style="color: var(--accent-color);">יום השבת</h4>
-
-                <div class="time-row">
-                    <span class="time-label">
-                        שחרית (ותפילת ילדים)
-                        <span class="kiddush">קידוש</span>
-                    </span>
-                    <span class="time-value">08:00</span>
-                </div>
-
-                <div class="time-row">
-                    <span class="time-label">מנחה גדולה</span>
-                    <span class="time-value">12:30</span>
-                </div>
+                <a href="https://links.payboxapp.com/rBbQDcbaPVb" class="paybox-btn">לתרומה ב-PayBox</a>
             </div>
         </div>
     </div>
 
-</div>
+    <div class="memorial-ticker-container">
+        <div class="memorial-text"><span class="candle-icon">🕯️</span>לעילוי נשמת שלמה זלמן בן מרדכי אלעזר הלוי</div>
+        <div class="memorial-text"><span class="candle-icon">🕯️</span> לעילוי נשמת רחל בת יוסף הכהן</div>
+        <div class="memorial-text"><span class="candle-icon">🕯️</span>לעילוי נשמת סעדיה בן יחיא</div>
+        <div class="memorial-text"><span class="candle-icon">🕯️</span>לעילוי נשמת עוואד בן יחיא</div>
+        <div class="memorial-text"><span class="candle-icon">🕯️</span>לעילוי נשמת טרנג'ה בת חביבה</div>
+    </div>
 
-<footer class="footer">
-    נבנה באהבה לרווחת המתפללים | בית הכנסת המרכזי כפר תפוח
-</footer>
+    <footer class="footer">
+        נבנה באהבה לרווחת המתפללים | בית הכנסת המרכזי כפר תפוח
+    </footer>
 
+    <script>
+        // פונקציה להצגת הפופ-אפ בטעינת הדף
+        window.addEventListener('DOMContentLoaded', (event) => {
+            setTimeout(() => {
+                document.getElementById('thankYouModal').classList.add('active');
+            }, 500); // השהייה של חצי שנייה למראה יפה יותר
+        });
+
+        // פונקציה לסגירת הפופ-אפ
+        function closePopup() {
+            document.getElementById('thankYouModal').classList.remove('active');
+        }
+
+        // אפשרות לסגור בלחיצה על הרקע הכהה
+        document.getElementById('thankYouModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closePopup();
+            }
+        });
+    </script>
 </body>
 </html>
