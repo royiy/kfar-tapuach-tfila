@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>בית הכנסת המרכזי כפר תפוח</title>
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
-
     <style>
         :root {
             --primary-color: #1a365d;
@@ -21,6 +20,8 @@
             background-color: var(--bg-color);
             color: var(--text-color);
             margin: 0;
+            padding: 0;
+            line-height: 1.6;
             padding-bottom: 60px;
         }
 
@@ -29,6 +30,18 @@
             color: white;
             text-align: center;
             padding: 2rem 1rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+
+        header h2 {
+            margin-top: 0.5rem;
+            font-weight: 400;
+            opacity: 0.9;
         }
 
         .container {
@@ -45,6 +58,12 @@
             padding: 1.5rem;
             box-shadow: 0 4px 6px rgba(0,0,0,0.05);
             border-top: 5px solid var(--primary-color);
+            transition: transform 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px rgba(0,0,0,0.1);
         }
 
         .section-title {
@@ -53,6 +72,9 @@
             border-bottom: 2px solid var(--light-blue);
             padding-bottom: 0.5rem;
             margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .time-row {
@@ -74,6 +96,18 @@
             border-radius: 4px;
         }
 
+        .shabbat-times {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .shabbat-times {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
         /* ===== הדגשת קידוש ===== */
         .kiddush {
             background: #fff5e6;
@@ -90,11 +124,58 @@
 
         .kiddush::before {
             content: "🍷";
-            font-size: 1.1em;
+        }
+        /* ======================= */
+
+        .shiur-item {
+            background: #fffaf0;
+            border-right: 4px solid var(--accent-color);
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 4px;
+        }
+
+        .shiur-title {
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: 0.2rem;
+        }
+
+        .donation-box {
+            text-align: center;
+            background: linear-gradient(to bottom, #ffffff, #f7fafc);
+        }
+
+        .bank-details {
+            font-size: 1.1rem;
+            background: var(--light-blue);
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .paybox-btn {
+            background-color: #00a0e9;
+            color: white;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 1rem;
+            color: #718096;
+            font-size: 0.9rem;
+            background-color: #e2e8f0;
         }
     </style>
 </head>
-
 <body>
 
 <header>
@@ -107,38 +188,29 @@
     <div class="card">
         <h3 class="section-title">🕯️ זמני השבת - פרשת ויחי</h3>
 
-        <div class="time-row">
-            <span class="time-label">
-                שחרית (ותפילת ילדים)
-                <span class="kiddush">קידוש</span>
-            </span>
-            <span class="time-value">08:00</span>
-        </div>
+        <div class="shabbat-times">
+            <div>
+                <h4 style="color: var(--accent-color);">יום השבת</h4>
 
-        <div class="time-row">
-            <span class="time-label">מנחה גדולה</span>
-            <span class="time-value">12:30</span>
-        </div>
+                <div class="time-row">
+                    <span class="time-label">
+                        שחרית (ותפילת ילדים)
+                        <span class="kiddush">קידוש</span>
+                    </span>
+                    <span class="time-value">08:00</span>
+                </div>
 
-        <div class="time-row">
-            <span class="time-label">לימוד הלכה</span>
-            <span class="time-value">13:00</span>
-        </div>
-
-        <div class="time-row">
-            <span class="time-label">מנחה של שבת</span>
-            <span class="time-value">15:15</span>
-        </div>
-
-        <div class="time-row">
-            <span class="time-label">צאת שבת וערבית</span>
-            <span class="time-value">17:27</span>
+                <div class="time-row">
+                    <span class="time-label">מנחה גדולה</span>
+                    <span class="time-value">12:30</span>
+                </div>
+            </div>
         </div>
     </div>
 
 </div>
 
-<footer style="text-align:center; padding:1rem; background:#e2e8f0;">
+<footer class="footer">
     נבנה באהבה לרווחת המתפללים | בית הכנסת המרכזי כפר תפוח
 </footer>
 
