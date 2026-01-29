@@ -4,438 +4,734 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>בית הכנסת המרכזי כפר תפוח</title>
-    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alef:wght@400;700&family=Frank+Ruhl+Libre:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #1a365d; /* כחול עמוק */
-            --accent-color: #c05621; /* כתום-זהב */
-            --bg-color: #f7fafc;
-            --card-bg: #ffffff;
-            --text-color: #2d3748;
-            --light-blue: #ebf8ff;
+            --deep-navy: #0a1628;
+            --royal-blue: #1e3a5f;
+            --gold: #d4af37;
+            --warm-gold: #f4e4c1;
+            --cream: #faf8f3;
+            --soft-white: #ffffff;
+            --charcoal: #2a2a2a;
+            --shadow-blue: rgba(30, 58, 95, 0.15);
         }
 
-        body {
-            font-family: 'Rubik', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
+        * {
             margin: 0;
             padding: 0;
-            line-height: 1.6;
-            padding-bottom: 60px;
-        }
-
-        /* כותרת ראשית */
-        header {
-            background: linear-gradient(135deg, var(--primary-color), #2c5282);
-            color: white;
-            text-align: center;
-            padding: 2rem 1rem;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-
-        header h1 {
-            margin: 0;
-            font-size: 2.5rem;
-        }
-
-        header h2 {
-            margin-top: 0.5rem;
-            font-weight: 400;
-            opacity: 0.9;
-        }
-
-        /* מיכל ראשי */
-        .container {
-            max-width: 900px;
-            margin: 2rem auto;
-            padding: 0 1rem;
-            display: grid;
-            gap: 2rem;
-        }
-
-        /* כרטיסים */
-        .card {
-            background: var(--card-bg);
-            border-radius: 12px;
-            padding: 1.5rem;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            border-top: 5px solid var(--primary-color);
-            transition: transform 0.2s;
-        }
-
-        .card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 15px rgba(0,0,0,0.1);
-        }
-
-        .section-title {
-            color: var(--primary-color);
-            font-size: 1.5rem;
-            border-bottom: 2px solid var(--light-blue);
-            padding-bottom: 0.5rem;
-            margin-bottom: 1.2rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        /* טבלאות זמנים */
-        .time-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 0.5rem 0;
-            border-bottom: 1px solid #edf2f7;
-        }
-
-        .time-row:last-child {
-            border-bottom: none;
-        }
-
-        .time-label {
-            font-weight: 500;
-        }
-
-        .time-value {
-            font-weight: 700;
-            color: var(--primary-color);
-            background: var(--light-blue);
-            padding: 2px 8px;
-            border-radius: 4px;
-        }
-
-        /* הדגשה לזמני שבת */
-        .shabbat-times {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 2rem;
-        }
-
-        @media (min-width: 768px) {
-            .shabbat-times {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-
-        /* שיעורים */
-        .shiur-item {
-            background: #fffaf0;
-            border-right: 4px solid var(--accent-color);
-            padding: 1rem;
-            margin-bottom: 1rem;
-            border-radius: 4px;
-        }
-
-        .shiur-title {
-            font-weight: 700;
-            color: var(--accent-color);
-            margin-bottom: 0.2rem;
-        }
-
-        /* תרומות */
-        .donation-box {
-            text-align: center;
-            background: linear-gradient(to bottom, #ffffff, #f7fafc);
-        }
-
-        .bank-details {
-            font-size: 1.1rem;
-            background: var(--light-blue);
-            padding: 1rem;
-            border-radius: 8px;
-            margin: 1rem 0;
-            display: inline-block;
-            width: 100%;
             box-sizing: border-box;
         }
 
-        .paybox-btn {
-            background-color: #00a0e9;
-            color: white;
-            text-decoration: none;
-            padding: 12px 24px;
-            border-radius: 50px;
-            font-weight: bold;
-            display: inline-block;
-            margin-top: 10px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        body {
+            font-family: 'Alef', sans-serif;
+            background: var(--cream);
+            color: var(--charcoal);
+            line-height: 1.8;
+            overflow-x: hidden;
         }
 
-        .footer {
-            text-align: center;
-            padding: 1rem;
-            color: #718096;
-            font-size: 0.9rem;
-            background-color: #e2e8f0;
-            margin-top: 0;
-        }
-
-        /* פס הנצחה */
-        .memorial-ticker-container {
-            background-color: #2d3748;
-            color: #fff;
-            padding: 20px 0; 
+        /* Hero Header with Gradient Overlay */
+        .hero {
+            position: relative;
+            background: linear-gradient(165deg, var(--deep-navy) 0%, var(--royal-blue) 50%, #2d5580 100%);
+            padding: 5rem 2rem 6rem;
             text-align: center;
             overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(212, 175, 55, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(212, 175, 55, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: var(--cream);
+            clip-path: polygon(0 50%, 100% 0, 100% 100%, 0 100%);
+        }
+
+        .hero-content {
             position: relative;
-            height: 50px; 
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .synagogue-title {
+            font-family: 'Frank Ruhl Libre', serif;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 900;
+            color: var(--soft-white);
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .location {
+            font-family: 'Frank Ruhl Libre', serif;
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            color: var(--warm-gold);
+            font-weight: 300;
+            letter-spacing: 0.05em;
+            margin-bottom: 2rem;
+        }
+
+        .decorative-line {
+            width: 120px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            margin: 0 auto;
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { opacity: 0.5; transform: scaleX(1); }
+            50% { opacity: 1; transform: scaleX(1.1); }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem 4rem;
+        }
+
+        /* Section Cards */
+        .section {
+            background: var(--soft-white);
+            border-radius: 20px;
+            padding: 3rem 2.5rem;
+            margin-bottom: 3rem;
+            box-shadow: 
+                0 10px 40px var(--shadow-blue),
+                0 2px 8px rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+            animation: fadeIn 0.8s ease-out backwards;
+        }
+
+        .section:nth-child(1) { animation-delay: 0.1s; }
+        .section:nth-child(2) { animation-delay: 0.2s; }
+        .section:nth-child(3) { animation-delay: 0.3s; }
+        .section:nth-child(4) { animation-delay: 0.4s; }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, var(--royal-blue), var(--gold), var(--royal-blue));
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid #f0ede3;
+        }
+
+        .section-icon {
+            font-size: 2.5rem;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+        }
+
+        .section-title {
+            font-family: 'Frank Ruhl Libre', serif;
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            font-weight: 700;
+            color: var(--royal-blue);
+            letter-spacing: -0.01em;
+        }
+
+        /* Shabbat Times Grid */
+        .shabbat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            margin-top: 2rem;
+        }
+
+        .shabbat-column h4 {
+            font-family: 'Frank Ruhl Libre', serif;
+            font-size: 1.4rem;
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .time-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid #f5f2e8;
+            transition: all 0.3s ease;
+        }
+
+        .time-item:last-child {
+            border-bottom: none;
+        }
+
+        .time-item:hover {
+            padding-right: 0.5rem;
+            background: linear-gradient(90deg, transparent, #faf8f3);
+        }
+
+        .time-label {
+            font-size: 1rem;
+            color: var(--charcoal);
+            font-weight: 400;
+        }
+
+        .time-value {
+            font-family: 'Frank Ruhl Libre', serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--royal-blue);
+            background: linear-gradient(135deg, #e8f2ff, #f0ede3);
+            padding: 0.4rem 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(30, 58, 95, 0.1);
+        }
+
+        .highlight-time {
+            background: linear-gradient(135deg, #fff9e6, #ffe8b8) !important;
+            color: #b8860b !important;
+            font-size: 1.3rem !important;
+            padding: 0.5rem 1.2rem !important;
+            box-shadow: 0 3px 12px rgba(212, 175, 55, 0.3) !important;
+        }
+
+        /* Weekday Schedule */
+        .schedule-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .schedule-row {
+            background: linear-gradient(135deg, #fafafa, #ffffff);
+            border-right: 4px solid var(--royal-blue);
+            padding: 1.2rem 1.5rem;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .schedule-row:hover {
+            transform: translateX(-5px);
+            box-shadow: 8px 8px 20px rgba(30, 58, 95, 0.15);
+            border-right-color: var(--gold);
+        }
+
+        .schedule-label {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--charcoal);
+        }
+
+        .schedule-times {
+            font-family: 'Frank Ruhl Libre', serif;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--royal-blue);
+        }
+
+        /* Shiurim Cards */
+        .shiurim-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .shiur-card {
+            background: linear-gradient(135deg, #fffbf0, #fff8e6);
+            border-radius: 16px;
+            padding: 2rem;
+            border-right: 5px solid var(--gold);
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .shiur-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .shiur-card:hover::before {
+            left: 100%;
+        }
+
+        .shiur-card:hover {
+            transform: translateX(-8px) scale(1.02);
+            box-shadow: 12px 12px 30px rgba(212, 175, 55, 0.3);
+        }
+
+        .shiur-title {
+            font-family: 'Frank Ruhl Libre', serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--royal-blue);
+            margin-bottom: 0.8rem;
+        }
+
+        .shiur-time {
+            font-size: 1.15rem;
+            color: var(--charcoal);
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .shiur-teacher {
+            font-size: 1rem;
+            color: #6b6b6b;
+            font-style: italic;
+        }
+
+        /* Donation Section */
+        .donation-section {
+            background: linear-gradient(165deg, var(--royal-blue) 0%, var(--deep-navy) 100%);
+            color: var(--soft-white);
+            text-align: center;
+            position: relative;
+        }
+
+        .donation-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 30% 40%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 70% 60%, rgba(212, 175, 55, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .donation-section .section-header {
+            border-bottom-color: rgba(212, 175, 55, 0.3);
+        }
+
+        .donation-section .section-title {
+            color: var(--warm-gold);
+        }
+
+        .donation-intro {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            line-height: 1.8;
+        }
+
+        .bank-details {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2rem auto;
+            max-width: 500px;
+            font-size: 1.1rem;
+            line-height: 2;
+        }
+
+        .bank-details strong {
+            color: var(--warm-gold);
+            font-size: 1.15rem;
+        }
+
+        .paybox-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #00a0e9, #0077b6);
+            color: white;
+            text-decoration: none;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-top: 1.5rem;
+            box-shadow: 0 8px 20px rgba(0, 160, 233, 0.4);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .paybox-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .paybox-button:hover::before {
+            left: 100%;
+        }
+
+        .paybox-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(0, 160, 233, 0.5);
+        }
+
+        /* Memorial Ticker */
+        .memorial-section {
+            background: var(--deep-navy);
+            color: var(--warm-gold);
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .memorial-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                repeating-linear-gradient(
+                    90deg,
+                    transparent,
+                    transparent 50px,
+                    rgba(212, 175, 55, 0.03) 50px,
+                    rgba(212, 175, 55, 0.03) 100px
+                );
+            pointer-events: none;
+        }
+
+        .memorial-header {
+            font-family: 'Frank Ruhl Libre', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            color: var(--warm-gold);
+        }
+
+        .memorial-container {
+            position: relative;
+            height: 60px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-top: 2rem;
-            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
         }
 
-        .memorial-text {
+        .memorial-item {
             position: absolute;
             width: 100%;
             opacity: 0;
+            font-family: 'Frank Ruhl Libre', serif;
+            font-size: 1.2rem;
             font-weight: 500;
-            font-size: 1.1rem;
-            animation: cycleText5 25s infinite;
+            animation: memorialCycle 25s infinite;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
         }
 
-        .memorial-text:nth-child(1) { animation-delay: 0s; }
-        .memorial-text:nth-child(2) { animation-delay: 5s; }
-        .memorial-text:nth-child(3) { animation-delay: 10s; }
-        .memorial-text:nth-child(4) { animation-delay: 15s; }
-        .memorial-text:nth-child(5) { animation-delay: 20s; }
+        .memorial-item:nth-child(1) { animation-delay: 0s; }
+        .memorial-item:nth-child(2) { animation-delay: 5s; }
+        .memorial-item:nth-child(3) { animation-delay: 10s; }
+        .memorial-item:nth-child(4) { animation-delay: 15s; }
+        .memorial-item:nth-child(5) { animation-delay: 20s; }
 
-        @keyframes cycleText5 {
-            0% { opacity: 0; transform: translateY(10px); }
-            4% { opacity: 1; transform: translateY(0); } 
-            16% { opacity: 1; transform: translateY(0); } 
-            20% { opacity: 0; transform: translateY(-10px); } 
+        @keyframes memorialCycle {
+            0% { opacity: 0; transform: translateY(15px); }
+            4% { opacity: 1; transform: translateY(0); }
+            16% { opacity: 1; transform: translateY(0); }
+            20% { opacity: 0; transform: translateY(-15px); }
             100% { opacity: 0; }
         }
 
-        .candle-icon {
-            margin-left: 8px;
-            color: #f6ad55;
+        .candle {
+            font-size: 1.5rem;
+            filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.6));
         }
 
-        /* פופ-אפ */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 2000;
-            visibility: hidden;
-            opacity: 0;
-            transition: all 0.4s ease;
-        }
-
-        .modal-overlay.active {
-            visibility: visible;
-            opacity: 1;
-        }
-
-        .modal-content {
-            background: white;
-            padding: 2rem;
-            border-radius: 15px;
-            max-width: 500px;
-            width: 85%;
+        /* Footer */
+        .footer {
+            background: var(--royal-blue);
+            color: var(--warm-gold);
             text-align: center;
-            position: relative;
-            border-top: 8px solid var(--accent-color);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-            transform: scale(0.8);
-            transition: all 0.4s ease;
-        }
-
-        .modal-overlay.active .modal-content {
-            transform: scale(1);
-        }
-
-        .modal-content h3 {
-            color: var(--primary-color);
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-        }
-
-        .modal-content p {
-            font-size: 1.15rem;
-            color: var(--text-color);
-            line-height: 1.5;
-        }
-
-        .modal-close-btn {
-            margin-top: 1.5rem;
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 8px;
-            font-weight: bold;
-            font-family: 'Rubik', sans-serif;
-            cursor: pointer;
+            padding: 2.5rem;
             font-size: 1rem;
-            transition: background 0.2s;
+            letter-spacing: 0.02em;
         }
 
-        .modal-close-btn:hover {
-            background-color: #2c5282;
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 3rem 1.5rem 4rem;
+            }
+
+            .section {
+                padding: 2rem 1.5rem;
+                margin-bottom: 2rem;
+            }
+
+            .shabbat-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .memorial-item {
+                font-size: 1rem;
+            }
+        }
+
+        /* Loading Animation */
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>בית הכנסת המרכזי</h1>
-        <h2>כפר תפוח</h2>
+    <!-- Hero Header -->
+    <header class="hero">
+        <div class="hero-content">
+            <h1 class="synagogue-title">בית הכנסת המרכזי</h1>
+            <p class="location">כפר תפוח</p>
+            <div class="decorative-line"></div>
+        </div>
     </header>
 
+    <!-- Main Content -->
     <div class="container">
 
-        <div class="card">
-            <h3 class="section-title">🕯️  זמני השבת - פרשת בשלח - שירה</h3>
-            <div class="shabbat-times">
-                <div>
-                    <h4 style="color: var(--accent-color);">ערב שבת</h4>
-                    <div class="time-row">
+        <!-- Shabbat Times -->
+        <section class="section">
+            <div class="section-header">
+                <span class="section-icon">🕯️</span>
+                <h2 class="section-title">זמני השבת - פרשת בשלח - שירה</h2>
+            </div>
+
+            <div class="shabbat-grid">
+                <div class="shabbat-column">
+                    <h4>🌅 ערב שבת</h4>
+                    <div class="time-item">
                         <span class="time-label">מנחה גדולה</span>
                         <span class="time-value">12:20</span>
                     </div>
-                    <div class="time-row" style="background-color: #fff5f5;">
+                    <div class="time-item">
                         <span class="time-label">הדלקת נרות</span>
-                        <span class="time-value">16:45</span>
+                        <span class="time-value highlight-time">16:45</span>
                     </div>
-                    <div class="time-row">
+                    <div class="time-item">
                         <span class="time-label">מנחה ערב שבת</span>
                         <span class="time-value">16:59</span>
                     </div>
-                    <div class="time-row">
+                    <div class="time-item">
                         <span class="time-label">צאת הכוכבים</span>
                         <span class="time-value">17:33</span>
                     </div>
                 </div>
 
-                <div>
-                    <h4 style="color: var(--accent-color);">יום השבת</h4>
-                    <div class="time-row">
+                <div class="shabbat-column">
+                    <h4>✡️ יום השבת</h4>
+                    <div class="time-item">
                         <span class="time-label">שחרית (ותפילת ילדים)</span>
                         <span class="time-value">08:00</span>
                     </div>
-                    <div class="time-row">
+                    <div class="time-item">
                         <span class="time-label">מנחה גדולה</span>
                         <span class="time-value">12:30</span>
                     </div>
-                    <div class="time-row">
-                        <span class="time-label">לימוד הלכה </span>
+                    <div class="time-item">
+                        <span class="time-label">לימוד הלכה</span>
                         <span class="time-value">13:00</span>
                     </div>
-                    <div class="time-row">
+                    <div class="time-item">
                         <span class="time-label">מנחה של שבת</span>
                         <span class="time-value">15:40</span>
                     </div>
-                    <div class="time-row">
+                    <div class="time-item">
                         <span class="time-label">שיעור הרב שמעון רוזנצוויג</span>
                         <span class="time-value">אחרי מנחה</span>
                     </div>
-                    <div class="time-row">
+                    <div class="time-item">
                         <span class="time-label">מנחה נוספת (בחדר לימוד)</span>
                         <span class="time-value">16:45</span>
                     </div>
-                    <div class="time-row">
+                    <div class="time-item">
                         <span class="time-label">שקיעה</span>
                         <span class="time-value">17:16</span>
                     </div>
-                    <div class="time-row" style="background-color: #ebf8ff;">
+                    <div class="time-item">
                         <span class="time-label">צאת שבת וערבית</span>
-                        <span class="time-value">17:50</span>
+                        <span class="time-value highlight-time">17:50</span>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <div class="card">
-            <h3 class="section-title">📅 זמני תפילות חול</h3>
-            <div class="time-row">
-                <span class="time-label">שחרית</span>
-                <span class="time-value">06:15 | 07:50 | 08:00 (בשישי)</span>
-            </div>
-            <div class="time-row">
-                <span class="time-label">מנחה</span>
-                <span class="time-value">13:15 | 17:00</span>
-            </div>
-            <div class="time-row">
-                <span class="time-label">ערבית</span>
-                <span class="time-value">17:40 | 20:00 | 21:00</span>
-            </div>
-        </div>
-
-        <div class="card">
-            <h3 class="section-title">📚 שיעורים בימות השבוע</h3>
-            <div class="shiur-item">
-                <div class="shiur-title">שיעור בדף היומי</div>
-                <div>ראשון עד חמישי בשעה <strong>20:30</strong></div>
-                <div style="font-size: 0.9em; color: #666;">אלעד אמסטרדם</div>
+        <!-- Weekday Schedule -->
+        <section class="section">
+            <div class="section-header">
+                <span class="section-icon">📅</span>
+                <h2 class="section-title">זמני תפילות חול</h2>
             </div>
 
-            <div class="shiur-item">
-                <div class="shiur-title">שיעור באורות</div>
-                <div>יום רביעי בשעה <strong>21:15</strong></div>
-                <div style="font-size: 0.9em; color: #666;">הרב שמעון רוזנצוויג</div>
+            <div class="schedule-grid">
+                <div class="schedule-row">
+                    <span class="schedule-label">שחרית</span>
+                    <span class="schedule-times">06:15 | 07:50 | 08:00 (בשישי)</span>
+                </div>
+                <div class="schedule-row">
+                    <span class="schedule-label">מנחה</span>
+                    <span class="schedule-times">13:15 | 17:00</span>
+                </div>
+                <div class="schedule-row">
+                    <span class="schedule-label">ערבית</span>
+                    <span class="schedule-times">17:40 | 20:00 | 21:00</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Shiurim -->
+        <section class="section">
+            <div class="section-header">
+                <span class="section-icon">📚</span>
+                <h2 class="section-title">שיעורים בימות השבוע</h2>
             </div>
 
-            <div class="shiur-item">
-                <div class="shiur-title">כולל יום שישי</div>
-                <div>בין השעות <strong>09:00 - 11:00</strong></div>
-                <div style="font-size: 0.9em; color: #666;">סוגיה בפרשת שבוע - הרב צביקה הרץ</div>
-            </div>
-        </div>
+            <div class="shiurim-grid">
+                <div class="shiur-card">
+                    <div class="shiur-title">שיעור בדף היומי</div>
+                    <div class="shiur-time">ראשון עד חמישי בשעה <strong>20:30</strong></div>
+                    <div class="shiur-teacher">אלעד אמסטרדם</div>
+                </div>
 
-        <div class="card donation-box" id="donate">
-            <h3 class="section-title" style="justify-content: center;">💎 תרומות לבית הכנסת</h3>
-            <p>נודה לכל תרומה להחזקת ופיתוח בית הכנסת</p>
+                <div class="shiur-card">
+                    <div class="shiur-title">שיעור באורות</div>
+                    <div class="shiur-time">יום רביעי בשעה <strong>21:15</strong></div>
+                    <div class="shiur-teacher">הרב שמעון רוזנצוויג</div>
+                </div>
+
+                <div class="shiur-card">
+                    <div class="shiur-title">כולל יום שישי</div>
+                    <div class="shiur-time">בין השעות <strong>09:00 - 11:00</strong></div>
+                    <div class="shiur-teacher">סוגיה בפרשת שבוע - הרב צביקה הרץ</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Donations -->
+        <section class="section donation-section">
+            <div class="section-header">
+                <span class="section-icon">💎</span>
+                <h2 class="section-title">תרומות לבית הכנסת</h2>
+            </div>
+
+            <p class="donation-intro">נודה לכל תרומה להחזקת ופיתוח בית הכנסת</p>
+
             <div class="bank-details">
                 <strong>העברה בנקאית:</strong><br>
                 בנק הפועלים (12)<br>
                 סניף 286<br>
                 מספר חשבון: <strong>126982</strong><br>
-                ע"ש בית הכנסת המרכזי כפר תפוח            
+                ע"ש בית הכנסת המרכזי כפר תפוח
             </div>
-            <div>
-                <a href="https://links.payboxapp.com/rBbQDcbaPVb" class="paybox-btn">לתרומה ב-PayBox</a>
+
+            <a href="https://links.payboxapp.com/rBbQDcbaPVb" class="paybox-button">
+                לתרומה ב-PayBox 💳
+            </a>
+        </section>
+
+    </div>
+
+    <!-- Memorial Section -->
+    <section class="memorial-section">
+        <h3 class="memorial-header">לעילוי נשמת</h3>
+        <div class="memorial-container">
+            <div class="memorial-item">
+                <span class="candle">🕯️</span>
+                <span>שלמה זלמן בן מרדכי אלעזר הלוי</span>
+            </div>
+            <div class="memorial-item">
+                <span class="candle">🕯️</span>
+                <span>רחל בת יוסף הכהן</span>
+            </div>
+            <div class="memorial-item">
+                <span class="candle">🕯️</span>
+                <span>סעדיה בן יחיא</span>
+            </div>
+            <div class="memorial-item">
+                <span class="candle">🕯️</span>
+                <span>עוואד בן יחיא</span>
+            </div>
+            <div class="memorial-item">
+                <span class="candle">🕯️</span>
+                <span>טרנג'ה בת חביבה</span>
             </div>
         </div>
-    </div>
+    </section>
 
-    <div class="memorial-ticker-container">
-        <div class="memorial-text"><span class="candle-icon">🕯️</span>לעילוי נשמת שלמה זלמן בן מרדכי אלעזר הלוי</div>
-        <div class="memorial-text"><span class="candle-icon">🕯️</span> לעילוי נשמת רחל בת יוסף הכהן</div>
-        <div class="memorial-text"><span class="candle-icon">🕯️</span>לעילוי נשמת סעדיה בן יחיא</div>
-        <div class="memorial-text"><span class="candle-icon">🕯️</span>לעילוי נשמת עוואד בן יחיא</div>
-        <div class="memorial-text"><span class="candle-icon">🕯️</span>לעילוי נשמת טרנג'ה בת חביבה</div>
-    </div>
-
+    <!-- Footer -->
     <footer class="footer">
         נבנה באהבה לרווחת המתפללים | בית הכנסת המרכזי כפר תפוח
     </footer>
 
-    <script>
-        window.addEventListener('DOMContentLoaded', (event) => {
-            setTimeout(() => {
-                document.getElementById('thankYouModal').classList.add('active');
-            }, 500);
-        });
-
-        function closePopup() {
-            document.getElementById('thankYouModal').classList.remove('active');
-        }
-
-        document.getElementById('thankYouModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closePopup();
-            }
-        });
-    </script>
 </body>
 </html>
