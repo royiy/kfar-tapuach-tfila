@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>לוח זמנים דינמי - בית הכנסת המרכזי</title>
-    <link href="https://fonts.googleapis.com/css2?family=Alef:wght@400;700&family=Frank+Ruhl+Libre:wght@700;900&display=swap" rel="stylesheet">
+    <title>לוח זמנים - בית הכנסת המרכזי</title>
+    <link href="https://fonts.googleapis.com/css2?family=Alef:wght@400;700&family=Frank+Ruhl+Libre:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #03070f; /* כחול-שחור עמוק מאוד */
-            --card-bg: rgba(14, 26, 45, 0.9); /* כחול כהה שקוף מעט */
-            --text-main: #ffffff;
-            --gold: #d4af37;
-            --gold-dim: #b8860b;
-            --blue-accent: #3a7bd5;
-            --highlight: #ffeb3b; /* צהוב בוהק לזמנים */
-            --shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            --bg-color: #f4f6f9;
+            --card-bg: #ffffff;
+            --text-main: #2c3e50;
+            --text-muted: #7f8c8d;
+            --accent-blue: #2980b9;
+            --accent-gold: #d4af37;
+            --border-color: #e2e8f0;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -22,211 +22,176 @@
         body {
             font-family: 'Alef', sans-serif;
             background-color: var(--bg-color);
-            background-image: 
-                radial-gradient(circle at 15% 15%, rgba(30, 58, 95, 0.2) 0%, transparent 40%),
-                radial-gradient(circle at 85% 85%, rgba(212, 175, 55, 0.05) 0%, transparent 40%);
             color: var(--text-main);
             height: 100vh;
-            overflow: hidden; /* מניעת גלילה בטלוויזיה */
+            overflow: hidden;
             display: flex;
             flex-direction: column;
-            padding: 1.5vh 1.5vw;
+            padding: 2vh 2vw;
         }
 
-        /* --- כותרת עליונה ושעון --- */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 3px solid var(--gold);
-            padding-bottom: 1vh;
-            margin-bottom: 2vh;
-            filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.3));
+            border-bottom: 2px solid var(--accent-gold);
+            padding-bottom: 1.5vh;
+            margin-bottom: 2.5vh;
         }
 
         .header-right {
             display: flex;
             flex-direction: column;
-            align-items: flex-start;
         }
 
         .synagogue-name {
             font-family: 'Frank Ruhl Libre', serif;
-            font-size: 2.2vw;
-            color: var(--gold);
-            margin-bottom: -0.5vh;
+            font-size: 2vw;
+            color: var(--accent-blue);
         }
 
         .parsha-title {
             font-family: 'Frank Ruhl Libre', serif;
-            font-size: 5.5vw;
+            font-size: 4.5vw;
             font-weight: 900;
             color: var(--text-main);
-            text-shadow: 0 4px 15px rgba(0,0,0,0.6);
         }
 
-        /* שעון חי בפינה */
         .clock-container {
-            background: rgba(255, 255, 255, 0.05);
-            border: 2px solid var(--blue-accent);
-            border-radius: 15px;
-            padding: 1vh 2vw;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5vh 2.5vw;
             text-align: center;
-            box-shadow: inset 0 0 15px rgba(58, 123, 213, 0.2);
+            box-shadow: var(--shadow);
         }
 
         #live-clock {
             font-family: 'Frank Ruhl Libre', serif;
-            font-size: 5vw;
+            font-size: 4.5vw;
             font-weight: 700;
-            color: var(--blue-accent);
+            color: var(--accent-blue);
             line-height: 1;
         }
 
         #live-date {
             font-size: 1.2vw;
-            color: #aaa;
+            color: var(--text-muted);
             margin-top: 0.5vh;
         }
 
-        /* --- אזור התוכן המרכזי --- */
         main {
             display: grid;
-            grid-template-columns: 1.1fr 0.9fr; /* צד שבת מעט רחב יותר */
-            gap: 1.5vw;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5vw;
             flex-grow: 1;
             margin-bottom: 2vh;
         }
 
         .column {
             background: var(--card-bg);
-            border-radius: 20px;
-            padding: 2vh 2vw;
+            border-radius: 16px;
+            padding: 2.5vh 2.5vw;
             display: flex;
             flex-direction: column;
             box-shadow: var(--shadow);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            position: relative;
-            overflow: hidden;
-        }
-
-        /* אפקט הילה קטן בפינות الكרטיסים */
-        .column::before {
-            content: '';
-            position: absolute;
-            top: -50%; left: -50%;
-            width: 200%; height: 200%;
-            background: radial-gradient(circle at center, rgba(58, 123, 213, 0.05) 0%, transparent 60%);
-            pointer-events: none;
+            border: 1px solid var(--border-color);
         }
 
         h2 {
             font-family: 'Frank Ruhl Libre', serif;
-            font-size: 3.2vw;
-            color: var(--gold);
+            font-size: 3vw;
+            color: var(--accent-blue);
             text-align: center;
-            margin-bottom: 2vh;
+            margin-bottom: 2.5vh;
             padding-bottom: 1vh;
-            border-bottom: 2px solid rgba(212, 175, 55, 0.2);
-            position: relative;
+            border-bottom: 1px solid var(--border-color);
         }
 
-        /* עיצוב שורות הזמן */
         .time-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.2vh 1vw;
-            margin-bottom: 1vh;
-            border-radius: 10px;
-            background: rgba(255, 255, 255, 0.02);
-            transition: background 0.3s ease;
+            padding: 1.5vh 1vw;
+            margin-bottom: 0.5vh;
+            border-bottom: 1px solid #f0f0f0;
         }
 
-        .time-row:hover {
-            background: rgba(255, 255, 255, 0.05);
+        .time-row:last-child {
+            border-bottom: none;
         }
 
         .label {
-            font-size: 2.2vw;
-            color: #dddddd;
-            font-weight: 400;
+            font-size: 2vw;
+            color: var(--text-main);
         }
 
         .time {
             font-family: 'Frank Ruhl Libre', serif;
-            font-size: 3.8vw;
+            font-size: 3vw;
             font-weight: 900;
-            color: var(--highlight);
-            text-shadow: 0 0 10px rgba(255, 235, 59, 0.4);
-            background: rgba(0, 0, 0, 0.3);
-            padding: 0.2vh 1vw;
+            color: var(--accent-blue);
+            background: #f8fafc;
+            padding: 0.5vh 1.5vw;
             border-radius: 8px;
-            border: 1px solid rgba(255, 235, 59, 0.1);
+            border: 1px solid var(--border-color);
         }
 
-        /* עיצוב מיוחד למנייני חול */
         .weekday-section {
             display: flex;
             flex-direction: column;
             justify-content: center;
             flex-grow: 1;
-            gap: 4vh;
+            gap: 5vh;
         }
 
         .weekday-group {
             text-align: center;
-            background: rgba(58, 123, 213, 0.05);
-            padding: 2vh;
-            border-radius: 15px;
-            border: 1px solid rgba(58, 123, 213, 0.1);
         }
 
         .weekday-label {
             font-size: 2.5vw;
-            color: var(--blue-accent);
+            color: var(--text-muted);
             margin-bottom: 1.5vh;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
         }
 
         .minyanim-list {
             font-family: 'Frank Ruhl Libre', serif;
             font-size: 3.5vw;
-            color: var(--highlight);
+            color: var(--accent-blue);
             font-weight: 700;
-            direction: ltr; /* שעות משמאל לימין */
-            letter-spacing: 2px;
+            direction: ltr;
         }
 
-        /* --- פס הנצחת נשמות (Memorial Ticker) --- */
         .memorial-section {
-            background: rgba(10, 22, 40, 0.8);
-            border-top: 2px solid var(--gold-dim);
-            color: var(--gold-dim);
-            padding: 1vh 2vw;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-right: 4px solid var(--accent-gold);
+            color: var(--text-main);
+            padding: 1.5vh 2vw;
             text-align: center;
-            border-radius: 10px;
-            margin-top: auto; /* נצמד לתחתית */
-            box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            gap: 2vw;
         }
 
         .memorial-header {
             font-family: 'Frank Ruhl Libre', serif;
-            font-size: 1.4vw;
-            font-weight: 700;
-            margin-bottom: 0.5vh;
-            opacity: 0.8;
+            font-size: 1.5vw;
+            color: var(--text-muted);
+            white-space: nowrap;
         }
 
         .memorial-container {
             position: relative;
-            height: 4vh; /* גובה הפס */
+            height: 3.5vh;
+            flex-grow: 1;
             overflow: hidden;
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
         }
 
         .memorial-item {
@@ -234,16 +199,13 @@
             width: 100%;
             opacity: 0;
             font-family: 'Frank Ruhl Libre', serif;
-            font-size: 1.8vw; /* גודל טקסט הנפטרים */
-            font-weight: 500;
-            animation: memorialCycle 25s infinite; /* אנימציית מחזור */
+            font-size: 1.8vw;
             display: flex;
             align-items: center;
-            justify-content: center;
             gap: 1vw;
+            animation: memorialCycle 25s infinite;
         }
 
-        /* תזמון האנימציה לכל שם (5 שמות במחזור של 25 שניות) */
         .memorial-item:nth-child(1) { animation-delay: 0s; }
         .memorial-item:nth-child(2) { animation-delay: 5s; }
         .memorial-item:nth-child(3) { animation-delay: 10s; }
@@ -259,8 +221,7 @@
         }
 
         .candle {
-            font-size: 2.2vw;
-            filter: drop-shadow(0 0 5px rgba(212, 175, 55, 0.5));
+            font-size: 1.8vw;
         }
 
     </style>
@@ -270,11 +231,11 @@
     <header>
         <div class="header-right">
             <div class="synagogue-name">בית הכנסת המרכזי כפר תפוח</div>
-            <h1 class="parsha-title" id="parsha-name">טוען...</h1>
+            <div class="parsha-title" id="parsha-name">טוען...</div>
         </div>
         <div class="clock-container">
             <div id="live-clock">00:00</div>
-            <div id="live-date">טוען תאריך...</div>
+            <div id="live-date">טוען...</div>
         </div>
     </header>
 
@@ -286,27 +247,26 @@
                 <span class="label">מנחה גדולה (שישי):</span>
                 <span class="time" id="mincha-gedola-fri">--:--</span>
             </div>
-
             <div class="time-row">
                 <span class="label">הדלקת נרות:</span>
                 <span class="time" id="candles">--:--</span>
             </div>
-            
             <div class="time-row">
                 <span class="label">מנחה ערב שבת (14 ד' אחרי):</span>
                 <span class="time" id="mincha-erev">--:--</span>
             </div>
-
             <div class="time-row">
-                <span class="label">מנחה נוספת (בזמן נרות):</span>
-                <span class="time" id="mincha-extra">--:--</span>
-            </div>
-
-            <div class="time-row">
-                <span class="label">מנחה של שבת (שעתיים ו-10 לפני צאת שבת):</span>
+                <span class="label">מנחה של שבת:</span>
                 <span class="time" id="mincha-shabbat">--:--</span>
             </div>
-
+            <div class="time-row" style="background-color: #f9fbfd; border-radius: 8px;">
+                <span class="label">שיעור:</span>
+                <span class="time" id="shiur-shabbat">--:--</span>
+            </div>
+            <div class="time-row" style="background-color: #f9fbfd; border-radius: 8px;">
+                <span class="label">מנחה (בחדר לימוד):</span>
+                <span class="time" id="mincha-room">--:--</span>
+            </div>
             <div class="time-row">
                 <span class="label">צאת שבת:</span>
                 <span class="time" id="tzeit">--:--</span>
@@ -320,7 +280,6 @@
                     <div class="weekday-label">מנחה</div>
                     <div class="minyanim-list" id="weekday-mincha">--:--</div>
                 </div>
-
                 <div class="weekday-group">
                     <div class="weekday-label">ערבית</div>
                     <div class="minyanim-list" id="weekday-arvit">--:--</div>
@@ -330,33 +289,17 @@
     </main>
 
     <section class="memorial-section">
-        <h3 class="memorial-header">לעילוי נשמת</h3>
+        <div class="memorial-header">לעילוי נשמת</div>
         <div class="memorial-container">
-            <div class="memorial-item">
-                <span class="candle">🕯️</span>
-                <span>שלמה זלמן בן מרדכי אלעזר הלוי</span>
-            </div>
-            <div class="memorial-item">
-                <span class="candle">🕯️</span>
-                <span>רחל בת יוסף הכהן</span>
-            </div>
-            <div class="memorial-item">
-                <span class="candle">🕯️</span>
-                <span>סעדיה בן יחיא</span>
-            </div>
-            <div class="memorial-item">
-                <span class="candle">🕯️</span>
-                <span>עוואד בן יחיא</span>
-            </div>
-            <div class="memorial-item">
-                <span class="candle">🕯️</span>
-                <span>טרנג'ה בת חביבה</span>
-            </div>
+            <div class="memorial-item"><span class="candle">🕯️</span><span>שלמה זלמן בן מרדכי אלעזר הלוי</span></div>
+            <div class="memorial-item"><span class="candle">🕯️</span><span>רחל בת יוסף הכהן</span></div>
+            <div class="memorial-item"><span class="candle">🕯️</span><span>סעדיה בן יחיא</span></div>
+            <div class="memorial-item"><span class="candle">🕯️</span><span>עוואד בן יחיא</span></div>
+            <div class="memorial-item"><span class="candle">🕯️</span><span>טרנג'ה בת חביבה</span></div>
         </div>
     </section>
 
     <script>
-        // --- פונקציות לוגיקה (חישוב זמנים) ---
         function addMinutes(timeStr, minutesToAdd) {
             if (!timeStr) return "--:--";
             const [hours, minutes] = timeStr.split(':').map(Number);
@@ -366,10 +309,8 @@
                    date.getMinutes().toString().padStart(2, '0');
         }
 
-        // --- פונקציות עדכון נתונים (JSON) ---
         async function updateData() {
             try {
-                // הוספת Timestamp למניעת Cache
                 const response = await fetch('data.json?t=' + Date.now());
                 const data = await response.json();
 
@@ -378,45 +319,34 @@
                 const candles = data.shabbat_times.erev_shabbat.candle_lighting;
                 const tzeitShabbat = data.shabbat_times.shabbat_day.tzeit_shabbat;
 
-                // עדכון זמני שבת
                 document.getElementById('mincha-gedola-fri').innerText = data.shabbat_times.erev_shabbat.mincha_gedola;
                 document.getElementById('candles').innerText = candles;
                 document.getElementById('mincha-erev').innerText = addMinutes(candles, 14);
-                document.getElementById('mincha-extra').innerText = candles;
+                
                 document.getElementById('mincha-shabbat').innerText = addMinutes(tzeitShabbat, -130);
+                
+                document.getElementById('shiur-shabbat').innerText = "16:00"; 
+                document.getElementById('mincha-room').innerText = "17:00"; 
+
                 document.getElementById('tzeit').innerText = tzeitShabbat;
 
-                // עדכון זמני חול
                 document.getElementById('weekday-mincha').innerText = data.weekday_times.mincha.join('  |  ');
                 document.getElementById('weekday-arvit').innerText = data.weekday_times.arvit.join('  |  ');
 
-            } catch (e) { console.error("Error updating data:", e); }
+            } catch (e) { console.error(e); }
         }
 
-        // --- פונקציות שעון ותאריך חי ---
         function updateClock() {
             const now = new Date();
-            
-            // עדכון השעה
-            const timeStr = now.toLocaleTimeString('he-IL', { hour: '2-digit', minute: '2-digit', hour12: false });
-            document.getElementById('live-clock').innerText = timeStr;
-
-            // עדכון התאריך הלועזי (יום בשבוע + תאריך)
-            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            const dateStr = now.toLocaleDateString('he-IL', options);
-            document.getElementById('live-date').innerText = dateStr;
+            document.getElementById('live-clock').innerText = now.toLocaleTimeString('he-IL', { hour: '2-digit', minute: '2-digit', hour12: false });
+            document.getElementById('live-date').innerText = now.toLocaleDateString('he-IL', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
         }
-
-        // --- הפעלה ראשונית וקביעת טיימרים ---
         
-        // 1. עדכון שעון (כל שנייה)
         updateClock();
         setInterval(updateClock, 1000);
 
-        // 2. עדכון נתונים מה-JSON (מיד, וכל 30 דקות)
         updateData();
         setInterval(updateData, 1800000); 
-
     </script>
 </body>
 </html>
