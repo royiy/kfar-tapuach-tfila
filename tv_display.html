@@ -3,350 +3,615 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>לוח זמנים - בית הכנסת המרכזי</title>
-    <link href="https://fonts.googleapis.com/css2?family=Alef:wght@400;700&family=Frank+Ruhl+Libre:wght@400;700;900&display=swap" rel="stylesheet">
+    <title>בית הכנסת המרכזי – כפר תפוח</title>
+    <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;700;900&family=Heebo:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #f4f6f9;
-            --card-bg: #ffffff;
-            --text-main: #2c3e50;
-            --text-muted: #7f8c8d;
-            --accent-blue: #2980b9;
-            --accent-gold: #d4af37;
-            --border-color: #e2e8f0;
-            --shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            --bg:        #060d1a;
+            --panel:     #0c1b30;
+            --border:    #1e3350;
+            --gold:      #c9a84c;
+            --gold-light:#f0d080;
+            --gold-dim:  #7a6230;
+            --white:     #f0ece0;
+            --muted:     #7a8fa8;
+            --highlight: #ffe066;
+            --accent:    #1a3a6e;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'Alef', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
+            font-family: 'Heebo', sans-serif;
+            background: var(--bg);
+            color: var(--white);
             height: 100vh;
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            padding: 2vh 2vw;
         }
 
+        /* ── Star background ─────────────────────────────── */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image:
+                radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,0.25) 0%, transparent 100%),
+                radial-gradient(1px 1px at 30% 60%, rgba(255,255,255,0.18) 0%, transparent 100%),
+                radial-gradient(1px 1px at 55% 15%, rgba(255,255,255,0.22) 0%, transparent 100%),
+                radial-gradient(1px 1px at 75% 45%, rgba(255,255,255,0.16) 0%, transparent 100%),
+                radial-gradient(1px 1px at 88% 75%, rgba(255,255,255,0.20) 0%, transparent 100%),
+                radial-gradient(1px 1px at 22% 85%, rgba(255,255,255,0.15) 0%, transparent 100%),
+                radial-gradient(1px 1px at 65% 70%, rgba(255,255,255,0.19) 0%, transparent 100%),
+                radial-gradient(1.5px 1.5px at 48% 38%, rgba(201,168,76,0.35) 0%, transparent 100%),
+                radial-gradient(1.5px 1.5px at 92% 28%, rgba(201,168,76,0.30) 0%, transparent 100%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* ── Gold ornament line ──────────────────────────── */
+        .gold-line {
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--gold), var(--gold-light), var(--gold), transparent);
+            flex-shrink: 0;
+        }
+
+        /* ── Header ──────────────────────────────────────── */
         header {
+            position: relative;
+            z-index: 1;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            border-bottom: 2px solid var(--accent-gold);
-            padding-bottom: 1.5vh;
-            margin-bottom: 2.5vh;
+            justify-content: space-between;
+            padding: 1.4vh 3vw 1.2vh;
+            background: linear-gradient(180deg, rgba(6,13,26,0.95) 0%, rgba(12,27,48,0.85) 100%);
+            border-bottom: 1px solid var(--border);
+            flex-shrink: 0;
         }
 
-        .header-right {
+        .header-logo {
             display: flex;
-            flex-direction: column;
+            align-items: center;
+            gap: 1.2vw;
         }
 
-        .synagogue-name {
-            font-family: 'Frank Ruhl Libre', serif;
-            font-size: 2vw;
-            color: var(--accent-blue);
+        .magen-david {
+            width: 4.5vw;
+            height: 4.5vw;
+            opacity: 0.9;
+            animation: softPulse 6s ease-in-out infinite;
+            flex-shrink: 0;
         }
 
-        .parsha-title {
+        @keyframes softPulse {
+            0%, 100% { opacity: 0.8; transform: scale(1); }
+            50%       { opacity: 1;   transform: scale(1.04); }
+        }
+
+        .shul-name {
             font-family: 'Frank Ruhl Libre', serif;
-            font-size: 4.5vw;
+            font-size: 3.2vh;
             font-weight: 900;
-            color: var(--text-main);
+            color: var(--white);
+            letter-spacing: 0.05em;
+            line-height: 1.15;
         }
 
-        .clock-container {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 1.5vh 2.5vw;
-            text-align: center;
-            box-shadow: var(--shadow);
+        .shul-location {
+            font-size: 1.8vh;
+            color: var(--gold);
+            font-weight: 300;
+            letter-spacing: 0.15em;
+        }
+
+        .header-clock {
+            text-align: left;
+            flex-shrink: 0;
         }
 
         #live-clock {
             font-family: 'Frank Ruhl Libre', serif;
-            font-size: 4.5vw;
+            font-size: 5vh;
             font-weight: 700;
-            color: var(--accent-blue);
+            color: var(--gold-light);
+            letter-spacing: 0.05em;
             line-height: 1;
         }
 
         #live-date {
-            font-size: 1.2vw;
-            color: var(--text-muted);
+            font-size: 2.2vh;
+            color: var(--gold);
+            text-align: left;
             margin-top: 0.5vh;
+            font-weight: 400;
+            letter-spacing: 0.05em;
         }
 
+        .parsha-badge {
+            background: linear-gradient(135deg, var(--accent), #102248);
+            border: 1px solid var(--gold-dim);
+            border-radius: 8px;
+            padding: 0.8vh 1.8vw;
+            text-align: center;
+        }
+
+        .parsha-label {
+            font-size: 1.3vh;
+            color: var(--gold-dim);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+        }
+
+        #parsha-name {
+            font-family: 'Frank Ruhl Libre', serif;
+            font-size: 2.4vh;
+            color: var(--gold-light);
+            font-weight: 700;
+        }
+
+        /* ── Main grid ───────────────────────────────────── */
         main {
+            position: relative;
+            z-index: 1;
+            flex: 1;
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2.5vw;
-            flex-grow: 1;
-            margin-bottom: 2vh;
+            grid-template-columns: 1fr 1px 1fr 1px 1fr;
+            gap: 0;
+            padding: 2vh 2vw;
+            overflow: hidden;
         }
 
-        .column {
-            background: var(--card-bg);
-            border-radius: 16px;
-            padding: 2.5vh 2.5vw;
+        .vdivider {
+            background: linear-gradient(180deg, transparent, var(--border), var(--gold-dim), var(--border), transparent);
+            margin: 2vh 0;
+        }
+
+        /* ── Column ──────────────────────────────────────── */
+        .col {
             display: flex;
             flex-direction: column;
-            box-shadow: var(--shadow);
-            border: 1px solid var(--border-color);
+            padding: 0 2vw;
         }
 
-        h2 {
+        .col-header {
+            display: flex;
+            align-items: center;
+            gap: 0.8vw;
+            margin-bottom: 2vh;
+            padding-bottom: 1.2vh;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .col-icon { font-size: 2.8vh; }
+
+        .col-title {
             font-family: 'Frank Ruhl Libre', serif;
-            font-size: 3vw;
-            color: var(--accent-blue);
-            text-align: center;
-            margin-bottom: 2.5vh;
-            padding-bottom: 1vh;
-            border-bottom: 1px solid var(--border-color);
+            font-size: 2.6vh;
+            font-weight: 700;
+            color: var(--gold);
+            letter-spacing: 0.04em;
         }
 
+        /* ── Time rows ───────────────────────────────────── */
         .time-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.5vh 1vw;
-            margin-bottom: 0.5vh;
-            border-bottom: 1px solid #f0f0f0;
+            padding: 1.4vh 0;
+            border-bottom: 1px solid rgba(30, 51, 80, 0.6);
+            animation: fadeIn 0.6s ease both;
+            gap: 1vw;
         }
 
-        .time-row:last-child {
-            border-bottom: none;
+        .time-row:last-child { border-bottom: none; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to   { opacity: 1; transform: translateY(0); }
         }
 
-        .label {
-            font-size: 2vw;
-            color: var(--text-main);
+        .row-label {
+            font-size: 2vh;
+            color: var(--muted);
+            font-weight: 300;
+            flex: 1;
+            line-height: 1.3;
         }
 
-        .time {
+        .row-time {
             font-family: 'Frank Ruhl Libre', serif;
-            font-size: 3vw;
-            font-weight: 900;
-            color: var(--accent-blue);
-            background: #f8fafc;
-            padding: 0.5vh 1.5vw;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-        }
-
-        .weekday-section {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            flex-grow: 1;
-            gap: 5vh;
-        }
-
-        .weekday-group {
-            text-align: center;
-        }
-
-        .weekday-label {
-            font-size: 2.5vw;
-            color: var(--text-muted);
-            margin-bottom: 1.5vh;
-        }
-
-        .minyanim-list {
-            font-family: 'Frank Ruhl Libre', serif;
-            font-size: 3.5vw;
-            color: var(--accent-blue);
+            font-size: 3.2vh;
             font-weight: 700;
-            direction: ltr;
-        }
-
-        .memorial-section {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-right: 4px solid var(--accent-gold);
-            color: var(--text-main);
-            padding: 1.5vh 2vw;
+            color: var(--white);
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 0.4vh 1.2vw;
+            min-width: 7vw;
             text-align: center;
-            border-radius: 12px;
-            box-shadow: var(--shadow);
-            display: flex;
-            align-items: center;
-            gap: 2vw;
-        }
-
-        .memorial-header {
-            font-family: 'Frank Ruhl Libre', serif;
-            font-size: 1.5vw;
-            color: var(--text-muted);
             white-space: nowrap;
+            letter-spacing: 0.05em;
+            transition: all 0.4s ease;
+            flex-shrink: 0;
         }
 
-        .memorial-container {
-            position: relative;
-            height: 3.5vh;
-            flex-grow: 1;
-            overflow: hidden;
+        .row-time.primary {
+            color: var(--highlight);
+            border-color: var(--gold-dim);
+            background: rgba(201, 168, 76, 0.08);
+            font-size: 3.8vh;
+            box-shadow: 0 0 18px rgba(201,168,76,0.12);
+        }
+
+        /* Upcoming highlight – pulses gold when within 15 min */
+        .row-time.upcoming {
+            animation: glowPulse 2s ease-in-out infinite;
+            border-color: var(--gold);
+        }
+
+        @keyframes glowPulse {
+            0%, 100% { box-shadow: 0 0 10px rgba(201,168,76,0.2); }
+            50%       { box-shadow: 0 0 28px rgba(201,168,76,0.55); }
+        }
+
+        /* ── Weekday multi-time pills ────────────────────── */
+        .multi-times {
             display: flex;
-            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.8vh;
             justify-content: flex-start;
         }
 
-        .memorial-item {
-            position: absolute;
-            width: 100%;
-            opacity: 0;
+        .time-pill {
             font-family: 'Frank Ruhl Libre', serif;
-            font-size: 1.8vw;
+            font-size: 3vh;
+            font-weight: 700;
+            color: var(--white);
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 0.4vh 1.2vw;
+            letter-spacing: 0.05em;
+            transition: all 0.4s ease;
+        }
+
+        .time-pill.upcoming {
+            animation: glowPulse 2s ease-in-out infinite;
+            border-color: var(--gold);
+            color: var(--highlight);
+        }
+
+        /* ── Footer ──────────────────────────────────────── */
+        footer {
+            position: relative;
+            z-index: 1;
+            height: 4.5vh;
+            background: var(--panel);
+            border-top: 1px solid var(--border);
             display: flex;
             align-items: center;
-            gap: 1vw;
-            animation: memorialCycle 25s infinite;
+            overflow: hidden;
+            flex-shrink: 0;
         }
 
-        .memorial-item:nth-child(1) { animation-delay: 0s; }
-        .memorial-item:nth-child(2) { animation-delay: 5s; }
-        .memorial-item:nth-child(3) { animation-delay: 10s; }
-        .memorial-item:nth-child(4) { animation-delay: 15s; }
-        .memorial-item:nth-child(5) { animation-delay: 20s; }
-
-        @keyframes memorialCycle {
-            0% { opacity: 0; transform: translateY(10px); }
-            4% { opacity: 1; transform: translateY(0); }
-            16% { opacity: 1; transform: translateY(0); }
-            20% { opacity: 0; transform: translateY(-10px); }
-            100% { opacity: 0; }
+        .ticker-track {
+            display: flex;
+            animation: ticker 30s linear infinite;
+            white-space: nowrap;
+            gap: 6vw;
         }
 
-        .candle {
-            font-size: 1.8vw;
+        @keyframes ticker {
+            0%   { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
         }
 
+        .ticker-item {
+            font-size: 1.8vh;
+            color: var(--gold);
+            letter-spacing: 0.12em;
+            padding: 0 3vw;
+        }
+
+        .ticker-dot {
+            color: var(--gold-dim);
+            margin: 0 1vw;
+        }
     </style>
 </head>
 <body>
 
+    <!-- Gold accent lines -->
+    <div class="gold-line"></div>
+
     <header>
-        <div class="header-right">
-            <div class="synagogue-name">בית הכנסת המרכזי כפר תפוח</div>
-            <div class="parsha-title" id="parsha-name">טוען...</div>
+        <div class="header-logo">
+            <!-- Magen David SVG -->
+            <svg class="magen-david" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="50,5 95,80 5,80" fill="none" stroke="#c9a84c" stroke-width="4"/>
+                <polygon points="50,95 5,20 95,20" fill="none" stroke="#c9a84c" stroke-width="4"/>
+                <circle cx="50" cy="50" r="10" fill="rgba(201,168,76,0.25)" stroke="#c9a84c" stroke-width="2"/>
+            </svg>
+            <div>
+                <div class="shul-name">בית הכנסת המרכזי</div>
+                <div class="shul-location">כפר תפוח</div>
+            </div>
         </div>
-        <div class="clock-container">
-            <div id="live-clock">00:00</div>
-            <div id="live-date">טוען...</div>
+
+        <div class="parsha-badge">
+            <div class="parsha-label">פרשת השבוע</div>
+            <div id="parsha-name">טוען...</div>
+        </div>
+
+        <div class="header-clock">
+            <div id="live-clock">--:--:--</div>
+            <div id="live-date"></div>
         </div>
     </header>
 
-    <main>
-        <section class="column">
-            <h2>זמני השבת</h2>
-            
-            <div class="time-row">
-                <span class="label">מנחה גדולה (שישי):</span>
-                <span class="time" id="mincha-gedola-fri">--:--</span>
-            </div>
-            <div class="time-row">
-                <span class="label">הדלקת נרות:</span>
-                <span class="time" id="candles">--:--</span>
-            </div>
-            <div class="time-row">
-                <span class="label">מנחה ערב שבת (14 ד' אחרי):</span>
-                <span class="time" id="mincha-erev">--:--</span>
-            </div>
-            <div class="time-row">
-                <span class="label">מנחה של שבת:</span>
-                <span class="time" id="mincha-shabbat">--:--</span>
-            </div>
-            <div class="time-row" style="background-color: #f9fbfd; border-radius: 8px;">
-                <span class="label">שיעור:</span>
-                <span class="time" id="shiur-shabbat">--:--</span>
-            </div>
-            <div class="time-row" style="background-color: #f9fbfd; border-radius: 8px;">
-                <span class="label">מנחה (בחדר לימוד):</span>
-                <span class="time" id="mincha-room">--:--</span>
-            </div>
-            <div class="time-row">
-                <span class="label">צאת שבת:</span>
-                <span class="time" id="tzeit">--:--</span>
-            </div>
-        </section>
+    <div class="gold-line"></div>
 
-        <section class="column">
-            <h2>תפילות חול</h2>
-            <div class="weekday-section">
-                <div class="weekday-group">
-                    <div class="weekday-label">מנחה</div>
-                    <div class="minyanim-list" id="weekday-mincha">--:--</div>
-                </div>
-                <div class="weekday-group">
-                    <div class="weekday-label">ערבית</div>
-                    <div class="minyanim-list" id="weekday-arvit">--:--</div>
-                </div>
+    <main>
+
+        <!-- ── Column 1: ערב שבת ── -->
+        <div class="col">
+            <div class="col-header">
+                <span class="col-icon">🌅</span>
+                <span class="col-title">ערב שבת</span>
             </div>
-        </section>
+
+            <div class="time-row">
+                <span class="row-label">מנחה גדולה</span>
+                <span id="fri-mincha-gedola" class="row-time">--:--</span>
+            </div>
+            <div class="time-row">
+                <span class="row-label">הדלקת נרות</span>
+                <span id="candle-lighting" class="row-time primary">--:--</span>
+            </div>
+            <div class="time-row">
+                <span class="row-label">מנחה ערב שבת</span>
+                <span id="fri-mincha-regular" class="row-time">--:--</span>
+            </div>
+            <div class="time-row">
+                <span class="row-label">צאת הכוכבים</span>
+                <span id="tzeit-stars" class="row-time">--:--</span>
+            </div>
+        </div>
+
+        <div class="vdivider"></div>
+
+        <!-- ── Column 2: יום השבת ── -->
+        <div class="col">
+            <div class="col-header">
+                <span class="col-icon">✡️</span>
+                <span class="col-title">יום השבת</span>
+            </div>
+
+            <div class="time-row">
+                <span class="row-label">שחרית</span>
+                <span id="sat-shacharit" class="row-time">--:--</span>
+            </div>
+            <div class="time-row">
+                <span class="row-label">מנחה גדולה</span>
+                <span id="sat-mincha-gedola" class="row-time">--:--</span>
+            </div>
+            <div class="time-row">
+                <span class="row-label">מנחה של שבת</span>
+                <span id="sat-mincha" class="row-time">--:--</span>
+            </div>
+            <div class="time-row">
+                <span class="row-label">שיעור הרב שמעון</span>
+                <span class="row-time" style="font-size:2.2vh; color:var(--gold-light); border-color:var(--gold-dim);">אחרי מנחה</span>
+            </div>
+            <div class="time-row">
+                <span class="row-label">שקיעה</span>
+                <span id="shkiya" class="row-time">--:--</span>
+            </div>
+            <div class="time-row">
+                <span class="row-label">מנחה נוספת</span>
+                <span id="fri-mincha-extra" class="row-time">--:--</span>
+            </div>
+            <div class="time-row">
+                <span class="row-label">צאת שבת וערבית</span>
+                <span id="tzeit-shabbat" class="row-time primary">--:--</span>
+            </div>
+        </div>
+
+        <div class="vdivider"></div>
+
+        <!-- ── Column 3: חול ── -->
+        <div class="col">
+            <div class="col-header">
+                <span class="col-icon">🕍</span>
+                <span class="col-title">תפילות חול</span>
+            </div>
+
+            <div class="time-row" style="flex-direction: column; align-items: flex-start; gap: 1.2vh;">
+                <span class="row-label" style="font-size:2.2vh; color:var(--gold-dim); letter-spacing:0.1em;">שחרית</span>
+                <div id="weekday-shacharit" class="multi-times"></div>
+            </div>
+
+            <div class="time-row" style="flex-direction: column; align-items: flex-start; gap: 1.2vh;">
+                <span class="row-label" style="font-size:2.2vh; color:var(--gold-dim); letter-spacing:0.1em;">מנחה</span>
+                <div id="weekday-mincha" class="multi-times"></div>
+            </div>
+
+            <div class="time-row" style="flex-direction: column; align-items: flex-start; gap: 1.2vh; margin-top: 1vh;">
+                <span class="row-label" style="font-size:2.2vh; color:var(--gold-dim); letter-spacing:0.1em;">ערבית</span>
+                <div id="weekday-arvit" class="multi-times"></div>
+            </div>
+        </div>
+
     </main>
 
-    <section class="memorial-section">
-        <div class="memorial-header">לעילוי נשמת</div>
-        <div class="memorial-container">
-            <div class="memorial-item"><span class="candle">🕯️</span><span>שלמה זלמן בן מרדכי אלעזר הלוי</span></div>
-            <div class="memorial-item"><span class="candle">🕯️</span><span>רחל בת יוסף הכהן</span></div>
-            <div class="memorial-item"><span class="candle">🕯️</span><span>סעדיה בן יחיא</span></div>
-            <div class="memorial-item"><span class="candle">🕯️</span><span>עוואד בן יחיא</span></div>
-            <div class="memorial-item"><span class="candle">🕯️</span><span>טרנג'ה בת חביבה</span></div>
+    <div class="gold-line"></div>
+
+    <footer>
+        <div class="ticker-track" id="ticker-track">
+            <!-- filled by JS -->
         </div>
-    </section>
+    </footer>
 
     <script>
-        function addMinutes(timeStr, minutesToAdd) {
-            if (!timeStr) return "--:--";
-            const [hours, minutes] = timeStr.split(':').map(Number);
-            const date = new Date();
-            date.setHours(hours, minutes + minutesToAdd);
-            return date.getHours().toString().padStart(2, '0') + ":" + 
-                   date.getMinutes().toString().padStart(2, '0');
+        /* ───── Helpers ───── */
+        function addMinutes(timeStr, mins) {
+            if (!timeStr || timeStr === '--:--') return '--:--';
+            const [h, m] = timeStr.split(':').map(Number);
+            const d = new Date();
+            d.setHours(h, m + mins, 0);
+            return d.getHours().toString().padStart(2,'0') + ':' + d.getMinutes().toString().padStart(2,'0');
         }
 
-        async function updateData() {
-            try {
-                const response = await fetch('data.json?t=' + Date.now());
-                const data = await response.json();
-
-                document.getElementById('parsha-name').innerText = data.parsha;
-                
-                const candles = data.shabbat_times.erev_shabbat.candle_lighting;
-                const tzeitShabbat = data.shabbat_times.shabbat_day.tzeit_shabbat;
-
-                document.getElementById('mincha-gedola-fri').innerText = data.shabbat_times.erev_shabbat.mincha_gedola;
-                document.getElementById('candles').innerText = candles;
-                document.getElementById('mincha-erev').innerText = addMinutes(candles, 14);
-                
-                document.getElementById('mincha-shabbat').innerText = addMinutes(tzeitShabbat, -130);
-                
-                document.getElementById('shiur-shabbat').innerText = "16:00"; 
-                document.getElementById('mincha-room').innerText = "17:00"; 
-
-                document.getElementById('tzeit').innerText = tzeitShabbat;
-
-                document.getElementById('weekday-mincha').innerText = data.weekday_times.mincha.join('  |  ');
-                document.getElementById('weekday-arvit').innerText = data.weekday_times.arvit.join('  |  ');
-
-            } catch (e) { console.error(e); }
+        function timeToMinutes(timeStr) {
+            if (!timeStr || timeStr === '--:--') return null;
+            const [h, m] = timeStr.split(':').map(Number);
+            return h * 60 + m;
         }
+
+        function nowMinutes() {
+            const n = new Date();
+            return n.getHours() * 60 + n.getMinutes();
+        }
+
+        function isUpcoming(timeStr, windowMin = 20) {
+            const t = timeToMinutes(timeStr);
+            if (t === null) return false;
+            const diff = t - nowMinutes();
+            return diff >= 0 && diff <= windowMin;
+        }
+
+        /* ───── Live Clock ───── */
+        const DAYS_HE = ['ראשון','שני','שלישי','רביעי','חמישי','שישי','שבת'];
+
+        function toGematria(n) {
+            if (n === 15) return 'ט״ו';
+            if (n === 16) return 'ט״ז';
+            const vals  = [400,300,200,100,90,80,70,60,50,40,30,20,10,9,8,7,6,5,4,3,2,1];
+            const chars = ['ת','ש','ר','ק','צ','פ','ע','ס','נ','מ','ל','כ','י','ט','ח','ז','ו','ה','ד','ג','ב','א'];
+            let s = '', rem = n;
+            for (let i = 0; i < vals.length; i++) {
+                while (rem >= vals[i]) { s += chars[i]; rem -= vals[i]; }
+            }
+            if (s.length === 1) return s + '׳';
+            return s.slice(0,-1) + '״' + s.slice(-1);
+        }
+
+        const hebrewDateFmt = new Intl.DateTimeFormat('he-IL-u-ca-hebrew', {
+            day: 'numeric', month: 'long', year: 'numeric'
+        });
 
         function updateClock() {
             const now = new Date();
-            document.getElementById('live-clock').innerText = now.toLocaleTimeString('he-IL', { hour: '2-digit', minute: '2-digit', hour12: false });
-            document.getElementById('live-date').innerText = now.toLocaleDateString('he-IL', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-        }
-        
-        updateClock();
-        setInterval(updateClock, 1000);
+            document.getElementById('live-clock').textContent =
+                now.getHours().toString().padStart(2,'0') + ':' +
+                now.getMinutes().toString().padStart(2,'0') + ':' +
+                now.getSeconds().toString().padStart(2,'0');
 
-        updateData();
-        setInterval(updateData, 1800000); 
+            const parts   = hebrewDateFmt.formatToParts(now);
+            const dayNum  = parseInt(parts.find(p => p.type === 'day').value);
+            const month   = parts.find(p => p.type === 'month').value;
+            const yearNum = parseInt(parts.find(p => p.type === 'year').value) % 1000;
+            const hebrewDate = `${toGematria(dayNum)} ${month} ${toGematria(yearNum)}`;
+
+            const dayName = DAYS_HE[now.getDay()];
+            document.getElementById('live-date').textContent = `יום ${dayName} | ${hebrewDate}`;
+        }
+
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // ריענון הדף כל 10 דקות
+        setTimeout(() => location.reload(), 10 * 60 * 1000);
+
+        /* ───── Upcoming Highlights (refresh every minute) ───── */
+        let allTimes = {};
+
+        function refreshHighlights() {
+            const single = ['fri-mincha-gedola','candle-lighting','fri-mincha-regular',
+                            'fri-mincha-extra','tzeit-stars','sat-shacharit','sat-mincha-gedola','sat-mincha','shkiya','tzeit-shabbat'];
+            single.forEach(id => {
+                const el = document.getElementById(id);
+                if (!el) return;
+                el.classList.toggle('upcoming', isUpcoming(el.textContent));
+            });
+            // Pills
+            document.querySelectorAll('.time-pill').forEach(pill => {
+                pill.classList.toggle('upcoming', isUpcoming(pill.textContent));
+            });
+        }
+
+        setInterval(refreshHighlights, 30000);
+
+        /* ───── Ticker builder ───── */
+        function buildTicker(data) {
+            const items = [
+                `📖 פרשת השבוע: ${data.parsha}`,
+                `🕯️ הדלקת נרות: ${data.shabbat_times.erev_shabbat.candle_lighting}`,
+                `✡️ צאת שבת: ${data.shabbat_times.shabbat_day.tzeit_shabbat}`,
+                `🙏 מנחה חול: ${data.weekday_times.mincha.join('  |  ')}`,
+                `🌙 ערבית חול: ${data.weekday_times.arvit.join('  |  ')}`,
+                `📖 פרשת השבוע: ${data.parsha}`,
+                `🕯️ הדלקת נרות: ${data.shabbat_times.erev_shabbat.candle_lighting}`,
+                `✡️ צאת שבת: ${data.shabbat_times.shabbat_day.tzeit_shabbat}`,
+                `🙏 מנחה חול: ${data.weekday_times.mincha.join('  |  ')}`,
+                `🌙 ערבית חול: ${data.weekday_times.arvit.join('  |  ')}`,
+            ];
+            const track = document.getElementById('ticker-track');
+            track.innerHTML = items.map(t =>
+                `<span class="ticker-item">${t}</span><span class="ticker-dot">❖</span>`
+            ).join('');
+        }
+
+        /* ───── Multi-time pill builder ───── */
+        function buildPills(containerId, times) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = '';
+            times.forEach(t => {
+                const span = document.createElement('span');
+                span.className = 'time-pill';
+                span.textContent = t;
+                if (isUpcoming(t)) span.classList.add('upcoming');
+                container.appendChild(span);
+            });
+        }
+
+        /* ───── Main data loader ───── */
+        async function loadData() {
+            try {
+                const res  = await fetch('data.json');
+                const data = await res.json();
+
+                const candles    = data.shabbat_times.erev_shabbat.candle_lighting;
+                const tzeitShabb = data.shabbat_times.shabbat_day.tzeit_shabbat;
+
+                document.getElementById('parsha-name').textContent         = data.parsha;
+                document.getElementById('fri-mincha-gedola').textContent   = data.shabbat_times.erev_shabbat.mincha_gedola;
+                document.getElementById('candle-lighting').textContent     = candles;
+                document.getElementById('fri-mincha-regular').textContent  = addMinutes(candles, 14);
+                document.getElementById('fri-mincha-extra').textContent    = candles;
+                document.getElementById('tzeit-stars').textContent        = data.shabbat_times.erev_shabbat.tzeit_hakochavim;
+                document.getElementById('sat-shacharit').textContent        = data.shabbat_times.shabbat_day.shacharit;
+                document.getElementById('sat-mincha-gedola').textContent    = '12:30';
+                document.getElementById('shkiya').textContent             = data.shabbat_times.shabbat_day.shkiya;
+                document.getElementById('tzeit-shabbat').textContent      = tzeitShabb;
+                document.getElementById('sat-mincha').textContent         = addMinutes(tzeitShabb, -130);
+
+                buildPills('weekday-shacharit', data.weekday_times.shacharit);
+                buildPills('weekday-mincha', data.weekday_times.mincha);
+                buildPills('weekday-arvit',  data.weekday_times.arvit);
+                buildTicker(data);
+                refreshHighlights();
+
+            } catch (e) {
+                console.error('Failed to load data.json:', e);
+                document.getElementById('parsha-name').textContent = 'שגיאה בטעינה';
+            }
+        }
+
+        loadData();
+        // Reload data every 10 minutes (in case JSON is updated server-side)
+        setInterval(loadData, 600_000);
     </script>
 </body>
 </html>
