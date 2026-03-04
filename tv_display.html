@@ -591,13 +591,13 @@
                 document.getElementById('fri-mincha-regular').textContent  = addMinutes(candles, 14);
                 document.getElementById('fri-mincha-extra').textContent    = candles;
                 document.getElementById('tzeit-stars').textContent        = data.shabbat_times.erev_shabbat.tzeit_hakochavim;
-                document.getElementById('sat-shacharit').textContent        = data.shabbat_times.shabbat_day.shacharit;
+                document.getElementById('sat-shacharit').textContent        = '08:00';
                 document.getElementById('sat-mincha-gedola').textContent    = '12:30';
                 document.getElementById('shkiya').textContent             = data.shabbat_times.shabbat_day.shkiya;
                 document.getElementById('tzeit-shabbat').textContent      = tzeitShabb;
                 document.getElementById('sat-mincha').textContent         = addMinutes(tzeitShabb, -130);
 
-                buildPills('weekday-shacharit', data.weekday_times.shacharit);
+                buildPills('weekday-shacharit', ['06:15', '07:50', '08:00 (שישי)']);
                 buildPills('weekday-mincha', data.weekday_times.mincha);
                 buildPills('weekday-arvit',  data.weekday_times.arvit);
                 buildTicker(data);
