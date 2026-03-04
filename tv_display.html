@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>לוח זמנים - בית הכנסת המרכזי</title>
+    <link href="https://fonts.googleapis.com/css2?family=Alef:wght@700&family=Frank+Ruhl+Libre:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #050a14;
+            --card-bg: #0e1a2d;
+            --text-main: #ffffff;
+            --gold-accent: #d4af37;
+            --blue-accent: #3a7bd5;
+            --highlight: #ffeb3b;
+        }
+
+        body {
+            font-family: 'Alef', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 2vw;
+            height: 100vh;
+            overflow: hidden; /* מניעת גלילה בטלוויזיה */
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* כותרת עליונה ענקית */
+        header {
+            text-align: center;
+            margin-bottom: 2vh;
+            border-bottom: 4px solid var(--gold-accent);
+            padding-bottom: 1vh;
+        }
+
+        .parsha-title {
+            font-family: 'Frank Ruhl Libre', serif;
+            font-size: 7vw;
+            color: var(--gold-accent);
+            margin: 0;
+            text-shadow: 0 4px 10px rgba(0,0,0,0.5);
+        }
+
+        /* חלוקת המסך לשניים - שבת וחול */
+        main {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2vw;
+            flex-grow: 1;
+        }
+
+        .column {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 2vw;
+            display: flex;
+            flex-direction: column;
+            border: 2px solid rgba(212, 175, 55, 0.3);
+        }
+
+        h2 {
+            font-family: 'Frank Ruhl Libre', serif;
+            font-size: 4vw;
+            color: var(--blue-accent);
+            text-align: center;
+            margin-top: 0;
+            border-bottom: 2px solid var(--blue-accent);
+        }
+
+        .time-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5vh;
+            padding: 1vh 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .label {
+            font-size: 2.8vw;
+            color: #ccc;
+        }
+
+        .time {
+            font-family: 'Frank Ruhl Libre', serif;
+            font-size: 4.5vw;
+            font-weight: 900;
+            color: var(--highlight);
+        }
+
+        /* התאמה למספר מניינים בחול */
+        .minyanim-list {
+            font-size: 3.5vw;
+            color: var(--highlight);
+            font-weight: 700;
+            text-align: left;
+            direction: ltr; /* לשמירה על סדר השעות משמאל לימין */
+        }
+
+        footer {
+            text-align: center;
+            font-size: 1.5vw;
+            color: var(--gold-accent);
+            margin-top: 1vh;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1 class="parsha-title" id="parsha-name">טוען נתונים...</h1>
+    </header>
+
+    <main>
+        <section class="column">
+            <h2>זמני השבת</h2>
+            
+            <div class="time-row">
+                <span class="label">הדלקת נרות:</span>
+                <span class="time" id="candles">--:--</span>
+            </div>
+            
+            <div class="time-row">
+                <span class="label">מנחה ערב שבת:</span>
+                <span class="time" id="mincha-erev">--:--</span>
+            </div>
+
+            <div class="time-row">
+                <span class="label">מנחה (בזמן נרות):</span>
+                <span class="time" id="mincha-extra">--:--</span>
+            </div>
+
+            <div class="time-row">
+                <span class="label">מנחה של שבת:</span>
+                <span class="time" id="mincha-shabbat">--:--</span>
+            </div>
+
+            <div class="time-row">
+                <span class="label">צאת שבת:</span>
+                <span class="time" id="tzeit">--:--</span>
+            </div>
+        </section>
+
+        <section class="column">
+            <h2>תפילות חול</h2>
+            
+            <div style="margin-top: 2vh;">
+                <div class="label" style="text-align: center; margin-bottom: 1vh;">מנחה:</div>
+                <div class="minyanim-list" id="weekday-mincha" style="text-align: center;">--:--</div>
+            </div>
+
+            <div style="margin-top: 5vh;">
+                <div class="label" style="text-align: center; margin-bottom: 1vh;">ערבית:</div>
+                <div class="minyanim-list" id="weekday-arvit" style="text-align: center;">--:--</div>
+            </div>
+        </section>
+    </main>
+
+    <footer>בית הכנסת המרכזי כפר תפוח</footer>
+
+    <script>
+        function addMinutes(timeStr, minutesToAdd) {
+            if (!timeStr) return "--:--";
+            const [hours, minutes] = timeStr.split(':').map(Number);
+            const date = new Date();
+            date.setHours(hours, minutes + minutesToAdd);
+            return date.getHours().toString().padStart(2, '0') + ":" + 
+                   date.getMinutes().toString().padStart(2, '0');
+        }
+
+        async function updateTV() {
+            try {
+                // הוספת Timestamp כדי למנוע שמירה ב-Cache של הדפדפן בטלוויזיה
+                const response = await fetch('data.json?t=' + Date.now());
+                const data = await response.json();
+
+                document.getElementById('parsha-name').innerText = data.parsha;
+                
+                const candles = data.shabbat_times.erev_shabbat.candle_lighting;
+                const tzeitShabbat = data.shabbat_times.shabbat_day.tzeit_shabbat;
+
+                // שבת
+                document.getElementById('candles').innerText = candles;
+                document.getElementById('mincha-erev').innerText = addMinutes(candles, 14);
+                document.getElementById('mincha-extra').innerText = candles;
+                document.getElementById('mincha-shabbat').innerText = addMinutes(tzeitShabbat, -130);
+                document.getElementById('tzeit').innerText = tzeitShabbat;
+
+                // חול
+                document.getElementById('weekday-mincha').innerText = data.weekday_times.mincha.join('  |  ');
+                document.getElementById('weekday-arvit').innerText = data.weekday_times.arvit.join('  |  ');
+
+            } catch (e) { console.error("Error updating TV:", e); }
+        }
+
+        // עדכון ראשוני
+        updateTV();
+        
+        // עדכון אוטומטי כל 30 דקות (כדי לתפוס שינויים בקובץ ה-JSON בלי רענון ידני)
+        setInterval(updateTV, 1800000);
+    </script>
+</body>
+</html>
