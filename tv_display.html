@@ -283,42 +283,6 @@
             color: var(--highlight);
         }
 
-        /* ── Footer ──────────────────────────────────────── */
-        footer {
-            position: relative;
-            z-index: 1;
-            height: 4.5vh;
-            background: var(--panel);
-            border-top: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            overflow: hidden;
-            flex-shrink: 0;
-        }
-
-        .ticker-track {
-            display: flex;
-            animation: ticker 30s linear infinite;
-            white-space: nowrap;
-            gap: 6vw;
-        }
-
-        @keyframes ticker {
-            0%   { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-
-        .ticker-item {
-            font-size: 1.8vh;
-            color: var(--gold);
-            letter-spacing: 0.12em;
-            padding: 0 3vw;
-        }
-
-        .ticker-dot {
-            color: var(--gold-dim);
-            margin: 0 1vw;
-        }
 
         .memorial-bar {
             position: relative;
@@ -484,12 +448,6 @@
         <span class="memorial-name" id="memorial-current"></span>
     </div>
 
-    <footer>
-        <div class="ticker-track" id="ticker-track">
-            <!-- filled by JS -->
-        </div>
-    </footer>
-
     <script>
         /* ───── Helpers ───── */
         function addMinutes(timeStr, mins) {
@@ -604,25 +562,6 @@
         setInterval(refreshHighlights, 30000);
 
         /* ───── Ticker builder ───── */
-        function buildTicker(data) {
-            const items = [
-                `📖 פרשת השבוע: ${data.parsha}`,
-                `🕯️ הדלקת נרות: ${data.shabbat_times.erev_shabbat.candle_lighting}`,
-                `✡️ צאת שבת: ${data.shabbat_times.shabbat_day.tzeit_shabbat}`,
-                `🙏 מנחה חול: ${data.weekday_times.mincha.join('  |  ')}`,
-                `🌙 ערבית חול: ${data.weekday_times.arvit.join('  |  ')}`,
-                `📖 פרשת השבוע: ${data.parsha}`,
-                `🕯️ הדלקת נרות: ${data.shabbat_times.erev_shabbat.candle_lighting}`,
-                `✡️ צאת שבת: ${data.shabbat_times.shabbat_day.tzeit_shabbat}`,
-                `🙏 מנחה חול: ${data.weekday_times.mincha.join('  |  ')}`,
-                `🌙 ערבית חול: ${data.weekday_times.arvit.join('  |  ')}`,
-            ];
-            const track = document.getElementById('ticker-track');
-            track.innerHTML = items.map(t =>
-                `<span class="ticker-item">${t}</span><span class="ticker-dot">❖</span>`
-            ).join('');
-        }
-
         /* ───── Multi-time pill builder ───── */
         function buildPills(containerId, times) {
             const container = document.getElementById(containerId);
@@ -660,7 +599,6 @@
                 buildPills('weekday-shacharit', ['06:15', '07:50', '08:00 (שישי)']);
                 buildPills('weekday-mincha', data.weekday_times.mincha);
                 buildPills('weekday-arvit',  data.weekday_times.arvit);
-                buildTicker(data);
                 refreshHighlights();
 
             } catch (e) {
