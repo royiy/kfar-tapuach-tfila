@@ -130,24 +130,25 @@
 
         .parsha-badge {
             background: linear-gradient(135deg, var(--accent), #102248);
-            border: 1px solid var(--gold-dim);
-            border-radius: 8px;
-            padding: 0.8vh 1.8vw;
+            border: 2px solid var(--gold-dim);
+            border-radius: 12px;
+            padding: 1.2vh 3vw;
             text-align: center;
+            box-shadow: 0 0 20px rgba(201,168,76,0.12);
         }
 
         .parsha-label {
-            font-size: 1.3vh;
+            font-size: 1.6vh;
             color: var(--gold-dim);
             letter-spacing: 0.2em;
-            text-transform: uppercase;
         }
 
         #parsha-name {
             font-family: 'Frank Ruhl Libre', serif;
-            font-size: 2.4vh;
+            font-size: 3.6vh;
             color: var(--gold-light);
             font-weight: 700;
+            letter-spacing: 0.04em;
         }
 
         /* ── Main grid ───────────────────────────────────── */
@@ -318,6 +319,38 @@
             color: var(--gold-dim);
             margin: 0 1vw;
         }
+
+        .memorial-bar {
+            position: relative;
+            z-index: 1;
+            background: rgba(12, 27, 48, 0.95);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: 1.2vh 3vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .memorial-name {
+            font-family: 'Frank Ruhl Libre', serif;
+            font-size: 2.4vh;
+            color: var(--gold-light);
+            display: flex;
+            align-items: center;
+            gap: 0.8vw;
+            opacity: 0;
+            transition: opacity 1.5s ease;
+        }
+
+        .memorial-name.visible {
+            opacity: 1;
+        }
+
+        .memorial-name .candle {
+            font-size: 2.2vh;
+        }
     </style>
 </head>
 <body>
@@ -447,6 +480,10 @@
 
     <div class="gold-line"></div>
 
+    <div class="memorial-bar">
+        <span class="memorial-name" id="memorial-current"></span>
+    </div>
+
     <footer>
         <div class="ticker-track" id="ticker-track">
             <!-- filled by JS -->
@@ -523,6 +560,29 @@
 
         // ריענון הדף כל 10 דקות
         setTimeout(() => location.reload(), 10 * 60 * 1000);
+
+        /* ── Memorial rotation ── */
+        const memorialNames = [
+            'שלמה זלמן בן מרדכי אלעזר הלוי',
+            'רחל בת יוסף הכהן',
+            'סעדיה בן יחיא',
+            'עוואד בן יחיא',
+            "טרנג'ה בת חביבה"
+        ];
+        let memorialIndex = 0;
+        const memorialEl = document.getElementById('memorial-current');
+
+        function showNextMemorial() {
+            memorialEl.classList.remove('visible');
+            setTimeout(() => {
+                memorialEl.innerHTML = `<span class="candle">🕯️</span> לעילוי נשמת ${memorialNames[memorialIndex]}`;
+                memorialEl.classList.add('visible');
+                memorialIndex = (memorialIndex + 1) % memorialNames.length;
+            }, 1500);
+        }
+
+        showNextMemorial();
+        setInterval(showNextMemorial, 8000);
 
         /* ───── Upcoming Highlights (refresh every minute) ───── */
         let allTimes = {};
