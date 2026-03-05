@@ -1,0 +1,59 @@
+{
+  "parsha": "כי תשא - פרה",
+  "shabbat_times": {
+    "erev_shabbat": [
+      { "label": "מנחה גדולה", "time": "12:20", "highlight": false },
+      { "label": "הדלקת נרות", "time": "17:14", "highlight": true },
+      { "label": "מנחה ערב שבת", "time": "17:28", "highlight": false },
+      { "label": "מנחה נוספת (בזמן נרות)", "time": "17:14", "highlight": false },
+      { "label": "צאת הכוכבים", "time": "18:03", "highlight": false }
+    ],
+    "shabbat_day": [
+      { "label": "שחרית (ותפילת ילדים)", "time": "08:00", "highlight": false },
+      { "label": "מנחה גדולה", "time": "12:30", "highlight": false },
+      { "label": "לימוד הלכה", "time": "13:00", "highlight": false },
+      { "label": "מנחה של שבת", "time": "16:10", "highlight": false },
+      { "label": "שיעור הרב שמעון רוזנצוויג", "time": "אחרי מנחה", "highlight": false },
+      { "label": "מנחה נוספת (בחדר לימוד)", "time": "17:14", "highlight": false },
+      { "label": "שקיעה", "time": "17:45", "highlight": false },
+      { "label": "צאת שבת וערבית", "time": "18:18", "highlight": true }
+    ]
+  },
+  "weekday_times": [
+    { "label": "שחרית", "times": "06:15 | 07:50 | 08:00 (בשישי)" },
+    { "label": "מנחה", "times": "13:15 | 17:25" },
+    { "label": "ערבית", "times": "18:05 | 20:00 | 21:00" }
+  ],
+  "shiurim": [
+    {
+      "title": "שיעור בדף היומי",
+      "time": "ראשון עד חמישי בשעה 20:30",
+      "teacher": "אלעד אמסטרדם"
+    },
+    {
+      "title": "שיעור באורות",
+      "time": "יום רביעי בשעה 21:15",
+      "teacher": "הרב שמעון רוזנצוויג"
+    },
+    {
+      "title": "כולל יום שישי",
+      "time": "בין השעות 09:00 - 11:00",
+      "teacher": "סוגיה בפרשת שבוע - הרב צביקה הרץ"
+    }
+  ],
+  "donations": {
+    "bank": "בנק הפועלים",
+    "bank_code": "12",
+    "branch": "286",
+    "account": "126982",
+    "account_name": "בית הכנסת המרכזי כפר תפוח",
+    "paybox_link": "https://links.payboxapp.com/rBbQDcbaPVb"
+  },
+  "memorials": [
+    "שלמה זלמן בן מרדכי אלעזר הלוי",
+    "רחל בת יוסף הכהן",
+    "סעדיה בן יחיא",
+    "עוואד בן יחיא",
+    "טרנג'ה בת חביבה"
+  ]
+}
