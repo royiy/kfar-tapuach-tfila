@@ -80,6 +80,8 @@
 
         .footer { background: var(--royal-blue); color: var(--warm-gold); text-align: center; padding: 2.5rem; font-size: 1rem; letter-spacing: 0.02em; }
 
+        .error-message { background: #ffebee; color: #c62828; padding: 2rem; border-radius: 8px; margin: 2rem; text-align: center; }
+
         @media (max-width: 768px) {
             .hero { padding: 3rem 1.5rem 4rem; }
             .section { padding: 2rem 1.5rem; }
@@ -98,174 +100,14 @@
         </div>
     </header>
 
-    <div class="container">
-        <!-- Shabbat Times -->
-        <section class="section">
-            <div class="section-header">
-                <span class="section-icon">🕯️</span>
-                <h2 class="section-title">זמני השבת - <span id="parsha-display">כי תשא - פרה</span></h2>
-            </div>
-
-            <div class="shabbat-grid">
-                <div class="shabbat-column">
-                    <h4>🌅 ערב שבת</h4>
-                    <div class="time-item">
-                        <span class="time-label">מנחה גדולה</span>
-                        <span class="time-value">12:20</span>
-                    </div>
-                    <div class="time-item">
-                        <span class="time-label">הדלקת נרות</span>
-                        <span class="time-value highlight-time">17:14</span>
-                    </div>
-                    <div class="time-item">
-                        <span class="time-label">מנחה ערב שבת</span>
-                        <span class="time-value">17:28</span>
-                    </div>
-                    <div class="time-item">
-                        <span class="time-label">מנחה נוספת (בזמן נרות)</span>
-                        <span class="time-value">17:14</span>
-                    </div>
-                    <div class="time-item">
-                        <span class="time-label">צאת הכוכבים</span>
-                        <span class="time-value">18:03</span>
-                    </div>
-                </div>
-     
-                <div class="shabbat-column">
-                    <h4>✡️ יום השבת</h4>
-                    <div class="time-item">
-                        <span class="time-label">שחרית (ותפילת ילדים)</span>
-                        <span class="time-value">08:00</span>
-                    </div>
-                    <div class="time-item">
-                        <span class="time-label">מנחה גדולה</span>
-                        <span class="time-value">12:30</span>
-                    </div>
-                    <div class="time-item">
-                        <span class="time-label">לימוד הלכה</span>
-                        <span class="time-value">13:00</span>
-                    </div>
-                    <div class="time-item">
-                        <span class="time-label">מנחה של שבת</span>
-                        <span class="time-value">16:10</span>
-                    </div>
-                    <div class="time-item">
-                        <span class="time-label">שיעור הרב שמעון רוזנצוויג</span>
-                        <span class="time-value">אחרי מנחה</span>
-                    </div>
-                    <div class="time-item">
-                        <span class="time-label">מנחה נוספת (בחדר לימוד)</span>
-                        <span class="time-value">17:14</span>
-                    </div>
-                    <div class="time-item">
-                        <span class="time-label">שקיעה</span>
-                        <span class="time-value">17:45</span>
-                    </div>
-                    <div class="time-item">
-                        <span class="time-label">צאת שבת וערבית</span>
-                        <span class="time-value highlight-time">18:18</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Weekday Times -->
-        <section class="section">
-            <div class="section-header">
-                <span class="section-icon">📅</span>
-                <h2 class="section-title">תפילות חול</h2>
-            </div>
-            <div class="schedule-grid">
-                <div class="schedule-row">
-                    <span class="schedule-label">שחרית</span>
-                    <span class="schedule-times">06:15 | 07:50 | 08:00 (בשישי)</span>
-                </div>
-                <div class="schedule-row">
-                    <span class="schedule-label">מנחה</span>
-                    <span class="schedule-times">13:15 | 17:25</span>
-                </div>
-                <div class="schedule-row">
-                    <span class="schedule-label">ערבית</span>
-                    <span class="schedule-times">18:05 | 20:00 | 21:00</span>
-                </div>
-            </div>
-        </section>
-
-        <!-- Shiurim -->
-        <section class="section">
-            <div class="section-header">
-                <span class="section-icon">📚</span>
-                <h2 class="section-title">שיעורים בימות השבוע</h2>
-            </div>
-            <div class="shiurim-grid">
-                <div class="shiur-card">
-                    <div class="shiur-title">שיעור בדף היומי</div>
-                    <div class="shiur-time">ראשון עד חמישי בשעה <strong>20:30</strong></div>
-                    <div class="shiur-teacher">אלעד אמסטרדם</div>
-                </div>
-
-                <div class="shiur-card">
-                    <div class="shiur-title">שיעור באורות</div>
-                    <div class="shiur-time">יום רביעי בשעה <strong>21:15</strong></div>
-                    <div class="shiur-teacher">הרב שמעון רוזנצוויג</div>
-                </div>
-
-                <div class="shiur-card">
-                    <div class="shiur-title">כולל יום שישי</div>
-                    <div class="shiur-time">בין השעות <strong>09:00 - 11:00</strong></div>
-                    <div class="shiur-teacher">סוגיה בפרשת שבוע - הרב צביקה הרץ</div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Donations -->
-        <section class="section donation-section">
-            <div class="section-header">
-                <span class="section-icon">💎</span>
-                <h2 class="section-title">תרומות לבית הכנסת</h2>
-            </div>
-
-            <p class="donation-intro">נודה לכל תרומה להחזקת ופיתוח בית הכנסת</p>
-
-            <div class="bank-details">
-                <strong>העברה בנקאית:</strong><br>
-                בנק הפועלים (12)<br>
-                סניף 286<br>
-                מספר חשבון: <strong>126982</strong><br>
-                ע"ש בית הכנסת המרכזי כפר תפוח
-            </div>
-
-            <a href="https://links.payboxapp.com/rBbQDcbaPVb" target="_blank" class="paybox-button">
-                לתרומה ב-PayBox 💳
-            </a>
-        </section>
+    <div class="container" id="main-container">
+        <!-- תא השחרור לתוכן דינמי -->
     </div>
 
     <!-- Memorial Section -->
-    <section class="memorial-section">
+    <section class="memorial-section" id="memorial-section">
         <h3 class="memorial-header">לעילוי נשמת</h3>
-        <div class="memorial-container">
-            <div class="memorial-item">
-                <span class="candle">🕯️</span>
-                <span>שלמה זלמן בן מרדכי אלעזר הלוי</span>
-            </div>
-            <div class="memorial-item">
-                <span class="candle">🕯️</span>
-                <span>רחל בת יוסף הכהן</span>
-            </div>
-            <div class="memorial-item">
-                <span class="candle">🕯️</span>
-                <span>סעדיה בן יחיא</span>
-            </div>
-            <div class="memorial-item">
-                <span class="candle">🕯️</span>
-                <span>עוואד בן יחיא</span>
-            </div>
-            <div class="memorial-item">
-                <span class="candle">🕯️</span>
-                <span>טרנג'ה בת חביבה</span>
-            </div>
-        </div>
+        <div class="memorial-container" id="memorial-container"></div>
     </section>
 
     <!-- Footer -->
@@ -274,77 +116,127 @@
     </footer>
 
     <script>
-        // כל הנתונים מוטבעים בתוך הקובץ - ניתן לשנות מכאן
-        const synagogueData = {
-            "parsha": "כי תשא - פרה",
-            "shabbat_times": {
-                "erev_shabbat": {
-                    "mincha_gedola": "12:20",
-                    "candle_lighting": "17:14",
-                    "mincha_regular": "17:28",
-                    "mincha_extra": "17:14",
-                    "tzeit_hakochavim": "18:03"
-                },
-                "shabbat_day": {
-                    "shacharit": "08:00",
-                    "mincha_gedola": "12:30",
-                    "halakha_study": "13:00",
-                    "mincha_regular": "16:10",
-                    "shiur": "אחרי מנחה",
-                    "mincha_extra": "17:14",
-                    "shkiya": "17:45",
-                    "tzeit_shabbat": "18:18"
-                }
-            },
-            "weekday_times": {
-                "shacharit": ["06:15", "07:50", "08:00 (בשישי)"],
-                "mincha": ["13:15", "17:25"],
-                "arvit": ["18:05", "20:00", "21:00"]
-            },
-            "shiurim": [
-                {
-                    "title": "שיעור בדף היומי",
-                    "time": "ראשון עד חמישי בשעה 20:30",
-                    "teacher": "אלעד אמסטרדם"
-                },
-                {
-                    "title": "שיעור באורות",
-                    "time": "יום רביעי בשעה 21:15",
-                    "teacher": "הרב שמעון רוזנצוויג"
-                },
-                {
-                    "title": "כולל יום שישי",
-                    "time": "בין השעות 09:00 - 11:00",
-                    "teacher": "סוגיה בפרשת שבוע - הרב צביקה הרץ"
-                }
-            ],
-            "donations": {
-                "bank": "בנק הפועלים",
-                "bank_code": "12",
-                "branch": "286",
-                "account": "126982",
-                "account_name": "בית הכנסת המרכזי כפר תפוח",
-                "paybox_link": "https://links.payboxapp.com/rBbQDcbaPVb"
-            },
-            "memorials": [
-                "שלמה זלמן בן מרדכי אלעזר הלוי",
-                "רחל בת יוסף הכהן",
-                "סעדיה בן יחיא",
-                "עוואד בן יחיא",
-                "טרנג'ה בת חביבה"
-            ]
-        };
-
-        // עדכון הנתונים בעמוד כשהדף נטען
-        function updatePageData() {
-            const parshaElement = document.getElementById('parsha-display');
-            if (parshaElement) {
-                parshaElement.textContent = synagogueData.parsha;
+        // טעינת הנתונים מ-JSON וביצוע המערכת
+        async function loadAndRender() {
+            try {
+                const response = await fetch('data.json');
+                if (!response.ok) throw new Error('Failed to load data.json');
+                const data = await response.json();
+                renderPage(data);
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('main-container').innerHTML = 
+                    '<div class="error-message">⚠️ שגיאה בטעינת קובץ data.json<br>אנא וודא שקובץ data.json נמצא באותה תיקייה</div>';
             }
         }
 
-        // ריצה כשהדף נטען
-        document.addEventListener('DOMContentLoaded', updatePageData);
+        // רינדור העמוד
+        function renderPage(data) {
+            let html = '';
+
+            // קטע זמני שבת
+            html += `
+                <section class="section">
+                    <div class="section-header">
+                        <span class="section-icon">🕯️</span>
+                        <h2 class="section-title">זמני השבת - ${data.parsha}</h2>
+                    </div>
+                    <div class="shabbat-grid">
+                        <div class="shabbat-column">
+                            <h4>🌅 ערב שבת</h4>
+                            ${renderShabbatTimes(data.shabbat_times.erev_shabbat)}
+                        </div>
+                        <div class="shabbat-column">
+                            <h4>✡️ יום השבת</h4>
+                            ${renderShabbatTimes(data.shabbat_times.shabbat_day)}
+                        </div>
+                    </div>
+                </section>
+            `;
+
+            // קטע זמני חול
+            html += `
+                <section class="section">
+                    <div class="section-header">
+                        <span class="section-icon">📅</span>
+                        <h2 class="section-title">תפילות חול</h2>
+                    </div>
+                    <div class="schedule-grid">
+                        ${data.weekday_times.map(day => 
+                            `<div class="schedule-row">
+                                <span class="schedule-label">${day.label}</span>
+                                <span class="schedule-times">${day.times}</span>
+                            </div>`
+                        ).join('')}
+                    </div>
+                </section>
+            `;
+
+            // קטע שיעורים
+            html += `
+                <section class="section">
+                    <div class="section-header">
+                        <span class="section-icon">📚</span>
+                        <h2 class="section-title">שיעורים בימות השבוע</h2>
+                    </div>
+                    <div class="shiurim-grid">
+                        ${data.shiurim.map(shiur =>
+                            `<div class="shiur-card">
+                                <div class="shiur-title">${shiur.title}</div>
+                                <div class="shiur-time">${shiur.time}</div>
+                                <div class="shiur-teacher">${shiur.teacher}</div>
+                            </div>`
+                        ).join('')}
+                    </div>
+                </section>
+            `;
+
+            // קטע תרומות
+            html += `
+                <section class="section donation-section">
+                    <div class="section-header">
+                        <span class="section-icon">💎</span>
+                        <h2 class="section-title">תרומות לבית הכנסת</h2>
+                    </div>
+                    <p class="donation-intro">נודה לכל תרומה להחזקת ופיתוח בית הכנסת</p>
+                    <div class="bank-details">
+                        <strong>העברה בנקאית:</strong><br>
+                        ${data.donations.bank} (${data.donations.bank_code})<br>
+                        סניף ${data.donations.branch}<br>
+                        מספר חשבון: <strong>${data.donations.account}</strong><br>
+                        ע"ש ${data.donations.account_name}
+                    </div>
+                    <a href="${data.donations.paybox_link}" target="_blank" class="paybox-button">
+                        לתרומה ב-PayBox 💳
+                    </a>
+                </section>
+            `;
+
+            // הצגת כל התוכן
+            document.getElementById('main-container').innerHTML = html;
+
+            // רינדור נרות לעילוי נשמה
+            const memorialContainer = document.getElementById('memorial-container');
+            memorialContainer.innerHTML = data.memorials.map(name =>
+                `<div class="memorial-item">
+                    <span class="candle">🕯️</span>
+                    <span>${name}</span>
+                </div>`
+            ).join('');
+        }
+
+        // פונקציה לרינדור זמני שבת
+        function renderShabbatTimes(times) {
+            return times.map(item =>
+                `<div class="time-item">
+                    <span class="time-label">${item.label}</span>
+                    <span class="time-value ${item.highlight ? 'highlight-time' : ''}">${item.time}</span>
+                </div>`
+            ).join('');
+        }
+
+        // טעינה כשהדף נטען
+        document.addEventListener('DOMContentLoaded', loadAndRender);
     </script>
 
 </body>
