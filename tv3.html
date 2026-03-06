@@ -146,7 +146,7 @@
                     <div class="time-item"><span>מנחה גדולה</span><span id="sat-mincha-gedola" class="time-value">12:30</span></div>
                     <div class="time-item"><span>לימוד הלכה</span><span class="time-value">13:00</span></div>
                     <div class="time-item"><span>מנחה של שבת</span><span id="sat-mincha" class="time-value">--:--</span></div>
-                    <div class="time-item"><span>שיעור הרב</span><span class="time-value" style="font-size: 2vh;">אחרי מנחה</span></div>
+                    <div class="time-item"><span>שיעור הרב שמעון רוזנצוויג שליט"א</span><span class="time-value" style="font-size: 2vh;">אחרי מנחה</span></div>
                     <div class="time-item"><span>מנחה (חדר לימוד)</span><span id="sat-mincha-extra" class="time-value">--:--</span></div>
                     <div class="time-item"><span>שקיעה</span><span id="shkiya" class="time-value">--:--</span></div>
                     <div class="time-item"><span>צאת שבת וערבית</span><span id="tzeit-shabbat" class="time-value">--:--</span></div>
@@ -205,7 +205,7 @@
         }
         setInterval(updateClock, 1000); updateClock();
 
-        const announcements = ["תזכורת לשלם דמי חבר", "שיעור גמרא יתקיים הערב לאחר ערבית", "ברוכים הבאים לבית הכנסת המרכזי"];
+        const announcements = ["תזכורת לשלם דמי חבר"];
         let announceIdx = 0;
         
         function toggleScreens() {
@@ -263,7 +263,7 @@
                     const cont = document.getElementById(id); cont.innerHTML = '';
                     list.forEach(t => { const s = document.createElement('span'); s.className = 'time-pill'; s.textContent = t; cont.appendChild(s); });
                 };
-                build('weekday-shacharit', ['06:15', '07:50', '08:00 (ו׳)']);
+                build('weekday-shacharit', ['06:15', '07:50', '08:00 (בשישי)']);
                 build('weekday-mincha', data.weekday_times.mincha);
                 build('weekday-arvit', data.weekday_times.arvit);
             } catch (e) { console.error(e); }
