@@ -29,7 +29,6 @@
             position: relative;
         }
 
-        /* ניהול מסכים */
         .screen {
             position: absolute;
             top: 0;
@@ -44,7 +43,6 @@
         .hidden { opacity: 0; pointer-events: none; z-index: 1; }
         .visible { opacity: 1; z-index: 10; }
 
-        /* פס עליון */
         .hero { 
             background: linear-gradient(165deg, var(--deep-navy) 0%, var(--royal-blue) 100%); 
             padding: 2vh 3vw; 
@@ -65,7 +63,6 @@
         #live-clock { font-family: 'Frank Ruhl Libre', serif; font-size: 5vh; font-weight: 700; color: var(--warm-gold); direction: ltr; }
         #live-date { font-size: 2.2vh; color: var(--soft-white); }
 
-        /* תוכן ראשי */
         .main-content { 
             flex: 1;
             display: grid;
@@ -96,18 +93,15 @@
         .weekday-times-container { display: flex; flex-wrap: wrap; gap: 1vh; }
         .time-pill { font-family: 'Frank Ruhl Libre', serif; font-size: 2.8vh; font-weight: 700; color: var(--royal-blue); background: #f0ede3; padding: 0.5vh 1vw; border-radius: 8px; }
 
-        /* פס הנצחה */
         .memorial-section { background: var(--deep-navy); padding: 1.5vh 2vw; text-align: center; border-top: 2px solid var(--gold); }
         .memorial-name { font-family: 'Frank Ruhl Libre', serif; font-size: 2.8vh; color: var(--warm-gold); opacity: 0; transition: opacity 1s; }
         .memorial-name.visible-text { opacity: 1; }
 
-        /* מסך הודעות */
         .announcements-container { flex: 1; display: flex; justify-content: center; align-items: center; background: radial-gradient(circle, #ffffff 0%, #f4e4c1 100%); }
         .announcement-box { background: white; padding: 8vh 5vw; border-radius: 40px; border: 10px double var(--gold); text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.2); max-width: 85%; }
         .announcement-title { font-family: 'Frank Ruhl Libre', serif; font-size: 8vh; color: var(--royal-blue); margin-bottom: 4vh; }
         .announcement-text { font-size: 6vh; line-height: 1.4; color: var(--charcoal); font-weight: bold; }
 
-        /* וידאו נסתר */
         #preventSleepVideo { position: fixed; right: 0; bottom: 0; width: 1px; height: 1px; opacity: 0.01; z-index: -1; pointer-events: none; }
     </style>
 </head>
@@ -150,7 +144,7 @@
                     <div class="time-item"><span>מנחה גדולה</span><span id="sat-mincha-gedola" class="time-value">--:--</span></div>
                     <div class="time-item"><span>מנחה של שבת</span><span id="sat-mincha" class="time-value">--:--</span></div>
                     <div class="time-item"><span>שקיעה</span><span id="shkiya" class="time-value">--:--</span></div>
-                    <div class="time-item"><span>צאת שבת</span><span id="tzeit-shabbat" class="time-value">--:--</span></div>
+                    <div class="time-item"><span>צאת שבת וערבית</span><span id="tzeit-shabbat" class="time-value">--:--</span></div>
                 </div>
             </div>
             <div class="column-card">
@@ -186,6 +180,14 @@
             return s.length === 1 ? s + '׳' : s.slice(0,-1) + '״' + s.slice(-1);
         }
 
+        function addMinutes(timeStr, mins) {
+            if (!timeStr || timeStr === '--:--' || !timeStr.includes(':')) return '--:--';
+            const [h, m] = timeStr.split(':').map(Number);
+            const d = new Date();
+            d.setHours(h, m + mins, 0);
+            return d.getHours().toString().padStart(2,'0') + ':' + d.getMinutes().toString().padStart(2,'0');
+        }
+
         function updateClock() {
             const now = new Date();
             document.getElementById('live-clock').textContent = now.toLocaleTimeString('he-IL', {hour12: false});
@@ -197,30 +199,25 @@
         }
         setInterval(updateClock, 1000); updateClock();
 
-        /* ───── הגדרות הודעות ───── */
+        /* רשימת הודעות מעודכנת */
         const announcements = [
-            "תזכורת לשלם דמי חבר",
-            "נא לכבות טלפונים ניידים בכניסה",
-            "שיעור גמרא יתקיים הערב לאחר ערבית"
+            "תזכורת לשלם דמי חבר"
         ];
         let announceIdx = 0;
         
         function toggleScreens() {
             const times = document.getElementById('times-screen');
             const announce = document.getElementById('announcement-screen');
-            
             if (times.classList.contains('visible')) {
                 document.getElementById('announcement-text').innerText = announcements[announceIdx];
                 announceIdx = (announceIdx + 1) % announcements.length;
                 times.classList.replace('visible', 'hidden'); 
                 announce.classList.replace('hidden', 'visible');
-                
-                setTimeout(toggleScreens, 25000); // ההודעה תוצג למשך 25 שניות
+                setTimeout(toggleScreens, 25000); 
             } else {
                 announce.classList.replace('visible', 'hidden'); 
                 times.classList.replace('hidden', 'visible');
-                
-                setTimeout(toggleScreens, 60000); // הלוח יוצג למשך דקה אחת
+                setTimeout(toggleScreens, 60000); 
             }
         }
         setTimeout(toggleScreens, 60000);
@@ -243,16 +240,20 @@
                 const res = await fetch('data.json?v=' + Date.now());
                 const data = await res.json();
                 document.getElementById('parsha-name').textContent = data.parsha;
+                
                 const candles = data.shabbat_times.erev_shabbat.candle_lighting;
+                const tzeitShabbat = data.shabbat_times.shabbat_day.tzeit_shabbat;
+
                 document.getElementById('candle-lighting').textContent = candles;
-                document.getElementById('fri-mincha-regular').textContent = "נרות + 14 ד'";
+                document.getElementById('fri-mincha-regular').textContent = addMinutes(candles, 14);
+                
                 document.getElementById('fri-mincha-gedola').textContent = data.shabbat_times.erev_shabbat.mincha_gedola;
                 document.getElementById('tzeit-stars').textContent = data.shabbat_times.erev_shabbat.tzeit_hakochavim;
                 document.getElementById('sat-shacharit').textContent = '08:00';
                 document.getElementById('sat-mincha-gedola').textContent = '12:30';
                 document.getElementById('shkiya').textContent = data.shabbat_times.shabbat_day.shkiya;
-                document.getElementById('tzeit-shabbat').textContent = data.shabbat_times.shabbat_day.tzeit_shabbat;
-                document.getElementById('sat-mincha').textContent = "צאת שבת - 2:10";
+                document.getElementById('tzeit-shabbat').textContent = tzeitShabbat;
+                document.getElementById('sat-mincha').textContent = addMinutes(tzeitShabbat, -130);
 
                 const build = (id, list) => {
                     const cont = document.getElementById(id); cont.innerHTML = '';
