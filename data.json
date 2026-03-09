@@ -1,14 +1,14 @@
 {
-  "parsha": "כי תשא - פרה",
+  "parsha": "פרשת ויקהל פקודי - החודש",
   "shabbat_times": {
     "erev_shabbat": {
       "mincha_gedola": "12:20",
-      "candle_lighting": "17:14",
-      "tzeit_hakochavim": "18:03"
+      "candle_lighting": "17:19",
+      "tzeit_hakochavim": "18:08"
     },
     "shabbat_day": {
-      "shkiya": "17:45",
-      "tzeit_shabbat": "18:18"
+      "shkiya": "17:51",
+      "tzeit_shabbat": "18:23"
     }
   },
   "weekday_times": {
