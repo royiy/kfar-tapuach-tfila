@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -94,19 +95,26 @@ background:#fafafa;
 border-radius:8px;
 }
 
+.shiur-card{
+background:#fff8e6;
+padding:20px;
+border-radius:10px;
+margin-bottom:15px;
+border-right:4px solid #d4af37;
+}
+
+.memorial{
+background:#0a1628;
+color:#f4e4c1;
+text-align:center;
+padding:30px;
+}
+
 .footer{
 background:#1e3a5f;
 color:#f4e4c1;
 text-align:center;
 padding:20px;
-}
-
-@media(max-width:700px){
-
-.shabbat-grid{
-grid-template-columns:1fr;
-}
-
 }
 
 </style>
@@ -117,11 +125,9 @@ grid-template-columns:1fr;
 <header class="hero">
 
 <h1 class="synagogue-title">בית הכנסת המרכזי</h1>
-
 <p class="location">כפר תפוח</p>
 
 </header>
-
 
 <div class="container">
 
@@ -173,31 +179,100 @@ grid-template-columns:1fr;
 </section>
 
 
-
 <section class="section">
 
 <h2 class="section-title">זמני תפילות חול</h2>
 
 <div class="schedule-row">
-
 <span>מנחה</span>
-
 <span id="weekdayMincha"></span>
-
 </div>
 
 <div class="schedule-row">
-
 <span>ערבית</span>
-
 <span id="weekdayArvit"></span>
+</div>
+
+</section>
+
+
+<section class="section">
+
+<h2 class="section-title">שיעורים בימות השבוע</h2>
+
+<div class="shiur-card">
+
+<div>שיעור בדף היומי</div>
+
+<div>ראשון עד חמישי בשעה <strong>20:30</strong></div>
+
+<div>אלעד אמסטרדם</div>
+
+</div>
+
+<div class="shiur-card">
+
+<div>שיעור באורות</div>
+
+<div>יום רביעי בשעה <strong>21:15</strong></div>
+
+<div>הרב שמעון רוזנצוויג</div>
+
+</div>
+
+<div class="shiur-card">
+
+<div>כולל יום שישי</div>
+
+<div>09:00 - 11:00</div>
+
+<div>הרב צביקה הרץ</div>
 
 </div>
 
 </section>
 
+
+<section class="section">
+
+<h2 class="section-title">תרומות לבית הכנסת</h2>
+
+<p>נודה לכל תרומה להחזקת בית הכנסת</p>
+
+<p>
+
+בנק הפועלים (12)<br>
+סניף 286<br>
+מספר חשבון 126982<br>
+
+</p>
+
+<a href="https://links.payboxapp.com/rBbQDcbaPVb">
+
+תרומה דרך PayBox
+
+</a>
+
+</section>
+
 </div>
 
+
+<section class="memorial">
+
+<h3>לעילוי נשמת</h3>
+
+<p>שלמה זלמן בן מרדכי אלעזר הלוי</p>
+
+<p>רחל בת יוסף הכהן</p>
+
+<p>סעדיה בן יחיא</p>
+
+<p>עוואד בן יחיא</p>
+
+<p>טרנג'ה בת חביבה</p>
+
+</section>
 
 
 <footer class="footer">
@@ -205,7 +280,6 @@ grid-template-columns:1fr;
 בית הכנסת המרכזי כפר תפוח
 
 </footer>
-
 
 
 <script>
