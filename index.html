@@ -29,7 +29,7 @@
             font-family: 'Alef', sans-serif;
             background: var(--cream);
             color: var(--charcoal);
-            line-height: 1.8;
+            line-height: 1.6;
             overflow-x: hidden;
         }
 
@@ -150,38 +150,57 @@
             border-radius: 8px;
         }
 
-        .schedule-label {
-            font-size: 1.1rem;
+        .shiur-card {
+            background: #fffbf0;
+            border-right: 4px solid var(--gold);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 12px;
         }
 
-        .schedule-times {
+        .shiur-name {
             font-family: 'Frank Ruhl Libre', serif;
-            font-size: 1.2rem;
             color: var(--royal-blue);
+            font-size: 1.2rem;
+            margin-bottom: 0.3rem;
         }
 
-        .footer {
+        .memorial-strip {
+            grid-column: span 2;
+            background: var(--deep-navy);
+            color: var(--warm-gold);
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 3rem;
+            font-family: 'Frank Ruhl Libre', serif;
+            font-size: 1.3rem;
+        }
+
+        .bank-info {
             grid-column: span 2;
             text-align: center;
             padding: 2rem;
             color: var(--royal-blue);
-            font-size: 0.9rem;
+            font-size: 0.95rem;
+            opacity: 0.8;
         }
 
         @media (max-width: 768px) {
             .container { grid-template-columns: 1fr; }
-            .section-full { grid-column: span 1; }
-            .shabbat-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+            .section-full, .memorial-strip, .bank-info { grid-column: span 1; }
+            .shabbat-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
     <header class="hero">
-        <div class="hero-content">
-            <h1 class="synagogue-title">בית הכנסת המרכזי</h1>
-            <p class="location">כפר תפוח</p>
-        </div>
+        <h1 class="synagogue-title">בית הכנסת המרכזי</h1>
+        <p class="location">כפר תפוח</p>
     </header>
 
     <div class="container">
@@ -193,88 +212,80 @@
             <div class="shabbat-grid">
                 <div class="shabbat-column">
                     <h4>🌅 ערב שבת</h4>
-                    <div class="time-item">
-                        <span>מנחה גדולה</span>
-                        <span class="time-value" id="mincha-gedola">--:--</span>
-                    </div>
-                    <div class="time-item">
-                        <span>הדלקת נרות</span>
-                        <span class="time-value highlight-time" id="candle-lighting">--:--</span>
-                    </div>
-                    <div class="time-item">
-                        <span>צאת הכוכבים</span>
-                        <span class="time-value" id="tzeit-kochavim">--:--</span>
-                    </div>
+                    <div class="time-item"><span>מנחה גדולה</span><span class="time-value" id="mincha-gedola">--:--</span></div>
+                    <div class="time-item"><span>הדלקת נרות</span><span class="time-value highlight-time" id="candle-lighting">--:--</span></div>
+                    <div class="time-item"><span>צאת הכוכבים</span><span class="time-value" id="tzeit-kochavim">--:--</span></div>
                 </div>
                 <div class="shabbat-column">
                     <h4>✡️ יום השבת</h4>
-                    <div class="time-item">
-                        <span>שקיעה</span>
-                        <span class="time-value" id="shkiya">--:--</span>
-                    </div>
-                    <div class="time-item">
-                        <span>צאת שבת</span>
-                        <span class="time-value highlight-time" id="tzeit-shabbat">--:--</span>
-                    </div>
+                    <div class="time-item"><span>שקיעה</span><span class="time-value" id="shkiya">--:--</span></div>
+                    <div class="time-item"><span>צאת שבת</span><span class="time-value highlight-time" id="tzeit-shabbat">--:--</span></div>
                 </div>
             </div>
         </section>
 
-        <section class="section section-full">
+        <section class="section">
             <div class="section-header">
                 <span>📅</span>
-                <h2 class="section-title">זמני תפילות חול</h2>
+                <h2 class="section-title">תפילות חול</h2>
             </div>
-            <div class="schedule-row">
-                <span class="schedule-label">מנחה</span>
-                <span class="schedule-times" id="weekday-mincha">--:--</span>
+            <div class="schedule-row"><span>מנחה</span><span id="weekday-mincha" class="time-value" style="background:none">--:--</span></div>
+            <div class="schedule-row"><span>ערבית</span><span id="weekday-arvit" class="time-value" style="background:none">--:--</span></div>
+        </section>
+
+        <section class="section">
+            <div class="section-header">
+                <span>📚</span>
+                <h2 class="section-title">שיעורי תורה</h2>
             </div>
-            <div class="schedule-row">
-                <span class="schedule-label">ערבית</span>
-                <span class="schedule-times" id="weekday-arvit">--:--</span>
+            <div class="shiur-card">
+                <div class="shiur-name">דף היומי</div>
+                <div>20:30 | אלעד אמסטרדם</div>
+            </div>
+            <div class="shiur-card">
+                <div class="shiur-name">שיעור באורות</div>
+                <div>יום ד' 21:15 | הרב רוזנצוויג</div>
             </div>
         </section>
 
-        <footer class="footer">
-            נבנה לרווחת המתפללים | בית הכנסת המרכזי כפר תפוח
-        </footer>
+        <div class="memorial-strip">
+            <span>לעילוי נשמת:</span>
+            <span>🕯️ שלמה זלמן בן מרדכי אלעזר הלוי</span>
+            <span>🕯️ רחל בת יוסף הכהן</span>
+        </div>
+
+        <div class="bank-info">
+            לתרומות ואחזקת בית הכנסת: בנק הפועלים (12), סניף 286, חשבון 126982
+        </div>
     </div>
 
     <script>
-        async function fetchShabbatData() {
+        async function loadData() {
             try {
                 const response = await fetch('data.json');
-                if (!response.ok) throw new Error('Network response was not ok');
                 const data = await response.json();
-                updateUI(data);
-            } catch (error) {
-                console.error('Error fetching JSON:', error);
-                document.getElementById('parsha-name').textContent = 'שגיאה בטעינת נתונים';
+                
+                // עדכון פרשה
+                document.getElementById('parsha-name').textContent = data.parsha;
+
+                // עדכון זמני שבת
+                document.getElementById('mincha-gedola').textContent = data.shabbat_times.erev_shabbat.mincha_gedola;
+                document.getElementById('candle-lighting').textContent = data.shabbat_times.erev_shabbat.candle_lighting;
+                document.getElementById('tzeit-kochavim').textContent = data.shabbat_times.erev_shabbat.tzeit_hakochavim;
+                
+                document.getElementById('shkiya').textContent = data.shabbat_times.shabbat_day.shkiya;
+                document.getElementById('tzeit-shabbat').textContent = data.shabbat_times.shabbat_day.tzeit_shabbat;
+
+                // עדכון זמני חול
+                document.getElementById('weekday-mincha').textContent = data.weekday_times.mincha.join(' | ');
+                document.getElementById('weekday-arvit').textContent = data.weekday_times.arvit.join(' | ');
+
+            } catch (e) {
+                console.error("שגיאה בטעינת ה-JSON", e);
             }
         }
 
-        function updateUI(content) {
-            // עדכון פרשה
-            document.getElementById('parsha-name').textContent = content.parsha;
-
-            // עדכון זמני ערב שבת
-            const erev = content.shabbat_times.erev_shabbat;
-            document.getElementById('mincha-gedola').textContent = erev.mincha_gedola;
-            document.getElementById('candle-lighting').textContent = erev.candle_lighting;
-            document.getElementById('tzeit-kochavim').textContent = erev.tzeit_hakochavim;
-
-            // עדכון זמני יום השבת
-            const day = content.shabbat_times.shabbat_day;
-            document.getElementById('shkiya').textContent = day.shkiya;
-            document.getElementById('tzeit-shabbat').textContent = day.tzeit_shabbat;
-
-            // עדכון זמני חול
-            document.getElementById('weekday-mincha').textContent = content.weekday_times.mincha.join(' | ');
-            document.getElementById('weekday-arvit').textContent = content.weekday_times.arvit.join(' | ');
-        }
-
-        // טעינה ראשונית
-        window.onload = fetchShabbatData;
+        window.onload = loadData;
     </script>
 </body>
 </html>
