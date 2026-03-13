@@ -3,34 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>זמני תפילה כפר תפוח</title>
+    <title>בית הכנסת המרכזי כפר תפוח</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Alef&family=Frank+Ruhl+Libre:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Alef:wght@400&family=Frank+Ruhl+Libre:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         :root {
             --deep-navy: #0a1628;
             --royal-blue: #1e3a5f;
             --gold: #d4af37;
+            --warm-gold: #f4e4c1;
             --cream: #faf8f3;
             --soft-white: #ffffff;
             --charcoal: #2a2a2a;
-            --bg-color: var(--cream);
-            --card-bg: var(--soft-white);
-            --text-main: var(--charcoal);
-            --chip-bg: #e8f2ff;
-            --border-color: rgba(30, 58, 95, 0.1);
-        }
-
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --bg-color: #121212;
-                --card-bg: #1e1e1e;
-                --text-main: #e0e0e0;
-                --royal-blue: #4a90e2;
-                --chip-bg: #2c3e50;
-                --border-color: rgba(255, 255, 255, 0.1);
-            }
+            --shadow-blue: rgba(30, 58, 95, 0.15);
         }
 
         * {
@@ -41,223 +27,254 @@
 
         body {
             font-family: 'Alef', sans-serif;
-            background: var(--bg-color);
-            color: var(--text-main);
-            line-height: 1.6;
-            padding-bottom: 2rem;
-            transition: background 0.3s ease;
+            background: var(--cream);
+            color: var(--charcoal);
+            line-height: 1.8;
+            overflow-x: hidden;
         }
 
-        header {
-            background: linear-gradient(135deg, var(--deep-navy) 0%, var(--royal-blue) 100%);
-            color: white;
-            padding: 1.5rem 1rem;
+        .hero {
+            position: relative;
+            background: linear-gradient(165deg, var(--deep-navy) 0%, var(--royal-blue) 50%, #2d5580 100%);
+            padding: 4rem 2rem 5rem;
             text-align: center;
-            border-bottom: 3px solid var(--gold);
         }
 
-        .synagogue-name {
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: var(--cream);
+            clip-path: polygon(0 50%, 100% 0, 100% 100%, 0 100%);
+        }
+
+        .synagogue-title {
             font-family: 'Frank Ruhl Libre', serif;
-            font-size: 1.6rem;
-            font-weight: 400;
-            margin-bottom: 0.2rem;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 500;
+            color: var(--soft-white);
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
         }
 
-        .parsha-title {
-            color: var(--gold);
-            font-size: 1.1rem;
+        .location {
+            font-family: 'Frank Ruhl Libre', serif;
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            color: var(--warm-gold);
             font-weight: 300;
+            margin-bottom: 2rem;
         }
 
         .container {
-            padding: 1rem;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            max-width: 600px;
+            max-width: 1400px;
             margin: 0 auto;
+            padding: 0 2rem 4rem;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
         }
 
-        .card {
-            background: var(--card-bg);
-            border-radius: 12px;
-            padding: 1.2rem;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-            border-right: 4px solid var(--royal-blue);
+        .section {
+            background: var(--soft-white);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 40px var(--shadow-blue);
         }
 
-        .card-header {
+        .section-full {
+            grid-column: span 2;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #f0ede3;
+        }
+
+        .section-title {
             font-family: 'Frank Ruhl Libre', serif;
-            font-size: 1.3rem;
+            font-size: 1.8rem;
+            font-weight: 500;
             color: var(--royal-blue);
-            margin-bottom: 0.8rem;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 0.4rem;
+        }
+
+        .shabbat-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .shabbat-column h4 {
+            font-family: 'Frank Ruhl Libre', serif;
+            font-size: 1.4rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
             font-weight: 400;
         }
 
-        .time-row {
+        .time-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0.6rem 0;
-            border-bottom: 1px solid var(--border-color);
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #f5f2e8;
         }
 
-        .time-row:last-child {
-            border-bottom: none;
-        }
-
-        .label {
-            font-size: 1rem;
-            opacity: 0.9;
-        }
-
-        .value {
+        .time-value {
             font-family: 'Frank Ruhl Libre', serif;
-            font-size: 1.1rem;
+            font-size: 1.3rem;
             color: var(--royal-blue);
-            background: var(--chip-bg);
-            padding: 0.2rem 0.6rem;
-            border-radius: 6px;
+            background: #e8f2ff;
+            padding: 0.3rem 1rem;
+            border-radius: 8px;
         }
 
-        .highlight .value {
+        .highlight-time {
             background: #fff9e6;
             color: #b8860b;
         }
 
-        .weekday-section {
-            margin-top: 0.5rem;
-        }
-
-        .weekday-label {
-            font-size: 0.9rem;
-            color: var(--gold);
-            margin-bottom: 0.4rem;
-            display: block;
-        }
-
-        .weekday-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.4rem;
+        .schedule-row {
+            background: #fafafa;
+            border-right: 4px solid var(--royal-blue);
+            padding: 1.2rem;
             margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            border-radius: 8px;
         }
 
-        .time-chip {
-            background: var(--chip-bg);
-            color: var(--royal-blue);
-            padding: 0.2rem 0.7rem;
-            border-radius: 15px;
-            font-size: 0.95rem;
-        }
-
-        footer {
-            text-align: center;
-            font-size: 0.8rem;
-            color: #888;
-            margin-top: 1.5rem;
-        }
-
-        .loading, .error {
-            text-align: center;
-            padding: 2rem;
+        .schedule-label {
             font-size: 1.1rem;
         }
 
-        .error {
-            color: #d93025;
+        .schedule-times {
+            font-family: 'Frank Ruhl Libre', serif;
+            font-size: 1.2rem;
+            color: var(--royal-blue);
+        }
+
+        .footer {
+            grid-column: span 2;
+            text-align: center;
+            padding: 2rem;
+            color: var(--royal-blue);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .container { grid-template-columns: 1fr; }
+            .section-full { grid-column: span 1; }
+            .shabbat-grid { grid-template-columns: 1fr; gap: 1.5rem; }
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="synagogue-name">בית הכנסת המרכזי כפר תפוח</div>
-        <div class="parsha-title" id="parsha-display">טוען...</div>
+    <header class="hero">
+        <div class="hero-content">
+            <h1 class="synagogue-title">בית הכנסת המרכזי</h1>
+            <p class="location">כפר תפוח</p>
+        </div>
     </header>
 
-    <main class="container" id="main-content">
-        <div class="loading">טוען נתוני תפילה...</div>
-    </main>
+    <div class="container">
+        <section class="section section-full">
+            <div class="section-header">
+                <span>🕯️</span>
+                <h2 class="section-title">זמני השבת - <span id="parsha-name">טוען...</span></h2>
+            </div>
+            <div class="shabbat-grid">
+                <div class="shabbat-column">
+                    <h4>🌅 ערב שבת</h4>
+                    <div class="time-item">
+                        <span>מנחה גדולה</span>
+                        <span class="time-value" id="mincha-gedola">--:--</span>
+                    </div>
+                    <div class="time-item">
+                        <span>הדלקת נרות</span>
+                        <span class="time-value highlight-time" id="candle-lighting">--:--</span>
+                    </div>
+                    <div class="time-item">
+                        <span>צאת הכוכבים</span>
+                        <span class="time-value" id="tzeit-kochavim">--:--</span>
+                    </div>
+                </div>
+                <div class="shabbat-column">
+                    <h4>✡️ יום השבת</h4>
+                    <div class="time-item">
+                        <span>שקיעה</span>
+                        <span class="time-value" id="shkiya">--:--</span>
+                    </div>
+                    <div class="time-item">
+                        <span>צאת שבת</span>
+                        <span class="time-value highlight-time" id="tzeit-shabbat">--:--</span>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    <footer>
-        נבנה לרווחת המתפללים | תשפ"ו
-    </footer>
+        <section class="section section-full">
+            <div class="section-header">
+                <span>📅</span>
+                <h2 class="section-title">זמני תפילות חול</h2>
+            </div>
+            <div class="schedule-row">
+                <span class="schedule-label">מנחה</span>
+                <span class="schedule-times" id="weekday-mincha">--:--</span>
+            </div>
+            <div class="schedule-row">
+                <span class="schedule-label">ערבית</span>
+                <span class="schedule-times" id="weekday-arvit">--:--</span>
+            </div>
+        </section>
+
+        <footer class="footer">
+            נבנה לרווחת המתפללים | בית הכנסת המרכזי כפר תפוח
+        </footer>
+    </div>
 
     <script>
-        async function loadPrayerTimes() {
-            const container = document.getElementById('main-content');
+        async function fetchShabbatData() {
             try {
-                // משיכת הנתונים מקובץ data.json
                 const response = await fetch('data.json');
-                if (!response.ok) throw new Error('נכשלה טעינת הקובץ');
-                
+                if (!response.ok) throw new Error('Network response was not ok');
                 const data = await response.json();
-                
-                // עדכון כותרת הפרשה
-                document.getElementById('parsha-display').textContent = "פרשת " + data.parsha;
-
-                // בניית התוכן
-                container.innerHTML = `
-                    <section class="card">
-                        <h2 class="card-header">🕯️ ערב שבת</h2>
-                        <div class="time-row">
-                            <span class="label">מנחה גדולה</span>
-                            <span class="value">${data.shabbat_times.erev_shabbat.mincha_gedola}</span>
-                        </div>
-                        <div class="time-row highlight">
-                            <span class="label">הדלקת נרות</span>
-                            <span class="value">${data.shabbat_times.erev_shabbat.candle_lighting}</span>
-                        </div>
-                        <div class="time-row">
-                            <span class="label">צאת הכוכבים</span>
-                            <span class="value">${data.shabbat_times.erev_shabbat.tzeit_hakochavim}</span>
-                        </div>
-                    </section>
-
-                    <section class="card">
-                        <h2 class="card-header">✡️ יום השבת</h2>
-                        <div class="time-row">
-                            <span class="label">שקיעה</span>
-                            <span class="value">${data.shabbat_times.shabbat_day.shkiya}</span>
-                        </div>
-                        <div class="time-row highlight">
-                            <span class="label">צאת שבת</span>
-                            <span class="value">${data.shabbat_times.shabbat_day.tzeit_shabbat}</span>
-                        </div>
-                    </section>
-
-                    <section class="card">
-                        <h2 class="card-header">📅 ימי חול</h2>
-                        <div class="weekday-section">
-                            <span class="weekday-label">מנחה:</span>
-                            <div class="weekday-list">
-                                ${data.weekday_times.mincha.map(t => `<span class="time-chip">${t}</span>`).join('')}
-                            </div>
-                        </div>
-                        <div class="weekday-section">
-                            <span class="weekday-label">ערבית:</span>
-                            <div class="weekday-list">
-                                ${data.weekday_times.arvit.map(t => `<span class="time-chip">${t}</span>`).join('')}
-                            </div>
-                        </div>
-                    </section>
-                `;
-            } catch (err) {
-                container.innerHTML = `
-                    <div class="error">
-                        חלקה שגיאה בטעינת הנתונים.<br>
-                        וודא שקובץ data.json נמצא בשרת.
-                    </div>
-                `;
-                console.error('Error fetching JSON:', err);
+                updateUI(data);
+            } catch (error) {
+                console.error('Error fetching JSON:', error);
+                document.getElementById('parsha-name').textContent = 'שגיאה בטעינת נתונים';
             }
         }
 
-        // הפעלה בעת טעינת הדף
-        window.addEventListener('DOMContentLoaded', loadPrayerTimes);
+        function updateUI(content) {
+            // עדכון פרשה
+            document.getElementById('parsha-name').textContent = content.parsha;
+
+            // עדכון זמני ערב שבת
+            const erev = content.shabbat_times.erev_shabbat;
+            document.getElementById('mincha-gedola').textContent = erev.mincha_gedola;
+            document.getElementById('candle-lighting').textContent = erev.candle_lighting;
+            document.getElementById('tzeit-kochavim').textContent = erev.tzeit_hakochavim;
+
+            // עדכון זמני יום השבת
+            const day = content.shabbat_times.shabbat_day;
+            document.getElementById('shkiya').textContent = day.shkiya;
+            document.getElementById('tzeit-shabbat').textContent = day.tzeit_shabbat;
+
+            // עדכון זמני חול
+            document.getElementById('weekday-mincha').textContent = content.weekday_times.mincha.join(' | ');
+            document.getElementById('weekday-arvit').textContent = content.weekday_times.arvit.join(' | ');
+        }
+
+        // טעינה ראשונית
+        window.onload = fetchShabbatData;
     </script>
 </body>
 </html>
