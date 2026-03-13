@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>זמני תפילה - כפר תפוח</title>
+    <title>זמני תפילה כפר תפוח</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Alef&family=Frank+Ruhl+Libre:wght@300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Alef&family=Frank+Ruhl+Libre:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         :root {
             --deep-navy: #0a1628;
@@ -15,6 +15,22 @@
             --cream: #faf8f3;
             --soft-white: #ffffff;
             --charcoal: #2a2a2a;
+            --bg-color: var(--cream);
+            --card-bg: var(--soft-white);
+            --text-main: var(--charcoal);
+            --chip-bg: #e8f2ff;
+            --border-color: rgba(30, 58, 95, 0.1);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --card-bg: #1e1e1e;
+                --text-main: #e0e0e0;
+                --royal-blue: #4a90e2;
+                --chip-bg: #2c3e50;
+                --border-color: rgba(255, 255, 255, 0.1);
+            }
         }
 
         * {
@@ -25,30 +41,31 @@
 
         body {
             font-family: 'Alef', sans-serif;
-            background: var(--cream);
-            color: var(--charcoal);
+            background: var(--bg-color);
+            color: var(--text-main);
             line-height: 1.6;
             padding-bottom: 2rem;
+            transition: background 0.3s ease;
         }
 
         header {
             background: linear-gradient(135deg, var(--deep-navy) 0%, var(--royal-blue) 100%);
-            color: var(--soft-white);
-            padding: 2rem 1rem;
+            color: white;
+            padding: 1.5rem 1rem;
             text-align: center;
             border-bottom: 3px solid var(--gold);
         }
 
         .synagogue-name {
             font-family: 'Frank Ruhl Libre', serif;
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             font-weight: 400;
-            margin-bottom: 0.3rem;
+            margin-bottom: 0.2rem;
         }
 
         .parsha-title {
             color: var(--gold);
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 300;
         }
 
@@ -56,11 +73,13 @@
             padding: 1rem;
             display: flex;
             flex-direction: column;
-            gap: 1.2rem;
+            gap: 1rem;
+            max-width: 600px;
+            margin: 0 auto;
         }
 
         .card {
-            background: var(--soft-white);
+            background: var(--card-bg);
             border-radius: 12px;
             padding: 1.2rem;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
@@ -69,14 +88,11 @@
 
         .card-header {
             font-family: 'Frank Ruhl Libre', serif;
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             color: var(--royal-blue);
-            margin-bottom: 1rem;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+            margin-bottom: 0.8rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.4rem;
             font-weight: 400;
         }
 
@@ -84,8 +100,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0.7rem 0;
-            border-bottom: 1px solid #f9f9f9;
+            padding: 0.6rem 0;
+            border-bottom: 1px solid var(--border-color);
         }
 
         .time-row:last-child {
@@ -94,16 +110,16 @@
 
         .label {
             font-size: 1rem;
-            color: #555;
+            opacity: 0.9;
         }
 
         .value {
             font-family: 'Frank Ruhl Libre', serif;
             font-size: 1.1rem;
             color: var(--royal-blue);
-            background: #f0f4f8;
-            padding: 0.2rem 0.7rem;
-            border-radius: 5px;
+            background: var(--chip-bg);
+            padding: 0.2rem 0.6rem;
+            border-radius: 6px;
         }
 
         .highlight .value {
@@ -111,26 +127,47 @@
             color: #b8860b;
         }
 
-        .weekday-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
+        .weekday-section {
             margin-top: 0.5rem;
         }
 
+        .weekday-label {
+            font-size: 0.9rem;
+            color: var(--gold);
+            margin-bottom: 0.4rem;
+            display: block;
+        }
+
+        .weekday-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-bottom: 1rem;
+        }
+
         .time-chip {
-            background: #e8f2ff;
+            background: var(--chip-bg);
             color: var(--royal-blue);
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
+            padding: 0.2rem 0.7rem;
+            border-radius: 15px;
             font-size: 0.95rem;
         }
 
         footer {
             text-align: center;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: #888;
-            margin-top: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .loading, .error {
+            text-align: center;
+            padding: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .error {
+            color: #d93025;
         }
     </style>
 </head>
@@ -138,102 +175,89 @@
 
     <header>
         <div class="synagogue-name">בית הכנסת המרכזי כפר תפוח</div>
-        <div class="parsha-title" id="parsha-display">טוען נתונים...</div>
+        <div class="parsha-title" id="parsha-display">טוען...</div>
     </header>
 
-    <div class="container">
-        <section class="card">
-            <h2 class="card-header">🕯️ ערב שבת</h2>
-            <div class="time-row">
-                <span class="label">מנחה גדולה</span>
-                <span class="value" id="mincha-gedola">--:--</span>
-            </div>
-            <div class="time-row highlight">
-                <span class="label">הדלקת נרות</span>
-                <span class="value" id="candle-lighting">--:--</span>
-            </div>
-            <div class="time-row">
-                <span class="label">צאת הכוכבים</span>
-                <span class="value" id="tzeit-kochavim">--:--</span>
-            </div>
-        </section>
-
-        <section class="card">
-            <h2 class="card-header">✡️ יום השבת</h2>
-            <div class="time-row">
-                <span class="label">שקיעה</span>
-                <span class="value" id="shkiya">--:--</span>
-            </div>
-            <div class="time-row highlight">
-                <span class="label">צאת שבת</span>
-                <span class="value" id="tzeit-shabbat">--:--</span>
-            </div>
-        </section>
-
-        <section class="card">
-            <h2 class="card-header">📅 ימי חול</h2>
-            <div style="margin-bottom: 1rem;">
-                <span class="label">מנחה:</span>
-                <div class="weekday-list" id="weekday-mincha"></div>
-            </div>
-            <div>
-                <span class="label">ערבית:</span>
-                <div class="weekday-list" id="weekday-arvit"></div>
-            </div>
-        </section>
-    </div>
+    <main class="container" id="main-content">
+        <div class="loading">טוען נתוני תפילה...</div>
+    </main>
 
     <footer>
         נבנה לרווחת המתפללים | תשפ"ו
     </footer>
 
     <script>
-        // הנתונים כפי שסיפקת
-        const jsonData = {
-            "parsha": "ויקהל פקודי - החודש",
-            "shabbat_times": {
-                "erev_shabbat": {
-                    "mincha_gedola": "12:20",
-                    "candle_lighting": "17:19",
-                    "tzeit_hakochavim": "18:08"
-                },
-                "shabbat_day": {
-                    "shkiya": "17:51",
-                    "tzeit_shabbat": "18:23"
-                }
-            },
-            "weekday_times": {
-                "mincha": ["13:15", "17:35"],
-                "arvit": ["18:15", "20:00", "21:00"]
+        async function loadPrayerTimes() {
+            const container = document.getElementById('main-content');
+            try {
+                // משיכת הנתונים מקובץ data.json
+                const response = await fetch('data.json');
+                if (!response.ok) throw new Error('נכשלה טעינת הקובץ');
+                
+                const data = await response.json();
+                
+                // עדכון כותרת הפרשה
+                document.getElementById('parsha-display').textContent = "פרשת " + data.parsha;
+
+                // בניית התוכן
+                container.innerHTML = `
+                    <section class="card">
+                        <h2 class="card-header">🕯️ ערב שבת</h2>
+                        <div class="time-row">
+                            <span class="label">מנחה גדולה</span>
+                            <span class="value">${data.shabbat_times.erev_shabbat.mincha_gedola}</span>
+                        </div>
+                        <div class="time-row highlight">
+                            <span class="label">הדלקת נרות</span>
+                            <span class="value">${data.shabbat_times.erev_shabbat.candle_lighting}</span>
+                        </div>
+                        <div class="time-row">
+                            <span class="label">צאת הכוכבים</span>
+                            <span class="value">${data.shabbat_times.erev_shabbat.tzeit_hakochavim}</span>
+                        </div>
+                    </section>
+
+                    <section class="card">
+                        <h2 class="card-header">✡️ יום השבת</h2>
+                        <div class="time-row">
+                            <span class="label">שקיעה</span>
+                            <span class="value">${data.shabbat_times.shabbat_day.shkiya}</span>
+                        </div>
+                        <div class="time-row highlight">
+                            <span class="label">צאת שבת</span>
+                            <span class="value">${data.shabbat_times.shabbat_day.tzeit_shabbat}</span>
+                        </div>
+                    </section>
+
+                    <section class="card">
+                        <h2 class="card-header">📅 ימי חול</h2>
+                        <div class="weekday-section">
+                            <span class="weekday-label">מנחה:</span>
+                            <div class="weekday-list">
+                                ${data.weekday_times.mincha.map(t => `<span class="time-chip">${t}</span>`).join('')}
+                            </div>
+                        </div>
+                        <div class="weekday-section">
+                            <span class="weekday-label">ערבית:</span>
+                            <div class="weekday-list">
+                                ${data.weekday_times.arvit.map(t => `<span class="time-chip">${t}</span>`).join('')}
+                            </div>
+                        </div>
+                    </section>
+                `;
+            } catch (err) {
+                container.innerHTML = `
+                    <div class="error">
+                        חלקה שגיאה בטעינת הנתונים.<br>
+                        וודא שקובץ data.json נמצא בשרת.
+                    </div>
+                `;
+                console.error('Error fetching JSON:', err);
             }
-        };
-
-        function renderData(data) {
-            // כותרת פרשה
-            document.getElementById('parsha-display').textContent = "פרשת " + data.parsha;
-
-            // זמני ערב שבת
-            document.getElementById('mincha-gedola').textContent = data.shabbat_times.erev_shabbat.mincha_gedola;
-            document.getElementById('candle-lighting').textContent = data.shabbat_times.erev_shabbat.candle_lighting;
-            document.getElementById('tzeit-kochavim').textContent = data.shabbat_times.erev_shabbat.tzeit_hakochavim;
-
-            // זמני יום השבת
-            document.getElementById('shkiya').textContent = data.shabbat_times.shabbat_day.shkiya;
-            document.getElementById('tzeit-shabbat').textContent = data.shabbat_times.shabbat_day.tzeit_shabbat;
-
-            // ימי חול - מנחה
-            const minchaContainer = document.getElementById('weekday-mincha');
-            minchaContainer.innerHTML = data.weekday_times.mincha
-                .map(t => `<span class="time-chip">${t}</span>`).join('');
-
-            // ימי חול - ערבית
-            const arvitContainer = document.getElementById('weekday-arvit');
-            arvitContainer.innerHTML = data.weekday_times.arvit
-                .map(t => `<span class="time-chip">${t}</span>`).join('');
         }
 
-        // הפעלת הפונקציה בטעינת הדף
-        window.onload = () => renderData(jsonData);
+        // הפעלה בעת טעינת הדף
+        window.addEventListener('DOMContentLoaded', loadPrayerTimes);
     </script>
 </body>
 </html>
