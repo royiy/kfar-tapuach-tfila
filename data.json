@@ -1,14 +1,14 @@
 {
-  "parsha": "ויקהל פקודי - החודש",
+  "parsha": "ויקרא ",
   "shabbat_times": {
     "erev_shabbat": {
       "mincha_gedola": "12:20",
-      "candle_lighting": "17:19",
-      "tzeit_hakochavim": "18:08"
+      "candle_lighting": "17:24",
+      "tzeit_hakochavim": "18:13"
     },
     "shabbat_day": {
-      "shkiya": "17:51",
-      "tzeit_shabbat": "18:23"
+      "shkiya": "17:55",
+      "tzeit_shabbat": "18:28"
     }
   },
   "weekday_times": {
