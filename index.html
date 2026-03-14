@@ -269,10 +269,19 @@
         נבנה באהבה לרווחת המתפללים | בית הכנסת המרכזי כפר תפוח
     </footer>
 
-    <!-- SCRIPT: טען נתונים מ data.json ועדכן רק את השדות המשתנים -->
+    <!-- SCRIPT: משיכת נתונים מ-data.json בדיוק כמו בקובץ הראשון (עם חישובי addMinutes) -->
     <script>
       (function() {
         const DATA_URL = './data.json';
+
+        // פונקציית עזר – בדיוק כמו בקובץ הראשון
+        function addMinutes(timeStr, mins) {
+            if (!timeStr || timeStr === '--:--' || !timeStr.includes(':')) return '--:--';
+            const [h, m] = timeStr.split(':').map(Number);
+            const d = new Date();
+            d.setHours(h, m + mins, 0);
+            return d.getHours().toString().padStart(2,'0') + ':' + d.getMinutes().toString().padStart(2,'0');
+        }
 
         // עזר: עדכון טקסט של אלמנט לפי id
         function setText(id, value) {
@@ -287,48 +296,62 @@
           return Array.isArray(v) ? v.join(' | ') : v;
         }
 
-        // מפה בין מפתחות ה‑JSON ל‑IDs בדף
+        // עדכון מלא של כל הזמנים – בדיוק כמו בקובץ הראשון
         function applyData(data) {
           if (!data) return;
 
-          // פרשה (אם יש)
-          if (data.parsha) {
-            // אם תרצה להציג את הפרשה במקום כלשהו, הוסף id מתאים בדף; כאן נשמור את הכותרת אם קיים אלמנט עם id 'parsha'
-            setText('parsha', data.parsha);
+          // ====================== ערב שבת ======================
+          const erev = data.shabbat_times?.erev_shabbat;
+          if (erev) {
+            setText('mincha_gedola', erev.mincha_gedola);
+            const candles = erev.candle_lighting;
+            setText('candle_lighting', candles);
+            setText('mincha_erev', addMinutes(candles, 14));           // +14 דקות כמו בקובץ הראשון
+            setText('tzeit_hakochavim', erev.tzeit_hakochavim);
           }
 
-          // ערב שבת
-          setText('mincha_gedola', data.shabbat_times?.erev_shabbat?.mincha_gedola ?? document.getElementById('mincha_gedola')?.textContent);
-          setText('candle_lighting', data.shabbat_times?.erev_shabbat?.candle_lighting ?? document.getElementById('candle_lighting')?.textContent);
-          setText('tzeit_hakochavim', data.shabbat_times?.erev_shabbat?.tzeit_hakochavim ?? document.getElementById('tzeit_hakochavim')?.textContent);
+          // ====================== יום השבת ======================
+          const day = data.shabbat_times?.shabbat_day;
+          if (day) {
+            setText('shkiya', day.shkiya);
+            const tzeitShabbat = day.tzeit_shabbat;
+            setText('tzeit_shabbat', tzeitShabbat);
+            setText('mincha_shabbat', addMinutes(tzeitShabbat, -130)); // -130 דקות כמו בקובץ הראשון
+          }
 
-          // יום שבת
-          setText('shkiya', data.shabbat_times?.shabbat_day?.shkiya ?? document.getElementById('shkiya')?.textContent);
-          setText('tzeit_shabbat', data.shabbat_times?.shabbat_day?.tzeit_shabbat ?? document.getElementById('tzeit_shabbat')?.textContent);
+          // מנחה נוספת = שעת הדלקת נרות (כמו בקובץ הראשון)
+          if (erev?.candle_lighting) {
+            setText('mincha_additional', erev.candle_lighting);
+          }
 
-          // תפילות חול
-          setText('weekday_mincha', formatTimes(data.weekday_times?.mincha) || document.getElementById('weekday_mincha')?.textContent);
-          setText('weekday_arvit', formatTimes(data.weekday_times?.arvit) || document.getElementById('weekday_arvit')?.textContent);
-
-          // אם תרצה לעדכן שדות נוספים (שחרית, מנחה נוספת וכו') הוסף כאן בדיקה ומיפוי
-          if (data.weekday_times?.shacharit) {
-            setText('weekday_shacharit', formatTimes(data.weekday_times.shacharit));
+          // ====================== תפילות חול ======================
+          const wd = data.weekday_times;
+          if (wd) {
+            setText('weekday_mincha', formatTimes(wd.mincha));
+            setText('weekday_arvit', formatTimes(wd.arvit));
+            if (wd.shacharit) {
+              setText('weekday_shacharit', formatTimes(wd.shacharit));
+            }
           }
         }
 
-        // טען ה‑JSON ועדכן ה‑DOM
-        fetch(DATA_URL, {cache: "no-store"})
-          .then(resp => {
-            if (!resp.ok) throw new Error('לא ניתן לטעון data.json: ' + resp.status);
-            return resp.json();
-          })
-          .then(json => {
-            applyData(json);
-          })
-          .catch(err => {
-            console.error('שגיאה בטעינת data.json:', err);
-            // לא מציגים הודעה גלויה למשתמש כדי לא לשבש את המראה; ניתן להוסיף אלמנט הודעה אם רוצים
-          });
+        // טעינה ראשונית + רענון כל 10 דקות (בדיוק כמו בקובץ הראשון)
+        function loadData() {
+          fetch(DATA_URL + '?v=' + Date.now(), { cache: "no-store" })
+            .then(resp => {
+              if (!resp.ok) throw new Error('לא ניתן לטעון data.json: ' + resp.status);
+              return resp.json();
+            })
+            .then(json => {
+              applyData(json);
+            })
+            .catch(err => {
+              console.error('שגיאה בטעינת data.json:', err);
+            });
+        }
+
+        loadData();
+        setInterval(loadData, 600000);   // 10 דקות
       })();
     </script>
 </body>
