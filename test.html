@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>בית הכנסת המרכזי כפר תפוח</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Alef:wght@400;700&family=Frank+Ruhl+Libre:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+--deep-navy:#0a1628;
+--royal-blue:#1e3a5f;
+--gold:#d4af37;
+--warm-gold:#f4e4c1;
+--cream:#faf8f3;
+--soft-white:#ffffff;
+--charcoal:#2a2a2a;
+--shadow-blue:rgba(30,58,95,0.15);
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+font-family:'Alef',sans-serif;
+background:var(--cream);
+color:var(--charcoal);
+line-height:1.8;
+overflow-x:hidden;
+}
+
+/* HERO */
+
+.hero{
+position:relative;
+background:linear-gradient(165deg,var(--deep-navy),var(--royal-blue));
+padding:5rem 2rem 6rem;
+text-align:center;
+}
+
+.synagogue-title{
+font-family:'Frank Ruhl Libre',serif;
+font-size:clamp(2.5rem,6vw,4.5rem);
+font-weight:900;
+color:white;
+}
+
+.location{
+font-family:'Frank Ruhl Libre',serif;
+font-size:1.5rem;
+color:var(--warm-gold);
+margin-bottom:1rem;
+}
+
+.decorative-line{
+width:120px;
+height:3px;
+background:linear-gradient(90deg,transparent,var(--gold),transparent);
+margin:auto;
+}
+
+/* CONTAINER */
+
+.container{
+max-width:1200px;
+margin:auto;
+padding:0 2rem 4rem;
+}
+
+.section{
+background:white;
+border-radius:20px;
+padding:3rem 2.5rem;
+margin-bottom:3rem;
+box-shadow:0 10px 40px var(--shadow-blue);
+border-top:6px solid var(--gold);
+}
+
+.section-header{
+display:flex;
+align-items:center;
+gap:1rem;
+margin-bottom:2rem;
+border-bottom:2px solid #eee;
+padding-bottom:1rem;
+}
+
+.section-title{
+font-family:'Frank Ruhl Libre',serif;
+font-size:2rem;
+color:var(--royal-blue);
+}
+
+/* SHABBAT GRID */
+
+.shabbat-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:2rem;
+}
+
+.shabbat-column h4{
+font-family:'Frank Ruhl Libre',serif;
+color:var(--gold);
+margin-bottom:1rem;
+font-size:1.3rem;
+}
+
+.time-item{
+display:flex;
+justify-content:space-between;
+padding:.8rem 0;
+border-bottom:1px solid #f3f3f3;
+}
+
+.time-value{
+font-family:'Frank Ruhl Libre',serif;
+font-weight:700;
+color:var(--royal-blue);
+background:#e8f2ff;
+padding:.3rem .8rem;
+border-radius:6px;
+}
+
+.highlight-time{
+background:#fff4d6;
+color:#b8860b;
+}
+
+/* WEEKDAY */
+
+.schedule-grid{display:grid;gap:1rem}
+
+.schedule-row{
+background:#fafafa;
+border-right:4px solid var(--royal-blue);
+padding:1rem 1.2rem;
+border-radius:10px;
+display:flex;
+justify-content:space-between;
+}
+
+.schedule-times{
+font-family:'Frank Ruhl Libre',serif;
+font-weight:700;
+color:var(--royal-blue);
+}
+
+/* FOOTER */
+
+.footer{
+background:var(--royal-blue);
+color:var(--warm-gold);
+text-align:center;
+padding:2rem;
+}
+
+</style>
+</head>
+
+<body>
+
+<header class="hero">
+<div class="hero-content">
+<h1 class="synagogue-title">בית הכנסת המרכזי</h1>
+<p class="location">כפר תפוח</p>
+<div class="decorative-line"></div>
+</div>
+</header>
+
+<div class="container">
+
+<section class="section">
+
+<div class="section-header">
+<span>🕯️</span>
+<h2 id="parsha-title" class="section-title">זמני השבת</h2>
+</div>
+
+<div class="shabbat-grid">
+
+<div class="shabbat-column">
+
+<h4>ערב שבת</h4>
+
+<div class="time-item">
+<span>מנחה גדולה</span>
+<span id="mincha_gedola" class="time-value">--:--</span>
+</div>
+
+<div class="time-item">
+<span>הדלקת נרות</span>
+<span id="candle_lighting" class="time-value highlight-time">--:--</span>
+</div>
+
+<div class="time-item">
+<span>מנחה ערב שבת</span>
+<span id="mincha_erev" class="time-value">--:--</span>
+</div>
+
+<div class="time-item">
+<span>צאת הכוכבים</span>
+<span id="tzeit_hakochavim" class="time-value">--:--</span>
+</div>
+
+</div>
+
+<div class="shabbat-column">
+
+<h4>יום השבת</h4>
+
+<div class="time-item">
+<span>שחרית</span>
+<span class="time-value">08:00</span>
+</div>
+
+<div class="time-item">
+<span>מנחה גדולה</span>
+<span class="time-value">12:30</span>
+</div>
+
+<div class="time-item">
+<span>לימוד הלכה</span>
+<span class="time-value">13:00</span>
+</div>
+
+<div class="time-item">
+<span>מנחה של שבת</span>
+<span id="mincha_shabbat" class="time-value">--:--</span>
+</div>
+
+<div class="time-item">
+<span>שיעור הרב שמעון רוזנצוויג</span>
+<span class="time-value">אחרי מנחה</span>
+</div>
+
+<div class="time-item">
+<span>מנחה נוספת</span>
+<span id="mincha_additional" class="time-value">--:--</span>
+</div>
+
+<div class="time-item">
+<span>שקיעה</span>
+<span id="shkiya" class="time-value">--:--</span>
+</div>
+
+<div class="time-item">
+<span>צאת שבת וערבית</span>
+<span id="tzeit_shabbat" class="time-value highlight-time">--:--</span>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<section class="section">
+
+<div class="section-header">
+<span>📅</span>
+<h2 class="section-title">תפילות חול</h2>
+</div>
+
+<div class="schedule-grid">
+
+<div class="schedule-row">
+<span>שחרית</span>
+<span class="schedule-times">06:15 | 07:50 | 08:00 (בשישי)</span>
+</div>
+
+<div class="schedule-row">
+<span>מנחה</span>
+<span id="weekday_mincha" class="schedule-times">--</span>
+</div>
+
+<div class="schedule-row">
+<span>ערבית</span>
+<span id="weekday_arvit" class="schedule-times">--</span>
+</div>
+
+</div>
+
+</section>
+
+</div>
+
+<footer class="footer">
+נבנה באהבה לרווחת המתפללים | בית הכנסת המרכזי כפר תפוח
+</footer>
+
+
+<script>
+
+const DATA_URL="data.json";
+
+function addMinutes(timeStr,mins){
+
+if(!timeStr||!timeStr.includes(":")) return "--:--";
+
+const[h,m]=timeStr.split(":").map(Number);
+
+const d=new Date();
+
+d.setHours(h,m+mins);
+
+return d.getHours().toString().padStart(2,"0")+":"+d.getMinutes().toString().padStart(2,"0");
+
+}
+
+function setText(id,value){
+
+const el=document.getElementById(id);
+
+if(el) el.textContent=value;
+
+}
+
+function formatTimes(arr){
+
+return Array.isArray(arr)?arr.join(" | "):arr;
+
+}
+
+function applyData(data){
+
+/* PARSHA */
+
+if(data.parsha){
+
+document.getElementById("parsha-title").textContent="זמני השבת - "+data.parsha;
+
+}
+
+/* EREV SHABBAT */
+
+const erev=data.shabbat_times.erev_shabbat;
+
+const candles=erev.candle_lighting;
+
+setText("mincha_gedola",erev.mincha_gedola);
+
+setText("candle_lighting",candles);
+
+setText("mincha_erev",addMinutes(candles,14));
+
+setText("tzeit_hakochavim",erev.tzeit_hakochavim);
+
+setText("mincha_additional",candles);
+
+/* SHABBAT DAY */
+
+const day=data.shabbat_times.shabbat_day;
+
+const tzeit=day.tzeit_shabbat;
+
+setText("shkiya",day.shkiya);
+
+setText("tzeit_shabbat",tzeit);
+
+setText("mincha_shabbat",addMinutes(tzeit,-130));
+
+/* WEEKDAY */
+
+setText("weekday_mincha",formatTimes(data.weekday_times.mincha));
+
+setText("weekday_arvit",formatTimes(data.weekday_times.arvit));
+
+}
+
+async function loadData(){
+
+try{
+
+const res=await fetch(DATA_URL+"?v="+Date.now());
+
+const data=await res.json();
+
+applyData(data);
+
+}catch(e){
+
+console.error(e);
+
+}
+
+}
+
+loadData();
+
+setInterval(loadData,600000);
+
+</script>
+
+</body>
+</html>
