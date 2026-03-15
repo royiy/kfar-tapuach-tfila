@@ -29,80 +29,42 @@ font-family:'Alef',sans-serif;
 background:var(--cream);
 color:var(--charcoal);
 line-height:1.8;
-overflow-x:hidden;
 }
 
 /* HERO */
 
 .hero{
-position:relative;
-background:linear-gradient(165deg,var(--deep-navy) 0%,var(--royal-blue) 50%,#2d5580 100%);
-padding:5rem 2rem 6rem;
+background:linear-gradient(165deg,var(--deep-navy),var(--royal-blue));
+padding:5rem 2rem;
 text-align:center;
-overflow:hidden;
-}
-
-.hero::before{
-content:'';
-position:absolute;
-top:0;left:0;right:0;bottom:0;
-background:
-radial-gradient(circle at 20% 30%,rgba(212,175,55,0.08) 0%,transparent 50%),
-radial-gradient(circle at 80% 70%,rgba(212,175,55,0.05) 0%,transparent 50%);
-}
-
-.hero::after{
-content:'';
-position:absolute;
-bottom:-2px;
-left:0;right:0;
-height:100px;
-background:var(--cream);
-clip-path:polygon(0 50%,100% 0,100% 100%,0 100%);
-}
-
-.hero-content{
-position:relative;
-z-index:1;
-max-width:900px;
-margin:auto;
 }
 
 .synagogue-title{
 font-family:'Frank Ruhl Libre',serif;
-font-size:4rem;
+font-size:3rem;
 font-weight:900;
-color:var(--soft-white);
-margin-bottom:.5rem;
+color:white;
 }
 
 .location{
 font-family:'Frank Ruhl Libre',serif;
-font-size:1.6rem;
 color:var(--warm-gold);
-margin-bottom:2rem;
+font-size:1.4rem;
 }
-
-.decorative-line{
-width:120px;
-height:3px;
-background:linear-gradient(90deg,transparent,var(--gold),transparent);
-margin:auto;
-}
-
-/* CONTAINER */
 
 .container{
 max-width:1200px;
 margin:auto;
-padding:0 2rem 4rem;
+padding:2rem;
 }
 
+/* SECTION */
+
 .section{
-background:var(--soft-white);
+background:white;
 border-radius:20px;
-padding:3rem 2.5rem;
-margin-bottom:3rem;
+padding:2.5rem;
+margin-bottom:2rem;
 box-shadow:0 10px 40px var(--shadow-blue);
 border-top:6px solid var(--gold);
 }
@@ -112,11 +74,9 @@ display:flex;
 align-items:center;
 gap:1rem;
 margin-bottom:2rem;
-border-bottom:2px solid #f0ede3;
+border-bottom:2px solid #eee;
 padding-bottom:1rem;
 }
-
-.section-icon{font-size:2.2rem}
 
 .section-title{
 font-family:'Frank Ruhl Libre',serif;
@@ -133,6 +93,7 @@ gap:2rem;
 }
 
 .shabbat-column h4{
+font-family:'Frank Ruhl Libre',serif;
 color:var(--gold);
 margin-bottom:1rem;
 }
@@ -140,63 +101,71 @@ margin-bottom:1rem;
 .time-item{
 display:flex;
 justify-content:space-between;
-padding:.9rem 0;
-border-bottom:1px solid #eee;
+padding:.8rem 0;
+border-bottom:1px solid #f0f0f0;
 }
 
 .time-value{
 font-family:'Frank Ruhl Libre',serif;
 font-weight:700;
+color:var(--royal-blue);
 background:#e8f2ff;
-padding:.3rem .9rem;
-border-radius:8px;
+padding:.3rem .8rem;
+border-radius:6px;
 }
 
 .highlight-time{
-background:#ffe8b8!important;
+background:#fff4d6;
+color:#b8860b;
 }
 
-/* חול */
+/* WEEKDAY */
 
 .schedule-grid{display:grid;gap:1rem}
 
 .schedule-row{
-display:flex;
-justify-content:space-between;
-padding:1rem;
 background:#fafafa;
 border-right:4px solid var(--royal-blue);
+padding:1rem 1.2rem;
 border-radius:10px;
+display:flex;
+justify-content:space-between;
 }
 
-/* שיעורים */
+.schedule-times{
+font-family:'Frank Ruhl Libre',serif;
+font-weight:700;
+color:var(--royal-blue);
+}
+
+/* SHIURIM */
 
 .shiur-card{
 background:#fff8e6;
 border-right:5px solid var(--gold);
 padding:1.5rem;
-border-radius:15px;
+border-radius:12px;
 margin-bottom:1rem;
 }
 
 .shiur-title{
 font-family:'Frank Ruhl Libre',serif;
-font-size:1.3rem;
-color:var(--royal-blue);
 font-weight:700;
+color:var(--royal-blue);
+font-size:1.3rem;
 }
 
-/* תרומות */
+.shiur-teacher{
+font-size:.9rem;
+color:#666;
+}
+
+/* DONATION */
 
 .donation-section{
-background:linear-gradient(165deg,var(--royal-blue) 0%,var(--deep-navy) 100%);
+background:linear-gradient(165deg,var(--royal-blue),var(--deep-navy));
 color:white;
 text-align:center;
-position:relative;
-}
-
-.donation-section .section-title{
-color:var(--warm-gold);
 }
 
 .donation-intro{
@@ -206,12 +175,10 @@ margin-bottom:2rem;
 
 .bank-details{
 background:rgba(255,255,255,.1);
-backdrop-filter:blur(10px);
-border:2px solid rgba(212,175,55,.3);
 border-radius:16px;
 padding:2rem;
 margin:2rem auto;
-max-width:500px;
+max-width:450px;
 line-height:2;
 }
 
@@ -223,38 +190,14 @@ color:var(--warm-gold);
 display:inline-block;
 background:linear-gradient(135deg,#00a0e9,#0077b6);
 color:white;
-text-decoration:none;
 padding:1rem 2.5rem;
 border-radius:50px;
+text-decoration:none;
 font-weight:700;
-font-size:1.1rem;
-margin-top:1.5rem;
-box-shadow:0 8px 20px rgba(0,160,233,.4);
-transition:.3s;
-position:relative;
-overflow:hidden;
+margin-top:1rem;
 }
 
-.paybox-button::before{
-content:'';
-position:absolute;
-top:0;
-left:-100%;
-width:100%;
-height:100%;
-background:linear-gradient(90deg,transparent,rgba(255,255,255,.4),transparent);
-transition:.6s;
-}
-
-.paybox-button:hover{
-transform:translateY(-3px);
-}
-
-.paybox-button:hover::before{
-left:100%;
-}
-
-/* עילוי נשמה */
+/* MEMORIAL */
 
 .memorial-section{
 background:var(--deep-navy);
@@ -263,12 +206,31 @@ padding:3rem;
 text-align:center;
 }
 
-.memorial-item{
-margin:10px;
-font-size:1.2rem;
+.memorial-container{
+position:relative;
+height:60px;
 }
 
-/* footer */
+.memorial-item{
+position:absolute;
+width:100%;
+opacity:0;
+animation:cycle 25s infinite;
+}
+
+.memorial-item:nth-child(1){animation-delay:0s}
+.memorial-item:nth-child(2){animation-delay:5s}
+.memorial-item:nth-child(3){animation-delay:10s}
+.memorial-item:nth-child(4){animation-delay:15s}
+.memorial-item:nth-child(5){animation-delay:20s}
+
+@keyframes cycle{
+0%{opacity:0}
+5%{opacity:1}
+15%{opacity:1}
+20%{opacity:0}
+100%{opacity:0}
+}
 
 .footer{
 background:var(--royal-blue);
@@ -283,38 +245,158 @@ padding:2rem;
 <body>
 
 <header class="hero">
-<div class="hero-content">
 <h1 class="synagogue-title">בית הכנסת המרכזי</h1>
 <p class="location">כפר תפוח</p>
-<div class="decorative-line"></div>
-</div>
 </header>
 
 <div class="container">
 
-<!-- תרומות -->
+<section class="section">
+
+<div class="section-header">
+<span>🕯️</span>
+<h2 id="parsha-title" class="section-title">זמני שבת</h2>
+</div>
+
+<div class="shabbat-grid">
+
+<div class="shabbat-column">
+
+<h4>ערב שבת</h4>
+
+<div class="time-item">
+<span>מנחה גדולה</span>
+<span id="mincha_gedola" class="time-value">--:--</span>
+</div>
+
+<div class="time-item">
+<span>הדלקת נרות</span>
+<span id="candle_lighting" class="time-value highlight-time">--:--</span>
+</div>
+
+<div class="time-item">
+<span>מנחה ערב שבת</span>
+<span id="mincha_erev" class="time-value">--:--</span>
+</div>
+
+<div class="time-item">
+<span>צאת הכוכבים</span>
+<span id="tzeit_hakochavim" class="time-value">--:--</span>
+</div>
+
+</div>
+
+<div class="shabbat-column">
+
+<h4>יום שבת</h4>
+
+<div class="time-item"><span>שחרית</span><span class="time-value">08:00</span></div>
+<div class="time-item"><span>מנחה גדולה</span><span class="time-value">12:30</span></div>
+<div class="time-item"><span>לימוד הלכה</span><span class="time-value">13:00</span></div>
+
+<div class="time-item">
+<span>מנחה של שבת</span>
+<span id="mincha_shabbat" class="time-value">--:--</span>
+</div>
+
+<div class="time-item">
+<span>שיעור הרב שמעון רוזנצוויג</span>
+<span class="time-value">אחרי מנחה</span>
+</div>
+
+<div class="time-item">
+<span>מנחה נוספת</span>
+<span id="mincha_additional" class="time-value">--:--</span>
+</div>
+
+<div class="time-item">
+<span>שקיעה</span>
+<span id="shkiya" class="time-value">--:--</span>
+</div>
+
+<div class="time-item">
+<span>צאת שבת וערבית</span>
+<span id="tzeit_shabbat" class="time-value highlight-time">--:--</span>
+</div>
+
+</div>
+
+</div>
+</section>
+
+<section class="section">
+
+<div class="section-header">
+<span>📅</span>
+<h2 class="section-title">תפילות חול</h2>
+</div>
+
+<div class="schedule-grid">
+
+<div class="schedule-row">
+<span>שחרית</span>
+<span class="schedule-times">06:15 | 07:50 | 08:00 (בשישי)</span>
+</div>
+
+<div class="schedule-row">
+<span>מנחה</span>
+<span id="weekday_mincha" class="schedule-times"></span>
+</div>
+
+<div class="schedule-row">
+<span>ערבית</span>
+<span id="weekday_arvit" class="schedule-times"></span>
+</div>
+
+</div>
+</section>
+
+<section class="section">
+
+<div class="section-header">
+<span>📚</span>
+<h2 class="section-title">שיעורים בימות השבוע</h2>
+</div>
+
+<div class="shiur-card">
+<div class="shiur-title">שיעור בדף היומי</div>
+<div>ראשון-חמישי 20:30</div>
+<div class="shiur-teacher">אלעד אמסטרדם</div>
+</div>
+
+<div class="shiur-card">
+<div class="shiur-title">שיעור באורות</div>
+<div>יום רביעי 21:15</div>
+<div class="shiur-teacher">הרב שמעון רוזנצוויג</div>
+</div>
+
+<div class="shiur-card">
+<div class="shiur-title">כולל יום שישי</div>
+<div>09:00-11:00</div>
+<div class="shiur-teacher">הרב צביקה הרץ</div>
+</div>
+
+</section>
 
 <section class="section donation-section">
 
 <div class="section-header">
-<span class="section-icon">💎</span>
+<span>💎</span>
 <h2 class="section-title">תרומות לבית הכנסת</h2>
 </div>
 
-<p class="donation-intro">
-נודה לכל תרומה להחזקת ופיתוח בית הכנסת
-</p>
+<p class="donation-intro">נודה לכל תרומה להחזקת ופיתוח בית הכנסת</p>
 
 <div class="bank-details">
 <strong>העברה בנקאית:</strong><br>
 בנק מזרחי<br>
 סניף 483<br>
-מספר חשבון: <strong>437738</strong><br>
-ע"ש בית הכנסת המרכזי כפר תפוח
+מספר חשבון <strong>437738</strong><br>
+בית כנסת מרכזי כפר תפוח
 </div>
 
-<a href="https://links.payboxapp.com/rBbQDcbaPVb" target="_blank" class="paybox-button">
-לתרומה ב-PayBox 💳
+<a class="paybox-button" href="https://links.payboxapp.com/rBbQDcbaPVb" target="_blank">
+לתרומה ב-PayBox
 </a>
 
 </section>
@@ -325,17 +407,73 @@ padding:2rem;
 
 <h3>לעילוי נשמת</h3>
 
+<div class="memorial-container">
 <div class="memorial-item">🕯️ שלמה זלמן בן מרדכי אלעזר הלוי</div>
 <div class="memorial-item">🕯️ רחל בת יוסף הכהן</div>
 <div class="memorial-item">🕯️ סעדיה בן יחיא</div>
 <div class="memorial-item">🕯️ עוואד בן יחיא</div>
 <div class="memorial-item">🕯️ טרנג'ה בת חביבה</div>
+</div>
 
 </section>
 
 <footer class="footer">
-נבנה באהבה לרווחת המתפללים | בית הכנסת המרכזי כפר תפוח
+נבנה באהבה לרווחת המתפללים
 </footer>
+
+<script>
+
+const DATA_URL="data.json";
+
+function addMinutes(timeStr,mins){
+if(!timeStr)return"--:--";
+const[h,m]=timeStr.split(":").map(Number);
+const d=new Date();
+d.setHours(h,m+mins);
+return d.getHours().toString().padStart(2,"0")+":"+d.getMinutes().toString().padStart(2,"0");
+}
+
+function setText(id,val){
+const el=document.getElementById(id);
+if(el)el.textContent=val;
+}
+
+function formatTimes(arr){
+return Array.isArray(arr)?arr.join(" | "):arr;
+}
+
+async function loadData(){
+
+const res=await fetch(DATA_URL+"?v="+Date.now());
+const data=await res.json();
+
+document.getElementById("parsha-title").textContent="זמני השבת - "+data.parsha;
+
+const erev=data.shabbat_times.erev_shabbat;
+const day=data.shabbat_times.shabbat_day;
+
+const candles=erev.candle_lighting;
+
+setText("mincha_gedola",erev.mincha_gedola);
+setText("candle_lighting",candles);
+setText("mincha_erev",addMinutes(candles,14));
+setText("tzeit_hakochavim",erev.tzeit_hakochavim);
+
+setText("mincha_additional",candles);
+
+setText("shkiya",day.shkiya);
+setText("tzeit_shabbat",day.tzeit_shabbat);
+setText("mincha_shabbat",addMinutes(day.tzeit_shabbat,-130));
+
+setText("weekday_mincha",formatTimes(data.weekday_times.mincha));
+setText("weekday_arvit",formatTimes(data.weekday_times.arvit));
+
+}
+
+loadData();
+setInterval(loadData,600000);
+
+</script>
 
 </body>
 </html>
