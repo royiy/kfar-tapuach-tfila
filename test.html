@@ -1,14 +1,17 @@
+```html
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>בית הכנסת המרכזי כפר תפוח</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Alef:wght@400;700&family=Frank+Ruhl+Libre:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 
 <style>
-:root {
+
+:root{
 --deep-navy:#0a1628;
 --royal-blue:#1e3a5f;
 --gold:#d4af37;
@@ -26,50 +29,42 @@ font-family:'Alef',sans-serif;
 background:var(--cream);
 color:var(--charcoal);
 line-height:1.8;
-overflow-x:hidden;
 }
 
 /* HERO */
 
 .hero{
-position:relative;
-background:linear-gradient(165deg,var(--deep-navy) 0%,var(--royal-blue) 50%,#2d5580 100%);
-padding:5rem 2rem 6rem;
+background:linear-gradient(165deg,var(--deep-navy),var(--royal-blue));
+padding:5rem 2rem;
 text-align:center;
 }
 
 .synagogue-title{
 font-family:'Frank Ruhl Libre',serif;
-font-size:clamp(2.5rem,6vw,4.5rem);
+font-size:3rem;
 font-weight:900;
-color:var(--soft-white);
+color:white;
 }
 
 .location{
 font-family:'Frank Ruhl Libre',serif;
-font-size:1.5rem;
 color:var(--warm-gold);
-margin-bottom:2rem;
-}
-
-.decorative-line{
-width:120px;
-height:3px;
-background:linear-gradient(90deg,transparent,var(--gold),transparent);
-margin:0 auto;
+font-size:1.4rem;
 }
 
 .container{
 max-width:1200px;
-margin:0 auto;
-padding:0 2rem 4rem;
+margin:auto;
+padding:2rem;
 }
 
+/* SECTION */
+
 .section{
-background:var(--soft-white);
+background:white;
 border-radius:20px;
-padding:3rem 2.5rem;
-margin-bottom:3rem;
+padding:2.5rem;
+margin-bottom:2rem;
 box-shadow:0 10px 40px var(--shadow-blue);
 border-top:6px solid var(--gold);
 }
@@ -79,7 +74,7 @@ display:flex;
 align-items:center;
 gap:1rem;
 margin-bottom:2rem;
-border-bottom:2px solid #f0ede3;
+border-bottom:2px solid #eee;
 padding-bottom:1rem;
 }
 
@@ -89,7 +84,7 @@ font-size:2rem;
 color:var(--royal-blue);
 }
 
-/* שבת */
+/* SHABBAT */
 
 .shabbat-grid{
 display:grid;
@@ -99,78 +94,73 @@ gap:2rem;
 
 .shabbat-column h4{
 font-family:'Frank Ruhl Libre',serif;
-font-size:1.4rem;
 color:var(--gold);
-margin-bottom:1.5rem;
+margin-bottom:1rem;
 }
 
 .time-item{
 display:flex;
 justify-content:space-between;
-padding:1rem 0;
-border-bottom:1px solid #f5f2e8;
+padding:.8rem 0;
+border-bottom:1px solid #f0f0f0;
 }
 
 .time-value{
 font-family:'Frank Ruhl Libre',serif;
-font-size:1.2rem;
 font-weight:700;
 color:var(--royal-blue);
 background:#e8f2ff;
-padding:0.4rem 1rem;
-border-radius:8px;
+padding:.3rem .8rem;
+border-radius:6px;
 }
 
 .highlight-time{
-background:#fff9e6!important;
-color:#b8860b!important;
+background:#fff4d6;
+color:#b8860b;
 }
 
-/* חול */
+/* WEEKDAY */
 
-.schedule-grid{display:grid;gap:1.5rem}
+.schedule-grid{display:grid;gap:1rem}
 
 .schedule-row{
 background:#fafafa;
 border-right:4px solid var(--royal-blue);
-padding:1.2rem 1.5rem;
-border-radius:12px;
+padding:1rem 1.2rem;
+border-radius:10px;
 display:flex;
 justify-content:space-between;
 }
 
 .schedule-times{
 font-family:'Frank Ruhl Libre',serif;
-font-size:1.15rem;
 font-weight:700;
 color:var(--royal-blue);
 }
 
-/* שיעורים */
+/* SHIURIM */
 
 .shiur-card{
-background:#fffbf0;
-border-radius:16px;
-padding:2rem;
+background:#fff8e6;
 border-right:5px solid var(--gold);
+padding:1.5rem;
+border-radius:12px;
 margin-bottom:1rem;
 }
 
 .shiur-title{
 font-family:'Frank Ruhl Libre',serif;
-font-size:1.4rem;
 font-weight:700;
 color:var(--royal-blue);
+font-size:1.3rem;
 }
-
-.shiur-time{margin-top:5px}
 
 .shiur-teacher{
 font-size:.9rem;
-color:#6b6b6b;
+color:#666;
 }
 
-/* תרומות */
+/* DONATION */
 
 .donation-section{
 background:linear-gradient(165deg,var(--royal-blue),var(--deep-navy));
@@ -178,17 +168,27 @@ color:white;
 text-align:center;
 }
 
+.donation-intro{
+font-size:1.2rem;
+margin-bottom:2rem;
+}
+
 .bank-details{
 background:rgba(255,255,255,.1);
 border-radius:16px;
 padding:2rem;
 margin:2rem auto;
-max-width:500px;
+max-width:450px;
+line-height:2;
+}
+
+.bank-details strong{
+color:var(--warm-gold);
 }
 
 .paybox-button{
 display:inline-block;
-background:#00a0e9;
+background:linear-gradient(135deg,#00a0e9,#0077b6);
 color:white;
 padding:1rem 2.5rem;
 border-radius:50px;
@@ -197,33 +197,25 @@ font-weight:700;
 margin-top:1rem;
 }
 
-/* עילוי נשמת */
+/* MEMORIAL */
 
 .memorial-section{
 background:var(--deep-navy);
 color:var(--warm-gold);
-padding:3rem 2rem;
+padding:3rem;
 text-align:center;
-}
-
-.memorial-header{
-font-family:'Frank Ruhl Libre',serif;
-font-size:1.5rem;
-margin-bottom:2rem;
 }
 
 .memorial-container{
 position:relative;
 height:60px;
-display:flex;
-align-items:center;
-justify-content:center;
 }
 
 .memorial-item{
 position:absolute;
+width:100%;
 opacity:0;
-animation:memorialCycle 25s infinite;
+animation:cycle 25s infinite;
 }
 
 .memorial-item:nth-child(1){animation-delay:0s}
@@ -232,10 +224,10 @@ animation:memorialCycle 25s infinite;
 .memorial-item:nth-child(4){animation-delay:15s}
 .memorial-item:nth-child(5){animation-delay:20s}
 
-@keyframes memorialCycle{
+@keyframes cycle{
 0%{opacity:0}
-4%{opacity:1}
-16%{opacity:1}
+5%{opacity:1}
+15%{opacity:1}
 20%{opacity:0}
 100%{opacity:0}
 }
@@ -244,7 +236,7 @@ animation:memorialCycle 25s infinite;
 background:var(--royal-blue);
 color:var(--warm-gold);
 text-align:center;
-padding:2.5rem;
+padding:2rem;
 }
 
 </style>
@@ -253,11 +245,8 @@ padding:2.5rem;
 <body>
 
 <header class="hero">
-<div class="hero-content">
 <h1 class="synagogue-title">בית הכנסת המרכזי</h1>
 <p class="location">כפר תפוח</p>
-<div class="decorative-line"></div>
-</div>
 </header>
 
 <div class="container">
@@ -299,7 +288,7 @@ padding:2.5rem;
 
 <div class="shabbat-column">
 
-<h4>יום השבת</h4>
+<h4>יום שבת</h4>
 
 <div class="time-item"><span>שחרית</span><span class="time-value">08:00</span></div>
 <div class="time-item"><span>מנחה גדולה</span><span class="time-value">12:30</span></div>
@@ -371,19 +360,19 @@ padding:2.5rem;
 
 <div class="shiur-card">
 <div class="shiur-title">שיעור בדף היומי</div>
-<div class="shiur-time">ראשון עד חמישי בשעה <strong>20:30</strong></div>
+<div>ראשון-חמישי 20:30</div>
 <div class="shiur-teacher">אלעד אמסטרדם</div>
 </div>
 
 <div class="shiur-card">
 <div class="shiur-title">שיעור באורות</div>
-<div class="shiur-time">יום רביעי בשעה <strong>21:15</strong></div>
+<div>יום רביעי 21:15</div>
 <div class="shiur-teacher">הרב שמעון רוזנצוויג</div>
 </div>
 
 <div class="shiur-card">
 <div class="shiur-title">כולל יום שישי</div>
-<div class="shiur-time">09:00 - 11:00</div>
+<div>09:00-11:00</div>
 <div class="shiur-teacher">הרב צביקה הרץ</div>
 </div>
 
@@ -396,16 +385,17 @@ padding:2.5rem;
 <h2 class="section-title">תרומות לבית הכנסת</h2>
 </div>
 
-<p>נודה לכל תרומה להחזקת ופיתוח בית הכנסת</p>
+<p class="donation-intro">נודה לכל תרומה להחזקת ופיתוח בית הכנסת</p>
 
 <div class="bank-details">
-בנק הפועלים (12)<br>
-סניף 286<br>
-מספר חשבון: <strong>126982</strong><br>
-בית הכנסת המרכזי כפר תפוח
+<strong>העברה בנקאית:</strong><br>
+בנק מזרחי<br>
+סניף 483<br>
+מספר חשבון <strong>437738</strong><br>
+בית כנסת מרכזי כפר תפוח
 </div>
 
-<a href="https://links.payboxapp.com/rBbQDcbaPVb" target="_blank" class="paybox-button">
+<a class="paybox-button" href="https://links.payboxapp.com/rBbQDcbaPVb" target="_blank">
 לתרומה ב-PayBox
 </a>
 
@@ -415,30 +405,28 @@ padding:2.5rem;
 
 <section class="memorial-section">
 
-<h3 class="memorial-header">לעילוי נשמת</h3>
+<h3>לעילוי נשמת</h3>
 
 <div class="memorial-container">
-
 <div class="memorial-item">🕯️ שלמה זלמן בן מרדכי אלעזר הלוי</div>
 <div class="memorial-item">🕯️ רחל בת יוסף הכהן</div>
 <div class="memorial-item">🕯️ סעדיה בן יחיא</div>
 <div class="memorial-item">🕯️ עוואד בן יחיא</div>
 <div class="memorial-item">🕯️ טרנג'ה בת חביבה</div>
-
 </div>
 
 </section>
 
 <footer class="footer">
-נבנה באהבה לרווחת המתפללים | בית הכנסת המרכזי כפר תפוח
+נבנה באהבה לרווחת המתפללים
 </footer>
 
 <script>
 
-const DATA_URL="./data.json";
+const DATA_URL="data.json";
 
 function addMinutes(timeStr,mins){
-if(!timeStr||!timeStr.includes(":"))return"--:--";
+if(!timeStr)return"--:--";
 const[h,m]=timeStr.split(":").map(Number);
 const d=new Date();
 d.setHours(h,m+mins);
@@ -489,3 +477,4 @@ setInterval(loadData,600000);
 
 </body>
 </html>
+```
