@@ -103,7 +103,7 @@
         .announcement-box { background: white; padding: 8vh 5vw; border-radius: 40px; border: 10px double var(--gold); text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.2); max-width: 85%; }
         .announcement-text { font-size: 8vh; line-height: 1.5; color: var(--deep-navy); font-weight: 900; text-shadow: 2px 2px 4px rgba(0,0,0,0.2); letter-spacing: 0.05em; }
 
-        /* סרטון "הונאה" למניעת שומר מסך */
+        /* וידאו רקע למניעת החשכת מסך */
         #preventSleepVideo { 
             position: fixed; 
             right: 0; 
@@ -116,7 +116,7 @@
         }
     </style>
 </head>
-<body onclick="requestWakeLock()">
+<body onclick="requestWakeLock(); initInteraction();">
 
     <video id="preventSleepVideo" autoplay loop muted playsinline>
         <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
@@ -141,7 +141,7 @@
         <div class="main-content">
             <div class="column-card">
                 <div class="card-header"><span style="font-size:3.5vh">🌅</span><h2 class="card-title">ערב שבת</h2></div>
-                <div class="time-list">
+                <div class="time-list" id="erev-shabbat-list">
                     <div class="time-item"><span>מנחה גדולה</span><span id="fri-mincha-gedola" class="time-value">--:--</span></div>
                     <div class="time-item"><span>הדלקת נרות</span><span id="candle-lighting" class="time-value">--:--</span></div>
                     <div class="time-item"><span>מנחה ערב שבת</span><span id="fri-mincha-regular" class="time-value">--:--</span></div>
@@ -151,12 +151,12 @@
 
             <div class="column-card">
                 <div class="card-header"><span style="font-size:3.5vh">✨</span><h2 class="card-title">יום השבת</h2></div>
-                <div class="time-list">
+                <div class="time-list" id="shabbat-day-list">
                     <div class="time-item"><span>שחרית</span><span id="sat-shacharit" class="time-value">08:00</span></div>
                     <div class="time-item"><span>מנחה גדולה</span><span id="sat-mincha-gedola" class="time-value">12:30</span></div>
                     <div class="time-item"><span>לימוד הלכה</span><span class="time-value">13:00</span></div>
                     <div class="time-item"><span>מנחה של שבת</span><span id="sat-mincha" class="time-value">--:--</span></div>
-                    <div class="time-item"><span style="font-size: 1.8vh;">שיעור הרב שמעון רוזנצוויג שליט"א</span><span class="time-value" style="font-size: 2vh;">אחרי מנחה</span></div>
+                    <div class="time-item"><span style="font-size: 1.8vh;">שיעור הלכה</span><span class="time-value" style="font-size: 2vh;">אחרי מנחה</span></div>
                     <div class="time-item"><span>מנחה (חדר לימוד)</span><span id="sat-mincha-extra" class="time-value">--:--</span></div>
                     <div class="time-item"><span>שקיעה</span><span id="shkiya" class="time-value">--:--</span></div>
                     <div class="time-item"><span>צאת שבת וערבית</span><span id="tzeit-shabbat" class="time-value">--:--</span></div>
@@ -186,27 +186,36 @@
     </div>
 
     <script>
-        // מנגנון Wake Lock למניעת שינה בדפדפנים תומכים
+        // מנגנון Wake Lock
         let wakeLock = null;
         async function requestWakeLock() {
             try {
                 if ('wakeLock' in navigator) {
                     wakeLock = await navigator.wakeLock.request('screen');
                 }
-            } catch (err) {
-                console.log('Wake Lock Error:', err);
-            }
+            } catch (err) {}
         }
-        requestWakeLock();
-        document.addEventListener('visibilitychange', () => {
-            if (wakeLock !== null && document.visibilityState === 'visible') requestWakeLock();
-        });
 
-        // טריק נוסף למניעת שומר מסך - הזזת פיקסל זעירה כל 30 שניות
+        // פונקציית אינטראקציה ראשונית להפעלת וידאו מונע שינה
+        function initInteraction() {
+            const v = document.getElementById('preventSleepVideo');
+            v.play().catch(e => console.log("Video play failed", e));
+        }
+
+        // טריק "לחיצה וירטואלית" ותנועה כל 2 דקות למניעת החשכה
         setInterval(() => {
+            // הזזת המסך
             window.scrollBy(0, 1);
-            window.scrollBy(0, -1);
-        }, 30000);
+            setTimeout(() => window.scrollBy(0, -1), 100);
+            
+            // שליחת לחיצה דמיונית
+            const evt = new MouseEvent('click', {view: window, bubbles: true, cancelable: true});
+            document.body.dispatchEvent(evt);
+            
+            // וידאו תמיד ב-Play
+            const v = document.getElementById('preventSleepVideo');
+            if(v.paused) v.play().catch(()=>{});
+        }, 120000);
 
         function toGematria(n) {
             if (n === 15) return 'ט״ו'; if (n === 16) return 'ט״ז';
@@ -229,14 +238,15 @@
             const now = new Date();
             document.getElementById('live-clock').textContent = now.toLocaleTimeString('he-IL', {hour12: false});
             const parts = new Intl.DateTimeFormat('he-IL-u-ca-hebrew', {day:'numeric', month:'long', year:'numeric'}).formatToParts(now);
-            const day = toGematria(parseInt(parts.find(p=>p.type==='day').value));
+            const dayNum = parseInt(parts.find(p=>p.type==='day').value);
+            const dayGematria = toGematria(dayNum);
             const month = parts.find(p=>p.type==='month').value;
-            const year = toGematria(parseInt(parts.find(p=>p.type==='year').value) % 1000);
-            document.getElementById('live-date').textContent = `יום ${['ראשון','שני','שלישי','רביעי','חמישי','שישי','שבת'][now.getDay()]} | ${day} ${month} ${year}`;
+            const yearGematria = toGematria(parseInt(parts.find(p=>p.type==='year').value) % 1000);
+            document.getElementById('live-date').textContent = `יום ${['ראשון','שני','שלישי','רביעי','חמישי','שישי','שבת'][now.getDay()]} | ${dayGematria} ${month} ${yearGematria}`;
         }
         setInterval(updateClock, 1000); updateClock();
 
-        const announcements = ["תזכורת לשלם דמי חבר", "נא לא להכניס חמץ לבית הכנסת"];
+        const announcements = ["תזכורת לשלם דמי חבר", "נא לשמור על קדושת המקום"];
         let announceIdx = 0;
         
         function toggleScreens() {
@@ -247,7 +257,7 @@
                 announceIdx = (announceIdx + 1) % announcements.length;
                 times.classList.replace('visible', 'hidden'); 
                 announce.classList.replace('hidden', 'visible');
-                setTimeout(toggleScreens, 25000); 
+                setTimeout(toggleScreens, 20000); 
             } else {
                 announce.classList.replace('visible', 'hidden'); 
                 times.classList.replace('hidden', 'visible');
@@ -267,11 +277,10 @@
                 nameIdx = (nameIdx + 1) % names.length;
             }, 1000);
         }
-        setInterval(rotateMemorial, 8000); rotateMemorial();
+        setInterval(rotateMemorial, 10000); rotateMemorial();
 
         async function loadData() {
             try {
-                // הוספת Timestamp למניעת טעינת קובץ ישן מה-Cache
                 const res = await fetch('data.json?v=' + Date.now());
                 const data = await res.json();
                 document.getElementById('parsha-name').textContent = data.parsha;
@@ -291,19 +300,15 @@
 
                 const build = (id, list) => {
                     const cont = document.getElementById(id); cont.innerHTML = '';
-                    list.forEach(t => { const s = document.createElement('span'); s.className = 'time-pill'; s.textContent = t; cont.appendChild(s); });
+                    if(list) list.forEach(t => { const s = document.createElement('span'); s.className = 'time-pill'; s.textContent = t; cont.appendChild(s); });
                 };
-                build('weekday-shacharit', ['06:15', '07:50', '08:00 (בשישי)']);
+                build('weekday-shacharit', ['06:15', '07:50', '08:00']);
                 build('weekday-mincha', data.weekday_times.mincha);
                 build('weekday-arvit', data.weekday_times.arvit);
-            } catch (e) { console.error('Data Load Error:', e); }
+            } catch (e) { console.log("JSON Load Fail", e); }
         }
         loadData(); 
-        setInterval(loadData, 600000); // עדכון נתונים כל 10 דקות
-
-        // וודא שהוידאו תמיד רץ (למקרה שהדפדפן עצר אותו)
-        const v = document.getElementById('preventSleepVideo');
-        setInterval(() => { if(v.paused) v.play().catch(()=>{}); }, 5000);
+        setInterval(loadData, 300000); // רענון נתונים כל 5 דקות
     </script>
 </body>
 </html>
