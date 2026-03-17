@@ -18,15 +18,19 @@
             --shadow-blue: rgba(30, 58, 95, 0.15);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body { 
-            font-family: 'Alef', sans-serif; 
-            background: var(--cream); 
-            color: var(--charcoal); 
+        /* שינוי קריטי: הגדרת רקע כהה כברירת מחדל למניעת סנוור לבן */
+        html, body { 
+            margin: 0; 
+            padding: 0; 
+            background-color: var(--deep-navy); 
             height: 100vh;
             width: 100vw;
-            overflow: hidden; 
+            overflow: hidden;
+        }
+
+        body { 
+            font-family: 'Alef', sans-serif; 
+            color: var(--charcoal); 
             position: relative;
         }
 
@@ -39,7 +43,7 @@
             display: flex;
             flex-direction: column;
             transition: opacity 1.5s ease-in-out;
-            background: var(--cream);
+            background: var(--cream); /* הרקע הבהיר יופיע רק כשהמסך נטען */
         }
         .hidden { opacity: 0; pointer-events: none; z-index: 1; }
         .visible { opacity: 1; z-index: 10; }
@@ -129,7 +133,7 @@
             </div>
             <div class="header-center">
                 <div class="parsha-label">פרשת השבוע</div>
-                <div id="parsha-name">טוען...</div>
+                <div id="parsha-name">מתחבר...</div>
             </div>
             <div class="header-left">
                 <div id="live-clock">--:--:--</div>
@@ -140,7 +144,7 @@
         <div class="main-content">
             <div class="column-card">
                 <div class="card-header"><span style="font-size:3.5vh">🌅</span><h2 class="card-title">ערב שבת</h2></div>
-                <div class="time-list" id="erev-shabbat-list">
+                <div class="time-list">
                     <div class="time-item"><span>מנחה גדולה</span><span id="fri-mincha-gedola" class="time-value">--:--</span></div>
                     <div class="time-item"><span>הדלקת נרות</span><span id="candle-lighting" class="time-value">--:--</span></div>
                     <div class="time-item"><span>מנחה ערב שבת</span><span id="fri-mincha-regular" class="time-value">--:--</span></div>
@@ -150,9 +154,9 @@
 
             <div class="column-card">
                 <div class="card-header"><span style="font-size:3.5vh">✨</span><h2 class="card-title">יום השבת</h2></div>
-                <div class="time-list" id="shabbat-day-list">
-                    <div class="time-item"><span>שחרית</span><span id="sat-shacharit" class="time-value">08:00</span></div>
-                    <div class="time-item"><span>מנחה גדולה</span><span id="sat-mincha-gedola" class="time-value">12:30</span></div>
+                <div class="time-list">
+                    <div class="time-item"><span>שחרית</span><span class="time-value">08:00</span></div>
+                    <div class="time-item"><span>מנחה גדולה</span><span class="time-value">12:30</span></div>
                     <div class="time-item"><span>לימוד הלכה</span><span class="time-value">13:00</span></div>
                     <div class="time-item"><span>מנחה של שבת</span><span id="sat-mincha" class="time-value">--:--</span></div>
                     <div class="time-item"><span style="font-size: 1.8vh;">שיעור הלכה</span><span class="time-value" style="font-size: 2vh;">אחרי מנחה</span></div>
@@ -171,6 +175,7 @@
                 </div>
             </div>
         </div>
+        
         <div class="memorial-section">
             <span class="memorial-name" id="memorial-current"></span>
         </div>
@@ -185,7 +190,7 @@
     </div>
 
     <script>
-        // מנגנון Wake Lock
+        // ניהול Wake Lock למניעת כיבוי מסך
         let wakeLock = null;
         async function requestWakeLock() {
             try {
@@ -197,18 +202,10 @@
 
         function initInteraction() {
             const v = document.getElementById('preventSleepVideo');
-            v.play().catch(e => console.log("Video play failed", e));
+            v.play().catch(e => console.log("Video fail", e));
         }
 
-        setInterval(() => {
-            window.scrollBy(0, 1);
-            setTimeout(() => window.scrollBy(0, -1), 100);
-            const evt = new MouseEvent('click', {view: window, bubbles: true, cancelable: true});
-            document.body.dispatchEvent(evt);
-            const v = document.getElementById('preventSleepVideo');
-            if(v.paused) v.play().catch(()=>{});
-        }, 120000);
-
+        // פונקציות עזר
         function toGematria(n) {
             if (n === 15) return 'ט״ו'; if (n === 16) return 'ט״ז';
             const vals = [400,300,200,100,90,80,70,60,50,40,30,20,10,9,8,7,6,5,4,3,2,1];
@@ -238,9 +235,9 @@
         }
         setInterval(updateClock, 1000); updateClock();
 
+        // הודעות
         const announcements = ["תזכורת לשלם דמי חבר", "נא לא להכניס חמץ לבית הכנסת"];
         let announceIdx = 0;
-        
         function toggleScreens() {
             const times = document.getElementById('times-screen');
             const announce = document.getElementById('announcement-screen');
@@ -258,6 +255,7 @@
         }
         setTimeout(toggleScreens, 60000);
 
+        // הנצחה
         const names = ['שלמה זלמן בן מרדכי אלעזר הלוי', 'רחל בת יוסף הכהן', 'סעדיה בן יחיא', 'עוואד בן יחיא', 'טרנג\'ה בת חביבה'];
         let nameIdx = 0;
         function rotateMemorial() {
@@ -271,16 +269,15 @@
         }
         setInterval(rotateMemorial, 10000); rotateMemorial();
 
+        // פונקציית הטעינה המרכזית
         async function loadData() {
             try {
-                // מניעת באפר/קאש על ידי הוספת זמן נוכחי לכתובת
-                const res = await fetch('data.json?v=' + Date.now());
-                if (!res.ok) throw new Error("Network issues");
-                
+                // הוספת Timestamp כדי למנוע Cache שגורם למסך לבן
+                const res = await fetch('data.json?t=' + Date.now());
+                if(!res.ok) throw new Error("Fetch failed");
                 const data = await res.json();
                 
                 document.getElementById('parsha-name').textContent = data.parsha;
-                
                 const candles = data.shabbat_times.erev_shabbat.candle_lighting;
                 const tzeitShabbat = data.shabbat_times.shabbat_day.tzeit_shabbat;
 
@@ -288,40 +285,32 @@
                 document.getElementById('fri-mincha-regular').textContent = addMinutes(candles, 14);
                 document.getElementById('fri-mincha-gedola').textContent = data.shabbat_times.erev_shabbat.mincha_gedola;
                 document.getElementById('tzeit-stars').textContent = data.shabbat_times.erev_shabbat.tzeit_hakochavim;
-                
                 document.getElementById('shkiya').textContent = data.shabbat_times.shabbat_day.shkiya;
                 document.getElementById('tzeit-shabbat').textContent = tzeitShabbat;
                 document.getElementById('sat-mincha').textContent = addMinutes(tzeitShabbat, -130);
                 document.getElementById('sat-mincha-extra').textContent = candles;
 
                 const build = (id, list) => {
-                    const cont = document.getElementById(id); 
-                    cont.innerHTML = '';
-                    if(list) list.forEach(t => { 
-                        const s = document.createElement('span'); 
-                        s.className = 'time-pill'; 
-                        s.textContent = t; 
-                        cont.appendChild(s); 
-                    });
+                    const cont = document.getElementById(id); cont.innerHTML = '';
+                    if(list) list.forEach(t => { const s = document.createElement('span'); s.className = 'time-pill'; s.textContent = t; cont.appendChild(s); });
                 };
 
-                // שחרית - מוזן כאן ידנית כדי לא לשנות את קובץ ה-JSON המקורי
                 build('weekday-shacharit', ['06:15', '07:50', '08:00']);
-                
-                // מנחה וערבית - נמשכים מה-JSON הקיים
                 build('weekday-mincha', data.weekday_times.mincha);
                 build('weekday-arvit', data.weekday_times.arvit);
 
-                console.log("נתונים עודכנו");
-            } catch (e) { 
-                console.log("שגיאת טעינה, מנסה שוב בעוד 10 שניות...", e);
-                // מנגנון ניסיון חוזר (Retry) לפתרון בעיית הסטרימר בהדלקה
-                setTimeout(loadData, 10000); 
+            } catch (e) {
+                console.log("Retrying in 5s...");
+                setTimeout(loadData, 5000);
             }
         }
-        
-        loadData(); 
-        setInterval(loadData, 300000); // רענון נתונים כל 5 דקות
+
+        // פתרון סופי למסך לבן: השהיה של 3 שניות בטעינה הראשונה כדי לתת לסטרימר להתחבר
+        window.addEventListener('load', () => {
+            setTimeout(loadData, 3000);
+        });
+
+        setInterval(loadData, 300000);
     </script>
 </body>
 </html>
