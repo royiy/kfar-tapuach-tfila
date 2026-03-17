@@ -185,6 +185,7 @@
     </div>
 
     <script>
+        // מנגנון Wake Lock
         let wakeLock = null;
         async function requestWakeLock() {
             try {
@@ -270,11 +271,11 @@
         }
         setInterval(rotateMemorial, 10000); rotateMemorial();
 
-        // פונקציית טעינה עם מנגנון Retry חכם
         async function loadData() {
             try {
+                // מניעת באפר/קאש על ידי הוספת זמן נוכחי לכתובת
                 const res = await fetch('data.json?v=' + Date.now());
-                if(!res.ok) throw new Error("Server response error");
+                if (!res.ok) throw new Error("Network issues");
                 
                 const data = await res.json();
                 
@@ -294,27 +295,33 @@
                 document.getElementById('sat-mincha-extra').textContent = candles;
 
                 const build = (id, list) => {
-                    const cont = document.getElementById(id); cont.innerHTML = '';
-                    if(list) list.forEach(t => { const s = document.createElement('span'); s.className = 'time-pill'; s.textContent = t; cont.appendChild(s); });
+                    const cont = document.getElementById(id); 
+                    cont.innerHTML = '';
+                    if(list) list.forEach(t => { 
+                        const s = document.createElement('span'); 
+                        s.className = 'time-pill'; 
+                        s.textContent = t; 
+                        cont.appendChild(s); 
+                    });
                 };
 
-                // בנייה מה-JSON (וודא שהשדות קיימים ב-JSON שלך)
-                build('weekday-shacharit', data.weekday_times.shacharit || ['--:--']);
+                // שחרית - מוזן כאן ידנית כדי לא לשנות את קובץ ה-JSON המקורי
+                build('weekday-shacharit', ['06:15', '07:50', '08:00']);
+                
+                // מנחה וערבית - נמשכים מה-JSON הקיים
                 build('weekday-mincha', data.weekday_times.mincha);
                 build('weekday-arvit', data.weekday_times.arvit);
 
-                console.log("Data loaded successfully");
+                console.log("נתונים עודכנו");
             } catch (e) { 
-                console.log("JSON Load Fail, retrying in 10s...", e);
-                // ניסיון חוזר אוטומטי במקרה של כשל (Wi-Fi לא מחובר וכדומה)
+                console.log("שגיאת טעינה, מנסה שוב בעוד 10 שניות...", e);
+                // מנגנון ניסיון חוזר (Retry) לפתרון בעיית הסטרימר בהדלקה
                 setTimeout(loadData, 10000); 
             }
         }
-
-        // טעינה ראשונית
+        
         loadData(); 
-        // רענון נתונים תקופתי
-        setInterval(loadData, 300000); 
+        setInterval(loadData, 300000); // רענון נתונים כל 5 דקות
     </script>
 </body>
 </html>
