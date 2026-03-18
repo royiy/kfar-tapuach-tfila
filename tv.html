@@ -186,7 +186,11 @@
     </div>
 
     <script>
-        // פונקציה למסך מלא ומניעת שינה
+        // רישום Service Worker לאפשר התקנה
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js').catch(() => {});
+        }
+
         function initFullScreen() {
             if (document.documentElement.requestFullscreen) {
                 document.documentElement.requestFullscreen().catch(()=>{});
@@ -194,7 +198,7 @@
             document.getElementById('preventSleepVideo').play().catch(()=>{});
         }
 
-        // עזרים
+        // פונקציות העזר שלך...
         function toGematria(n) {
             if (n === 15) return 'ט״ו'; if (n === 16) return 'ט״ז';
             const vals = [400,300,200,100,90,80,70,60,50,40,30,20,10,9,8,7,6,5,4,3,2,1];
