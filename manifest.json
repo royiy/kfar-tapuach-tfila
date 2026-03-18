@@ -1,7 +1,7 @@
 {
   "name": "לוח בית כנסת",
   "short_name": "לוח",
-  "start_url": "index.html",
+  "start_url": "tv.html",
   "display": "fullscreen",
   "orientation": "landscape",
   "background_color": "#0a1628",
