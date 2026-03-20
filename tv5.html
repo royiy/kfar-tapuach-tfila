@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="refresh" content="3600">
     <title>בית הכנסת המרכזי – כפר תפוח</title>
     <link href="https://fonts.googleapis.com/css2?family=Alef:wght@400;700&family=Frank+Ruhl+Libre:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <style>
@@ -94,21 +95,52 @@
         .weekday-times-container { display: flex; flex-wrap: wrap; gap: 0.8vh; }
         .time-pill { font-family: 'Frank Ruhl Libre', serif; font-size: 2.4vh; font-weight: 700; color: var(--royal-blue); background: #f0ede3; padding: 0.4vh 0.8vw; border-radius: 8px; }
 
-        .memorial-section { background: var(--deep-navy); padding: 1.5vh 2vw; text-align: center; border-top: 2px solid var(--gold); }
-        .memorial-name { font-family: 'Frank Ruhl Libre', serif; font-size: 2.8vh; color: var(--warm-gold); opacity: 0; transition: opacity 1s; }
-        .memorial-name.visible-text { opacity: 1; }
+        .memorial-section { 
+            background: var(--deep-navy); 
+            padding: 2.5vh 2vw 6.5vh 2vw; 
+            text-align: center; 
+            border-top: 2px solid var(--gold); 
+        }
+        
+        .memorial-name { 
+            font-family: 'Frank Ruhl Libre', serif; 
+            font-size: 2.8vh; 
+            color: var(--warm-gold); 
+            opacity: 0; 
+            transition: opacity 1s;
+        }
+
+        .memorial-name.visible-text { 
+            opacity: 1; 
+            animation: pulse-glow 3s infinite ease-in-out;
+        }
+
+        @keyframes pulse-glow {
+            0% { text-shadow: 0 0 5px rgba(244, 228, 193, 0.2); transform: scale(1); }
+            50% { text-shadow: 0 0 15px rgba(244, 228, 193, 0.5); transform: scale(1.02); }
+            100% { text-shadow: 0 0 5px rgba(244, 228, 193, 0.2); transform: scale(1); }
+        }
 
         .announcements-container { flex: 1; display: flex; justify-content: center; align-items: center; background: radial-gradient(circle, #ffffff 0%, #f4e4c1 100%); }
         .announcement-box { background: white; padding: 8vh 5vw; border-radius: 40px; border: 10px double var(--gold); text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.2); max-width: 85%; }
         .announcement-text { font-size: 8vh; line-height: 1.5; color: var(--deep-navy); font-weight: 900; text-shadow: 2px 2px 4px rgba(0,0,0,0.2); letter-spacing: 0.05em; }
 
-        #preventSleepVideo { position: fixed; right: 0; bottom: 0; width: 1px; height: 1px; opacity: 0.01; z-index: -1; pointer-events: none; }
+        #preventSleepVideo { 
+            position: fixed; 
+            right: 0; 
+            bottom: 0; 
+            width: 1px; 
+            height: 1px; 
+            opacity: 0.01; 
+            z-index: -1; 
+            pointer-events: none; 
+        }
     </style>
 </head>
-<body onclick="requestWakeLock()">
+<body onclick="requestWakeLock(); initInteraction();">
 
     <video id="preventSleepVideo" autoplay loop muted playsinline>
-        <source src="https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4" type="video/mp4">
+        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
     </video>
 
     <div id="times-screen" class="screen visible">
@@ -130,7 +162,7 @@
         <div class="main-content">
             <div class="column-card">
                 <div class="card-header"><span style="font-size:3.5vh">🌅</span><h2 class="card-title">ערב שבת</h2></div>
-                <div class="time-list">
+                <div class="time-list" id="erev-shabbat-list">
                     <div class="time-item"><span>מנחה גדולה</span><span id="fri-mincha-gedola" class="time-value">--:--</span></div>
                     <div class="time-item"><span>הדלקת נרות</span><span id="candle-lighting" class="time-value">--:--</span></div>
                     <div class="time-item"><span>מנחה ערב שבת</span><span id="fri-mincha-regular" class="time-value">--:--</span></div>
@@ -140,12 +172,12 @@
 
             <div class="column-card">
                 <div class="card-header"><span style="font-size:3.5vh">✨</span><h2 class="card-title">יום השבת</h2></div>
-                <div class="time-list">
+                <div class="time-list" id="shabbat-day-list">
                     <div class="time-item"><span>שחרית</span><span id="sat-shacharit" class="time-value">08:00</span></div>
                     <div class="time-item"><span>מנחה גדולה</span><span id="sat-mincha-gedola" class="time-value">12:30</span></div>
                     <div class="time-item"><span>לימוד הלכה</span><span class="time-value">13:00</span></div>
                     <div class="time-item"><span>מנחה של שבת</span><span id="sat-mincha" class="time-value">--:--</span></div>
-                    <div class="time-item"><span style="font-size: 1.8vh;">שיעור הרב שמעון רוזנצוויג שליט"א</span><span class="time-value" style="font-size: 2vh;">אחרי מנחה</span></div>
+                    <div class="time-item"><span style="font-size: 1.8vh;">שיעור הלכה</span><span class="time-value" style="font-size: 2vh;">אחרי מנחה</span></div>
                     <div class="time-item"><span>מנחה (חדר לימוד)</span><span id="sat-mincha-extra" class="time-value">--:--</span></div>
                     <div class="time-item"><span>שקיעה</span><span id="shkiya" class="time-value">--:--</span></div>
                     <div class="time-item"><span>צאת שבת וערבית</span><span id="tzeit-shabbat" class="time-value">--:--</span></div>
@@ -180,16 +212,23 @@
             try {
                 if ('wakeLock' in navigator) {
                     wakeLock = await navigator.wakeLock.request('screen');
-                    console.log('Wake Lock active');
                 }
-            } catch (err) {
-                console.error(err);
-            }
+            } catch (err) {}
         }
-        requestWakeLock();
-        document.addEventListener('visibilitychange', () => {
-            if (wakeLock !== null && document.visibilityState === 'visible') requestWakeLock();
-        });
+
+        function initInteraction() {
+            const v = document.getElementById('preventSleepVideo');
+            v.play().catch(e => console.log("Video play failed", e));
+        }
+
+        setInterval(() => {
+            window.scrollBy(0, 1);
+            setTimeout(() => window.scrollBy(0, -1), 100);
+            const evt = new MouseEvent('click', {view: window, bubbles: true, cancelable: true});
+            document.body.dispatchEvent(evt);
+            const v = document.getElementById('preventSleepVideo');
+            if(v.paused) v.play().catch(()=>{});
+        }, 120000);
 
         function toGematria(n) {
             if (n === 15) return 'ט״ו'; if (n === 16) return 'ט״ז';
@@ -212,10 +251,11 @@
             const now = new Date();
             document.getElementById('live-clock').textContent = now.toLocaleTimeString('he-IL', {hour12: false});
             const parts = new Intl.DateTimeFormat('he-IL-u-ca-hebrew', {day:'numeric', month:'long', year:'numeric'}).formatToParts(now);
-            const day = toGematria(parseInt(parts.find(p=>p.type==='day').value));
+            const dayNum = parseInt(parts.find(p=>p.type==='day').value);
+            const dayGematria = toGematria(dayNum);
             const month = parts.find(p=>p.type==='month').value;
-            const year = toGematria(parseInt(parts.find(p=>p.type==='year').value) % 1000);
-            document.getElementById('live-date').textContent = `יום ${['ראשון','שני','שלישי','רביעי','חמישי','שישי','שבת'][now.getDay()]} | ${day} ${month} ${year}`;
+            const yearGematria = toGematria(parseInt(parts.find(p=>p.type==='year').value) % 1000);
+            document.getElementById('live-date').textContent = `יום ${['ראשון','שני','שלישי','רביעי','חמישי','שישי','שבת'][now.getDay()]} | ${dayGematria} ${month} ${yearGematria}`;
         }
         setInterval(updateClock, 1000); updateClock();
 
@@ -230,7 +270,7 @@
                 announceIdx = (announceIdx + 1) % announcements.length;
                 times.classList.replace('visible', 'hidden'); 
                 announce.classList.replace('hidden', 'visible');
-                setTimeout(toggleScreens, 25000); 
+                setTimeout(toggleScreens, 20000); 
             } else {
                 announce.classList.replace('visible', 'hidden'); 
                 times.classList.replace('hidden', 'visible');
@@ -250,7 +290,7 @@
                 nameIdx = (nameIdx + 1) % names.length;
             }, 1000);
         }
-        setInterval(rotateMemorial, 8000); rotateMemorial();
+        setInterval(rotateMemorial, 10000); rotateMemorial();
 
         async function loadData() {
             try {
@@ -273,17 +313,15 @@
 
                 const build = (id, list) => {
                     const cont = document.getElementById(id); cont.innerHTML = '';
-                    list.forEach(t => { const s = document.createElement('span'); s.className = 'time-pill'; s.textContent = t; cont.appendChild(s); });
+                    if(list) list.forEach(t => { const s = document.createElement('span'); s.className = 'time-pill'; s.textContent = t; cont.appendChild(s); });
                 };
-                build('weekday-shacharit', ['06:15', '07:50', '08:00 (בשישי)']);
+                build('weekday-shacharit', ['06:15', '07:50', '08:00']);
                 build('weekday-mincha', data.weekday_times.mincha);
                 build('weekday-arvit', data.weekday_times.arvit);
-            } catch (e) { console.error(e); }
+            } catch (e) { console.log("JSON Load Fail", e); }
         }
-        loadData(); setInterval(loadData, 600000);
-        
-        const v = document.getElementById('preventSleepVideo');
-        setInterval(() => { if(v.paused) v.play().catch(()=>{}); }, 10000);
+        loadData(); 
+        setInterval(loadData, 300000);
     </script>
 </body>
 </html>
