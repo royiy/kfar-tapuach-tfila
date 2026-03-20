@@ -98,24 +98,25 @@
 
         .card-qr-footer {
             margin-top: auto;
-            padding-top: 2vh;
-            border-top: 1px dashed var(--gold);
+            padding: 2vh 0 1vh 0;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 1.5vw;
+            gap: 1.2vw;
         }
         .qr-footer-image {
             width: 8vh;
             height: 8vh;
             background: white;
-            padding: 3px;
-            border: 1px solid #ddd;
+            padding: 4px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 6px;
         }
         .qr-footer-label {
             font-size: 1.8vh;
             color: var(--royal-blue);
             line-height: 1.3;
+            text-align: right;
         }
 
         .memorial-section { 
@@ -135,7 +136,7 @@
 
         .announcements-container { flex: 1; display: flex; justify-content: center; align-items: center; background: radial-gradient(circle, #ffffff 0%, #f4e4c1 100%); }
         .announcement-box { background: white; padding: 8vh 5vw; border-radius: 40px; border: 10px double var(--gold); text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.2); max-width: 85%; }
-        .announcement-text { font-size: 8vh; line-height: 1.5; color: var(--deep-navy); text-shadow: 2px 2px 4px rgba(0,0,0,0.2); letter-spacing: 0.05em; }
+        .announcement-text { font-size: 8vh; line-height: 1.5; color: var(--deep-navy); text-shadow: 2px 2px 4px rgba(0,0,0,0.1); letter-spacing: 0.05em; }
 
         #preventSleepVideo { position: fixed; right: 0; bottom: 0; width: 1px; height: 1px; opacity: 0.01; z-index: -1; pointer-events: none; }
     </style>
@@ -173,7 +174,7 @@
                 </div>
                 <div class="card-qr-footer">
                     <div class="qr-footer-label">סריקה<br>לתרומות</div>
-                    <img class="qr-footer-image" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://example.com/donate" alt="QR Donate">
+                    <img class="qr-footer-image" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https%3A%2F%2Flinks.payboxapp.com%2FrBbQDcbaPVb" alt="QR Paybox">
                 </div>
             </div>
 
@@ -200,7 +201,7 @@
                 </div>
                 <div class="card-qr-footer">
                     <div class="qr-footer-label">הצטרפות<br>לוואטסאפ</div>
-                    <img class="qr-footer-image" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://chat.whatsapp.com/example" alt="QR WhatsApp">
+                    <img class="qr-footer-image" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https%3A%2F%2Fchat.whatsapp.com%2FLNNQcjZXV2OGkbYZpnxktw" alt="QR WhatsApp">
                 </div>
             </div>
         </div>
