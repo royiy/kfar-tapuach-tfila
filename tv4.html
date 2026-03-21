@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="refresh" content="3600">
     <title>בית הכנסת המרכזי – כפר תפוח</title>
-    <link href="https://fonts.googleapis.com/css2?family=Alef:wght@400;700&family=Frank+Ruhl+Libre:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Alef:wght@400&family=Frank+Ruhl+Libre:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         :root {
             --deep-navy: #0a1628; 
@@ -18,7 +18,7 @@
             --shadow-blue: rgba(30, 58, 95, 0.15);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-weight: 400 !important; }
         
         body { 
             font-family: 'Alef', sans-serif; 
@@ -54,14 +54,14 @@
             flex-shrink: 0;
         }
 
-        .synagogue-title { font-family: 'Frank Ruhl Libre', serif; font-size: 4.5vh; font-weight: 900; color: var(--soft-white); line-height: 1.1; }
+        .synagogue-title { font-family: 'Frank Ruhl Libre', serif; font-size: 4.5vh; color: var(--soft-white); line-height: 1.1; }
         .location { font-family: 'Frank Ruhl Libre', serif; font-size: 2.2vh; color: var(--warm-gold); }
         
         .header-center { text-align: center; background: rgba(255, 255, 255, 0.1); padding: 1vh 3vw; border-radius: 50px; backdrop-filter: blur(5px); border: 1px solid rgba(212, 175, 55, 0.3); }
         .parsha-label { font-size: 2vh; color: var(--warm-gold); }
-        #parsha-name { font-family: 'Frank Ruhl Libre', serif; font-size: 3.5vh; font-weight: 700; color: var(--soft-white); }
+        #parsha-name { font-family: 'Frank Ruhl Libre', serif; font-size: 3.5vh; color: var(--soft-white); }
 
-        #live-clock { font-family: 'Frank Ruhl Libre', serif; font-size: 5vh; font-weight: 700; color: var(--warm-gold); direction: ltr; }
+        #live-clock { font-family: 'Frank Ruhl Libre', serif; font-size: 5vh; color: var(--warm-gold); direction: ltr; }
         #live-date { font-size: 2.2vh; color: var(--soft-white); }
 
         .main-content { 
@@ -82,38 +82,65 @@
             border-top: 6px solid var(--gold); 
         }
 
-        .card-header { display: flex; align-items: center; gap: 1vw; margin-bottom: 1.5vh; border-bottom: 2px solid #f0ede3; padding-bottom: 1vh; }
-        .card-title { font-family: 'Frank Ruhl Libre', serif; font-size: 3.2vh; font-weight: 700; color: var(--royal-blue); }
+        .card-header { 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            gap: 1vw; 
+            margin-bottom: 1.5vh; 
+            border-bottom: 2px solid #f0ede3; 
+            padding-bottom: 1vh; 
+        }
+        .card-title { font-family: 'Frank Ruhl Libre', serif; font-size: 3.2vh; color: var(--royal-blue); }
 
         .time-list { display: flex; flex-direction: column; gap: 0.8vh; flex: 1; }
         .time-item { display: flex; justify-content: space-between; align-items: center; padding: 0.8vh 0; border-bottom: 1px solid #f5f2e8; }
-        .time-label { font-size: 2.1vh; color: var(--charcoal); }
-        .time-value { font-family: 'Frank Ruhl Libre', serif; font-size: 2.6vh; font-weight: 700; color: var(--royal-blue); background: #e8f2ff; padding: 0.4vh 0.8vw; border-radius: 8px; min-width: 5.5vw; text-align: center; }
+        .time-value { font-family: 'Frank Ruhl Libre', serif; font-size: 2.6vh; color: var(--royal-blue); background: #e8f2ff; padding: 0.4vh 0.8vw; border-radius: 8px; min-width: 5.5vw; text-align: center; }
 
         .weekday-block { margin-bottom: 1.5vh; background: #fafafa; border-right: 4px solid var(--royal-blue); padding: 1vh 1vw; border-radius: 12px; }
-        .weekday-label { font-size: 2.2vh; font-weight: 700; color: var(--royal-blue); margin-bottom: 0.5vh; display: block; }
+        .weekday-label { font-size: 2.2vh; color: var(--royal-blue); margin-bottom: 0.5vh; display: block; }
         .weekday-times-container { display: flex; flex-wrap: wrap; gap: 0.8vh; }
-        .time-pill { font-family: 'Frank Ruhl Libre', serif; font-size: 2.4vh; font-weight: 700; color: var(--royal-blue); background: #f0ede3; padding: 0.4vh 0.8vw; border-radius: 8px; }
+        .time-pill { font-family: 'Frank Ruhl Libre', serif; font-size: 2.4vh; color: var(--royal-blue); background: #f0ede3; padding: 0.4vh 0.8vw; border-radius: 8px; }
 
-        .memorial-section { background: var(--deep-navy); padding: 1.5vh 2vw; text-align: center; border-top: 2px solid var(--gold); }
+        .memorial-section { 
+            background: var(--deep-navy); 
+            padding: 1vh 3vw 4vh 3vw; 
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-top: 1px solid var(--gold); 
+        }
+        
+        .memorial-qr-item {
+            display: flex;
+            align-items: center;
+            gap: 1vw;
+            color: var(--warm-gold);
+        }
+        .memorial-qr-img {
+            width: 7vh;
+            height: 7vh;
+            background: white;
+            padding: 3px;
+            border-radius: 4px;
+        }
+        .memorial-qr-text { font-size: 1.6vh; line-height: 1.2; text-align: center; }
+
+        .memorial-name-container { flex: 1; text-align: center; }
         .memorial-name { font-family: 'Frank Ruhl Libre', serif; font-size: 2.8vh; color: var(--warm-gold); opacity: 0; transition: opacity 1s; }
-        .memorial-name.visible-text { opacity: 1; }
+        .memorial-name.visible-text { opacity: 1; animation: pulse-glow 3s infinite ease-in-out; }
+
+        @keyframes pulse-glow {
+            0% { text-shadow: 0 0 5px rgba(244, 228, 193, 0.2); transform: scale(1); }
+            50% { text-shadow: 0 0 15px rgba(244, 228, 193, 0.5); transform: scale(1.02); }
+            100% { text-shadow: 0 0 5px rgba(244, 228, 193, 0.2); transform: scale(1); }
+        }
 
         .announcements-container { flex: 1; display: flex; justify-content: center; align-items: center; background: radial-gradient(circle, #ffffff 0%, #f4e4c1 100%); }
         .announcement-box { background: white; padding: 8vh 5vw; border-radius: 40px; border: 10px double var(--gold); text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.2); max-width: 85%; }
-        .announcement-text { font-size: 8vh; line-height: 1.5; color: var(--deep-navy); font-weight: 900; text-shadow: 2px 2px 4px rgba(0,0,0,0.2); letter-spacing: 0.05em; }
+        .announcement-text { font-size: 8vh; line-height: 1.5; color: var(--deep-navy); text-shadow: 2px 2px 4px rgba(0,0,0,0.1); letter-spacing: 0.05em; }
 
-        /* וידאו רקע למניעת החשכת מסך */
-        #preventSleepVideo { 
-            position: fixed; 
-            right: 0; 
-            bottom: 0; 
-            width: 1px; 
-            height: 1px; 
-            opacity: 0.01; 
-            z-index: -1; 
-            pointer-events: none; 
-        }
+        #preventSleepVideo { position: fixed; right: 0; bottom: 0; width: 1px; height: 1px; opacity: 0.01; z-index: -1; pointer-events: none; }
     </style>
 </head>
 <body onclick="requestWakeLock(); initInteraction();">
@@ -140,7 +167,7 @@
 
         <div class="main-content">
             <div class="column-card">
-                <div class="card-header"><span style="font-size:3.5vh">🌅</span><h2 class="card-title">ערב שבת</h2></div>
+                <div class="card-header"><span>🌅</span><h2 class="card-title">ערב שבת</h2></div>
                 <div class="time-list" id="erev-shabbat-list">
                     <div class="time-item"><span>מנחה גדולה</span><span id="fri-mincha-gedola" class="time-value">--:--</span></div>
                     <div class="time-item"><span>הדלקת נרות</span><span id="candle-lighting" class="time-value">--:--</span></div>
@@ -150,13 +177,13 @@
             </div>
 
             <div class="column-card">
-                <div class="card-header"><span style="font-size:3.5vh">✨</span><h2 class="card-title">יום השבת</h2></div>
+                <div class="card-header"><span>✨</span><h2 class="card-title">יום השבת</h2></div>
                 <div class="time-list" id="shabbat-day-list">
                     <div class="time-item"><span>שחרית</span><span id="sat-shacharit" class="time-value">08:00</span></div>
                     <div class="time-item"><span>מנחה גדולה</span><span id="sat-mincha-gedola" class="time-value">12:30</span></div>
                     <div class="time-item"><span>לימוד הלכה</span><span class="time-value">13:00</span></div>
                     <div class="time-item"><span>מנחה של שבת</span><span id="sat-mincha" class="time-value">--:--</span></div>
-                    <div class="time-item"><span style="font-size: 1.8vh;">שיעור הלכה</span><span class="time-value" style="font-size: 2vh;">אחרי מנחה</span></div>
+                    <div class="time-item"><span>שיעור הלכה</span><span class="time-value">אחרי מנחה</span></div>
                     <div class="time-item"><span>מנחה (חדר לימוד)</span><span id="sat-mincha-extra" class="time-value">--:--</span></div>
                     <div class="time-item"><span>שקיעה</span><span id="shkiya" class="time-value">--:--</span></div>
                     <div class="time-item"><span>צאת שבת וערבית</span><span id="tzeit-shabbat" class="time-value">--:--</span></div>
@@ -164,7 +191,7 @@
             </div>
 
             <div class="column-card">
-                <div class="card-header"><span style="font-size:3.5vh">🕍</span><h2 class="card-title">תפילות חול</h2></div>
+                <div class="card-header"><span>🕍</span><h2 class="card-title">תפילות חול</h2></div>
                 <div class="time-list">
                     <div class="weekday-block"><span class="weekday-label">שחרית</span><div id="weekday-shacharit" class="weekday-times-container"></div></div>
                     <div class="weekday-block"><span class="weekday-label">מנחה</span><div id="weekday-mincha" class="weekday-times-container"></div></div>
@@ -172,8 +199,21 @@
                 </div>
             </div>
         </div>
+
         <div class="memorial-section">
-            <span class="memorial-name" id="memorial-current"></span>
+            <div class="memorial-qr-item">
+                <img class="memorial-qr-img" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https%3A%2F%2Flinks.payboxapp.com%2FrBbQDcbaPVb" alt="Paybox">
+                <div class="memorial-qr-text">סריקה<br>לתרומות</div>
+            </div>
+            
+            <div class="memorial-name-container">
+                <span class="memorial-name" id="memorial-current"></span>
+            </div>
+
+            <div class="memorial-qr-item">
+                <div class="memorial-qr-text">הצטרפות<br>לוואטסאפ</div>
+                <img class="memorial-qr-img" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https%3A%2F%2Fchat.whatsapp.com%2FLNNQcjZXV2OGkbYZpnxktw" alt="WhatsApp">
+            </div>
         </div>
     </div>
 
@@ -186,35 +226,23 @@
     </div>
 
     <script>
-        // מנגנון Wake Lock
         let wakeLock = null;
         async function requestWakeLock() {
-            try {
-                if ('wakeLock' in navigator) {
-                    wakeLock = await navigator.wakeLock.request('screen');
-                }
-            } catch (err) {}
+            try { if ('wakeLock' in navigator) { wakeLock = await navigator.wakeLock.request('screen'); } } catch (err) {}
         }
 
-        // פונקציית אינטראקציה ראשונית להפעלת וידאו מונע שינה
         function initInteraction() {
             const v = document.getElementById('preventSleepVideo');
-            v.play().catch(e => console.log("Video play failed", e));
+            if(v) v.play().catch(e => console.log("Video play failed", e));
         }
 
-        // טריק "לחיצה וירטואלית" ותנועה כל 2 דקות למניעת החשכה
         setInterval(() => {
-            // הזזת המסך
             window.scrollBy(0, 1);
             setTimeout(() => window.scrollBy(0, -1), 100);
-            
-            // שליחת לחיצה דמיונית
             const evt = new MouseEvent('click', {view: window, bubbles: true, cancelable: true});
             document.body.dispatchEvent(evt);
-            
-            // וידאו תמיד ב-Play
             const v = document.getElementById('preventSleepVideo');
-            if(v.paused) v.play().catch(()=>{});
+            if(v && v.paused) v.play().catch(()=>{});
         }, 120000);
 
         function toGematria(n) {
@@ -308,7 +336,7 @@
             } catch (e) { console.log("JSON Load Fail", e); }
         }
         loadData(); 
-        setInterval(loadData, 300000); // רענון נתונים כל 5 דקות
+        setInterval(loadData, 300000);
     </script>
 </body>
 </html>
