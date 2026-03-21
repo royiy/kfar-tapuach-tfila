@@ -2,13 +2,13 @@
   "parsha": "צו - שבת הגדול ",
   "shabbat_times": {
     "erev_shabbat": {
-      "mincha_gedola": "12:20",
-      "candle_lighting": "17:24",
+      "mincha_gedola": "13:30",
+      "candle_lighting": "18:29",
       "tzeit_hakochavim": "18:13"
     },
     "shabbat_day": {
-      "shkiya": "17:55",
-      "tzeit_shabbat": "18:28"
+      "shkiya": "19:00",
+      "tzeit_shabbat": "19:33"
     }
   },
   "weekday_times": {
