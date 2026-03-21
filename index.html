@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
@@ -291,7 +290,12 @@ padding:2rem;
 <h4>יום שבת</h4>
 
 <div class="time-item"><span>שחרית</span><span class="time-value">08:00</span></div>
-<div class="time-item"><span>מנחה גדולה</span><span class="time-value">12:30</span></div>
+
+<div class="time-item">
+<span>מנחה גדולה</span>
+<span id="sat-mincha-gedola" class="time-value">--:--</span>
+</div>
+
 <div class="time-item"><span>לימוד הלכה</span><span class="time-value">13:00</span></div>
 
 <div class="time-item">
@@ -456,6 +460,7 @@ setText("candle_lighting",candles);
 setText("mincha_erev",addMinutes(candles,14));
 setText("tzeit_hakochavim",erev.tzeit_hakochavim);
 
+setText("sat-mincha-gedola",day.mincha_gedola);
 setText("mincha_additional",candles);
 
 setText("shkiya",day.shkiya);
@@ -474,4 +479,3 @@ setInterval(loadData,600000);
 
 </body>
 </html>
-```
