@@ -159,6 +159,13 @@ font-size:.9rem;
 color:#666;
 }
 
+.highlight-lesson{
+color:var(--gold);
+font-weight:700;
+font-size:1.1em;
+font-family:'Frank Ruhl Libre',serif;
+}
+
 /* DONATION */
 
 .donation-section{
@@ -304,7 +311,7 @@ padding:2rem;
 </div>
 
 <div class="time-item">
-<span>שיעור הרב שמעון רוזנצוויג</span>
+<span class="highlight-lesson">שיעור שבת הגדול - הרב שמעון רוזנצוויג</span>
 <span class="time-value">אחרי מנחה</span>
 </div>
 
@@ -465,7 +472,7 @@ setText("mincha_additional",candles);
 
 setText("shkiya",day.shkiya);
 setText("tzeit_shabbat",day.tzeit_shabbat);
-setText("mincha_shabbat",addMinutes(day.tzeit_shabbat,-130));
+setText("mincha_shabbat",addMinutes(day.tzeit_shabbat,-143));
 
 setText("weekday_mincha",formatTimes(data.weekday_times.mincha));
 setText("weekday_arvit",formatTimes(data.weekday_times.arvit));
