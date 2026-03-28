@@ -172,16 +172,12 @@
         }
         .memorial-name.visible-text { opacity: 1; }
 
-        /* עיצוב לתמונת המצה - מיזוג משופר */
         .matzah-img {
             max-width: 90%;
             max-height: 25vh;
             object-fit: contain;
-            /* שינוי שיטת המיזוג כדי שצבע הרקע ישתקף דרך התמונה */
             mix-blend-mode: multiply;
-            /* החלפת הצל לשחור בצל עדין בגוון חום-זהב */
             filter: drop-shadow(0 4px 8px rgba(197, 160, 89, 0.4));
-            /* הוספת שקיפות קלה לריכוך הנוכחות */
             opacity: 0.92;
         }
 
@@ -239,9 +235,12 @@
                     <div class="time-item"><span class="time-label">מנחה של חג</span><span class="time-value">18:45</span></div>
                     <div class="time-item"><span class="time-label">שקיעה</span><span class="time-value">19:04</span></div>
                     <div class="time-item" style="justify-content: flex-start; padding: 1.5vh 0;">
-                        <span class="time-label" style="color: var(--charcoal); font-size: 2.5vh; text-align: right; padding-left: 0;">דבר תורה מפי הרב שמעון רוזנצוויג שליט"א</span>
+                        <span class="time-label" style="color: var(--charcoal); font-size: 2.5vh; text-align: right;">דבר תורה מפי הרב שמעון רוזנצוויג שליט"א</span>
                     </div>
-                    <div class="time-item" style="border-bottom: none;"><span class="time-label">צאת החג וספירת העומר</span><span class="time-value">19:36</span></div>
+                    <div class="time-item" style="border-bottom: none;">
+                        <span class="time-label" style="font-size: 2.3vh;">צאת החג, ערבית וספירת העומר</span>
+                        <span class="time-value">19:36</span>
+                    </div>
                 </div>
             </div>
 
