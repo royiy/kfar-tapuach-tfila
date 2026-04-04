@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="refresh" content="3600">
     <title>פסח - בית הכנסת המרכזי</title>
-    <link href="https://fonts.googleapis.com/css2?family=Alef&family=Frank+Ruhl+Libre:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Alef&family=Frank+Ruhl+Libre:wght@400&display=swap" rel="stylesheet">
     <style>
         :root {
             --wine-red: #6b1414;
@@ -95,15 +95,11 @@
             padding-bottom: 1vh;
         }
 
-        .card-title {
-            font-family: 'Frank Ruhl Libre', serif;
-            font-size: 3.8vh;
-            color: var(--wine-red);
-        }
+        .card-title { font-family: 'Frank Ruhl Libre', serif; font-size: 3.8vh; color: var(--wine-red); }
 
-        .time-list {
-            display: flex; flex-direction: column; gap: 0.8vh; flex: 1;
-        }
+        .shabbat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2vw; flex: 1; }
+
+        .time-list { display: flex; flex-direction: column; gap: 0.8vh; flex: 1; }
 
         .time-item {
             display: flex; justify-content: space-between; align-items: center;
@@ -132,7 +128,14 @@
             background: rgba(107, 20, 20, 0.05); padding: 0.2vh 1vw; border-radius: 6px; border: 1px solid rgba(197, 160, 89, 0.2);
         }
 
-        .shabbat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2vw; flex: 1; }
+        .chometz-notice {
+            margin-top: 8vh;
+            font-family: 'Frank Ruhl Libre', serif;
+            font-size: 3.2vh;
+            color: var(--wine-red);
+            padding: 1vh;
+            text-align: center;
+        }
 
         .custom-footer-area {
             margin-top: 0.5vh;
@@ -146,7 +149,7 @@
 
         .custom-navy-text {
             font-family: 'Frank Ruhl Libre', serif;
-            font-size: 5.4vh; /* הקטנתי מעט כדי שייכנסו שלוש שורות בנוחות */
+            font-size: 5.4vh;
             color: var(--deep-navy);
             line-height: 1.2;
         }
@@ -184,16 +187,6 @@
             max-width: 90%; max-height: 25vh; object-fit: contain; mix-blend-mode: multiply;
             filter: drop-shadow(0 4px 8px rgba(197, 160, 89, 0.4)); opacity: 0.92;
         }
-
-        .announcements-container {
-            height: 100%; display: flex; justify-content: center; align-items: center;
-            background: radial-gradient(circle, #fdf5e6 0%, #f4e4c1 100%);
-        }
-        .announcement-box {
-            background: white; padding: 6vh 5vw; border-radius: 20px;
-            border: 8px double var(--antique-gold); text-align: center;
-        }
-        .announcement-text { font-size: 9vh; color: var(--wine-red); font-family: 'Frank Ruhl Libre', serif; }
     </style>
 </head>
 <body onclick="requestWakeLock();">
@@ -215,28 +208,28 @@
 
         <div class="main-content">
             <div class="column-card">
-                <div class="card-header"><span>🍷</span><h2 class="card-title">תפילות שבת חול המועד</h2></div>
+                <div class="card-header"><span>🍷</span><h2 class="card-title">תפילות שביעי של פסח</h2></div>
                 <div class="shabbat-grid">
                     <div class="time-list">
+                        <div class="time-item"><span class="time-label">שחרית</span><span class="time-value">08:00</span></div>
                         <div class="time-item"><span class="time-label">מנחה גדולה</span><span class="time-value">13:30</span></div>
-                        <div class="time-item"><span class="time-label">כניסת שבת</span><span class="time-value">18:34</span></div>
-                        <div class="time-item"><span class="time-label">מנחת ערב שבת</span><span class="time-value">18:48</span></div>
-                        <div class="time-item" style="border-bottom: none;"><span class="time-label">צאת הכוכבים</span><span class="time-value">19:22</span></div>
+                        <div class="time-item"><span class="time-label">כניסת החג</span><span class="time-value">18:37</span></div>
+                        <div class="time-item"><span class="time-label">מנחת ערב חג</span><span class="time-value">18:51</span></div>
+                        <div class="time-item" style="border-bottom: none;"><span class="time-label">צאת הכוכבים</span><span class="time-value">19:25</span></div>
+                        
                         <div style="flex: 1; display: flex; align-items: center; justify-content: center; margin-top: 1vh;">
                             <img src="https://acheinu.co.il/wp-content/uploads/2018/05/4977.gif" class="matzah-img" alt="פסח">
                         </div>
                     </div>
+                    
                     <div class="time-list">
                         <div class="time-item"><span class="time-label">שחרית</span><span class="time-value">08:00</span></div>
-                        <div class="time-item"><span class="time-label">לימוד הלכה</span><span class="time-value">13:00</span></div>
                         <div class="time-item"><span class="time-label">מנחה גדולה</span><span class="time-value">13:30</span></div>
-                        <div class="time-item"><span class="time-label">מנחה של שבת</span><span class="time-value">17:30</span></div>
-                        <div class="time-item" style="justify-content: flex-start; padding: 1vh 0;">
-                            <span class="time-label" style="color: var(--charcoal); font-size: 2.3vh;">שיעור הרב שמעון רוזנצוויג שליט"א</span>
-                        </div>
-                        <div class="time-item"><span class="time-label">מנחה נוספת (בחדר לימוד)</span><span class="time-value">18:34</span></div>
-                        <div class="time-item"><span class="time-label">שקיעה</span><span class="time-value">19:05</span></div>
-                        <div class="time-item" style="border-bottom: none;"><span class="time-label">צאת שבת וערבית</span><span class="time-value">19:38</span></div>
+                        <div class="time-item"><span class="time-label">מנחה של חג</span><span class="time-value">18:30</span></div>
+                        <div class="time-item"><span class="time-label">שקיעה</span><span class="time-value">19:08</span></div>
+                        <div class="time-item" style="border-bottom: none;"><span class="time-label">צאת החג וערבית</span><span class="time-value">19:41</span></div>
+                        
+                        <div class="chometz-notice">החמץ שנמכר מותר בשימוש החל מ 20:00</div>
                     </div>
                 </div>
             </div>
@@ -244,15 +237,34 @@
             <div class="column-card">
                 <div class="card-header"><span>🕍</span><h2 class="card-title">תפילות חול המועד</h2></div>
                 <div class="time-list">
-                    <div class="weekday-block"><span class="weekday-label">שחרית</span><div class="weekday-times-container"><span class="time-pill">06:15</span><span class="time-pill">07:50</span><span class="time-pill">08:00 (שישי)</span></div></div>
-                    <div class="weekday-block"><span class="weekday-label">מנחה</span><div class="weekday-times-container"><span class="time-pill">13:15</span><span class="time-pill">18:45</span></div></div>
-                    <div class="weekday-block"><span class="weekday-label">ערבית</span><div class="weekday-times-container"><span class="time-pill">19:25</span><span class="time-pill">20:00</span><span class="time-pill">21:00</span></div></div>
+                    <div class="weekday-block">
+                        <span class="weekday-label">שחרית</span>
+                        <div class="weekday-times-container">
+                            <span class="time-pill">06:15</span>
+                            <span class="time-pill">07:50</span>
+                        </div>
+                    </div>
+                    <div class="weekday-block">
+                        <span class="weekday-label">מנחה</span>
+                        <div class="weekday-times-container">
+                            <span class="time-pill">13:15</span>
+                            <span class="time-pill">18:45</span>
+                        </div>
+                    </div>
+                    <div class="weekday-block">
+                        <span class="weekday-label">ערבית</span>
+                        <div class="weekday-times-container">
+                            <span class="time-pill">19:25</span>
+                            <span class="time-pill">20:00</span>
+                            <span class="time-pill">21:00</span>
+                        </div>
+                    </div>
                     
-                    <div class="custom-footer-area">
+                    <div class="custom-footer-area" style="margin-top: 3vh;">
                         <div class="custom-navy-text">מוריד הטל</div>
                         <div class="custom-navy-text">יעלה ויבוא</div>
-                        <div style="height: 1vh;"></div>
-                        <div class="custom-navy-text">היום שני ימים לעומר</div>
+                        <div style="height: 1.5vh;"></div>
+                        <div class="custom-navy-text" style="color: var(--wine-red); font-size: 4.5vh;">היום שלושה ימים לעומר</div>
                     </div>
                 </div>
             </div>
@@ -270,12 +282,6 @@
                 <img class="brand-image" src="https://www.shomron.org.il/uploads/n/1613293437.2921.jpg" alt="WhatsApp">
                 <img class="memorial-qr-img" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https%3A%2F%2Fchat.whatsapp.com%2FLNNQcjZXV2OGkbYZpnxktw" alt="WhatsApp QR">
             </div>
-        </div>
-    </div>
-
-    <div id="announcement-screen" class="screen hidden">
-        <div class="announcements-container">
-            <div class="announcement-box"><div class="announcement-text">חג פסח כשר ושמח</div></div>
         </div>
     </div>
 
@@ -299,21 +305,6 @@
             document.getElementById('live-date').textContent = `יום ${['ראשון','שני','שלישי','רביעי','חמישי','שישי','שבת'][now.getDay()]} | ${toGematria(dayNum)} ${month} ${yearGematria}`;
         }
         setInterval(updateClock, 1000); updateClock();
-
-        function toggleScreens() {
-            const times = document.getElementById('times-screen');
-            const announce = document.getElementById('announcement-screen');
-            if (times.classList.contains('visible')) {
-                times.classList.replace('visible', 'hidden');
-                announce.classList.replace('hidden', 'visible');
-                setTimeout(toggleScreens, 12000); 
-            } else {
-                announce.classList.replace('visible', 'hidden');
-                times.classList.replace('hidden', 'visible');
-                setTimeout(toggleScreens, 48000); 
-            }
-        }
-        setTimeout(toggleScreens, 48000);
 
         const names = ['שלמה זלמן בן מרדכי אלעזר הלוי', 'רחל בת יוסף הכהן', 'סעדיה בן יחיא', 'עוואד בן יחיא', 'טרנג\'ה בת חביבה'];
         let nameIdx = 0;
