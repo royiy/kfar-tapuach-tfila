@@ -117,7 +117,9 @@
         .time-pill {
             font-family: 'Frank Ruhl Libre', serif; font-size: 2.8vh; color: var(--wine-red);
             background: rgba(107, 20, 20, 0.05); padding: 0.2vh 1vw; border-radius: 6px; border: 1px solid rgba(197, 160, 89, 0.2);
+            display: flex; align-items: center; gap: 0.5vw;
         }
+        .friday-note { font-size: 2.2vh; color: var(--wine-red); opacity: 0.8; }
 
         .notices-container {
             flex: 1;
@@ -173,9 +175,9 @@
                 transform: scale(1);
             }
             50% { 
-                filter: drop-shadow(0 0 25px var(--rich-gold)) drop-shadow(0 0 45px rgba(255, 215, 0, 0.9));
+                filter: drop-shadow(0 0 20px var(--rich-gold)) drop-shadow(0 0 35px rgba(255, 215, 0, 0.9));
                 opacity: 1;
-                transform: scale(1.05);
+                transform: scale(1.03);
             }
             100% { 
                 filter: drop-shadow(0 0 5px var(--rich-gold)) drop-shadow(0 0 10px rgba(255, 215, 0, 0.5));
@@ -258,7 +260,9 @@
                         <div class="weekday-times-container">
                             <span class="time-pill">06:15</span>
                             <span class="time-pill">07:50</span>
-                            <span class="time-pill">08:00</span>
+                            <span class="time-pill">
+                                08:00 <span class="friday-note">ביום שישי</span>
+                            </span>
                         </div>
                     </div>
                     <div class="weekday-block">
@@ -277,7 +281,7 @@
                     </div>
                 </div>
                 <div class="magen-david-container">
-                    <svg class="magen-david-svg" width="135" height="135" viewBox="0 0 100 100">
+                    <svg class="magen-david-svg" width="110" height="110" viewBox="0 0 100 100">
                         <path d="M50 5 L85 75 L15 75 Z" fill="none" stroke="var(--rich-gold)" stroke-width="6"/>
                         <path d="M50 95 L15 25 L85 25 Z" fill="none" stroke="var(--rich-gold)" stroke-width="6"/>
                     </svg>
