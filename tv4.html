@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="refresh" content="3600">
     <title>פסח - בית הכנסת המרכזי</title>
-    <link href="https://fonts.googleapis.com/css2?family=Alef&family=Frank+Ruhl+Libre:wght@400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Alef&family=Frank+Ruhl+Libre:wght@400&family=Varela+Round&display=swap" rel="stylesheet">
     <style>
         :root {
             --wine-red: #6b1414;
@@ -15,6 +15,8 @@
             --soft-white: #ffffff;
             --charcoal: #333333;
             --warm-gold: #f4e4c1;
+            --rich-gold: #FFD700;
+            --marker-yellow: #fff176;
         }
 
         * {
@@ -42,9 +44,6 @@
             transition: opacity 1s ease-in-out;
         }
 
-        .hidden { opacity: 0; pointer-events: none; }
-        .visible { opacity: 1; pointer-events: auto; }
-
         .hero {
             background: linear-gradient(135deg, var(--wine-red) 0%, #4a0a0a 100%);
             padding: 1.5vh 3vw;
@@ -53,17 +52,11 @@
             flex-shrink: 0;
         }
 
-        .header-right { 
-            text-align: center; 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            min-width: 200px;
-        }
+        .header-right { text-align: center; display: flex; flex-direction: column; align-items: center; min-width: 200px; }
         .synagogue-title { font-family: 'Frank Ruhl Libre', serif; font-size: 4.8vh; color: var(--soft-white); line-height: 1.1; }
         .location { font-family: 'Frank Ruhl Libre', serif; font-size: 2.8vh; color: var(--antique-gold); margin-top: 0.2vh; }
 
-        .header-center { text-align: center; }
+        .header-center { text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; }
         #parsha-name { font-family: 'Frank Ruhl Libre', serif; font-size: 5.5vh; color: var(--antique-gold); }
 
         .header-left { text-align: left; }
@@ -73,7 +66,7 @@
         .main-content {
             flex: 1;
             display: grid;
-            grid-template-columns: 2fr 1fr;
+            grid-template-columns: 1fr 1fr 1fr;
             gap: 1.5vw;
             padding: 2vh 1.5vw;
         }
@@ -90,16 +83,14 @@
 
         .card-header {
             display: flex; align-items: center; justify-content: center; gap: 0.8vw;
-            margin-bottom: 2vh;
+            margin-bottom: 1.5vh;
             border-bottom: 1px solid var(--antique-gold);
             padding-bottom: 1vh;
         }
 
         .card-title { font-family: 'Frank Ruhl Libre', serif; font-size: 3.8vh; color: var(--wine-red); }
 
-        .shabbat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2vw; flex: 1; }
-
-        .time-list { display: flex; flex-direction: column; gap: 0.8vh; flex: 1; }
+        .time-list { display: flex; flex-direction: column; gap: 0.8vh; }
 
         .time-item {
             display: flex; justify-content: space-between; align-items: center;
@@ -107,9 +98,9 @@
             border-bottom: 1px solid rgba(0,0,0,0.04);
         }
 
-        .time-label { font-size: 2.8vh; color: var(--charcoal); }
+        .time-label { font-size: 2.6vh; color: var(--charcoal); }
         .time-value {
-            font-family: 'Frank Ruhl Libre', serif; font-size: 3.2vh; color: var(--wine-red);
+            font-family: 'Frank Ruhl Libre', serif; font-size: 3vh; color: var(--wine-red);
             background: rgba(107, 20, 20, 0.05); padding: 0.3vh 1vw; border-radius: 6px;
         }
 
@@ -128,30 +119,73 @@
             background: rgba(107, 20, 20, 0.05); padding: 0.2vh 1vw; border-radius: 6px; border: 1px solid rgba(197, 160, 89, 0.2);
         }
 
-        .chometz-notice {
-            margin-top: 8vh;
-            font-family: 'Frank Ruhl Libre', serif;
-            font-size: 3.2vh;
-            color: var(--wine-red);
-            padding: 1vh;
-            text-align: center;
-        }
-
-        .custom-footer-area {
-            margin-top: 0.5vh;
-            padding: 0;
-            text-align: center;
+        .notices-container {
+            flex: 1;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            flex-grow: 0.5;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 2.5vh;
+            padding-bottom: 4vh;
         }
 
-        .custom-navy-text {
-            font-family: 'Frank Ruhl Libre', serif;
-            font-size: 5.4vh;
-            color: var(--deep-navy);
-            line-height: 1.2;
+        .chometz-notice { 
+            font-family: 'Frank Ruhl Libre', serif; 
+            font-size: 3vh; 
+            color: var(--charcoal); 
+            text-align: center;
+            background-color: var(--marker-yellow);
+            padding: 0.5vh 1.5vw;
+            border-radius: 3px;
+            box-shadow: 2px 2px 8px rgba(0,0,0,0.05);
+            margin-bottom: 4.5vh;
+        }
+        
+        .omer-middle-text { 
+            font-family: 'Varela Round', sans-serif; 
+            font-size: 3.8vh; 
+            color: var(--wine-red); 
+            text-align: center;
+            width: 100%;
+            white-space: nowrap;
+        }
+        
+        .omer-right-text { 
+            font-family: 'Varela Round', sans-serif; 
+            font-size: 3.8vh; 
+            color: var(--wine-red); 
+            text-align: center;
+            margin-top: auto;
+        }
+
+        .magen-david-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 1vh;
+        }
+
+        @keyframes golden-glow-pulse {
+            0% { 
+                filter: drop-shadow(0 0 5px var(--rich-gold)) drop-shadow(0 0 10px rgba(255, 215, 0, 0.5));
+                opacity: 0.9;
+                transform: scale(1);
+            }
+            50% { 
+                filter: drop-shadow(0 0 25px var(--rich-gold)) drop-shadow(0 0 45px rgba(255, 215, 0, 0.9));
+                opacity: 1;
+                transform: scale(1.05);
+            }
+            100% { 
+                filter: drop-shadow(0 0 5px var(--rich-gold)) drop-shadow(0 0 10px rgba(255, 215, 0, 0.5));
+                opacity: 0.9;
+                transform: scale(1);
+            }
+        }
+
+        .magen-david-svg { 
+            animation: golden-glow-pulse 4s infinite ease-in-out; 
         }
 
         .memorial-section {
@@ -161,32 +195,12 @@
             border-top: 3px solid var(--antique-gold);
         }
 
-        .memorial-qr-item { 
-            display: flex; 
-            align-items: center; 
-            gap: 2.5vw; 
-        }
-
+        .memorial-qr-item { display: flex; align-items: center; gap: 2.5vw; }
         .memorial-qr-img { width: 7.5vh; height: 7.5vh; background: white; padding: 3px; border-radius: 4px; }
-        
-        .brand-image {
-            width: 7vh;
-            height: 7vh;
-            object-fit: contain;
-            border-radius: 50%;
-        }
-
+        .brand-image { width: 7vh; height: 7vh; object-fit: contain; border-radius: 50%; }
         .memorial-name-container { flex: 1; text-align: center; }
-        .memorial-name {
-            font-family: 'Frank Ruhl Libre', serif; font-size: 3.6vh; color: var(--warm-gold);
-            opacity: 0; transition: opacity 1s ease-in-out;
-        }
+        .memorial-name { font-family: 'Frank Ruhl Libre', serif; font-size: 3.6vh; color: var(--warm-gold); opacity: 0; transition: opacity 1s ease-in-out; }
         .memorial-name.visible-text { opacity: 1; }
-
-        .matzah-img {
-            max-width: 90%; max-height: 25vh; object-fit: contain; mix-blend-mode: multiply;
-            filter: drop-shadow(0 4px 8px rgba(197, 160, 89, 0.4)); opacity: 0.92;
-        }
     </style>
 </head>
 <body onclick="requestWakeLock();">
@@ -198,7 +212,7 @@
                 <div class="location">כפר תפוח</div>
             </div>
             <div class="header-center">
-                <div id="parsha-name">זמני פסח תשפ"ו</div>
+                <div id="parsha-name">תפילות שביעי של פסח</div>
             </div>
             <div class="header-left">
                 <div id="live-clock">--:--:--</div>
@@ -208,29 +222,31 @@
 
         <div class="main-content">
             <div class="column-card">
-                <div class="card-header"><span>🍷</span><h2 class="card-title">תפילות שביעי של פסח</h2></div>
-                <div class="shabbat-grid">
-                    <div class="time-list">
-                        <div class="time-item"><span class="time-label">שחרית</span><span class="time-value">08:00</span></div>
-                        <div class="time-item"><span class="time-label">מנחה גדולה</span><span class="time-value">13:30</span></div>
-                        <div class="time-item"><span class="time-label">כניסת החג</span><span class="time-value">18:37</span></div>
-                        <div class="time-item"><span class="time-label">מנחת ערב חג</span><span class="time-value">18:51</span></div>
-                        <div class="time-item" style="border-bottom: none;"><span class="time-label">צאת הכוכבים</span><span class="time-value">19:25</span></div>
-                        
-                        <div style="flex: 1; display: flex; align-items: center; justify-content: center; margin-top: 1vh;">
-                            <img src="https://acheinu.co.il/wp-content/uploads/2018/05/4977.gif" class="matzah-img" alt="פסח">
-                        </div>
-                    </div>
-                    
-                    <div class="time-list">
-                        <div class="time-item"><span class="time-label">שחרית</span><span class="time-value">08:00</span></div>
-                        <div class="time-item"><span class="time-label">מנחה גדולה</span><span class="time-value">13:30</span></div>
-                        <div class="time-item"><span class="time-label">מנחה של חג</span><span class="time-value">18:30</span></div>
-                        <div class="time-item"><span class="time-label">שקיעה</span><span class="time-value">19:08</span></div>
-                        <div class="time-item" style="border-bottom: none;"><span class="time-label">צאת החג וערבית</span><span class="time-value">19:41</span></div>
-                        
-                        <div class="chometz-notice">החמץ שנמכר מותר בשימוש החל מ 20:00</div>
-                    </div>
+                <div class="card-header"><span>🍷</span><h2 class="card-title">ערב חג</h2></div>
+                <div class="time-list">
+                    <div class="time-item"><span class="time-label">שחרית</span><span class="time-value">08:00</span></div>
+                    <div class="time-item"><span class="time-label">מנחה גדולה</span><span class="time-value">13:30</span></div>
+                    <div class="time-item"><span class="time-label">כניסת החג</span><span class="time-value">18:37</span></div>
+                    <div class="time-item"><span class="time-label">מנחת ערב חג</span><span class="time-value">18:51</span></div>
+                    <div class="time-item" style="border-bottom: none;"><span class="time-label">צאת הכוכבים</span><span class="time-value">19:25</span></div>
+                </div>
+                <div class="notices-container">
+                    <div class="omer-right-text">היום שישה ימים לעומר</div>
+                </div>
+            </div>
+
+            <div class="column-card">
+                <div class="card-header"><span>🍷</span><h2 class="card-title">יום חג</h2></div>
+                <div class="time-list">
+                    <div class="time-item"><span class="time-label">שחרית</span><span class="time-value">08:00</span></div>
+                    <div class="time-item"><span class="time-label">מנחה גדולה</span><span class="time-value">13:30</span></div>
+                    <div class="time-item"><span class="time-label">מנחה של חג</span><span class="time-value">18:30</span></div>
+                    <div class="time-item"><span class="time-label">שקיעה</span><span class="time-value">19:08</span></div>
+                    <div class="time-item" style="border-bottom: none;"><span class="time-label">צאת החג וערבית</span><span class="time-value">19:41</span></div>
+                </div>
+                <div class="notices-container">
+                    <div class="chometz-notice">החמץ שנמכר מותר בשימוש החל מ-20:00</div>
+                    <div class="omer-middle-text">היום שבעה ימים שהם שבוע אחד לעומר</div>
                 </div>
             </div>
 
@@ -242,7 +258,7 @@
                         <div class="weekday-times-container">
                             <span class="time-pill">06:15</span>
                             <span class="time-pill">07:50</span>
-                            <span class="time-pill">08:00 (ביום שישי)</span>
+                            <span class="time-pill">08:00</span>
                         </div>
                     </div>
                     <div class="weekday-block">
@@ -259,13 +275,12 @@
                             <span class="time-pill">21:00</span>
                         </div>
                     </div>
-                    
-                    <div class="custom-footer-area" style="margin-top: 3vh;">
-                        <div class="custom-navy-text">מוריד הטל</div>
-                        <div class="custom-navy-text">יעלה ויבוא</div>
-                        <div style="height: 1.5vh;"></div>
-                        <div class="custom-navy-text" style="color: var(--wine-red); font-size: 4.5vh;">היום חמישה ימים לעומר</div>
-                    </div>
+                </div>
+                <div class="magen-david-container">
+                    <svg class="magen-david-svg" width="135" height="135" viewBox="0 0 100 100">
+                        <path d="M50 5 L85 75 L15 75 Z" fill="none" stroke="var(--rich-gold)" stroke-width="6"/>
+                        <path d="M50 95 L15 25 L85 25 Z" fill="none" stroke="var(--rich-gold)" stroke-width="6"/>
+                    </svg>
                 </div>
             </div>
         </div>
@@ -275,9 +290,7 @@
                 <img class="memorial-qr-img" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https%3A%2F%2Flinks.payboxapp.com%2FrBbQDcbaPVb" alt="PayBox QR">
                 <img class="brand-image" src="https://media.licdn.com/dms/image/v2/C4D0BAQG-2i2h5gL6Gw/company-logo_200_200/company-logo_200_200/0/1647427815522/paybox_payment_solutions_logo?e=2147483647&v=beta&t=m9QuEqO-Mamw-iTgLStX2At3eXiD4saJycKbAWLudTQ" alt="PayBox">
             </div>
-            
             <div class="memorial-name-container"><span class="memorial-name" id="memorial-current"></span></div>
-            
             <div class="memorial-qr-item">
                 <img class="brand-image" src="https://www.shomron.org.il/uploads/n/1613293437.2921.jpg" alt="WhatsApp">
                 <img class="memorial-qr-img" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https%3A%2F%2Fchat.whatsapp.com%2FLNNQcjZXV2OGkbYZpnxktw" alt="WhatsApp QR">
@@ -297,12 +310,15 @@
 
         function updateClock() {
             const now = new Date();
-            document.getElementById('live-clock').textContent = now.toLocaleTimeString('he-IL', {hour12: false});
-            const parts = new Intl.DateTimeFormat('he-IL-u-ca-hebrew', {day:'numeric', month:'long', year:'numeric'}).formatToParts(now);
+            const timeOptions = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false, timeZone: 'Asia/Jerusalem' };
+            document.getElementById('live-clock').textContent = now.toLocaleTimeString('he-IL', timeOptions);
+            const parts = new Intl.DateTimeFormat('he-IL-u-ca-hebrew', {day:'numeric', month:'long', year:'numeric', timeZone: 'Asia/Jerusalem'}).formatToParts(now);
             const dayNum = parseInt(parts.find(p=>p.type==='day').value);
             const month = parts.find(p=>p.type==='month').value;
-            const yearGematria = toGematria(parseInt(parts.find(p=>p.year || p.type==='year').value) % 1000);
-            document.getElementById('live-date').textContent = `יום ${['ראשון','שני','שלישי','רביעי','חמישי','שישי','שבת'][now.getDay()]} | ${toGematria(dayNum)} ${month} ${yearGematria}`;
+            const yearNum = parseInt(parts.find(p=>p.type==='year').value);
+            const yearGematria = toGematria(yearNum % 1000);
+            const dayOfWeek = ['ראשון','שני','שלישי','רביעי','חמישי','שישי','שבת'][now.getDay()];
+            document.getElementById('live-date').textContent = `יום ${dayOfWeek} | ${toGematria(dayNum)} ${month} ${yearGematria}`;
         }
         setInterval(updateClock, 1000); updateClock();
 
@@ -322,6 +338,7 @@
         async function requestWakeLock() {
             try { if ('wakeLock' in navigator) { await navigator.wakeLock.request('screen'); } } catch (err) {}
         }
+        requestWakeLock();
     </script>
 </body>
 </html>
