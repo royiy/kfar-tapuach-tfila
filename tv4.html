@@ -38,11 +38,8 @@
             height: 100%;
             display: flex;
             flex-direction: column;
-            transition: opacity 1.5s ease-in-out;
             background: var(--cream);
         }
-        .hidden { opacity: 0; pointer-events: none; z-index: 1; }
-        .visible { opacity: 1; z-index: 10; }
 
         .hero { 
             background: linear-gradient(165deg, var(--deep-navy) 0%, var(--royal-blue) 100%); 
@@ -54,8 +51,15 @@
             flex-shrink: 0;
         }
 
-        .synagogue-title { font-family: 'Frank Ruhl Libre', serif; font-size: 4.5vh; color: var(--soft-white); line-height: 1.1; }
-        .location { font-family: 'Frank Ruhl Libre', serif; font-size: 2.2vh; color: var(--warm-gold); }
+        /* מרכוז כותרת ומיקום */
+        .header-right { 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            min-width: 250px; 
+        }
+        .synagogue-title { font-family: 'Frank Ruhl Libre', serif; font-size: 4.5vh; color: var(--soft-white); line-height: 1.1; text-align: center; }
+        .location { font-family: 'Frank Ruhl Libre', serif; font-size: 2.2vh; color: var(--warm-gold); text-align: center; width: 100%; }
         
         .header-center { text-align: center; background: rgba(255, 255, 255, 0.1); padding: 1vh 3vw; border-radius: 50px; backdrop-filter: blur(5px); border: 1px solid rgba(212, 175, 55, 0.3); }
         .parsha-label { font-size: 2vh; color: var(--warm-gold); }
@@ -102,6 +106,7 @@
         .weekday-times-container { display: flex; flex-wrap: wrap; gap: 0.8vh; }
         .time-pill { font-family: 'Frank Ruhl Libre', serif; font-size: 2.4vh; color: var(--royal-blue); background: #f0ede3; padding: 0.4vh 0.8vw; border-radius: 8px; }
 
+        /* עיצוב חלק תחתון עם אייקונים עגולים */
         .memorial-section { 
             background: var(--deep-navy); 
             padding: 1vh 3vw 4vh 3vw; 
@@ -111,20 +116,9 @@
             border-top: 1px solid var(--gold); 
         }
         
-        .memorial-qr-item {
-            display: flex;
-            align-items: center;
-            gap: 1vw;
-            color: var(--warm-gold);
-        }
-        .memorial-qr-img {
-            width: 7vh;
-            height: 7vh;
-            background: white;
-            padding: 3px;
-            border-radius: 4px;
-        }
-        .memorial-qr-text { font-size: 1.6vh; line-height: 1.2; text-align: center; }
+        .memorial-qr-item { display: flex; align-items: center; gap: 1vw; }
+        .memorial-qr-img { width: 7.5vh; height: 7.5vh; background: white; padding: 3px; border-radius: 4px; }
+        .brand-image { width: 7vh; height: 7vh; object-fit: contain; border-radius: 50%; background: white; padding: 2px; }
 
         .memorial-name-container { flex: 1; text-align: center; }
         .memorial-name { font-family: 'Frank Ruhl Libre', serif; font-size: 2.8vh; color: var(--warm-gold); opacity: 0; transition: opacity 1s; }
@@ -136,10 +130,6 @@
             100% { text-shadow: 0 0 5px rgba(244, 228, 193, 0.2); transform: scale(1); }
         }
 
-        .announcements-container { flex: 1; display: flex; justify-content: center; align-items: center; background: radial-gradient(circle, #ffffff 0%, #f4e4c1 100%); }
-        .announcement-box { background: white; padding: 8vh 5vw; border-radius: 40px; border: 10px double var(--gold); text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.2); max-width: 85%; }
-        .announcement-text { font-size: 8vh; line-height: 1.5; color: var(--deep-navy); text-shadow: 2px 2px 4px rgba(0,0,0,0.1); letter-spacing: 0.05em; }
-
         #preventSleepVideo { position: fixed; right: 0; bottom: 0; width: 1px; height: 1px; opacity: 0.01; z-index: -1; pointer-events: none; }
     </style>
 </head>
@@ -149,7 +139,7 @@
         <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
     </video>
 
-    <div id="times-screen" class="screen visible">
+    <div id="times-screen" class="screen">
         <header class="hero">
             <div class="header-right">
                 <div class="synagogue-title">בית הכנסת המרכזי</div>
@@ -183,7 +173,7 @@
                     <div class="time-item"><span>מנחה גדולה</span><span id="sat-mincha-gedola" class="time-value">12:30</span></div>
                     <div class="time-item"><span>לימוד הלכה</span><span class="time-value">13:00</span></div>
                     <div class="time-item"><span>מנחה של שבת</span><span id="sat-mincha" class="time-value">--:--</span></div>
-                    <div class="time-item"><span>שיעור הלכה</span><span class="time-value">אחרי מנחה</span></div>
+                    <div class="time-item"><span>שיעור הרב שמעון רוזנצוייג שליט"א</span><span class="time-value">אחרי מנחה</span></div>
                     <div class="time-item"><span>מנחה (חדר לימוד)</span><span id="sat-mincha-extra" class="time-value">--:--</span></div>
                     <div class="time-item"><span>שקיעה</span><span id="shkiya" class="time-value">--:--</span></div>
                     <div class="time-item"><span>צאת שבת וערבית</span><span id="tzeit-shabbat" class="time-value">--:--</span></div>
@@ -202,8 +192,8 @@
 
         <div class="memorial-section">
             <div class="memorial-qr-item">
-                <img class="memorial-qr-img" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https%3A%2F%2Flinks.payboxapp.com%2FrBbQDcbaPVb" alt="Paybox">
-                <div class="memorial-qr-text">סריקה<br>לתרומות</div>
+                <img class="memorial-qr-img" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https%3A%2F%2Flinks.payboxapp.com%2FrBbQDcbaPVb" alt="PayBox QR">
+                <img class="brand-image" src="https://media.licdn.com/dms/image/v2/C4D0BAQG-2i2h5gL6Gw/company-logo_200_200/company-logo_200_200/0/1647427815522/paybox_payment_solutions_logo?e=2147483647&v=beta&t=m9QuEqO-Mamw-iTgLStX2At3eXiD4saJycKbAWLudTQ" alt="PayBox">
             </div>
             
             <div class="memorial-name-container">
@@ -211,16 +201,8 @@
             </div>
 
             <div class="memorial-qr-item">
-                <div class="memorial-qr-text">הצטרפות<br>לוואטסאפ</div>
-                <img class="memorial-qr-img" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https%3A%2F%2Fchat.whatsapp.com%2FLNNQcjZXV2OGkbYZpnxktw" alt="WhatsApp">
-            </div>
-        </div>
-    </div>
-
-    <div id="announcement-screen" class="screen hidden">
-        <div class="announcements-container">
-            <div class="announcement-box">
-                <div id="announcement-text" class="announcement-text"></div>
+                <img class="brand-image" src="https://www.shomron.org.il/uploads/n/1613293437.2921.jpg" alt="WhatsApp">
+                <img class="memorial-qr-img" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https%3A%2F%2Fchat.whatsapp.com%2FLNNQcjZXV2OGkbYZpnxktw" alt="WhatsApp QR">
             </div>
         </div>
     </div>
@@ -235,15 +217,6 @@
             const v = document.getElementById('preventSleepVideo');
             if(v) v.play().catch(e => console.log("Video play failed", e));
         }
-
-        setInterval(() => {
-            window.scrollBy(0, 1);
-            setTimeout(() => window.scrollBy(0, -1), 100);
-            const evt = new MouseEvent('click', {view: window, bubbles: true, cancelable: true});
-            document.body.dispatchEvent(evt);
-            const v = document.getElementById('preventSleepVideo');
-            if(v && v.paused) v.play().catch(()=>{});
-        }, 120000);
 
         function toGematria(n) {
             if (n === 15) return 'ט״ו'; if (n === 16) return 'ט״ז';
@@ -273,26 +246,6 @@
             document.getElementById('live-date').textContent = `יום ${['ראשון','שני','שלישי','רביעי','חמישי','שישי','שבת'][now.getDay()]} | ${dayGematria} ${month} ${yearGematria}`;
         }
         setInterval(updateClock, 1000); updateClock();
-
-        const announcements = ["תזכורת לשלם דמי חבר", "נא לא להכניס חמץ לבית הכנסת"];
-        let announceIdx = 0;
-        
-        function toggleScreens() {
-            const times = document.getElementById('times-screen');
-            const announce = document.getElementById('announcement-screen');
-            if (times.classList.contains('visible')) {
-                document.getElementById('announcement-text').innerText = announcements[announceIdx];
-                announceIdx = (announceIdx + 1) % announcements.length;
-                times.classList.replace('visible', 'hidden'); 
-                announce.classList.replace('hidden', 'visible');
-                setTimeout(toggleScreens, 20000); 
-            } else {
-                announce.classList.replace('visible', 'hidden'); 
-                times.classList.replace('hidden', 'visible');
-                setTimeout(toggleScreens, 60000); 
-            }
-        }
-        setTimeout(toggleScreens, 60000);
 
         const names = ['שלמה זלמן בן מרדכי אלעזר הלוי', 'רחל בת יוסף הכהן', 'סעדיה בן יחיא', 'עוואד בן יחיא', 'טרנג\'ה בת חביבה'];
         let nameIdx = 0;
