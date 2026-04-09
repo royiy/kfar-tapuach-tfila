@@ -16,7 +16,6 @@
             --soft-white: #ffffff;
             --charcoal: #2a2a2a; 
             --shadow-blue: rgba(30, 58, 95, 0.15);
-            --omer-bg: #4a1e1e;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-weight: 400 !important; }
@@ -98,12 +97,40 @@
         .weekday-block { margin-bottom: 1.5vh; background: #f9f5ff; border-right: 4px solid var(--gold); padding: 1vh; border-radius: 10px; text-align: center; }
         .time-pill { font-family: 'Frank Ruhl Libre', serif; font-size: 2.2vh; color: var(--soft-white); background: var(--deep-navy); padding: 0.4vh 0.8vw; border-radius: 8px; margin: 0.2vh; display: inline-block; }
 
-        .omer-section { background: var(--omer-bg); padding: 1.2vh 0; text-align: center; border-top: 3px solid var(--gold); border-bottom: 3px solid var(--gold); flex-shrink: 0; }
-        .omer-count { font-family: 'Frank Ruhl Libre', serif; font-size: 3vh; color: var(--warm-gold); text-shadow: 1px 1px 3px rgba(0,0,0,0.5); }
+        .omer-section { 
+            background: linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)), 
+                        url('https://www.transparenttextures.com/patterns/cream-paper.png'),
+                        linear-gradient(90deg, #d4af37 0%, #f4e4c1 50%, #d4af37 100%);
+            padding: 1.5vh 0; 
+            text-align: center; 
+            border-top: 4px double var(--gold); 
+            border-bottom: 4px double var(--gold); 
+            flex-shrink: 0;
+            box-shadow: inset 0 0 50px rgba(212, 175, 55, 0.2);
+        }
+        .omer-count { 
+            font-family: 'Frank Ruhl Libre', serif; 
+            font-size: 3.5vh; 
+            color: #4a1e1e;
+            text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.8);
+        }
 
         .footer { background: var(--deep-navy); padding: 1vh 3vw 2vh 3vw; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
-        .qr-img { width: 6vh; height: 6vh; background: white; padding: 2px; border-radius: 4px; }
-        .memorial-name { font-family: 'Frank Ruhl Libre', serif; font-size: 2.6vh; color: var(--warm-gold); }
+        .qr-img { width: 6vh; height: 6vh; background: white; padding: 2px; border-radius: 4px; flex-shrink: 0; }
+        
+        .memorial-display { 
+            flex: 1; 
+            text-align: center; 
+            font-family: 'Frank Ruhl Libre', serif; 
+            font-size: 2.8vh; 
+            color: var(--warm-gold);
+            height: 4vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.8s ease-in-out;
+        }
+        .fade-out { opacity: 0; }
     </style>
 </head>
 <body onclick="initInteraction();">
@@ -137,14 +164,16 @@
                         <div id="shabbat-content">
                             <div class="right-column-section-title">ערב שבת</div>
                             <div class="right-column-item"><span>מנחה גדולה</span><span class="time-value">13:30</span></div>
-                            <div class="right-column-item"><span>הדלקת נרות</span><span class="time-value">18:45</span></div>
-                            <div class="right-column-item"><span>מנחה ערב שבת</span><span class="time-value">18:59</span></div>
+                            <div class="right-column-item"><span>הדלקת נרות</span><span class="time-value">18:39</span></div>
+                            <div class="right-column-item"><span>מנחה ערב שבת</span><span class="time-value">18:53</span></div>
+                            <div class="right-column-item"><span>צאת הכוכבים</span><span class="time-value">19:27</span></div>
                             <div class="right-column-section-title">יום השבת</div>
                             <div class="right-column-item"><span>שחרית</span><span class="time-value">08:00</span></div>
                             <div class="right-column-item"><span>מנחה גדולה</span><span class="time-value">13:30</span></div>
-                            <div class="right-column-item"><span>מנחה של שבת</span><span class="time-value">18:20</span></div>
+                            <div class="right-column-item"><span>מנחה של שבת</span><span class="time-value">17:33</span></div>
                             <div class="right-column-item"><span>שיעור הרב רוזנצוייג שליט"א</span><span class="time-value">אחרי מנחה</span></div>
-                            <div class="right-column-item"><span>שקיעה</span><span class="time-value">19:15</span></div>
+                            <div class="right-column-item"><span>מנחה נוספת (בחדר לימוד)</span><span class="time-value">18:39</span></div>
+                            <div class="right-column-item"><span>שקיעה</span><span class="time-value">19:10</span></div>
                             <div class="right-column-item"><span>צאת שבת וערבית</span><span class="time-value">19:50</span></div>
                         </div>
                     </div>
@@ -159,14 +188,14 @@
                     <div class="shiur-teacher">אלעד אמסטרדם</div>
                 </div>
                 <div class="shiur-block">
-                    <div class="shiur-title">שיעור הרב שמעון רוזנצוייג שליט"א</div>
-                    <div class="shiur-time">שבת אחרי מנחה</div>
-                    <div class="shiur-teacher">בבית הכנסת</div>
+                    <div class="shiur-title">שיעור באורות</div>
+                    <div class="shiur-time">יום רביעי | 21:15</div>
+                    <div class="shiur-teacher">הרב שמעון רוזנצווייג</div>
                 </div>
                 <div class="shiur-block">
                     <div class="shiur-title">כולל יום שישי</div>
                     <div class="shiur-time">09:00 - 11:00</div>
-                    <div class="shiur-teacher">הרב צביקה הרץ</div>
+                    <div class="shiur-teacher">סוגיה בפרשת שבוע | הרב צביקה הרץ</div>
                 </div>
             </div>
 
@@ -193,12 +222,33 @@
 
         <footer class="footer">
             <img class="qr-img" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=paybox" alt="QR">
-            <div class="memorial-name">🕯️ לעילוי נשמת שלמה זלמן בן מרדכי אלעזר הלוי ז"ל 🕯️</div>
+            <div id="memorial-text" class="memorial-display"></div>
             <img class="qr-img" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=whatsapp" alt="QR">
         </footer>
     </div>
 
     <script>
+        const names = [
+            'שלמה זלמן בן מרדכי אלעזר הלוי ז"ל', 
+            'רחל בת יוסף הכהן ע"ה', 
+            'סעדיה בן יחיא ז"ל', 
+            'עוואד בן יחיא ז"ל', 
+            'טרנג\'ה בת חביבה ע"ה'
+        ];
+        let nameIndex = 0;
+
+        function updateMemorial() {
+            const display = document.getElementById('memorial-text');
+            if(!display) return;
+            display.classList.add('fade-out');
+            
+            setTimeout(() => {
+                display.textContent = `🕯️ לעילוי נשמת: ${names[nameIndex]} 🕯️`;
+                display.classList.remove('fade-out');
+                nameIndex = (nameIndex + 1) % names.length;
+            }, 800);
+        }
+
         function toGematria(n) {
             if (n === 15) return 'ט״ו'; if (n === 16) return 'ט״ז';
             const vals = [400,300,200,100,90,80,70,60,50,40,30,20,10,9,8,7,6,5,4,3,2,1];
@@ -213,7 +263,8 @@
 
         function updateClock() {
             const now = new Date();
-            document.getElementById('live-clock').textContent = now.toLocaleTimeString('he-IL', {hour12: false});
+            const clockEl = document.getElementById('live-clock');
+            if(clockEl) clockEl.textContent = now.toLocaleTimeString('he-IL', {hour12: false});
             
             const options = {day:'numeric', month:'long', year:'numeric'};
             const parts = new Intl.DateTimeFormat('he-IL-u-ca-hebrew', options).formatToParts(now);
@@ -226,7 +277,8 @@
             const yearGematria = "ה׳תש" + toGematria(yearNum % 100).replace('׳', '').replace('״', '');
             
             const days = ['ראשון','שני','שלישי','רביעי','חמישי','שישי','שבת'];
-            document.getElementById('live-date').textContent = `יום ${days[now.getDay()]} | ${dayGematria} ${monthName} ${yearGematria}`;
+            const dateEl = document.getElementById('live-date');
+            if(dateEl) dateEl.textContent = `יום ${days[now.getDay()]} | ${dayGematria} ${monthName} ${yearGematria}`;
         }
 
         function initInteraction() {
@@ -236,11 +288,16 @@
 
         const content = document.getElementById('shabbat-content');
         const wrapper = document.getElementById('shabbat-scroll');
-        wrapper.appendChild(content.cloneNode(true));
+        if(content && wrapper) {
+            wrapper.appendChild(content.cloneNode(true));
+        }
 
         document.getElementById('parsha-name').textContent = "שמיני";
+        
         setInterval(updateClock, 1000);
+        setInterval(updateMemorial, 5000);
         updateClock();
+        updateMemorial();
     </script>
 </body>
 </html>
