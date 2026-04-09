@@ -249,7 +249,7 @@
             display.classList.add('fade-out');
             
             setTimeout(() => {
-                display.textContent = `🕯️ לעילוי נשמת: ${names[nameIndex]} 🕯️`;
+                display.textContent = `🕯️ לעילוי נשמת ${names[nameIndex]} 🕯️`;
                 display.classList.remove('fade-out');
                 nameIndex = (nameIndex + 1) % names.length;
             }, 800);
