@@ -1,19 +1,19 @@
 {
-  "parsha": "צו - שבת הגדול",
+  "parsha": "שמיני",
   "shabbat_times": {
     "erev_shabbat": {
       "mincha_gedola": "13:30",
-      "candle_lighting": "18:29",
-      "tzeit_hakochavim": "19:18"
+      "candle_lighting": "18:39",
+      "tzeit_hakochavim": "19:27"
     },
     "shabbat_day": {
       "mincha_gedola": "13:30",
-      "shkiya": "19:00",
-      "tzeit_shabbat": "19:33"
+      "shkiya": "19:10",
+      "tzeit_shabbat": "19:43"
     }
   },
   "weekday_times": {
-    "mincha": ["13:15", "18:45"],
-    "arvit": ["19:25", "20:00", "21:00"]
+    "mincha": ["13:15", "18:55"],
+    "arvit": ["19:30",  "21:00"]
   }
 }

@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="refresh" content="3600">
+    <title>פסח - בית הכנסת המרכזי</title>
+    <link href="https://fonts.googleapis.com/css2?family=Alef&family=Frank+Ruhl+Libre:wght@400&family=Varela+Round&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --wine-red: #6b1414;
+            --parchment: #fdf5e6;
+            --antique-gold: #c5a059;
+            --deep-navy: #0a1628;
+            --soft-white: #ffffff;
+            --charcoal: #333333;
+            --warm-gold: #f4e4c1;
+            --rich-gold: #FFD700;
+            --marker-yellow: #fff176;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-weight: 400 !important;
+        }
+
+        body {
+            font-family: 'Alef', sans-serif;
+            background-color: var(--parchment);
+            background-image: url("https://www.transparenttextures.com/patterns/natural-paper.png");
+            color: var(--charcoal);
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .screen {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            display: flex; flex-direction: column;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, var(--wine-red) 0%, #4a0a0a 100%);
+            padding: 1.5vh 3vw;
+            display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 5px solid var(--antique-gold);
+            flex-shrink: 0;
+        }
+
+        .header-right { text-align: center; display: flex; flex-direction: column; align-items: center; min-width: 200px; }
+        .synagogue-title { font-family: 'Frank Ruhl Libre', serif; font-size: 4.8vh; color: var(--soft-white); line-height: 1.1; }
+        .location { font-family: 'Frank Ruhl Libre', serif; font-size: 2.8vh; color: var(--antique-gold); margin-top: 0.2vh; }
+
+        .header-center { text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        #parsha-name { font-family: 'Frank Ruhl Libre', serif; font-size: 5.5vh; color: var(--antique-gold); }
+
+        .header-left { text-align: left; }
+        #live-clock { font-family: 'Frank Ruhl Libre', serif; font-size: 5.2vh; color: var(--antique-gold); direction: ltr; line-height: 1.1;}
+        #live-date { font-size: 2.4vh; color: var(--soft-white); }
+
+        .main-content {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1.5vw;
+            padding: 2vh 1.5vw;
+        }
+
+        .column-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 10px;
+            padding: 2vh 1.5vw;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+            display: flex;
+            flex-direction: column;
+            border: 1px solid var(--antique-gold);
+        }
+
+        .card-header {
+            display: flex; align-items: center; justify-content: center; gap: 0.8vw;
+            margin-bottom: 1.5vh;
+            border-bottom: 1px solid var(--antique-gold);
+            padding-bottom: 1vh;
+        }
+
+        .card-title { font-family: 'Frank Ruhl Libre', serif; font-size: 3.8vh; color: var(--wine-red); }
+
+        .time-list { display: flex; flex-direction: column; gap: 0.8vh; }
+
+        .time-item {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0.5vh 0;
+            border-bottom: 1px solid rgba(0,0,0,0.04);
+        }
+
+        .time-label { font-size: 2.6vh; color: var(--charcoal); }
+        .time-value {
+            font-family: 'Frank Ruhl Libre', serif; font-size: 3vh; color: var(--wine-red);
+            background: rgba(107, 20, 20, 0.05); padding: 0.3vh 1vw; border-radius: 6px;
+        }
+
+        .weekday-block {
+            margin-bottom: 0.8vh;
+            border-right: 4px solid var(--wine-red);
+            padding: 0.5vh 1vw;
+            background: rgba(255,255,255,0.4);
+            border-radius: 6px;
+        }
+
+        .weekday-label { font-size: 2.5vh; color: var(--wine-red); margin-bottom: 0.4vh; display: block; }
+        .weekday-times-container { display: flex; flex-wrap: wrap; gap: 0.8vh; align-items: center; }
+        .time-pill {
+            font-family: 'Frank Ruhl Libre', serif; font-size: 2.8vh; color: var(--wine-red);
+            background: rgba(107, 20, 20, 0.05); padding: 0.2vh 1vw; border-radius: 6px; border: 1px solid rgba(197, 160, 89, 0.2);
+            display: flex; align-items: center; gap: 0.5vw;
+        }
+        .friday-note { font-size: 2.2vh; color: var(--wine-red); opacity: 0.8; }
+
+        .notices-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 2.5vh;
+            padding-bottom: 4vh;
+        }
+
+        .chometz-notice { 
+            font-family: 'Frank Ruhl Libre', serif; 
+            font-size: 3vh; 
+            color: var(--charcoal); 
+            text-align: center;
+            background-color: var(--marker-yellow);
+            padding: 0.5vh 1.5vw;
+            border-radius: 3px;
+            box-shadow: 2px 2px 8px rgba(0,0,0,0.05);
+            margin-bottom: 4.5vh;
+        }
+        
+        .omer-middle-text { 
+            font-family: 'Varela Round', sans-serif; 
+            font-size: 3.8vh; 
+            color: var(--wine-red); 
+            text-align: center;
+            width: 100%;
+            white-space: nowrap;
+        }
+        
+        .omer-right-text { 
+            font-family: 'Varela Round', sans-serif; 
+            font-size: 3.8vh; 
+            color: var(--wine-red); 
+            text-align: center;
+            margin-top: auto;
+        }
+
+        .magen-david-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 1vh;
+        }
+
+        @keyframes golden-glow-pulse {
+            0% { 
+                filter: drop-shadow(0 0 5px var(--rich-gold)) drop-shadow(0 0 10px rgba(255, 215, 0, 0.5));
+                opacity: 0.9;
+                transform: scale(1);
+            }
+            50% { 
+                filter: drop-shadow(0 0 20px var(--rich-gold)) drop-shadow(0 0 35px rgba(255, 215, 0, 0.9));
+                opacity: 1;
+                transform: scale(1.03);
+            }
+            100% { 
+                filter: drop-shadow(0 0 5px var(--rich-gold)) drop-shadow(0 0 10px rgba(255, 215, 0, 0.5));
+                opacity: 0.9;
+                transform: scale(1);
+            }
+        }
+
+        .magen-david-svg { 
+            animation: golden-glow-pulse 4s infinite ease-in-out; 
+        }
+
+        .memorial-section {
+            background: var(--deep-navy);
+            padding: 1.5vh 3vw 4vh 3vw;
+            display: flex; align-items: center; justify-content: space-between;
+            border-top: 3px solid var(--antique-gold);
+        }
+
+        .memorial-qr-item { display: flex; align-items: center; gap: 2.5vw; }
+        .memorial-qr-img { width: 7.5vh; height: 7.5vh; background: white; padding: 3px; border-radius: 4px; }
+        .brand-image { width: 7vh; height: 7vh; object-fit: contain; border-radius: 50%; }
+        .memorial-name-container { flex: 1; text-align: center; }
+        .memorial-name { font-family: 'Frank Ruhl Libre', serif; font-size: 3.6vh; color: var(--warm-gold); opacity: 0; transition: opacity 1s ease-in-out; }
+        .memorial-name.visible-text { opacity: 1; }
+    </style>
+</head>
+<body onclick="requestWakeLock();">
+
+    <div id="times-screen" class="screen visible">
+        <header class="hero">
+            <div class="header-right">
+                <div class="synagogue-title">בית הכנסת המרכזי</div>
+                <div class="location">כפר תפוח</div>
+            </div>
+            <div class="header-center">
+                <div id="parsha-name">תפילות שביעי של פסח</div>
+            </div>
+            <div class="header-left">
+                <div id="live-clock">--:--:--</div>
+                <div id="live-date">טוען...</div>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <div class="column-card">
+                <div class="card-header"><span>🍷</span><h2 class="card-title">ערב חג</h2></div>
+                <div class="time-list">
+                    <div class="time-item"><span class="time-label">שחרית</span><span class="time-value">08:00</span></div>
+                    <div class="time-item"><span class="time-label">מנחה גדולה</span><span class="time-value">13:30</span></div>
+                    <div class="time-item"><span class="time-label">כניסת החג</span><span class="time-value">18:37</span></div>
+                    <div class="time-item"><span class="time-label">מנחת ערב חג</span><span class="time-value">18:51</span></div>
+                    <div class="time-item" style="border-bottom: none;"><span class="time-label">צאת הכוכבים</span><span class="time-value">19:25</span></div>
+                </div>
+                <div class="notices-container">
+                    <div class="omer-right-text">היום שישה ימים לעומר</div>
+                </div>
+            </div>
+
+            <div class="column-card">
+                <div class="card-header"><span>🍷</span><h2 class="card-title">יום חג</h2></div>
+                <div class="time-list">
+                    <div class="time-item"><span class="time-label">שחרית</span><span class="time-value">08:00</span></div>
+                    <div class="time-item"><span class="time-label">מנחה גדולה</span><span class="time-value">13:30</span></div>
+                    <div class="time-item"><span class="time-label">מנחה של חג</span><span class="time-value">18:30</span></div>
+                    <div class="time-item"><span class="time-label">שקיעה</span><span class="time-value">19:08</span></div>
+                    <div class="time-item" style="border-bottom: none;"><span class="time-label">צאת החג וערבית</span><span class="time-value">19:41</span></div>
+                </div>
+                <div class="notices-container">
+                    <div class="chometz-notice">החמץ שנמכר מותר בשימוש החל מ-20:00</div>
+                    <div class="omer-middle-text">היום שבעה ימים שהם שבוע אחד לעומר</div>
+                </div>
+            </div>
+
+            <div class="column-card">
+                <div class="card-header"><span>🕍</span><h2 class="card-title">תפילות חול</h2></div>
+                <div class="time-list">
+                    <div class="weekday-block">
+                        <span class="weekday-label">שחרית</span>
+                        <div class="weekday-times-container">
+                            <span class="time-pill">06:15</span>
+                            <span class="time-pill">07:50</span>
+                            <span class="time-pill">
+                                08:00 <span class="friday-note">ביום שישי</span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="weekday-block">
+                        <span class="weekday-label">מנחה</span>
+                        <div class="weekday-times-container">
+                            <span class="time-pill">13:15</span>
+                            <span class="time-pill">18:50</span>
+                        </div>
+                    </div>
+                    <div class="weekday-block">
+                        <span class="weekday-label">ערבית</span>
+                        <div class="weekday-times-container">
+                            <span class="time-pill">19:30</span>
+                            <span class="time-pill">21:00</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="magen-david-container">
+                    <svg class="magen-david-svg" width="110" height="110" viewBox="0 0 100 100">
+                        <path d="M50 5 L85 75 L15 75 Z" fill="none" stroke="var(--rich-gold)" stroke-width="6"/>
+                        <path d="M50 95 L15 25 L85 25 Z" fill="none" stroke="var(--rich-gold)" stroke-width="6"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <div class="memorial-section">
+            <div class="memorial-qr-item">
+                <img class="memorial-qr-img" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https%3A%2F%2Flinks.payboxapp.com%2FrBbQDcbaPVb" alt="PayBox QR">
+                <img class="brand-image" src="https://media.licdn.com/dms/image/v2/C4D0BAQG-2i2h5gL6Gw/company-logo_200_200/company-logo_200_200/0/1647427815522/paybox_payment_solutions_logo?e=2147483647&v=beta&t=m9QuEqO-Mamw-iTgLStX2At3eXiD4saJycKbAWLudTQ" alt="PayBox">
+            </div>
+            <div class="memorial-name-container"><span class="memorial-name" id="memorial-current"></span></div>
+            <div class="memorial-qr-item">
+                <img class="brand-image" src="https://www.shomron.org.il/uploads/n/1613293437.2921.jpg" alt="WhatsApp">
+                <img class="memorial-qr-img" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https%3A%2F%2Fchat.whatsapp.com%2FLNNQcjZXV2OGkbYZpnxktw" alt="WhatsApp QR">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toGematria(n) {
+            if (n === 15) return 'ט״ו'; if (n === 16) return 'ט״ז';
+            const vals = [400,300,200,100,90,80,70,60,50,40,30,20,10,9,8,7,6,5,4,3,2,1];
+            const chars = ['ת','ש','ר','ק','צ','פ','ע','ס','נ','מ','ל','כ','י','ט','ח','ז','ו','ה','ד','ג','ב','א'];
+            let s = '', rem = n;
+            for (let i = 0; i < vals.length; i++) { while (rem >= vals[i]) { s += chars[i]; rem -= vals[i]; } }
+            return s.length === 1 ? s + '׳' : s.slice(0,-1) + '״' + s.slice(-1);
+        }
+
+        function updateClock() {
+            const now = new Date();
+            const timeOptions = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false, timeZone: 'Asia/Jerusalem' };
+            document.getElementById('live-clock').textContent = now.toLocaleTimeString('he-IL', timeOptions);
+            const parts = new Intl.DateTimeFormat('he-IL-u-ca-hebrew', {day:'numeric', month:'long', year:'numeric', timeZone: 'Asia/Jerusalem'}).formatToParts(now);
+            const dayNum = parseInt(parts.find(p=>p.type==='day').value);
+            const month = parts.find(p=>p.type==='month').value;
+            const yearNum = parseInt(parts.find(p=>p.type==='year').value);
+            const yearGematria = toGematria(yearNum % 1000);
+            const dayOfWeek = ['ראשון','שני','שלישי','רביעי','חמישי','שישי','שבת'][now.getDay()];
+            document.getElementById('live-date').textContent = `יום ${dayOfWeek} | ${toGematria(dayNum)} ${month} ${yearGematria}`;
+        }
+        setInterval(updateClock, 1000); updateClock();
+
+        const names = ['שלמה זלמן בן מרדכי אלעזר הלוי', 'רחל בת יוסף הכהן', 'סעדיה בן יחיא', 'עוואד בן יחיא', 'טרנג\'ה בת חביבה'];
+        let nameIdx = 0;
+        function rotateMemorial() {
+            const el = document.getElementById('memorial-current');
+            el.classList.remove('visible-text');
+            setTimeout(() => {
+                el.innerHTML = `🕯️ לעילוי נשמת ${names[nameIdx]} 🕯️`;
+                el.classList.add('visible-text');
+                nameIdx = (nameIdx + 1) % names.length;
+            }, 1000);
+        }
+        setInterval(rotateMemorial, 10000); rotateMemorial();
+
+        async function requestWakeLock() {
+            try { if ('wakeLock' in navigator) { await navigator.wakeLock.request('screen'); } } catch (err) {}
+        }
+        requestWakeLock();
+    </script>
+</body>
+</html>
