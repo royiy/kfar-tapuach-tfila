@@ -115,8 +115,11 @@
             text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.8);
         }
 
-        .footer { background: var(--deep-navy); padding: 1vh 3vw 2vh 3vw; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
-        .qr-img { width: 6vh; height: 6vh; background: white; padding: 2px; border-radius: 4px; flex-shrink: 0; }
+        .footer { background: var(--deep-navy); padding: 1vh 2vw 2vh 2vw; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
+        
+        .qr-wrapper { display: flex; align-items: center; gap: 0.8vw; }
+        .qr-img { width: 7vh; height: 7vh; background: white; padding: 2px; border-radius: 4px; border: none; }
+        .qr-icon { width: 5.5vh; height: 5.5vh; object-fit: contain; border-radius: 8px; }
         
         .memorial-display { 
             flex: 1; 
@@ -221,9 +224,17 @@
         </div>
 
         <footer class="footer">
-            <img class="qr-img" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=paybox" alt="QR">
+            <div class="qr-wrapper">
+                <img class="qr-img" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=paybox" alt="PayBox QR">
+                <img class="qr-icon" src="https://media.glassdoor.com/sqll/4573583/paybox-israel-squareLogo-1640762021095.png" alt="PayBox Icon">
+            </div>
+            
             <div id="memorial-text" class="memorial-display"></div>
-            <img class="qr-img" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=whatsapp" alt="QR">
+            
+            <div class="qr-wrapper">
+                <img class="qr-icon" src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp Icon">
+                <img class="qr-img" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=whatsapp" alt="WhatsApp QR">
+            </div>
         </footer>
     </div>
 
