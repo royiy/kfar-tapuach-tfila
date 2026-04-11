@@ -314,6 +314,20 @@
                 document.getElementById('parsha-name').textContent = jsonData.parsha;
             }
 
+            // Helper: add minutes (can be negative) to 'HH:MM' string
+            function addMinutesToTimeStr(timeStr, mins) {
+                const parts = String(timeStr).split(':');
+                if (parts.length < 2) return timeStr;
+                let h = parseInt(parts[0], 10);
+                let m = parseInt(parts[1], 10);
+                if (isNaN(h) || isNaN(m)) return timeStr;
+                let total = h * 60 + m + mins;
+                total = (total + 24 * 60) % (24 * 60);
+                const nh = Math.floor(total / 60);
+                const nm = total % 60;
+                return String(nh).padStart(2, '0') + ':' + String(nm).padStart(2, '0');
+            }
+
             if (jsonData.shabbat_times && jsonData.shabbat_times.erev_shabbat) {
                 const erevShabbatData = jsonData.shabbat_times.erev_shabbat;
                 const shabbatItems = document.querySelectorAll('.column-card')[0].querySelectorAll('.right-column-item');
@@ -360,7 +374,7 @@
             if (jsonData.shabbat_times && jsonData.shabbat_times.shabbat_day) {
                 const shabbatDayData = jsonData.shabbat_times.shabbat_day;
                 const shabbatItems = document.querySelectorAll('.column-card')[0].querySelectorAll('.right-column-item');
-                
+
                 shabbatItems.forEach(item => {
                     const label = item.querySelector('span').textContent;
                     if (label === 'שקיעה' && shabbatDayData.shkiya) {
@@ -369,10 +383,13 @@
                     if (label === 'צאת שבת וערבית' && shabbatDayData.tzeit_shabbat) {
                         item.querySelector('.time-value').textContent = shabbatDayData.tzeit_shabbat;
                     }
-                    // שיעור הרב צריך להיות 2:10 לפני צאת שבת וערבית
-                    if (label.includes('שיעור הרב') && shabbatDayData.tzeit_shabbat) {
-                        // חיסור 130 דקות (2 שעות ו-10 דקות)
+                    // מנחה של שבת צריך להיות 2:10 לפני צאת שבת וערבית
+                    if (label === 'מנחה של שבת' && shabbatDayData.tzeit_shabbat) {
                         item.querySelector('.time-value').textContent = addMinutesToTimeStr(shabbatDayData.tzeit_shabbat, -130);
+                    }
+                    // הורד את השעה עבור שיעור הרב רוזנצוייג
+                    if (label === 'שיעור הרב רוזנצוייג שליט."א' || label === 'שיעור הרב רוזנצוייג שליט"א' || label === 'שיעור הרב רוזנצוייג') {
+                        item.querySelector('.time-value').textContent = '';
                     }
                 });
             }
