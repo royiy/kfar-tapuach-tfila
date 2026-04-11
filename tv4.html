@@ -317,7 +317,20 @@
             if (jsonData.shabbat_times && jsonData.shabbat_times.erev_shabbat) {
                 const erevShabbatData = jsonData.shabbat_times.erev_shabbat;
                 const shabbatItems = document.querySelectorAll('.column-card')[0].querySelectorAll('.right-column-item');
-                
+
+                function addMinutesToTimeStr(timeStr, mins) {
+                    const parts = timeStr.split(':');
+                    if (parts.length < 2) return timeStr;
+                    let h = parseInt(parts[0], 10);
+                    let m = parseInt(parts[1], 10);
+                    if (isNaN(h) || isNaN(m)) return timeStr;
+                    let total = h * 60 + m + mins;
+                    total = (total + 24 * 60) % (24 * 60);
+                    const nh = Math.floor(total / 60);
+                    const nm = total % 60;
+                    return String(nh).padStart(2, '0') + ':' + String(nm).padStart(2, '0');
+                }
+
                 shabbatItems.forEach(item => {
                     const label = item.querySelector('span').textContent;
                     if (label === 'קבלת שבת מוקדמת' && erevShabbatData.kablat_shabbat_mukdemet) {
@@ -325,6 +338,18 @@
                     }
                     if (label === 'הדלקת נרות' && erevShabbatData.candle_lighting) {
                         item.querySelector('.time-value').textContent = erevShabbatData.candle_lighting;
+                    }
+                    // מנחה נוספת (בחדר לימוד) צריך להיות בדיוק בזמן הדלקת נרות
+                    if (label === 'מנחה נוספת (בחדר לימוד)' && erevShabbatData.candle_lighting) {
+                        item.querySelector('.time-value').textContent = erevShabbatData.candle_lighting;
+                    }
+                    if (label === 'מנחה ערב שבת') {
+                        // קבע את מנחה ערב שבת ל-14 דקות אחרי הדלקת נרות אם לא צוין במפורש ב-JSON
+                        if (erevShabbatData.mincha_erev_shabbat) {
+                            item.querySelector('.time-value').textContent = erevShabbatData.mincha_erev_shabbat;
+                        } else if (erevShabbatData.candle_lighting) {
+                            item.querySelector('.time-value').textContent = addMinutesToTimeStr(erevShabbatData.candle_lighting, 14);
+                        }
                     }
                     if (label === 'צאת הכוכבים' && erevShabbatData.tzeit_hakochavim) {
                         item.querySelector('.time-value').textContent = erevShabbatData.tzeit_hakochavim;
@@ -343,6 +368,11 @@
                     }
                     if (label === 'צאת שבת וערבית' && shabbatDayData.tzeit_shabbat) {
                         item.querySelector('.time-value').textContent = shabbatDayData.tzeit_shabbat;
+                    }
+                    // שיעור הרב צריך להיות 2:10 לפני צאת שבת וערבית
+                    if (label.includes('שיעור הרב') && shabbatDayData.tzeit_shabbat) {
+                        // חיסור 130 דקות (2 שעות ו-10 דקות)
+                        item.querySelector('.time-value').textContent = addMinutesToTimeStr(shabbatDayData.tzeit_shabbat, -130);
                     }
                 });
             }
