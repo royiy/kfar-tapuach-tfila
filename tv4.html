@@ -175,7 +175,7 @@
                             <div class="right-column-item"><span>שחרית</span><span class="time-value">08:00</span></div>
                             <div class="right-column-item"><span>מנחה גדולה</span><span class="time-value">13:30</span></div>
                             <div class="right-column-item"><span>מנחה של שבת</span><span class="time-value">17:33</span></div>
-                            <div class="right-column-item"><span>שיעור הרב רוזנצוייג שליט"א</span><span class="time-value">אחרי מנחה</span></div>
+                            <div class="right-column-item"><span>שיעור הרב שמעון רוזנצוייג שליט"א</span><span class="time-value">אחרי מנחה</span></div>
                             <div class="right-column-item"><span>מנחה נוספת (בחדר לימוד)</span><span class="time-value">18:39</span></div>
                             <div class="right-column-item"><span>שקיעה</span><span class="time-value">19:10</span></div>
                             <div class="right-column-item"><span>צאת שבת וערבית</span><span class="time-value">19:50</span></div>
@@ -291,7 +291,7 @@
             const yearNum = parseInt(parts.find(p => p.type === 'year').value);
             
             const dayGematria = toGematria(dayNum);
-            const yearGematria = "ה׳תש" + toGematria(yearNum % 100).replace('׳', '').replace('״', '');
+            const yearGematria = "תש" + toGematria(yearNum % 100).replace('׳', '').replace('״', '');
             
             const days = ['ראשון','שני','שלישי','רביעי','חמישי','שישי','שבת'];
             const dateEl = document.getElementById('live-date');
