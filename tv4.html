@@ -242,6 +242,17 @@
     <script>
         const names = ['שלמה זלמן בן מרדכי אלעזר הלוי', 'רחל בת יוסף הכהן', 'סעדיה בן יחיא', 'עוואד בן יחיא', 'טרנג\'ה בת חביבה'];
         let nameIndex = 0;
+        let jsonData = {};
+
+        async function loadDataFromJson() {
+            try {
+                const response = await fetch('data.json');
+                jsonData = await response.json();
+                updatePageFromData();
+            } catch (error) {
+                console.error('Error loading data.json:', error);
+            }
+        }
 
         function updateMemorial() {
             const display = document.getElementById('memorial-text');
@@ -298,7 +309,53 @@
             wrapper.appendChild(content.cloneNode(true));
         }
 
-        document.getElementById('parsha-name').textContent = "שמיני";
+        function updatePageFromData() {
+            if (jsonData.parsha) {
+                document.getElementById('parsha-name').textContent = jsonData.parsha;
+            }
+
+            if (jsonData.weekday_times) {
+                const shacharitTimes = jsonData.weekday_times.shacharit || ["06:15", "07:50", "08:00 (ביום שישי)"];
+                const minchaeTimes = jsonData.weekday_times.mincha || ["13:15", "18:55"];
+                const arvitTimes = jsonData.weekday_times.arvit || ["19:30", "21:00"];
+                
+                // Update Shacharit times
+                const shacharitBlock = document.querySelectorAll('.weekday-block')[0];
+                if (shacharitBlock) {
+                    const timePills = shacharitBlock.querySelectorAll('.time-pill');
+                    timePills.forEach((pill, index) => {
+                        if (index < shacharitTimes.length) {
+                            pill.textContent = shacharitTimes[index];
+                        }
+                    });
+                }
+
+                // Update Mincha times
+                const minchaBlock = document.querySelectorAll('.weekday-block')[1];
+                if (minchaBlock) {
+                    const timePills = minchaBlock.querySelectorAll('.time-pill');
+                    timePills.forEach((pill, index) => {
+                        if (index < minchaeTimes.length) {
+                            pill.textContent = minchaeTimes[index];
+                        }
+                    });
+                }
+
+                // Update Arvit times
+                const arvitBlock = document.querySelectorAll('.weekday-block')[2];
+                if (arvitBlock) {
+                    const timePills = arvitBlock.querySelectorAll('.time-pill');
+                    timePills.forEach((pill, index) => {
+                        if (index < arvitTimes.length) {
+                            pill.textContent = arvitTimes[index];
+                        }
+                    });
+                }
+            }
+        }
+        
+        loadDataFromJson();
+
         
         setInterval(updateClock, 1000);
         setInterval(updateMemorial, 5000);
