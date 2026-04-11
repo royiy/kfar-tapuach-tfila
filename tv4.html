@@ -323,6 +323,27 @@
                     if (label === 'קבלת שבת מוקדמת' && erevShabbatData.kablat_shabbat_mukdemet) {
                         item.querySelector('.time-value').textContent = erevShabbatData.kablat_shabbat_mukdemet;
                     }
+                    if (label === 'הדלקת נרות' && erevShabbatData.candle_lighting) {
+                        item.querySelector('.time-value').textContent = erevShabbatData.candle_lighting;
+                    }
+                    if (label === 'צאת הכוכבים' && erevShabbatData.tzeit_hakochavim) {
+                        item.querySelector('.time-value').textContent = erevShabbatData.tzeit_hakochavim;
+                    }
+                });
+            }
+
+            if (jsonData.shabbat_times && jsonData.shabbat_times.shabbat_day) {
+                const shabbatDayData = jsonData.shabbat_times.shabbat_day;
+                const shabbatItems = document.querySelectorAll('.column-card')[0].querySelectorAll('.right-column-item');
+                
+                shabbatItems.forEach(item => {
+                    const label = item.querySelector('span').textContent;
+                    if (label === 'שקיעה' && shabbatDayData.shkiya) {
+                        item.querySelector('.time-value').textContent = shabbatDayData.shkiya;
+                    }
+                    if (label === 'צאת שבת וערבית' && shabbatDayData.tzeit_shabbat) {
+                        item.querySelector('.time-value').textContent = shabbatDayData.tzeit_shabbat;
+                    }
                 });
             }
 
