@@ -3,6 +3,7 @@
   "shabbat_times": {
     "erev_shabbat": {
       "mincha_gedola": "13:30",
+      "kablat_shabbat_mukdemet": "17:30",
       "candle_lighting": "18:44",
       "tzeit_hakochavim": "19:32"
     },

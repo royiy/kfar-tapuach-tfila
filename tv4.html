@@ -314,6 +314,18 @@
                 document.getElementById('parsha-name').textContent = jsonData.parsha;
             }
 
+            if (jsonData.shabbat_times && jsonData.shabbat_times.erev_shabbat) {
+                const erevShabbatData = jsonData.shabbat_times.erev_shabbat;
+                const shabbatItems = document.querySelectorAll('.column-card')[0].querySelectorAll('.right-column-item');
+                
+                shabbatItems.forEach(item => {
+                    const label = item.querySelector('span').textContent;
+                    if (label === 'קבלת שבת מוקדמת' && erevShabbatData.kablat_shabbat_mukdemet) {
+                        item.querySelector('.time-value').textContent = erevShabbatData.kablat_shabbat_mukdemet;
+                    }
+                });
+            }
+
             if (jsonData.weekday_times) {
                 const shacharitTimes = jsonData.weekday_times.shacharit || ["06:15", "07:50", "08:00 (ביום שישי)"];
                 const minchaeTimes = jsonData.weekday_times.mincha || ["13:15", "18:55"];
