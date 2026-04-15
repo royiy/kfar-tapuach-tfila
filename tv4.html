@@ -263,11 +263,14 @@
 
         async function loadDataFromJson() {
             try {
-                const response = await fetch('data.json?v=' + Date.now());
+                const response = await fetch('./data.json?v=' + Date.now());
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
                 jsonData = await response.json();
+                console.log('Data loaded successfully:', jsonData);
                 updatePageFromData();
             } catch (error) {
                 console.error('Error loading data.json:', error);
+                document.getElementById('parsha-name').textContent = 'שגיאה בטעינה';
             }
         }
 
