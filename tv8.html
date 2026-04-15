@@ -121,18 +121,11 @@
         .flag-icon {
             width: 6vh;
             height: 6vh;
-            animation: wave 1s ease-in-out infinite;
-            transform-origin: bottom center;
             display: inline-block;
+            vertical-align: middle;
         }
         .flag-icon.right {
-            transform: scaleX(-1);
-            animation-delay: 0.2s;
-        }
-        @keyframes wave {
-            0%, 100% { transform: rotateZ(0deg); }
-            25% { transform: rotateZ(15deg); }
-            75% { transform: rotateZ(-15deg); }
+            /* No transform */
         }
 
         .footer { background: var(--deep-navy); padding: 1vh 2vw 2vh 2vw; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
