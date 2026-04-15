@@ -123,23 +123,16 @@
             height: 6vh;
             animation: wave 1s ease-in-out infinite;
             transform-origin: bottom center;
+            display: inline-block;
         }
         .flag-icon.right {
-            animation-delay: 0.2s;
             transform: scaleX(-1);
+            animation-delay: 0.2s;
         }
         @keyframes wave {
             0%, 100% { transform: rotateZ(0deg); }
             25% { transform: rotateZ(15deg); }
             75% { transform: rotateZ(-15deg); }
-        }
-        .flag-icon.right {
-            animation: wave-right 1s ease-in-out infinite;
-        }
-        @keyframes wave-right {
-            0%, 100% { transform: scaleX(-1) rotateZ(0deg); }
-            25% { transform: scaleX(-1) rotateZ(-15deg); }
-            75% { transform: scaleX(-1) rotateZ(15deg); }
         }
 
         .footer { background: var(--deep-navy); padding: 1vh 2vw 2vh 2vw; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
