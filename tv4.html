@@ -263,7 +263,7 @@
 
         async function loadDataFromJson() {
             try {
-                const response = await fetch('data.json');
+                const response = await fetch('data.json?v=' + Date.now());
                 jsonData = await response.json();
                 updatePageFromData();
             } catch (error) {
@@ -452,6 +452,7 @@
         }
         
         loadDataFromJson();
+        setInterval(loadDataFromJson, 300000);
 
         
         setInterval(updateClock, 1000);
