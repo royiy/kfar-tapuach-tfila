@@ -119,13 +119,16 @@
             gap: 1.5vw;
         }
         .flag-icon {
-            width: 6vh;
-            height: 6vh;
+            display: inline-block;
+        }
+        .flag-icon::before {
+            content: "🇮🇱";
+            font-size: 4vh;
             animation: wave 1s ease-in-out infinite;
             transform-origin: bottom center;
             display: inline-block;
         }
-        .flag-icon.right {
+        .flag-icon.right::before {
             transform: scaleX(-1);
             animation-delay: 0.2s;
         }
@@ -242,9 +245,9 @@
 
         <div class="omer-section">
             <div class="omer-count">
-                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwMCIgaGVpZ2h0PSI4MDAiIHZpZXdCb3g9IjAgMCAxMjAwIDgwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8ZGVmcz4KICAgIDxjbGlwUGF0aCBpZD0iYSI+CiAgICAgIDxyZWN0IHdpZHRoPSI5MDAiIGhlaWdodD0iNjAwIi8+CiAgICA8L2NsaXBQYXRoPgogIDwvZGVmcz4KICA8cGF0aCBmaWxsPSIjMDAzM0E1IiBkPSJtMCwwIDYwMCw2MDAgTDAsNjAwIHoiLz4KICA8cGF0aCBmaWxsPSIjRkZGRkZGIiBkPSJtMCwwIDYwMCwwIDYwMCw2MDAgTDAsNjAwIHoiLz4KICA8cGF0aCBmaWxsPSIjRkZGRkZGIiBkPSJtMzAwLDI1MCA0NTAsMzUwIDMwMCw0NTAgMTUwLDM1MCB6Ii8+CiAgPHBhdGggZmlsbD0iIzAwMzNBNSIgZD0ibTMwMCwyNTAgNDUwLDM1MCAzMDAsNDUwIDE1MCwzNTAgeiIvPgo8L3N2Zz4K" alt="דגל ישראל" class="flag-icon">
+                <span class="flag-icon"></span>
                 <span>היום ארבעה עשר יום לעומר שהם שני שבועות</span>
-                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwMCIgaGVpZ2h0PSI4MDAiIHZpZXdCb3g9IjAgMCAxMjAwIDgwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8ZGVmcz4KICAgIDxjbGlwUGF0aCBpZD0iYSI+CiAgICAgIDxyZWN0IHdpZHRoPSI5MDAiIGhlaWdodD0iNjAwIi8+CiAgICA8L2NsaXBQYXRoPgogIDwvZGVmcz4KICA8cGF0aCBmaWxsPSIjMDAzM0E1IiBkPSJtMCwwIDYwMCw2MDAgTDAsNjAwIHoiLz4KICA8cGF0aCBmaWxsPSIjRkZGRkZGIiBkPSJtMCwwIDYwMCwwIDYwMCw2MDAgTDAsNjAwIHoiLz4KICA8cGF0aCBmaWxsPSIjRkZGRkZGIiBkPSJtMzAwLDI1MCA0NTAsMzUwIDMwMCw0NTAgMTUwLDM1MCB6Ii8+CiAgPHBhdGggZmlsbD0iIzAwMzNBNSIgZD0ibTMwMCwyNTAgNDUwLDM1MCAzMDAsNDUwIDE1MCwzNTAgeiIvPgo8L3N2Zz4K" alt="דגל ישראל" class="flag-icon right">
+                <span class="flag-icon right"></span>
             </div>
         </div>
 
