@@ -113,6 +113,33 @@
             font-size: 3.5vh; 
             color: #4a1e1e;
             text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5vw;
+        }
+        .flag-icon {
+            width: 6vh;
+            height: 6vh;
+            animation: wave 1s ease-in-out infinite;
+            transform-origin: bottom center;
+        }
+        .flag-icon.right {
+            animation-delay: 0.2s;
+            transform: scaleX(-1);
+        }
+        @keyframes wave {
+            0%, 100% { transform: rotateZ(0deg); }
+            25% { transform: rotateZ(15deg); }
+            75% { transform: rotateZ(-15deg); }
+        }
+        .flag-icon.right {
+            animation: wave-right 1s ease-in-out infinite;
+        }
+        @keyframes wave-right {
+            0%, 100% { transform: scaleX(-1) rotateZ(0deg); }
+            25% { transform: scaleX(-1) rotateZ(-15deg); }
+            75% { transform: scaleX(-1) rotateZ(15deg); }
         }
 
         .footer { background: var(--deep-navy); padding: 1vh 2vw 2vh 2vw; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
@@ -221,7 +248,11 @@
         </div>
 
         <div class="omer-section">
-            <div class="omer-count">🇮🇱 היום ארבעה עשר יום לעומר שהם שני שבועות 🇮🇱</div>
+            <div class="omer-count">
+                <img src="https://upload.wikimedia.org/wikipedia/en/d/d4/Flag_of_Israel.svg" alt="דגל ישראל" class="flag-icon">
+                <span>היום ארבעה עשר יום לעומר שהם שני שבועות</span>
+                <img src="https://upload.wikimedia.org/wikipedia/en/d/d4/Flag_of_Israel.svg" alt="דגל ישראל" class="flag-icon right">
+            </div>
         </div>
 
         <footer class="footer">
