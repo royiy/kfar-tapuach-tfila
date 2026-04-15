@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="refresh" content="3600">
+    <title>בית הכנסת המרכזי – כפר תפוח</title>
+    <link href="https://fonts.googleapis.com/css2?family=Alef:wght@400&family=Frank+Ruhl+Libre:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --deep-navy: #0a1628; 
+            --royal-blue: #1e3a5f; 
+            --gold: #d4af37;
+            --warm-gold: #f4e4c1; 
+            --cream: #faf8f3; 
+            --soft-white: #ffffff;
+            --charcoal: #2a2a2a; 
+            --shadow-blue: rgba(30, 58, 95, 0.15);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-weight: 400 !important; }
+        
+        body { 
+            font-family: 'Alef', sans-serif; 
+            background: var(--cream); 
+            color: var(--charcoal); 
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden; 
+            display: flex;
+            flex-direction: column;
+        }
+
+        .screen {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .hero { 
+            background: linear-gradient(165deg, var(--deep-navy) 0%, var(--royal-blue) 100%); 
+            padding: 1.5vh 3vw; 
+            display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 5px solid var(--gold);
+            flex-shrink: 0;
+        }
+
+        .header-right { display: flex; flex-direction: column; align-items: center; min-width: 250px; }
+        .synagogue-title { font-family: 'Frank Ruhl Libre', serif; font-size: 4vh; color: var(--soft-white); line-height: 1.1; text-align: center; }
+        .location { font-family: 'Frank Ruhl Libre', serif; font-size: 2vh; color: var(--warm-gold); text-align: center; }
+
+        .header-center { 
+            text-align: center; 
+            background: rgba(255, 255, 255, 0.1); 
+            padding: 0.8vh 2.5vw; 
+            border-radius: 50px; 
+            backdrop-filter: blur(5px); 
+            border: 1px solid rgba(212, 175, 55, 0.3); 
+        }
+        .parsha-label { font-size: 1.8vh; color: var(--warm-gold); }
+        #parsha-name { font-family: 'Frank Ruhl Libre', serif; font-size: 3.2vh; color: var(--soft-white); }
+
+        .header-left { min-width: 250px; text-align: left; }
+        #live-clock { font-family: 'Frank Ruhl Libre', serif; font-size: 4.5vh; color: var(--warm-gold); direction: ltr; }
+        #live-date { font-size: 2vh; color: var(--soft-white); }
+
+        .main-content { 
+            flex: 1; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.2vw; padding: 1.5vh 1.2vw;
+            align-items: start; overflow: hidden;
+        }
+        
+        .column-card { 
+            background: var(--soft-white); border-radius: 15px; padding: 1.2vh 1.2vw; 
+            box-shadow: 0 8px 25px var(--shadow-blue); display: flex; flex-direction: column;
+            border-top: 5px solid var(--gold); height: 64vh; overflow: hidden;
+        }
+
+        .card-header { 
+            display: flex; align-items: center; justify-content: center; gap: 0.8vw; 
+            margin-bottom: 1.2vh; border-bottom: 2px solid #f0ede3; padding-bottom: 0.8vh; flex-shrink: 0;
+        }
+        .card-title { font-family: 'Frank Ruhl Libre', serif; font-size: 2.8vh; color: var(--royal-blue); }
+
+        .scrolling-content { flex: 1; overflow: hidden; position: relative; }
+        .scroll-wrapper { position: absolute; width: 100%; animation: autoScroll 25s linear infinite; }
+        @keyframes autoScroll { 0% { transform: translateY(0); } 100% { transform: translateY(-50%); } }
+
+        .right-column-item { display: flex; justify-content: space-between; align-items: center; padding: 1vh 0; border-bottom: 1px solid #f5f2e8; }
+        .time-value { font-family: 'Frank Ruhl Libre', serif; font-size: 2.4vh; color: var(--royal-blue); background: #e8f2ff; padding: 0.3vh 0.7vw; border-radius: 6px; min-width: 5vw; text-align: center; }
+        .right-column-section-title { font-family: 'Frank Ruhl Libre', serif; font-size: 2.2vh; color: var(--royal-blue); margin-top: 1.2vh; margin-bottom: 0.6vh; padding-bottom: 0.4vh; border-bottom: 2px solid var(--gold); }
+
+        .shiur-block { background: linear-gradient(135deg, #f5f9ff 0%, #eef5ff 100%); border-right: 4px solid var(--royal-blue); padding: 1.2vh 1vw; border-radius: 12px; margin-bottom: 1.5vh; }
+        .shiur-title { font-family: 'Frank Ruhl Libre', serif; font-size: 2.2vh; color: var(--royal-blue); margin-bottom: 0.4vh; }
+        .shiur-time { font-family: 'Frank Ruhl Libre', serif; font-size: 1.8vh; color: var(--soft-white); background: var(--royal-blue); padding: 0.2vh 0.7vw; border-radius: 4px; display: inline-block; margin-bottom: 0.4vh; }
+        .shiur-teacher { font-size: 1.8vh; color: var(--charcoal); }
+
+        .weekday-block { margin-bottom: 1.5vh; background: #f9f5ff; border-right: 4px solid var(--gold); padding: 1vh; border-radius: 10px; text-align: center; }
+        .time-pill { font-family: 'Frank Ruhl Libre', serif; font-size: 2.2vh; color: var(--soft-white); background: var(--deep-navy); padding: 0.4vh 0.8vw; border-radius: 8px; margin: 0.2vh; display: inline-block; }
+
+        .omer-section { 
+            background: linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)), 
+                        url('https://www.transparenttextures.com/patterns/cream-paper.png'),
+                        linear-gradient(90deg, #d4af37 0%, #f4e4c1 50%, #d4af37 100%);
+            padding: 1.5vh 0; 
+            text-align: center; 
+            border-top: 4px double var(--gold); 
+            border-bottom: 4px double var(--gold); 
+            flex-shrink: 0;
+            box-shadow: inset 0 0 50px rgba(212, 175, 55, 0.2);
+        }
+        .omer-count { 
+            font-family: 'Frank Ruhl Libre', serif; 
+            font-size: 3.5vh; 
+            color: #4a1e1e;
+            text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.8);
+        }
+
+        .footer { background: var(--deep-navy); padding: 1vh 2vw 2vh 2vw; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
+        
+        .qr-wrapper { display: flex; align-items: center; gap: 0.8vw; }
+        .qr-img { width: 7vh; height: 7vh; background: white; padding: 2px; border-radius: 4px; border: none; }
+        .qr-icon { width: 5.5vh; height: 5.5vh; object-fit: contain; border-radius: 8px; }
+        
+        .memorial-display { 
+            flex: 1; 
+            text-align: center; 
+            font-family: 'Frank Ruhl Libre', serif; 
+            font-size: 2.8vh; 
+            color: var(--warm-gold);
+            height: 4vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.8s ease-in-out;
+        }
+        .fade-out { opacity: 0; }
+    </style>
+</head>
+<body onclick="initInteraction();">
+    <video id="preventSleepVideo" autoplay loop muted playsinline style="position:fixed; width:1px; height:1px; opacity:0.01;">
+        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+    </video>
+
+    <div class="screen">
+        <header class="hero">
+            <div class="header-right">
+                <div class="synagogue-title">בית הכנסת המרכזי</div>
+                <div class="location">כפר תפוח</div>
+            </div>
+            
+            <div class="header-center">
+                <div class="parsha-label">פרשת השבוע</div>
+                <div id="parsha-name">טוען...</div>
+            </div>
+
+            <div class="header-left">
+                <div id="live-clock">--:--:--</div>
+                <div id="live-date"></div>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <div class="column-card">
+                <div class="card-header"><span>🕍</span><h2 class="card-title">תפילות שבת</h2></div>
+                <div class="scrolling-content">
+                    <div class="scroll-wrapper" id="shabbat-scroll">
+                        <div id="shabbat-content">
+                            <div class="right-column-section-title">ערב שבת</div>
+                            <div class="right-column-item"><span>מנחה גדולה</span><span class="time-value">13:30</span></div>
+                            <div class="right-column-item"><span>קבלת שבת מוקדמת</span><span class="time-value">17:25</span></div>
+                            <div class="right-column-item"><span>הדלקת נרות</span><span class="time-value">18:39</span></div>
+                            <div class="right-column-item"><span>מנחה ערב שבת</span><span class="time-value">18:53</span></div>
+                            <div class="right-column-item"><span>צאת הכוכבים</span><span class="time-value">19:27</span></div>
+                            <div class="right-column-section-title">יום השבת</div>
+                            <div class="right-column-item"><span>שחרית</span><span class="time-value">08:00</span></div>
+                            <div class="right-column-item"><span>מנחה גדולה</span><span class="time-value">13:30</span></div>
+                            <div class="right-column-item"><span>מנחה של שבת</span><span class="time-value">17:33</span></div>
+                            <div class="right-column-item"><span>שיעור הרב שמעון רוזנצוייג שליט"א</span><span class="time-value">אחרי מנחה</span></div>
+                            <div class="right-column-item"><span>מנחה נוספת (בחדר לימוד)</span><span class="time-value">18:39</span></div>
+                            <div class="right-column-item"><span>שקיעה</span><span class="time-value">19:10</span></div>
+                            <div class="right-column-item"><span>צאת שבת וערבית</span><span class="time-value">19:50</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="column-card">
+                <div class="card-header"><span>📚</span><h2 class="card-title">שיעורים</h2></div>
+                <div class="shiur-block">
+                    <div class="shiur-title">שיעור בדף היומי</div>
+                    <div class="shiur-time">א' - ה' | 20:30</div>
+                    <div class="shiur-teacher">אלעד אמסטרדם</div>
+                </div>
+                <div class="shiur-block">
+                    <div class="shiur-title">שיעור באורות</div>
+                    <div class="shiur-time">יום רביעי | 21:15</div>
+                    <div class="shiur-teacher">הרב שמעון רוזנצווייג</div>
+                </div>
+                <div class="shiur-block">
+                    <div class="shiur-title">כולל יום שישי</div>
+                    <div class="shiur-time">09:00 - 11:00</div>
+                    <div class="shiur-teacher">סוגיה בפרשת שבוע | הרב צביקה הרץ</div>
+                </div>
+            </div>
+
+            <div class="column-card">
+                <div class="card-header"><span>✨</span><h2 class="card-title">תפילות חול</h2></div>
+                <div class="weekday-block">
+                    <div style="color:var(--royal-blue); margin-bottom: 4px; font-size: 2vh;">שחרית</div>
+                    <div class="time-pill">06:15</div><div class="time-pill">07:50</div><div class="time-pill">08:00 (ביום שישי)</div>
+                </div>
+                <div class="weekday-block">
+                    <div style="color:var(--royal-blue); margin-bottom: 4px; font-size: 2vh;">מנחה</div>
+                    <div class="time-pill">13:15</div><div class="time-pill">18:55</div>
+                </div>
+                <div class="weekday-block">
+                    <div style="color:var(--royal-blue); margin-bottom: 4px; font-size: 2vh;">ערבית</div>
+                    <div class="time-pill">19:30</div><div class="time-pill">21:00</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="omer-section">
+            <div class="omer-count">🇮🇱 היום ארבעה עשר יום לעומר שהם שני שבועות 🇮🇱</div>
+        </div>
+
+        <footer class="footer">
+            <div class="qr-wrapper">
+                <img class="qr-img" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=paybox" alt="PayBox QR">
+                <img class="qr-icon" src="https://media.glassdoor.com/sqll/4573583/paybox-israel-squareLogo-1640762021095.png" alt="PayBox Icon">
+            </div>
+            
+            <div id="memorial-text" class="memorial-display"></div>
+            
+            <div class="qr-wrapper">
+                <img class="qr-icon" src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp Icon">
+                <img class="qr-img" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=whatsapp" alt="WhatsApp QR">
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        const names = ['שלמה זלמן בן מרדכי אלעזר הלוי', 'רחל בת יוסף הכהן', 'סעדיה בן יחיא', 'עוואד בן יחיא', 'טרנג\'ה בת חביבה'];
+        let nameIndex = 0;
+        let jsonData = {};
+
+        async function loadDataFromJson() {
+            try {
+                const response = await fetch('data.json');
+                jsonData = await response.json();
+                updatePageFromData();
+            } catch (error) {
+                console.error('Error loading data.json:', error);
+            }
+        }
+
+        function updateMemorial() {
+            const display = document.getElementById('memorial-text');
+            if(!display) return;
+            display.classList.add('fade-out');
+            
+            setTimeout(() => {
+                display.textContent = `🕯️ לעילוי נשמת ${names[nameIndex]} 🕯️`;
+                display.classList.remove('fade-out');
+                nameIndex = (nameIndex + 1) % names.length;
+            }, 800);
+        }
+
+        function toGematria(n) {
+            if (n === 15) return 'ט״ו'; if (n === 16) return 'ט״ז';
+            const vals = [400,300,200,100,90,80,70,60,50,40,30,20,10,9,8,7,6,5,4,3,2,1];
+            const chars = ['ת','ש','ר','ק','צ','פ','ע','ס','נ','מ','ל','כ','י','ט','ח','ז','ו','ה','ד','ג','ב','א'];
+            let s = '', rem = n;
+            for (let i = 0; i < vals.length; i++) {
+                while (rem >= vals[i]) { s += chars[i]; rem -= vals[i]; }
+            }
+            if (s.length === 1) return s + '׳';
+            return s.slice(0, -1) + '״' + s.slice(-1);
+        }
+
+        function updateClock() {
+            const now = new Date();
+            const clockEl = document.getElementById('live-clock');
+            if(clockEl) clockEl.textContent = now.toLocaleTimeString('he-IL', {hour12: false});
+            
+            const options = {day:'numeric', month:'long', year:'numeric'};
+            const parts = new Intl.DateTimeFormat('he-IL-u-ca-hebrew', options).formatToParts(now);
+            
+            const dayNum = parseInt(parts.find(p => p.type === 'day').value);
+            const monthName = parts.find(p => p.type === 'month').value;
+            const yearNum = parseInt(parts.find(p => p.type === 'year').value);
+            
+            const dayGematria = toGematria(dayNum);
+            const yearGematria = "תש" + toGematria(yearNum % 100).replace('׳', '').replace('״', '');
+            
+            const days = ['ראשון','שני','שלישי','רביעי','חמישי','שישי','שבת'];
+            const dateEl = document.getElementById('live-date');
+            if(dateEl) dateEl.textContent = `יום ${days[now.getDay()]} | ${dayGematria} ${monthName} ${yearGematria}`;
+        }
+
+        function initInteraction() {
+            const v = document.getElementById('preventSleepVideo');
+            if(v) v.play().catch(() => {});
+        }
+
+        const content = document.getElementById('shabbat-content');
+        const wrapper = document.getElementById('shabbat-scroll');
+        if(content && wrapper) {
+            wrapper.appendChild(content.cloneNode(true));
+        }
+
+        function updatePageFromData() {
+            if (jsonData.parsha) {
+                document.getElementById('parsha-name').textContent = jsonData.parsha;
+            }
+
+            // Helper: add minutes (can be negative) to 'HH:MM' string
+            function addMinutesToTimeStr(timeStr, mins) {
+                const parts = String(timeStr).split(':');
+                if (parts.length < 2) return timeStr;
+                let h = parseInt(parts[0], 10);
+                let m = parseInt(parts[1], 10);
+                if (isNaN(h) || isNaN(m)) return timeStr;
+                let total = h * 60 + m + mins;
+                total = (total + 24 * 60) % (24 * 60);
+                const nh = Math.floor(total / 60);
+                const nm = total % 60;
+                return String(nh).padStart(2, '0') + ':' + String(nm).padStart(2, '0');
+            }
+
+            if (jsonData.shabbat_times && jsonData.shabbat_times.erev_shabbat) {
+                const erevShabbatData = jsonData.shabbat_times.erev_shabbat;
+                const shabbatItems = document.querySelectorAll('.column-card')[0].querySelectorAll('.right-column-item');
+
+                function addMinutesToTimeStr(timeStr, mins) {
+                    const parts = timeStr.split(':');
+                    if (parts.length < 2) return timeStr;
+                    let h = parseInt(parts[0], 10);
+                    let m = parseInt(parts[1], 10);
+                    if (isNaN(h) || isNaN(m)) return timeStr;
+                    let total = h * 60 + m + mins;
+                    total = (total + 24 * 60) % (24 * 60);
+                    const nh = Math.floor(total / 60);
+                    const nm = total % 60;
+                    return String(nh).padStart(2, '0') + ':' + String(nm).padStart(2, '0');
+                }
+
+                shabbatItems.forEach(item => {
+                    const label = item.querySelector('span').textContent;
+                    if (label === 'קבלת שבת מוקדמת' && erevShabbatData.kablat_shabbat_mukdemet) {
+                        item.querySelector('.time-value').textContent = erevShabbatData.kablat_shabbat_mukdemet;
+                    }
+                    if (label === 'הדלקת נרות' && erevShabbatData.candle_lighting) {
+                        item.querySelector('.time-value').textContent = erevShabbatData.candle_lighting;
+                    }
+                    // מנחה נוספת (בחדר לימוד) צריך להיות בדיוק בזמן הדלקת נרות
+                    if (label === 'מנחה נוספת (בחדר לימוד)' && erevShabbatData.candle_lighting) {
+                        item.querySelector('.time-value').textContent = erevShabbatData.candle_lighting;
+                    }
+                    if (label === 'מנחה ערב שבת') {
+                        // קבע את מנחה ערב שבת ל-14 דקות אחרי הדלקת נרות אם לא צוין במפורש ב-JSON
+                        if (erevShabbatData.mincha_erev_shabbat) {
+                            item.querySelector('.time-value').textContent = erevShabbatData.mincha_erev_shabbat;
+                        } else if (erevShabbatData.candle_lighting) {
+                            item.querySelector('.time-value').textContent = addMinutesToTimeStr(erevShabbatData.candle_lighting, 14);
+                        }
+                    }
+                    if (label === 'צאת הכוכבים' && erevShabbatData.tzeit_hakochavim) {
+                        item.querySelector('.time-value').textContent = erevShabbatData.tzeit_hakochavim;
+                    }
+                });
+            }
+
+            if (jsonData.shabbat_times && jsonData.shabbat_times.shabbat_day) {
+                const shabbatDayData = jsonData.shabbat_times.shabbat_day;
+                const shabbatItems = document.querySelectorAll('.column-card')[0].querySelectorAll('.right-column-item');
+
+                shabbatItems.forEach(item => {
+                    const label = item.querySelector('span').textContent;
+                    if (label === 'שקיעה' && shabbatDayData.shkiya) {
+                        item.querySelector('.time-value').textContent = shabbatDayData.shkiya;
+                    }
+                    if (label === 'צאת שבת וערבית' && shabbatDayData.tzeit_shabbat) {
+                        item.querySelector('.time-value').textContent = shabbatDayData.tzeit_shabbat;
+                    }
+                    // מנחה של שבת צריך להיות 2:10 לפני צאת שבת וערבית
+                    if (label === 'מנחה של שבת' && shabbatDayData.tzeit_shabbat) {
+                        item.querySelector('.time-value').textContent = addMinutesToTimeStr(shabbatDayData.tzeit_shabbat, -130);
+                    }
+                    // הורד את השעה עבור שיעור הרב רוזנצוייג
+                    if (label === 'שיעור הרב רוזנצוייג שליט."א' || label === 'שיעור הרב רוזנצוייג שליט"א' || label === 'שיעור הרב רוזנצוייג') {
+                        item.querySelector('.time-value').textContent = '';
+                    }
+                });
+            }
+
+            if (jsonData.weekday_times) {
+                const shacharitTimes = jsonData.weekday_times.shacharit || ["06:15", "07:50", "08:00 (ביום שישי)"];
+                const minchaeTimes = jsonData.weekday_times.mincha || ["13:15", "18:55"];
+                const arvitTimes = jsonData.weekday_times.arvit || ["19:30", "21:00"];
+                
+                // Update Shacharit times
+                const shacharitBlock = document.querySelectorAll('.weekday-block')[0];
+                if (shacharitBlock) {
+                    const timePills = shacharitBlock.querySelectorAll('.time-pill');
+                    timePills.forEach((pill, index) => {
+                        if (index < shacharitTimes.length) {
+                            pill.textContent = shacharitTimes[index];
+                        }
+                    });
+                }
+
+                // Update Mincha times
+                const minchaBlock = document.querySelectorAll('.weekday-block')[1];
+                if (minchaBlock) {
+                    const timePills = minchaBlock.querySelectorAll('.time-pill');
+                    timePills.forEach((pill, index) => {
+                        if (index < minchaeTimes.length) {
+                            pill.textContent = minchaeTimes[index];
+                        }
+                    });
+                }
+
+                // Update Arvit times
+                const arvitBlock = document.querySelectorAll('.weekday-block')[2];
+                if (arvitBlock) {
+                    const timePills = arvitBlock.querySelectorAll('.time-pill');
+                    timePills.forEach((pill, index) => {
+                        if (index < arvitTimes.length) {
+                            pill.textContent = arvitTimes[index];
+                        }
+                    });
+                }
+            }
+        }
+        
+        loadDataFromJson();
+
+        
+        setInterval(updateClock, 1000);
+        setInterval(updateMemorial, 5000);
+        updateClock();
+        updateMemorial();
+    </script>
+</body>
+</html>
