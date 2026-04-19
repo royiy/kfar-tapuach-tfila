@@ -259,6 +259,24 @@
             min-width: 4.5vw;
             text-align: center;
         }
+
+        /* Full Azmaut Image Screen */
+        .azmaut-screen {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #000;
+            padding: 2vh 2vw;
+        }
+
+        .azmaut-image {
+            max-width: 95vw;
+            max-height: 95vh;
+            object-fit: contain;
+            border-radius: 10px;
+            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.7);
+        }
     </style>
 </head>
 <body onclick="initInteraction();">
@@ -398,6 +416,13 @@
             </div>
             
             <img src="flag.jfif" alt="דגל ישראל" class="flag-image">
+        </div>
+    </div>
+
+    <!-- Azmaut Full Screen -->
+    <div class="screen hidden" id="azmaut-screen">
+        <div class="azmaut-screen">
+            <img src="Azmaut.jfif" alt="תמונת האזמאות" class="azmaut-image">
         </div>
     </div>
 
@@ -602,7 +627,8 @@
         let currentScreenIndex = 0;
         const screens = [
             document.getElementById('main-screen'),
-            document.getElementById('flag-screen')
+            document.getElementById('flag-screen'),
+            document.getElementById('azmaut-screen')
         ];
 
         // Switch between screens every 20 seconds
