@@ -148,103 +148,23 @@
         }
         .fade-out { opacity: 0; }
 
-        /* Independence Day Screen Styles */
+        /* Screen Switching */
         .screen.hidden { display: none; }
         .screen.visible { display: flex; }
 
-        .independence-container {
-            flex: 1;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2vw;
-            padding: 2vh 2vw;
-            align-items: center;
-        }
-
-        .flag-section {
+        /* Full Flag Screen */
+        .flag-screen {
+            height: 100%;
             display: flex;
+            align-items: center;
             justify-content: center;
-            align-items: center;
+            background: #000;
+        }
+
+        .flag-image {
+            width: 100%;
             height: 100%;
-        }
-
-        .large-flag {
-            width: 30vh;
-            height: 30vh;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(30, 58, 95, 0.3);
-            object-fit: cover;
-        }
-
-        .info-section {
-            display: flex;
-            flex-direction: column;
-            gap: 2vh;
-            height: 100%;
-            padding: 2vh;
-        }
-
-        .independence-title {
-            font-family: 'Frank Ruhl Libre', serif;
-            font-size: 4.5vh;
-            color: var(--deep-navy);
-            text-align: center;
-            margin-bottom: 1vh;
-            text-shadow: 1px 1px 2px rgba(212, 175, 55, 0.3);
-        }
-
-        .independence-times {
-            background: white;
-            border-radius: 20px;
-            padding: 2vh 1.5vw;
-            box-shadow: 0 10px 40px var(--shadow-blue);
-            border-top: 6px solid var(--gold);
-            flex: 1;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .independence-time-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1.2vh 0;
-            border-bottom: 1px solid #f5f2e8;
-            gap: 1vw;
-        }
-
-        .independence-time-label {
-            font-family: 'Frank Ruhl Libre', serif;
-            font-size: 2.4vh;
-            color: var(--royal-blue);
-            flex: 1;
-        }
-
-        .independence-time-value {
-            font-family: 'Frank Ruhl Libre', serif;
-            font-size: 2.6vh;
-            color: var(--soft-white);
-            background: var(--royal-blue);
-            padding: 0.4vh 1vw;
-            border-radius: 8px;
-            min-width: 6vw;
-            text-align: center;
-        }
-
-        .independence-message {
-            background: linear-gradient(135deg, #fff9e6 0%, #fffaed 100%);
-            border-right: 5px solid var(--gold);
-            padding: 1.5vh 1.2vw;
-            border-radius: 12px;
-            text-align: center;
-        }
-
-        .independence-message-text {
-            font-family: 'Frank Ruhl Libre', serif;
-            font-size: 2.2vh;
-            color: var(--deep-navy);
-            line-height: 1.6;
+            object-fit: contain;
         }
     </style>
 </head>
@@ -355,78 +275,11 @@
         </footer>
     </div>
 
-    <!-- Independence Day Screen -->
-    <div class="screen hidden" id="independence-screen">
-        <header class="hero">
-            <div class="header-right">
-                <div class="synagogue-title">בית הכנסת המרכזי</div>
-                <div class="location">כפר תפוח</div>
-            </div>
-            
-            <div class="header-center">
-                <div class="parsha-label">יום העצמאות</div>
-                <div id="parsha-name-indy">ישראל חי</div>
-            </div>
-
-            <div class="header-left">
-                <div id="live-clock-indy">--:--:--</div>
-                <div id="live-date-indy"></div>
-            </div>
-        </header>
-
-        <div class="independence-container">
-            <div class="flag-section">
-                <img src="https://m.media-amazon.com/images/I/51rN2PSZooL.jpg" alt="דגל ישראל" class="large-flag">
-            </div>
-
-            <div class="info-section">
-                <div class="independence-title">זמני תפילות יום העצמאות</div>
-                
-                <div class="independence-times" id="independence-times-container">
-                    <div class="independence-time-item">
-                        <span class="independence-time-label">שחרית</span>
-                        <span class="independence-time-value">06:15</span>
-                    </div>
-                    <div class="independence-time-item">
-                        <span class="independence-time-label">שחרית</span>
-                        <span class="independence-time-value">07:50</span>
-                    </div>
-                    <div class="independence-time-item">
-                        <span class="independence-time-label">מנחה גדולה</span>
-                        <span class="independence-time-value">13:15</span>
-                    </div>
-                    <div class="independence-time-item">
-                        <span class="independence-time-label">מנחה</span>
-                        <span class="independence-time-value">18:55</span>
-                    </div>
-                    <div class="independence-time-item">
-                        <span class="independence-time-label">ערבית</span>
-                        <span class="independence-time-value">19:30</span>
-                    </div>
-                </div>
-
-                <div class="independence-message">
-                    <div class="independence-message-text">
-                        🇮🇱 יום העצמאות 🇮🇱<br>
-                        יום שמח ויום חג לכל עם ישראל
-                    </div>
-                </div>
-            </div>
+    <!-- Flag Full Screen -->
+    <div class="screen hidden" id="flag-screen">
+        <div class="flag-screen">
+            <img src="flag.jfif" alt="דגל ישראל" class="flag-image">
         </div>
-
-        <footer class="footer">
-            <div class="qr-wrapper">
-                <img class="qr-img" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=paybox" alt="PayBox QR">
-                <img class="qr-icon" src="https://media.glassdoor.com/sqll/4573583/paybox-israel-squareLogo-1640762021095.png" alt="PayBox Icon">
-            </div>
-            
-            <div id="memorial-text-indy" class="memorial-display"></div>
-            
-            <div class="qr-wrapper">
-                <img class="qr-icon" src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp Icon">
-                <img class="qr-img" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=whatsapp" alt="WhatsApp QR">
-            </div>
-        </footer>
     </div>
 
     <script>
@@ -626,46 +479,12 @@
         
         loadDataFromJson();
 
-        // Screen Switching for Independence Day
+        // Screen Switching
         let currentScreenIndex = 0;
         const screens = [
             document.getElementById('main-screen'),
-            document.getElementById('independence-screen')
+            document.getElementById('flag-screen')
         ];
-
-        // Update clock for independence screen
-        function updateClockIndependence() {
-            const now = new Date();
-            const clockEl = document.getElementById('live-clock-indy');
-            if(clockEl) clockEl.textContent = now.toLocaleTimeString('he-IL', {hour12: false});
-            
-            const options = {day:'numeric', month:'long', year:'numeric'};
-            const parts = new Intl.DateTimeFormat('he-IL-u-ca-hebrew', options).formatToParts(now);
-            
-            const dayNum = parseInt(parts.find(p => p.type === 'day').value);
-            const monthName = parts.find(p => p.type === 'month').value;
-            const yearNum = parseInt(parts.find(p => p.type === 'year').value);
-            
-            const dayGematria = toGematria(dayNum);
-            const yearGematria = "תש" + toGematria(yearNum % 100).replace('׳', '').replace('״', '');
-            
-            const days = ['ראשון','שני','שלישי','רביעי','חמישי','שישי','שבת'];
-            const dateEl = document.getElementById('live-date-indy');
-            if(dateEl) dateEl.textContent = `יום ${days[now.getDay()]} | ${dayGematria} ${monthName} ${yearGematria}`;
-        }
-
-        // Update memorial for independence screen
-        function updateMemorialIndependence() {
-            const display = document.getElementById('memorial-text-indy');
-            if(!display) return;
-            display.classList.add('fade-out');
-            
-            setTimeout(() => {
-                display.textContent = `🕯️ לעילוי נשמת ${names[nameIndex]} 🕯️`;
-                display.classList.remove('fade-out');
-                nameIndex = (nameIndex + 1) % names.length;
-            }, 800);
-        }
 
         // Switch between screens every 20 seconds
         function switchScreens() {
@@ -679,23 +498,13 @@
             // Show new screen
             screens[currentScreenIndex].classList.remove('hidden');
             screens[currentScreenIndex].classList.add('visible');
-            
-            // Update clock and memorial for new screen if it's independence screen
-            if (currentScreenIndex === 1) {
-                updateClockIndependence();
-                updateMemorialIndependence();
-            }
         }
 
         setInterval(updateClock, 1000);
-        setInterval(updateClockIndependence, 1000);
         setInterval(updateMemorial, 5000);
-        setInterval(updateMemorialIndependence, 5000);
         setInterval(switchScreens, 20000); // Switch screens every 20 seconds
         updateClock();
-        updateClockIndependence();
         updateMemorial();
-        updateMemorialIndependence();
     </script>
 </body>
 </html>
