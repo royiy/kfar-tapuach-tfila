@@ -1,16 +1,16 @@
 {
-  "parsha": "תזריע-מצורע ~ שבת ראש חודש",
+  "parsha": "אחרי מות - קדושים",
   "shabbat_times": {
     "erev_shabbat": {
       "mincha_gedola": "13:30",
-      "kablat_shabbat_mukdemet": "17:30",
-      "candle_lighting": "18:44",
-      "tzeit_hakochavim": "19:32"
+      "kablat_shabbat_mukdemet": "17:35",
+      "candle_lighting": "18:49",
+      "tzeit_hakochavim": "19:37"
     },
     "shabbat_day": {
       "mincha_gedola": "13:30",
-      "shkiya": "19:15",
-      "tzeit_shabbat": "19:49"
+      "shkiya": "19:20",
+      "tzeit_shabbat": "19:54"
     }
   },
   "weekday_times": {
