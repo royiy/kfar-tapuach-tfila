@@ -147,6 +147,28 @@
             transition: opacity 0.8s ease-in-out;
         }
         .fade-out { opacity: 0; }
+
+        /* Screen Switching */
+        .screen.hidden { display: none; }
+        .screen.visible { display: flex; }
+
+        /* Full Azmaut Image Screen */
+        .azmaut-screen {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #000;
+            padding: 2vh 2vw;
+        }
+
+        .azmaut-image {
+            max-width: 95vw;
+            max-height: 95vh;
+            object-fit: contain;
+            border-radius: 10px;
+            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.7);
+        }
     </style>
 </head>
 <body onclick="initInteraction();">
@@ -154,7 +176,7 @@
         <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
     </video>
 
-    <div class="screen">
+    <div class="screen visible" id="main-screen">
         <header class="hero">
             <div class="header-right">
                 <div class="synagogue-title">בית הכנסת המרכזי</div>
@@ -254,6 +276,13 @@
                 <img class="qr-img" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=whatsapp" alt="WhatsApp QR">
             </div>
         </footer>
+    </div>
+
+    <!-- Azmaut Full Screen -->
+    <div class="screen hidden" id="azmaut-screen">
+        <div class="azmaut-screen">
+            <img src="Azmaut.jfif" alt="תמונת האזמאות" class="azmaut-image">
+        </div>
     </div>
 
     <script>
@@ -462,6 +491,29 @@
         setInterval(updateMemorial, 5000);
         updateClock();
         updateMemorial();
+
+        // Screen Switching
+        let currentScreenIndex = 0;
+        const screens = [
+            document.getElementById('main-screen'),
+            document.getElementById('azmaut-screen')
+        ];
+
+        // Switch between screens every 20 seconds
+        function switchScreens() {
+            // Hide current screen
+            screens[currentScreenIndex].classList.add('hidden');
+            screens[currentScreenIndex].classList.remove('visible');
+            
+            // Move to next screen
+            currentScreenIndex = (currentScreenIndex + 1) % screens.length;
+            
+            // Show new screen
+            screens[currentScreenIndex].classList.remove('hidden');
+            screens[currentScreenIndex].classList.add('visible');
+        }
+
+        setInterval(switchScreens, 20000); // Switch screens every 20 seconds
     </script>
 </body>
 </html>
