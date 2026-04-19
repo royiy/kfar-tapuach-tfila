@@ -157,14 +157,105 @@
             height: 100%;
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: space-between;
             background: #000;
+            padding: 2vh 2vw;
+            gap: 2vw;
         }
 
         .flag-image {
-            width: 100%;
+            flex: 1;
             height: 100%;
             object-fit: contain;
+        }
+
+        .flag-times-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 2vh;
+            background: white;
+            border-radius: 20px;
+            padding: 2vh 1.5vw;
+            box-shadow: 0 10px 40px rgba(30, 58, 95, 0.3);
+            border-top: 6px solid var(--gold);
+            min-width: 280px;
+            height: 100%;
+        }
+
+        .flag-times-title {
+            font-family: 'Frank Ruhl Libre', serif;
+            font-size: 2.2vh;
+            color: var(--deep-navy);
+            text-align: center;
+            font-weight: bold;
+            border-bottom: 2px solid var(--gold);
+            padding-bottom: 1vh;
+        }
+
+        .flag-times-content {
+            flex: 1;
+            overflow: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5vh;
+        }
+
+        .flag-time-event {
+            background: linear-gradient(135deg, #fff9e6 0%, #fffaed 100%);
+            border-right: 4px solid var(--gold);
+            padding: 1.2vh 1vw;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .flag-event-title {
+            font-family: 'Frank Ruhl Libre', serif;
+            font-size: 1.8vh;
+            color: var(--deep-navy);
+            font-weight: bold;
+            margin-bottom: 0.5vh;
+        }
+
+        .flag-event-text {
+            font-family: 'Frank Ruhl Libre', serif;
+            font-size: 1.5vh;
+            color: var(--charcoal);
+            line-height: 1.5;
+        }
+
+        .flag-times-list {
+            background: white;
+            border-radius: 12px;
+            padding: 1vh 0;
+        }
+
+        .flag-time-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8vh 1vw;
+            border-bottom: 1px solid #f5f2e8;
+        }
+
+        .flag-time-item:last-child {
+            border-bottom: none;
+        }
+
+        .flag-time-label {
+            font-family: 'Frank Ruhl Libre', serif;
+            font-size: 1.8vh;
+            color: var(--royal-blue);
+        }
+
+        .flag-time-value {
+            font-family: 'Frank Ruhl Libre', serif;
+            font-size: 2vh;
+            color: var(--soft-white);
+            background: var(--royal-blue);
+            padding: 0.3vh 0.8vw;
+            border-radius: 6px;
+            min-width: 4.5vw;
+            text-align: center;
         }
     </style>
 </head>
@@ -279,6 +370,32 @@
     <div class="screen hidden" id="flag-screen">
         <div class="flag-screen">
             <img src="flag.jfif" alt="דגל ישראל" class="flag-image">
+            
+            <div class="flag-times-panel">
+                <div class="flag-times-title">זמני תפילות יום העצמאות</div>
+                
+                <div class="flag-times-content">
+                    <div class="flag-time-event">
+                        <div class="flag-event-title">ערב יום העצמאות</div>
+                        <div class="flag-event-text">ערבית חגיגית<br>בבית הכנסת הספרדי</div>
+                    </div>
+
+                    <div class="flag-time-event">
+                        <div class="flag-event-title">יום העצמאות</div>
+                    </div>
+
+                    <div class="flag-times-list">
+                        <div class="flag-time-item">
+                            <span class="flag-time-label">שחרית</span>
+                            <span class="flag-time-value">6:15</span>
+                        </div>
+                        <div class="flag-time-item">
+                            <span class="flag-time-label">שחרית</span>
+                            <span class="flag-time-value">7:30</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
