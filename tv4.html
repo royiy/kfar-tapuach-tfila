@@ -278,13 +278,6 @@
         </footer>
     </div>
 
-    <!-- Azmaut Full Screen -->
-    <div class="screen hidden" id="azmaut-screen">
-        <div class="azmaut-screen">
-            <img src="Azmaut.jfif" alt="תמונת האזמאות" class="azmaut-image">
-        </div>
-    </div>
-
     <script>
         const names = ['שלמה זלמן בן מרדכי אלעזר הלוי', 'רחל בת יוסף הכהן', 'סעדיה בן יחיא', 'עוואד בן יחיא', 'טרנג\'ה בת חביבה'];
         let nameIndex = 0;
@@ -491,29 +484,6 @@
         setInterval(updateMemorial, 5000);
         updateClock();
         updateMemorial();
-
-        // Screen Switching
-        let currentScreenIndex = 0;
-        const screens = [
-            document.getElementById('main-screen'),
-            document.getElementById('azmaut-screen')
-        ];
-
-        // Switch between screens every 20 seconds
-        function switchScreens() {
-            // Hide current screen
-            screens[currentScreenIndex].classList.add('hidden');
-            screens[currentScreenIndex].classList.remove('visible');
-            
-            // Move to next screen
-            currentScreenIndex = (currentScreenIndex + 1) % screens.length;
-            
-            // Show new screen
-            screens[currentScreenIndex].classList.remove('hidden');
-            screens[currentScreenIndex].classList.add('visible');
-        }
-
-        setInterval(switchScreens, 20000); // Switch screens every 20 seconds
     </script>
 </body>
 </html>
