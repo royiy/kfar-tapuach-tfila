@@ -1,16 +1,16 @@
 {
-  "parsha": "אחרי מות - קדושים",
+  "parsha": "אמור",
   "shabbat_times": {
     "erev_shabbat": {
       "mincha_gedola": "13:30",
-      "kablat_shabbat_mukdemet": "17:35",
-      "candle_lighting": "18:49",
-      "tzeit_hakochavim": "19:37"
+      "kablat_shabbat_mukdemet": "17:40",
+      "candle_lighting": "18:54",
+      "tzeit_hakochavim": "19:42"
     },
     "shabbat_day": {
       "mincha_gedola": "13:30",
-      "shkiya": "19:20",
-      "tzeit_shabbat": "19:54"
+      "shkiya": "19:25",
+      "tzeit_shabbat": "20:00"
     }
   },
   "weekday_times": {
