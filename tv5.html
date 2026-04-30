@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="refresh" content="3600">
     <title>בית הכנסת המרכזי – כפר תפוח</title>
     <link href="https://fonts.googleapis.com/css2?family=Alef:wght@400;700&family=Frank+Ruhl+Libre:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <style>
@@ -101,25 +100,15 @@
 
         .announcements-container { flex: 1; display: flex; justify-content: center; align-items: center; background: radial-gradient(circle, #ffffff 0%, #f4e4c1 100%); }
         .announcement-box { background: white; padding: 8vh 5vw; border-radius: 40px; border: 10px double var(--gold); text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.2); max-width: 85%; }
-        .announcement-text { font-size: 8vh; line-height: 1.5; color: var(--deep-navy); font-weight: 900; text-shadow: 2px 2px 4px rgba(0,0,0,0.2); letter-spacing: 0.05em; }
+        .announcement-text { font-size: 6vh; line-height: 1.4; color: var(--charcoal); font-weight: bold; }
 
-        /* וידאו רקע למניעת החשכת מסך */
-        #preventSleepVideo { 
-            position: fixed; 
-            right: 0; 
-            bottom: 0; 
-            width: 1px; 
-            height: 1px; 
-            opacity: 0.01; 
-            z-index: -1; 
-            pointer-events: none; 
-        }
+        #preventSleepVideo { position: fixed; right: 0; bottom: 0; width: 1px; height: 1px; opacity: 0.01; z-index: -1; pointer-events: none; }
     </style>
 </head>
-<body onclick="requestWakeLock(); initInteraction();">
+<body onclick="requestWakeLock()">
 
     <video id="preventSleepVideo" autoplay loop muted playsinline>
-        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+        <source src="https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4" type="video/mp4">
     </video>
 
     <div id="times-screen" class="screen visible">
@@ -141,7 +130,7 @@
         <div class="main-content">
             <div class="column-card">
                 <div class="card-header"><span style="font-size:3.5vh">🌅</span><h2 class="card-title">ערב שבת</h2></div>
-                <div class="time-list" id="erev-shabbat-list">
+                <div class="time-list">
                     <div class="time-item"><span>מנחה גדולה</span><span id="fri-mincha-gedola" class="time-value">--:--</span></div>
                     <div class="time-item"><span>הדלקת נרות</span><span id="candle-lighting" class="time-value">--:--</span></div>
                     <div class="time-item"><span>מנחה ערב שבת</span><span id="fri-mincha-regular" class="time-value">--:--</span></div>
@@ -151,12 +140,12 @@
 
             <div class="column-card">
                 <div class="card-header"><span style="font-size:3.5vh">✨</span><h2 class="card-title">יום השבת</h2></div>
-                <div class="time-list" id="shabbat-day-list">
+                <div class="time-list">
                     <div class="time-item"><span>שחרית</span><span id="sat-shacharit" class="time-value">08:00</span></div>
                     <div class="time-item"><span>מנחה גדולה</span><span id="sat-mincha-gedola" class="time-value">12:30</span></div>
                     <div class="time-item"><span>לימוד הלכה</span><span class="time-value">13:00</span></div>
                     <div class="time-item"><span>מנחה של שבת</span><span id="sat-mincha" class="time-value">--:--</span></div>
-                    <div class="time-item"><span style="font-size: 1.8vh;">שיעור הלכה</span><span class="time-value" style="font-size: 2vh;">אחרי מנחה</span></div>
+                    <div class="time-item"><span style="font-size: 1.8vh;">שיעור הרב שמעון רוזנצוויג שליט"א</span><span class="time-value" style="font-size: 2vh;">אחרי מנחה</span></div>
                     <div class="time-item"><span>מנחה (חדר לימוד)</span><span id="sat-mincha-extra" class="time-value">--:--</span></div>
                     <div class="time-item"><span>שקיעה</span><span id="shkiya" class="time-value">--:--</span></div>
                     <div class="time-item"><span>צאת שבת וערבית</span><span id="tzeit-shabbat" class="time-value">--:--</span></div>
@@ -185,37 +174,34 @@
         </div>
     </div>
 
+    <div id="omer-screen" class="screen hidden">
+        <div class="announcements-container" style="background: radial-gradient(circle at 30% 40%, #0a1628 0%, #1e3a5f 60%, #0a1628 100%);">
+            <div style="text-align:center; padding: 4vh 5vw; width: 100%;">
+                <div style="font-family:'Frank Ruhl Libre',serif; font-size:3vh; color:var(--warm-gold); margin-bottom:2vh; letter-spacing:0.1em;">✡ ספירת העומר ✡</div>
+                <div id="omer-day-number" style="font-family:'Frank Ruhl Libre',serif; font-size:18vh; font-weight:900; color:var(--gold); line-height:1; text-shadow: 0 0 40px rgba(212,175,55,0.5);"></div>
+                <div id="omer-hebrew-text" style="font-family:'Frank Ruhl Libre',serif; font-size:4.5vh; color:var(--soft-white); margin-top:1vh; line-height:1.5;"></div>
+                <div id="omer-weeks-text" style="font-family:'Frank Ruhl Libre',serif; font-size:3vh; color:var(--warm-gold); margin-top:1.5vh;"></div>
+                <div id="omer-mitzva-text" style="font-family:'Alef',sans-serif; font-size:2.2vh; color:#aac4e8; margin-top:2.5vh; font-style:italic;"></div>
+            </div>
+        </div>
+    </div>
+
     <script>
-        // מנגנון Wake Lock
         let wakeLock = null;
         async function requestWakeLock() {
             try {
                 if ('wakeLock' in navigator) {
                     wakeLock = await navigator.wakeLock.request('screen');
+                    console.log('Wake Lock active');
                 }
-            } catch (err) {}
+            } catch (err) {
+                console.error(err);
+            }
         }
-
-        // פונקציית אינטראקציה ראשונית להפעלת וידאו מונע שינה
-        function initInteraction() {
-            const v = document.getElementById('preventSleepVideo');
-            v.play().catch(e => console.log("Video play failed", e));
-        }
-
-        // טריק "לחיצה וירטואלית" ותנועה כל 2 דקות למניעת החשכה
-        setInterval(() => {
-            // הזזת המסך
-            window.scrollBy(0, 1);
-            setTimeout(() => window.scrollBy(0, -1), 100);
-            
-            // שליחת לחיצה דמיונית
-            const evt = new MouseEvent('click', {view: window, bubbles: true, cancelable: true});
-            document.body.dispatchEvent(evt);
-            
-            // וידאו תמיד ב-Play
-            const v = document.getElementById('preventSleepVideo');
-            if(v.paused) v.play().catch(()=>{});
-        }, 120000);
+        requestWakeLock();
+        document.addEventListener('visibilitychange', () => {
+            if (wakeLock !== null && document.visibilityState === 'visible') requestWakeLock();
+        });
 
         function toGematria(n) {
             if (n === 15) return 'ט״ו'; if (n === 16) return 'ט״ז';
@@ -238,33 +224,124 @@
             const now = new Date();
             document.getElementById('live-clock').textContent = now.toLocaleTimeString('he-IL', {hour12: false});
             const parts = new Intl.DateTimeFormat('he-IL-u-ca-hebrew', {day:'numeric', month:'long', year:'numeric'}).formatToParts(now);
-            const dayNum = parseInt(parts.find(p=>p.type==='day').value);
-            const dayGematria = toGematria(dayNum);
+            const day = toGematria(parseInt(parts.find(p=>p.type==='day').value));
             const month = parts.find(p=>p.type==='month').value;
-            const yearGematria = toGematria(parseInt(parts.find(p=>p.type==='year').value) % 1000);
-            document.getElementById('live-date').textContent = `יום ${['ראשון','שני','שלישי','רביעי','חמישי','שישי','שבת'][now.getDay()]} | ${dayGematria} ${month} ${yearGematria}`;
+            const year = toGematria(parseInt(parts.find(p=>p.type==='year').value) % 1000);
+            document.getElementById('live-date').textContent = `יום ${['ראשון','שני','שלישי','רביעי','חמישי','שישי','שבת'][now.getDay()]} | ${day} ${month} ${year}`;
         }
         setInterval(updateClock, 1000); updateClock();
 
-        const announcements = ["תזכורת לשלם דמי חבר", "נא לא להכניס חמץ לבית הכנסת"];
-        let announceIdx = 0;
-        
-        function toggleScreens() {
-            const times = document.getElementById('times-screen');
-            const announce = document.getElementById('announcement-screen');
-            if (times.classList.contains('visible')) {
+        // ===== ספירת העומר =====
+        const OMER_DAYS_HEB = ['','אחד','שניים','שלשה','ארבעה','חמשה','ששה','שבעה','שמונה','תשעה','עשרה','אחד עשר','שניים עשר','שלשה עשר','ארבעה עשר','חמשה עשר','ששה עשר','שבעה עשר','שמונה עשר','תשעה עשר','עשרים','עשרים ואחד','עשרים ושניים','עשרים ושלשה','עשרים וארבעה','עשרים וחמשה','עשרים וששה','עשרים ושבעה','עשרים ושמונה','עשרים ותשעה','שלשים','שלשים ואחד','שלשים ושניים','שלשים ושלשה','שלשים וארבעה','שלשים וחמשה','שלשים וששה','שלשים ושבעה','שלשים ושמונה','שלשים ותשעה','ארבעים','ארבעים ואחד','ארבעים ושניים','ארבעים ושלשה','ארבעים וארבעה','ארבעים וחמשה','ארבעים וששה','ארבעים ושבעה','ארבעים ושמונה','ארבעים ותשעה'];
+        const OMER_WEEKS_HEB = ['','שבוע אחד','שני שבועות','שלשה שבועות','ארבעה שבועות','חמשה שבועות','ששה שבועות'];
+        const OMER_DAYS_IN_WEEK = ['','יום אחד','שני ימים','שלשה ימים','ארבעה ימים','חמשה ימים','ששה ימים'];
+
+        function getOmerDay() {
+            // חישוב ט"ז ניסן של השנה הנוכחית
+            const now = new Date();
+            const year = now.getFullYear();
+            // פסח תמיד ב-15 ניסן, ספירה מתחילה ב-16 ניסן (יום שני של פסח)
+            // חישוב תאריך ט"ז ניסן בלוח הגרגוריאני לשנה הנוכחית
+            // נחשב לפי נוסחת מולאד / טבלה מובנית לשנים קרובות
+            function getPesach(y) {
+                // אלגוריתם Meeus/Jones/Butcher לחישוב פסח
+                const a = (12 * y + 17) % 19;
+                const b = y % 4;
+                const m = 32.044093161444 + 1.5542417966749 * a + 0.25 * b - 0.00335116096 * y;
+                const n = Math.floor(m) + Math.floor((m - Math.floor(m) + 0.5));
+                const Q = n + 7 - ((y + Math.floor(y/4) + n + 31 + 1) % 7);
+                // Q הוא יום החודש במרץ, אם Q > 31 אז ניסן
+                if (Q <= 31) return new Date(y, 2, Q); // מרץ
+                return new Date(y, 3, Q - 31); // אפריל
+            }
+            
+            const pesach = getPesach(year);
+            const omerStart = new Date(pesach);
+            omerStart.setDate(omerStart.getDate() + 1); // ט"ז ניסן
+            omerStart.setHours(0,0,0,0);
+            
+            const today = new Date(now);
+            today.setHours(0,0,0,0);
+            
+            const diffMs = today - omerStart;
+            const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24)) + 1;
+            
+            if (diffDays < 1 || diffDays > 49) return null;
+            return diffDays;
+        }
+
+        function getOmerText(day) {
+            if (!day) return null;
+            const weeks = Math.floor((day - 1) / 7);
+            const rem = day % 7;
+            
+            let main = `הַיּוֹם ${OMER_DAYS_HEB[day]} יוֹם`;
+            if (day === 7) main = 'הַיּוֹם שִׁבְעָה יָמִים שֶׁהֵם שָׁבוּעַ אֶחָד לָעוֹמֶר';
+            else if (weeks > 0 && rem === 0) {
+                main = `הַיּוֹם ${OMER_DAYS_HEB[day]} יוֹם שֶׁהֵם ${OMER_WEEKS_HEB[weeks]} לָעוֹמֶר`;
+            } else if (weeks > 0) {
+                main = `הַיּוֹם ${OMER_DAYS_HEB[day]} יוֹם שֶׁהֵם ${OMER_WEEKS_HEB[weeks]} וְ${OMER_DAYS_IN_WEEK[rem]} לָעוֹמֶר`;
+            } else {
+                main += ` לָעוֹמֶר`;
+            }
+            
+            let weeksLine = '';
+            if (weeks > 0 && rem > 0) weeksLine = `${OMER_WEEKS_HEB[weeks]} ו${OMER_DAYS_IN_WEEK[rem]}`;
+            else if (weeks > 0) weeksLine = OMER_WEEKS_HEB[weeks];
+            
+            return { main, weeksLine };
+        }
+
+        function updateOmerScreen() {
+            const day = getOmerDay();
+            const numEl = document.getElementById('omer-day-number');
+            const textEl = document.getElementById('omer-hebrew-text');
+            const weeksEl = document.getElementById('omer-weeks-text');
+            const mitzvaEl = document.getElementById('omer-mitzva-text');
+            
+            if (!day) {
+                numEl.textContent = '';
+                textEl.textContent = 'לא בזמן ספירת העומר';
+                weeksEl.textContent = '';
+                mitzvaEl.textContent = '';
+                return;
+            }
+            
+            numEl.textContent = day;
+            const omerText = getOmerText(day);
+            textEl.textContent = omerText.main;
+            weeksEl.textContent = omerText.weeksLine;
+            mitzvaEl.textContent = '"וּסְפַרְתֶּם לָכֶם מִמָּחֳרַת הַשַּׁבָּת... שֶׁבַע שַׁבָּתוֹת תְּמִימֹת תִּהְיֶינָה" (ויקרא כג:טו)';
+        }
+        updateOmerScreen();
+
+        const SCREENS = [
+            { id: 'times-screen', duration: 60000 },
+            { id: 'announcement-screen', duration: 25000 },
+            { id: 'omer-screen', duration: 20000 },
+        ];
+        let currentScreen = 0;
+        const omit = () => getOmerDay() === null; // אל תציג את מסך העומר מחוץ לתקופה
+
+        function cycleScreens() {
+            const prev = SCREENS[currentScreen].id;
+            document.getElementById(prev).classList.replace('visible','hidden');
+            
+            // דלג על מסך עומר אם לא בתקופה
+            do { currentScreen = (currentScreen + 1) % SCREENS.length; }
+            while (SCREENS[currentScreen].id === 'omer-screen' && omit());
+            
+            const next = SCREENS[currentScreen];
+            if (next.id === 'announcement-screen') {
                 document.getElementById('announcement-text').innerText = announcements[announceIdx];
                 announceIdx = (announceIdx + 1) % announcements.length;
-                times.classList.replace('visible', 'hidden'); 
-                announce.classList.replace('hidden', 'visible');
-                setTimeout(toggleScreens, 20000); 
-            } else {
-                announce.classList.replace('visible', 'hidden'); 
-                times.classList.replace('hidden', 'visible');
-                setTimeout(toggleScreens, 60000); 
             }
+            if (next.id === 'omer-screen') updateOmerScreen();
+            
+            document.getElementById(next.id).classList.replace('hidden','visible');
+            setTimeout(cycleScreens, next.duration);
         }
-        setTimeout(toggleScreens, 60000);
+        setTimeout(cycleScreens, SCREENS[0].duration);
 
         const names = ['שלמה זלמן בן מרדכי אלעזר הלוי', 'רחל בת יוסף הכהן', 'סעדיה בן יחיא', 'עוואד בן יחיא', 'טרנג\'ה בת חביבה'];
         let nameIdx = 0;
@@ -277,7 +354,7 @@
                 nameIdx = (nameIdx + 1) % names.length;
             }, 1000);
         }
-        setInterval(rotateMemorial, 10000); rotateMemorial();
+        setInterval(rotateMemorial, 8000); rotateMemorial();
 
         async function loadData() {
             try {
@@ -300,15 +377,17 @@
 
                 const build = (id, list) => {
                     const cont = document.getElementById(id); cont.innerHTML = '';
-                    if(list) list.forEach(t => { const s = document.createElement('span'); s.className = 'time-pill'; s.textContent = t; cont.appendChild(s); });
+                    list.forEach(t => { const s = document.createElement('span'); s.className = 'time-pill'; s.textContent = t; cont.appendChild(s); });
                 };
-                build('weekday-shacharit', ['06:15', '07:50', '08:00']);
+                build('weekday-shacharit', ['06:15', '07:50', '08:00 (בשישי)']);
                 build('weekday-mincha', data.weekday_times.mincha);
                 build('weekday-arvit', data.weekday_times.arvit);
-            } catch (e) { console.log("JSON Load Fail", e); }
+            } catch (e) { console.error(e); }
         }
-        loadData(); 
-        setInterval(loadData, 300000); // רענון נתונים כל 5 דקות
+        loadData(); setInterval(loadData, 600000);
+        
+        const v = document.getElementById('preventSleepVideo');
+        setInterval(() => { if(v.paused) v.play().catch(()=>{}); }, 10000);
     </script>
 </body>
 </html>
