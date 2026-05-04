@@ -320,11 +320,11 @@
                 jsonData = await response.json();
                 console.log('Data loaded successfully:', jsonData);
                 updatePageFromData();
-                updateOmer(); // Update Omer after data loads
+                // Removed updateOmer() from here to avoid updating every 5 minutes
             } catch (error) {
                 console.error('Error loading data.json:', error);
                 document.getElementById('parsha-name').textContent = 'שגיאה בטעינה';
-                updateOmer(); // Update Omer even if data fails
+                // Removed updateOmer() from here too
             }
         }
 
@@ -370,6 +370,11 @@
             const days = ['ראשון','שני','שלישי','רביעי','חמישי','שישי','שבת'];
             const dateEl = document.getElementById('live-date');
             if(dateEl) dateEl.textContent = `יום ${days[now.getDay()]} | ${dayGematria} ${monthName} ${yearGematria}`;
+
+            // Update Omer at 19:00 every day
+            if (now.getHours() === 19 && now.getMinutes() === 0 && now.getSeconds() === 0) {
+                updateOmer();
+            }
         }
 
         function initInteraction() {
@@ -583,7 +588,7 @@
             }
         }
         
-        loadDataFromJson();
+        loadDataFromJson().then(() => updateOmer());
         setInterval(loadDataFromJson, 300000);
 
         
