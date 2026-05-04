@@ -285,7 +285,7 @@
         <div class="omer-section">
             <div class="omer-count">
                 <img src="https://m.media-amazon.com/images/I/51rN2PSZooL.jpg" alt="דגל ישראל" class="flag-icon">
-                <span>היום שלושה ושלושים יום לעומר שהם ארבעה שבועות וחמישה ימים</span>
+                <span id="omer-text">טוען...</span>
                 <img src="https://m.media-amazon.com/images/I/51rN2PSZooL.jpg" alt="דגל ישראל" class="flag-icon right">
             </div>
         </div>
@@ -323,9 +323,11 @@
                 jsonData = await response.json();
                 console.log('Data loaded successfully:', jsonData);
                 updatePageFromData();
+                updateOmer(); // Update Omer after data loads
             } catch (error) {
                 console.error('Error loading data.json:', error);
                 document.getElementById('parsha-name').textContent = 'שגיאה בטעינה';
+                updateOmer(); // Update Omer even if data fails
             }
         }
 
@@ -392,10 +394,69 @@
             showScreen(currentScreen);
         }
 
-        const content = document.getElementById('shabbat-content');
-        const wrapper = document.getElementById('shabbat-scroll');
-        if(content && wrapper) {
-            wrapper.appendChild(content.cloneNode(true));
+        // ===== ספירת העומר =====
+        const OMER_DAYS_HEB = ['','אחד','שניים','שלשה','ארבעה','חמשה','ששה','שבעה','שמונה','תשעה','עשרה','אחד עשר','שניים עשר','שלשה עשר','ארבעה עשר','חמשה עשר','ששה עשר','שבעה עשר','שמונה עשר','תשעה עשר','עשרים','עשרים ואחד','עשרים ושניים','עשרים ושלשה','עשרים וארבעה','עשרים וחמשה','עשרים וששה','עשרים ושבעה','עשרים ושמונה','עשרים ותשעה','שלשים','שלשים ואחד','שלשים ושניים','שלשים ושלשה','שלשים וארבעה','שלשים וחמשה','שלשים וששה','שלשים ושבעה','שלשים ושמונה','שלשים ותשעה','ארבעים','ארבעים ואחד','ארבעים ושניים','ארבעים ושלשה','ארבעים וארבעה','ארבעים וחמשה','ארבעים וששה','ארבעים ושבעה','ארבעים ושמונה','ארבעים ותשעה'];
+        const OMER_WEEKS_HEB = ['','שבוע אחד','שני שבועות','שלשה שבועות','ארבעה שבועות','חמשה שבועות','ששה שבועות'];
+        const OMER_DAYS_IN_WEEK = ['','יום אחד','שני ימים','שלשה ימים','ארבעה ימים','חמשה ימים','ששה ימים'];
+
+        function getOmerDay() {
+            // חישוב ט"ז ניסן של השנה הנוכחית
+            const now = new Date();
+            const year = now.getFullYear();
+            // פסח תמיד ב-15 ניסן, ספירה מתחילה ב-16 ניסן (יום שני של פסח)
+            // חישוב תאריך ט"ז ניסן בלוח הגרגוריאני לשנה הנוכחית
+            // נחשב לפי נוסחת מולאד / טבלה מובנית לשנים קרובות
+            function getPesach(y) {
+                // אלגוריתם Meeus/Jones/Butcher לחישוב פסח
+                const a = (12 * y + 17) % 19;
+                const b = y % 4;
+                const m = 32.044093161444 + 1.5542417966749 * a + 0.25 * b - 0.00335116096 * y;
+                const n = Math.floor(m) + Math.floor((m - Math.floor(m) + 0.5));
+                const Q = n + 7 - ((y + Math.floor(y/4) + n + 31 + 1) % 7);
+                // Q הוא יום החודש במרץ, אם Q > 31 אז ניסן
+                if (Q <= 31) return new Date(y, 2, Q); // מרץ
+                return new Date(y, 3, Q - 31); // אפריל
+            }
+            
+            const pesach = getPesach(year);
+            const omerStart = new Date(pesach);
+            omerStart.setDate(omerStart.getDate() + 1); // ט"ז ניסן
+            omerStart.setHours(0,0,0,0);
+            
+            const today = new Date(now);
+            today.setHours(0,0,0,0);
+            
+            const diffMs = today - omerStart;
+            const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24)) + 1;
+            
+            if (diffDays < 1 || diffDays > 49) return null;
+            return diffDays;
+        }
+
+        function getOmerText(day) {
+            if (!day) return 'לא בזמן ספירת העומר';
+            const weeks = Math.floor((day - 1) / 7);
+            const rem = day % 7;
+            
+            let main = `הַיּוֹם ${OMER_DAYS_HEB[day]} יוֹם`;
+            if (day === 7) main = 'הַיּוֹם שִׁבְעָה יָמִים שֶׁהֵם שָׁבוּעַ אֶחָד לָעוֹמֶר';
+            else if (weeks > 0 && rem === 0) {
+                main = `הַיּוֹם ${OMER_DAYS_HEB[day]} יוֹם שֶׁהֵם ${OMER_WEEKS_HEB[weeks]} לָעוֹמֶר`;
+            } else if (weeks > 0) {
+                main = `הַיּוֹם ${OMER_DAYS_HEB[day]} יוֹם שֶׁהֵם ${OMER_WEEKS_HEB[weeks]} וְ${OMER_DAYS_IN_WEEK[rem]} לָעוֹמֶר`;
+            } else {
+                main += ` לָעוֹמֶר`;
+            }
+            
+            return main;
+        }
+
+        function updateOmer() {
+            const day = getOmerDay();
+            const textEl = document.getElementById('omer-text');
+            if (textEl) {
+                textEl.textContent = getOmerText(day);
+            }
         }
 
         setInterval(toggleScreen, 10000);
