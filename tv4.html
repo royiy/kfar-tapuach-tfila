@@ -409,7 +409,7 @@
                 const b = y % 4;
                 const m = 32.044093161444 + 1.5542417966749 * a + 0.25 * b - 0.00335116096 * y;
                 const n = Math.floor(m) + Math.floor((m - Math.floor(m) + 0.5));
-                const Q = n + 7 - ((y + Math.floor(y/4) + n + 31 + 1) % 7);
+                const Q = n + 7 - ((y + Math.floor(y/4) + n + 31 + 1) % 7) - 16;
                 // Q הוא יום החודש במרץ, אם Q > 31 אז ניסן
                 if (Q <= 31) return new Date(y, 2, Q); // מרץ
                 return new Date(y, 3, Q - 31); // אפריל
@@ -424,7 +424,7 @@
             today.setHours(0,0,0,0);
             
             const diffMs = today - omerStart;
-            const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24)) + 1;
+            const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
             
             if (diffDays < 1 || diffDays > 49) return null;
             return diffDays;
