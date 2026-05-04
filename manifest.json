@@ -1,7 +1,7 @@
 {
   "name": "לוח בית כנסת",
   "short_name": "לוח",
-  "start_url": "./tv.html",
+  "start_url": "./tv4.html",
   "scope": "./",
   "display": "fullscreen",
   "orientation": "landscape",
