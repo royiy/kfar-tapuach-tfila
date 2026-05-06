@@ -442,14 +442,14 @@
             const weeks = Math.floor(day / 7);
             const rem = day % 7;
             
-            let main = `הַיּוֹם ${OMER_DAYS_HEB[day]} יוֹם`;
-            if (day === 7) main = 'הַיּוֹם שִׁבְעָה יָמִים שֶׁהֵם שָׁבוּעַ אֶחָד לָעוֹמֶר';
+            let main = `היום ${OMER_DAYS_HEB[day]} יום`;
+            if (day === 7) main = 'היום שבעה ימים שהם שבוע אחד לעומר';
             else if (weeks > 0 && rem === 0) {
-                main = `הַיּוֹם ${OMER_DAYS_HEB[day]} יוֹם שֶׁהֵם ${OMER_WEEKS_HEB[weeks]} לָעוֹמֶר`;
+                main = `היום ${OMER_DAYS_HEB[day]} יום שהם ${OMER_WEEKS_HEB[weeks]} לעומר`;
             } else if (weeks > 0) {
-                main = `הַיּוֹם ${OMER_DAYS_HEB[day]} יוֹם שֶׁהֵם ${OMER_WEEKS_HEB[weeks]} וְ${OMER_DAYS_IN_WEEK[rem]} לָעוֹמֶר`;
+                main = `היום ${OMER_DAYS_HEB[day]} יום שהם ${OMER_WEEKS_HEB[weeks]} ו${OMER_DAYS_IN_WEEK[rem]} לעומר`;
             } else {
-                main += ` לָעוֹמֶר`;
+                main += ` לעומר`;
             }
             
             return main;
