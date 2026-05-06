@@ -431,8 +431,8 @@
             const diffMs = today - omerStart;
             const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
             
-            if (diffDays < 1 || diffDays > 49) return null;
-            return diffDays;
+            if (diffDays < 0 || diffDays > 48) return null;
+            return diffDays + 1;
         }
 
         function getOmerText(day) {
