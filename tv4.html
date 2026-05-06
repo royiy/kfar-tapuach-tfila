@@ -312,6 +312,7 @@
         const names = ['שלמה זלמן בן מרדכי אלעזר הלוי', 'רחל בת יוסף הכהן', 'סעדיה בן יחיא', 'עוואד בן יחיא', 'טרנג\'ה בת חביבה'];
         let nameIndex = 0;
         let jsonData = {};
+        let omerUpdatedToday = false;
 
         async function loadDataFromJson() {
             try {
@@ -372,8 +373,13 @@
             if(dateEl) dateEl.textContent = `יום ${days[now.getDay()]} | ${dayGematria} ${monthName} ${yearGematria}`;
 
             // Update Omer at 19:00 every day
-            if (now.getHours() === 19 && now.getMinutes() === 0 && now.getSeconds() === 0) {
+            if (now.getHours() === 19 && now.getMinutes() === 0 && now.getSeconds() === 0 && !omerUpdatedToday) {
                 updateOmer();
+                omerUpdatedToday = true;
+            }
+            // Reset at midnight
+            if (now.getHours() === 0 && now.getMinutes() === 0 && now.getSeconds() === 0) {
+                omerUpdatedToday = false;
             }
         }
 
@@ -590,7 +596,11 @@
             }
         }
         
-        loadDataFromJson().then(() => updateOmer());
+        loadDataFromJson().then(() => {
+            updateOmer();
+            const now = new Date();
+            omerUpdatedToday = now.getHours() >= 19;
+        });
         setInterval(loadDataFromJson, 300000);
 
         
