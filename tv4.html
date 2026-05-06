@@ -373,7 +373,7 @@
             if(dateEl) dateEl.textContent = `יום ${days[now.getDay()]} | ${dayGematria} ${monthName} ${yearGematria}`;
 
             // Update Omer at 19:00 every day
-            if (now.getHours() === 19 && now.getMinutes() === 0 && now.getSeconds() === 0 && !omerUpdatedToday) {
+            if (now.getHours() === 19 && now.getMinutes() === 0 && !omerUpdatedToday) {
                 updateOmer();
                 omerUpdatedToday = true;
             }
@@ -463,9 +463,12 @@
 
         function updateOmer() {
             const day = getOmerDay();
+            const now = new Date();
+            const isAfter19 = now.getHours() >= 19;
+            const adjustedDay = isAfter19 ? day + 1 : day;
             const textEl = document.getElementById('omer-text');
             if (textEl) {
-                textEl.textContent = getOmerText(day);
+                textEl.textContent = getOmerText(adjustedDay);
             }
         }
 
