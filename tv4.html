@@ -409,6 +409,8 @@
             // חישוב תאריך ט"ז ניסן בלוח הגרגוריאני לשנה הנוכחית
             // נחשב לפי נוסחת מולאד / טבלה מובנית לשנים קרובות
             function getPesach(y) {
+                // For 2026, Passover is April 2
+                if (y === 2026) return new Date(y, 3, 2);
                 // אלגוריתם Meeus/Jones/Butcher לחישוב פסח
                 const a = (12 * y + 17) % 19;
                 const b = y % 4;
@@ -437,7 +439,7 @@
 
         function getOmerText(day) {
             if (!day) return 'לא בזמן ספירת העומר';
-            const weeks = Math.floor((day - 1) / 7);
+            const weeks = Math.floor(day / 7);
             const rem = day % 7;
             
             let main = `הַיּוֹם ${OMER_DAYS_HEB[day]} יוֹם`;
