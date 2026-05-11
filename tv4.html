@@ -177,7 +177,7 @@
             box-shadow: 0 10px 50px rgba(0, 0, 0, 0.7);
         }
 
-        .truma-screen {
+        .jerusalem-screen {
             height: 100%;
             display: flex;
             align-items: center;
@@ -186,7 +186,7 @@
             padding: 2vh 2vw;
         }
 
-        .truma-screen img {
+        .jerusalem-screen img {
             width: 100%;
             height: 100%;
             max-width: 95vw;
@@ -302,9 +302,9 @@
         </footer>
     </div>
 
-    <div class="screen hidden" id="truma-screen">
-        <div class="truma-screen">
-            <img src="Truma_Keva.png" alt="Truma Keva" />
+    <div class="screen hidden" id="jerusalem-screen">
+        <div class="jerusalem-screen">
+            <img src="Jerusalem.png" alt="Jerusalem" />
         </div>
     </div>
 
@@ -398,7 +398,7 @@
 
         let currentScreen = 'main-screen';
         function toggleScreen() {
-            currentScreen = currentScreen === 'main-screen' ? 'truma-screen' : 'main-screen';
+            currentScreen = currentScreen === 'main-screen' ? 'jerusalem-screen' : 'main-screen';
             showScreen(currentScreen);
         }
 
@@ -472,7 +472,7 @@
             }
         }
 
-        setInterval(toggleScreen, 30000);
+        setInterval(toggleScreen, 15000);
 
         function updatePageFromData() {
             if (jsonData.parsha) {
