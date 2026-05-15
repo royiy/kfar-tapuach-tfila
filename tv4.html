@@ -375,14 +375,15 @@
             const dateEl = document.getElementById('live-date');
             if(dateEl) dateEl.textContent = `יום ${days[now.getDay()]} | ${dayGematria} ${monthName} ${yearGematria}`;
 
-            // Update Omer at 19:00 every day
-            if (now.getHours() === 19 && now.getMinutes() === 0 && !omerUpdatedToday) {
+            const todayDate = now.toDateString();
+            if (lastOmerUpdateDate !== todayDate) {
+                omerUpdatedToday = false;
+                lastOmerUpdateDate = todayDate;
+            }
+
+            if (now.getHours() >= 19 && !omerUpdatedToday) {
                 updateOmer();
                 omerUpdatedToday = true;
-            }
-            // Reset at midnight
-            if (now.getHours() === 0 && now.getMinutes() === 0 && now.getSeconds() === 0) {
-                omerUpdatedToday = false;
             }
         }
 
@@ -400,7 +401,17 @@
         }
 
         let currentScreen = 'main-screen';
-        window.addEventListener('load', () => showScreen('main-screen'));
+        const SCREEN_TOGGLE_INTERVAL_MS = 30000;
+        let screenToggleInterval = null;
+        let lastOmerUpdateDate = null;
+
+        window.addEventListener('load', () => {
+            showScreen('main-screen');
+            if (!screenToggleInterval) {
+                screenToggleInterval = setInterval(toggleScreen, SCREEN_TOGGLE_INTERVAL_MS);
+            }
+        });
+
         function toggleScreen() {
             currentScreen = currentScreen === 'main-screen' ? 'jerusalem-screen' : 'main-screen';
             showScreen(currentScreen);
@@ -475,8 +486,6 @@
                 textEl.textContent = getOmerText(adjustedDay);
             }
         }
-
-        setInterval(toggleScreen, 15000);
 
         function updatePageFromData() {
             if (jsonData.parsha) {
@@ -606,11 +615,11 @@
         loadDataFromJson().then(() => {
             updateOmer();
             const now = new Date();
+            lastOmerUpdateDate = now.toDateString();
             omerUpdatedToday = now.getHours() >= 19;
         });
         setInterval(loadDataFromJson, 300000);
 
-        
         setInterval(updateClock, 1000);
         setInterval(updateMemorial, 5000);
         updateClock();
