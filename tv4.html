@@ -100,44 +100,6 @@
         .weekday-block { margin-bottom: 1.5vh; background: #f9f5ff; border-right: 4px solid var(--gold); padding: 1vh; border-radius: 10px; text-align: center; }
         .time-pill { font-family: 'Frank Ruhl Libre', serif; font-size: 2.2vh; color: var(--soft-white); background: var(--deep-navy); padding: 0.4vh 0.8vw; border-radius: 8px; margin: 0.2vh; display: inline-block; }
 
-        .omer-section { 
-            background: linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)), 
-                        url('https://www.transparenttextures.com/patterns/cream-paper.png'),
-                        linear-gradient(90deg, #d4af37 0%, #f4e4c1 50%, #d4af37 100%);
-            padding: 1.5vh 0; 
-            text-align: center; 
-            border-top: 4px double var(--gold); 
-            border-bottom: 4px double var(--gold); 
-            flex-shrink: 0;
-            box-shadow: inset 0 0 50px rgba(212, 175, 55, 0.2);
-        }
-        .omer-count { 
-            font-family: 'Frank Ruhl Libre', serif; 
-            font-size: 3.5vh; 
-            color: #4a1e1e;
-            text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.8);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 3vw;
-        }
-        .flag-icon {
-            width: 8vh;
-            height: 8vh;
-            display: inline-block;
-            vertical-align: middle;
-        }
-        .flag-icon.right {
-            margin-left: 4vw;
-        }
-
-        .omer-count {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 5vw;
-        }
-
         .footer { background: var(--deep-navy); padding: 1vh 2vw 2vh 2vw; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
         
         .qr-wrapper { display: flex; align-items: center; gap: 0.8vw; }
@@ -284,14 +246,6 @@
             </div>
         </div>
 
-        <div class="omer-section">
-            <div class="omer-count">
-                <img src="https://m.media-amazon.com/images/I/51rN2PSZooL.jpg" alt="דגל ישראל" class="flag-icon">
-                <span id="omer-text">טוען...</span>
-                <img src="https://m.media-amazon.com/images/I/51rN2PSZooL.jpg" alt="דגל ישראל" class="flag-icon right">
-            </div>
-        </div>
-
         <footer class="footer">
             <div class="qr-wrapper">
                 <img class="qr-img" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=paybox" alt="PayBox QR">
@@ -323,7 +277,6 @@
         const names = ['שלמה זלמן בן מרדכי אלעזר הלוי', 'רחל בת יוסף הכהן', 'סעדיה בן יחיא', 'עוואד בן יחיא', 'טרנג\'ה בת חביבה'];
         let nameIndex = 0;
         let jsonData = {};
-        let omerUpdatedToday = false;
 
         async function loadDataFromJson() {
             try {
@@ -332,11 +285,9 @@
                 jsonData = await response.json();
                 console.log('Data loaded successfully:', jsonData);
                 updatePageFromData();
-                // Removed updateOmer() from here to avoid updating every 5 minutes
             } catch (error) {
                 console.error('Error loading data.json:', error);
                 document.getElementById('parsha-name').textContent = 'שגיאה בטעינה';
-                // Removed updateOmer() from here too
             }
         }
 
@@ -383,16 +334,6 @@
             const dateEl = document.getElementById('live-date');
             if(dateEl) dateEl.textContent = `יום ${days[now.getDay()]} | ${dayGematria} ${monthName} ${yearGematria}`;
 
-            const todayDate = now.toDateString();
-            if (lastOmerUpdateDate !== todayDate) {
-                omerUpdatedToday = false;
-                lastOmerUpdateDate = todayDate;
-            }
-
-            if (now.getHours() >= 19 && !omerUpdatedToday) {
-                updateOmer();
-                omerUpdatedToday = true;
-            }
         }
 
         function initInteraction() {
@@ -412,7 +353,6 @@
         const SCREEN_TOGGLE_INTERVAL_MS = 30000;
         const SCREEN_ORDER = ['main-screen', 'jerusalem-screen', 'lessons-screen'];
         let screenToggleInterval = null;
-        let lastOmerUpdateDate = null;
 
         window.addEventListener('load', () => {
             showScreen('main-screen');
@@ -429,75 +369,6 @@
         }
 
         // ===== ספירת העומר =====
-        const OMER_DAYS_HEB = ['','אחד','שניים','שלשה','ארבעה','חמשה','ששה','שבעה','שמונה','תשעה','עשרה','אחד עשר','שניים עשר','שלשה עשר','ארבעה עשר','חמשה עשר','ששה עשר','שבעה עשר','שמונה עשר','תשעה עשר','עשרים','עשרים ואחד','עשרים ושניים','עשרים ושלשה','עשרים וארבעה','עשרים וחמשה','עשרים וששה','עשרים ושבעה','עשרים ושמונה','עשרים ותשעה','שלשים','שלשים ואחד','שלשים ושניים','שלשים ושלשה','שלשים וארבעה','שלשים וחמשה','שלשים וששה','שלשים ושבעה','שלשים ושמונה','שלשים ותשעה','ארבעים','ארבעים ואחד','ארבעים ושניים','ארבעים ושלשה','ארבעים וארבעה','ארבעים וחמשה','ארבעים וששה','ארבעים ושבעה','ארבעים ושמונה','ארבעים ותשעה'];
-        const OMER_WEEKS_HEB = ['','שבוע אחד','שני שבועות','שלשה שבועות','ארבעה שבועות','חמשה שבועות','ששה שבועות'];
-        const OMER_DAYS_IN_WEEK = ['','יום אחד','שני ימים','שלשה ימים','ארבעה ימים','חמשה ימים','ששה ימים'];
-
-        function getOmerDay() {
-            // חישוב ט"ז ניסן של השנה הנוכחית
-            const now = new Date();
-            const year = now.getFullYear();
-            // פסח תמיד ב-15 ניסן, ספירה מתחילה ב-16 ניסן (יום שני של פסח)
-            // חישוב תאריך ט"ז ניסן בלוח הגרגוריאני לשנה הנוכחית
-            // נחשב לפי נוסחת מולאד / טבלה מובנית לשנים קרובות
-            function getPesach(y) {
-                // For 2026, Passover is April 2
-                if (y === 2026) return new Date(y, 3, 2);
-                // אלגוריתם Meeus/Jones/Butcher לחישוב פסח
-                const a = (12 * y + 17) % 19;
-                const b = y % 4;
-                const m = 32.044093161444 + 1.5542417966749 * a + 0.25 * b - 0.00335116096 * y;
-                const n = Math.floor(m) + Math.floor((m - Math.floor(m) + 0.5));
-                const Q = n + 7 - ((y + Math.floor(y/4) + n + 31 + 1) % 7) - 16;
-                // Q הוא יום החודש במרץ, אם Q > 31 אז ניסן
-                if (Q <= 31) return new Date(y, 2, Q); // מרץ
-                return new Date(y, 3, Q - 31); // אפריל
-            }
-            
-            const pesach = getPesach(year);
-            const omerStart = new Date(pesach);
-            omerStart.setDate(omerStart.getDate() + 1); // ט"ז ניסן
-            omerStart.setHours(0,0,0,0);
-            
-            const today = new Date(now);
-            today.setHours(0,0,0,0);
-            
-            const diffMs = today - omerStart;
-            const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
-            
-            if (diffDays < 0 || diffDays > 48) return null;
-            return diffDays + 1;
-        }
-
-        function getOmerText(day) {
-            if (!day) return 'לא בזמן ספירת העומר';
-            const weeks = Math.floor(day / 7);
-            const rem = day % 7;
-            
-            let main = `היום ${OMER_DAYS_HEB[day]} יום`;
-            if (day === 7) main = 'היום שבעה ימים שהם שבוע אחד לעומר';
-            else if (weeks > 0 && rem === 0) {
-                main = `היום ${OMER_DAYS_HEB[day]} יום שהם ${OMER_WEEKS_HEB[weeks]} לעומר`;
-            } else if (weeks > 0) {
-                main = `היום ${OMER_DAYS_HEB[day]} יום שהם ${OMER_WEEKS_HEB[weeks]} ו${OMER_DAYS_IN_WEEK[rem]} לעומר`;
-            } else {
-                main += ` לעומר`;
-            }
-            
-            return main;
-        }
-
-        function updateOmer() {
-            const day = getOmerDay();
-            const now = new Date();
-            const isAfter19 = now.getHours() >= 19;
-            const adjustedDay = isAfter19 ? day + 1 : day;
-            const textEl = document.getElementById('omer-text');
-            if (textEl) {
-                textEl.textContent = getOmerText(adjustedDay);
-            }
-        }
-
         function updatePageFromData() {
             if (jsonData.parsha) {
                 document.getElementById('parsha-name').textContent = jsonData.parsha;
@@ -623,12 +494,7 @@
             }
         }
         
-        loadDataFromJson().then(() => {
-            updateOmer();
-            const now = new Date();
-            lastOmerUpdateDate = now.toDateString();
-            omerUpdatedToday = now.getHours() >= 19;
-        });
+        loadDataFromJson();
         setInterval(loadDataFromJson, 300000);
 
         setInterval(updateClock, 1000);
