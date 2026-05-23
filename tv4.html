@@ -261,17 +261,7 @@
         </footer>
     </div>
 
-    <div class="screen hidden" id="jerusalem-screen">
-        <div class="jerusalem-screen">
-            <img src="Shavuot.png" alt="Shavuot" />
-        </div>
-    </div>
-
-    <div class="screen hidden" id="lessons-screen">
-        <div class="lessons-screen">
-            <img src="Lessons.png" alt="Lessons" />
-        </div>
-    </div>
+    <!-- מסכים נוספים הוסרו; נשמור `main-screen` כחלון היחיד והקבוע -->
 
     <script>
         const names = ['שלמה זלמן בן מרדכי אלעזר הלוי', 'רחל בת יוסף הכהן', 'סעדיה בן יחיא', 'עוואד בן יחיא', 'טרנג\'ה בת חביבה'];
@@ -350,23 +340,14 @@
         }
 
         let currentScreen = 'main-screen';
-        const SCREEN_TOGGLE_INTERVAL_MS = 30000;
-        const SCREEN_ORDER = ['main-screen', 'jerusalem-screen', 'lessons-screen'];
+        // קבוע לתמונה הקבועה (תמונה ברירת מחדל)
+        const TRUMA_KEVA = 'Azmaut.jfif';
         let screenToggleInterval = null;
 
+        // אין מעבר מסכים אוטומטי יותר. נטען את המסך הראשי בלבד בעת טעינת הדף.
         window.addEventListener('load', () => {
             showScreen('main-screen');
-            if (!screenToggleInterval) {
-                screenToggleInterval = setInterval(toggleScreen, SCREEN_TOGGLE_INTERVAL_MS);
-            }
         });
-
-        function toggleScreen() {
-            const currentIndex = SCREEN_ORDER.indexOf(currentScreen);
-            const nextIndex = (currentIndex + 1) % SCREEN_ORDER.length;
-            currentScreen = SCREEN_ORDER[nextIndex];
-            showScreen(currentScreen);
-        }
 
         // ===== ספירת העומר =====
         function updatePageFromData() {
