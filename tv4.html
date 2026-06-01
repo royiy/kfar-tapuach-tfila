@@ -261,6 +261,12 @@
         </footer>
     </div>
 
+    <div class="screen hidden" id="shaulmoyal-screen">
+        <div class="azmaut-screen">
+            <img class="azmaut-image" src="ShaulMoyal.jpeg" alt="Shaul Moyal">
+        </div>
+    </div>
+
     <!-- מסכים נוספים הוסרו; נשמור `main-screen` כחלון היחיד והקבוע -->
 
     <script>
@@ -347,6 +353,10 @@
         // אין מעבר מסכים אוטומטי יותר. נטען את המסך הראשי בלבד בעת טעינת הדף.
         window.addEventListener('load', () => {
             showScreen('main-screen');
+                setInterval(() => {
+                    currentScreen = currentScreen === 'main-screen' ? 'shaulmoyal-screen' : 'main-screen';
+                    showScreen(currentScreen);
+                }, 20000);
         });
 
         // ===== ספירת העומר =====
