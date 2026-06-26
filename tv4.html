@@ -163,6 +163,23 @@
             box-shadow: 0 10px 50px rgba(0, 0, 0, 0.7);
             background: #000;
         }
+
+        .announcement-bar {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ff5252 100%);
+            padding: 1.2vh 2vw;
+            text-align: center;
+            flex-shrink: 0;
+            border-bottom: 3px solid var(--deep-navy);
+        }
+
+        .announcement-highlight {
+            font-family: 'Frank Ruhl Libre', serif;
+            font-size: 3vh;
+            color: white;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            letter-spacing: 0.1em;
+        }
     </style>
 </head>
 <body onclick="initInteraction();">
@@ -242,6 +259,12 @@
                     <div style="color:var(--royal-blue); margin-bottom: 4px; font-size: 2vh;">ערבית</div>
                     <div class="time-pill">19:30</div><div class="time-pill">21:00</div>
                 </div>
+            </div>
+        </div>
+
+        <div class="announcement-bar">
+            <div class="announcement-highlight">
+                ⚠️ מנחה י"ז בתמוז - 19:20 ⚠️
             </div>
         </div>
 
