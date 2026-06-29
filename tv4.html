@@ -369,19 +369,27 @@
             });
         }
 
-        let currentScreen = 'truma-screen';
+        let currentScreen = 'main-screen';
         // קבוע לתמונה הקבועה (תמונה ברירת מחדל)
         const Truma_keva = 'Truma_Keva.png';
         let screenToggleInterval = null;
 
-        function toggleBetweenScreens() {
-            currentScreen = currentScreen === 'truma-screen' ? 'main-screen' : 'truma-screen';
-            showScreen(currentScreen);
+        function cycleThroughScreens() {
+            if (currentScreen === 'main-screen') {
+                // הצג את main-screen למשך 30 שניות, ואז עבור ל-truma-screen
+                showScreen('main-screen');
+                setTimeout(() => {
+                    showScreen('truma-screen');
+                    currentScreen = 'truma-screen';
+                    // הצג את truma-screen למשך 15 שניות, ואז חזור ל-main-screen
+                    setTimeout(cycleThroughScreens, 15000);
+                }, 30000);
+            }
         }
 
         window.addEventListener('load', () => {
-            showScreen(currentScreen);
-            screenToggleInterval = setInterval(toggleBetweenScreens, 20000);
+            showScreen('main-screen');
+            cycleThroughScreens();
         });
 
         // ===== ספירת העומר =====
