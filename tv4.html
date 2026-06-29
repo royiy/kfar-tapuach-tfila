@@ -374,13 +374,9 @@
         const TRUMA_KEVA = 'Azmaut.jfif';
         let screenToggleInterval = null;
 
-        // אין מעבר מסכים אוטומטי יותר. נטען את המסך הראשי בלבד בעת טעינת הדף.
+        // המסך הראשי יישאר גלוי בלבד ללא מעבר אוטומטי בין מסכים.
         window.addEventListener('load', () => {
             showScreen('main-screen');
-                setInterval(() => {
-                    currentScreen = currentScreen === 'main-screen' ? 'shaulmoyal-screen' : 'main-screen';
-                    showScreen(currentScreen);
-                }, 20000);
         });
 
         // ===== ספירת העומר =====
