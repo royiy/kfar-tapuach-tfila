@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="refresh" content="3600">
+    <title>׳‘׳™׳× ׳”׳›׳ ׳¡׳× ׳”׳׳¨׳›׳–׳™ ג€“ ׳›׳₪׳¨ ׳×׳₪׳•׳—</title>
+    <link href="https://fonts.googleapis.com/css2?family=Alef:wght@400;700&family=Frank+Ruhl+Libre:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --deep-navy: #0a1628; 
+            --royal-blue: #1e3a5f; 
+            --gold: #d4af37;
+            --warm-gold: #f4e4c1; 
+            --cream: #faf8f3; 
+            --soft-white: #ffffff;
+            --charcoal: #2a2a2a; 
+            --shadow-blue: rgba(30, 58, 95, 0.12);
+            --light-gray: #f5f2e8;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-weight: 400 !important; }
+        
+        body { 
+            font-family: 'Alef', sans-serif; 
+            background: var(--cream); 
+            color: var(--charcoal); 
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden; 
+            display: flex;
+            flex-direction: column;
+        }
+
+        .screen {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ג•ג•ג• Header ג•ג•ג• */
+        .hero { 
+            background: linear-gradient(165deg, var(--deep-navy) 0%, var(--royal-blue) 100%); 
+            padding: 1.8vh 3vw; 
+            display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 4px solid var(--gold);
+            flex-shrink: 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .header-right { display: flex; flex-direction: column; align-items: center; min-width: 280px; }
+        .synagogue-title { 
+            font-family: 'Frank Ruhl Libre', serif; 
+            font-size: 4.2vh; 
+            color: var(--soft-white); 
+            line-height: 1.15; 
+            text-align: center; 
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+        .location { 
+            font-family: 'Frank Ruhl Libre', serif; 
+            font-size: 2.2vh; 
+            color: var(--warm-gold); 
+            text-align: center; 
+            margin-top: 0.4vh;
+            letter-spacing: 0.3px;
+        }
+
+        .header-center { 
+            text-align: center; 
+            background: rgba(255, 255, 255, 0.08); 
+            padding: 1.1vh 3vw; 
+            border-radius: 50px; 
+            backdrop-filter: blur(8px); 
+            border: 1px solid rgba(212, 175, 55, 0.25); 
+            transition: all 0.3s ease;
+        }
+
+        .header-center:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(212, 175, 55, 0.4);
+        }
+
+        .parsha-label { 
+            font-size: 1.6vh; 
+            color: var(--warm-gold); 
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        #parsha-name { 
+            font-family: 'Frank Ruhl Libre', serif; 
+            font-size: 3.4vh; 
+            color: var(--soft-white); 
+            margin-top: 0.3vh;
+            font-weight: 500;
+        }
+
+        .header-left { min-width: 280px; text-align: left; }
+        #live-clock { 
+            font-family: 'Frank Ruhl Libre', serif; 
+            font-size: 4.8vh; 
+            color: var(--warm-gold); 
+            direction: ltr; 
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+        #live-date { 
+            font-size: 2vh; 
+            color: var(--soft-white); 
+            margin-top: 0.4vh;
+            letter-spacing: 0.3px;
+        }
+
+        /* ג•ג•ג• Main Content Grid ג•ג•ג• */
+        .main-content { 
+            flex: 1; 
+            display: grid; 
+            grid-template-columns: 2fr 1fr 1fr; 
+            gap: 1.8vw; 
+            padding: 2.2vh 2vw;
+            align-items: stretch; 
+            justify-content: center; 
+            overflow: hidden;
+        }
+        
+        .column-card { 
+            justify-content:flex-start;
+            background: var(--soft-white); 
+            border-radius: 14px; 
+            padding: 1.8vh 1.8vw; 
+            box-shadow: 0 3px 14px var(--shadow-blue); 
+            display: flex; 
+            flex-direction: column;
+            border-top: 5px solid var(--gold); 
+            height: 100%; 
+            min-height: 0; 
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .column-card:hover {
+            box-shadow: 0 5px 20px var(--shadow-blue);
+            transform: translateY(-1px);
+        }
+
+        .card-header { 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            gap: 1vw; 
+            margin-bottom: 1.6vh; 
+            border-bottom: 2.5px solid var(--light-gray); 
+            padding-bottom: 1.1vh; 
+            flex-shrink: 0;
+        }
+
+        .card-header span {
+            font-size: 3vh;
+            line-height: 1;
+        }
+
+        .card-title { 
+            font-family: 'Frank Ruhl Libre', serif; 
+            font-size: 2.8vh; 
+            color: var(--royal-blue); 
+            font-weight: 500;
+            letter-spacing: 0.4px;
+        }
+
+        /* ג•ג•ג• Scrolling Content ג•ג•ג• */
+        .scrolling-content { 
+            display:flex;
+            flex-direction:column;
+            flex: 1; 
+            overflow-y: auto; 
+            overflow-x: hidden; 
+            position: relative; 
+            padding-right: 0.4vw;
+        }
+
+        .scrolling-content::-webkit-scrollbar { width: 5px; }
+        .scrolling-content::-webkit-scrollbar-track { background: var(--light-gray); border-radius: 10px; }
+        .scrolling-content::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 10px; }
+        .scrolling-content::-webkit-scrollbar-thumb:hover { background: #e8c443; }
+
+        .scroll-wrapper { position: static; width: 100%; }
+
+        /* ג•ג•ג• Shabbat Times ג•ג•ג• */
+        .right-column-item { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 1.1vh 0; 
+            border-bottom: 1px solid var(--light-gray); 
+            gap: 1vw;
+            transition: background 0.2s ease;
+        }
+
+        .right-column-item:hover {
+            background: rgba(30, 58, 95, 0.02);
+            padding: 1.1vh 0.5vw;
+        }
+
+        .right-column-item span:first-child {
+            font-size: 1.9vh;
+            color: var(--charcoal);
+            flex: 1;
+        }
+
+        .time-value { 
+            font-family: 'Frank Ruhl Libre', serif; 
+            font-size: 2.2vh; 
+            color: var(--royal-blue); 
+            background: linear-gradient(135deg, #eef5ff, #e8f2ff);
+            padding: 0.5vh 1vw; 
+            border-radius: 8px; 
+            min-width: 6vw; 
+            text-align: center; 
+            white-space: nowrap;
+            font-weight: 500;
+            border: 1px solid rgba(30, 58, 95, 0.1);
+        }
+
+        .right-column-section-title { 
+            font-family: 'Frank Ruhl Libre', serif; 
+            font-size: 2.3vh; 
+            color: var(--royal-blue); 
+            margin-top: 1.4vh; 
+            margin-bottom: 0.8vh; 
+            padding-bottom: 0.6vh; 
+            border-bottom: 2.5px solid var(--gold);
+            font-weight: 500;
+        }
+
+        .shabbat-grid { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 1.2vw; 
+            height: 100%; 
+        }
+
+        .shabbat-section { min-width: 0; }
+
+        /* ג•ג•ג• Lessons/Classes ג•ג•ג• */
+        .shiur-block { 
+            min-height:95px;
+            background: linear-gradient(135deg, #f5f9ff 0%, #eef5ff 100%); 
+            border-right: 4px solid var(--royal-blue); 
+            padding: 1.3vh 1.2vw; 
+            border-radius: 12px; 
+            margin-bottom: 1.4vh;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(30, 58, 95, 0.1);
+        }
+
+        .shiur-block:hover {
+            box-shadow: 0 3px 10px rgba(30, 58, 95, 0.12);
+            transform: translateX(-2px);
+        }
+
+        .shiur-title { 
+            font-family: 'Frank Ruhl Libre', serif; 
+            font-size: 2.2vh; 
+            color: var(--royal-blue); 
+            margin-bottom: 0.6vh;
+            font-weight: 500;
+        }
+
+        .shiur-time { 
+            font-family: 'Frank Ruhl Libre', serif; 
+            font-size: 1.8vh; 
+            color: var(--soft-white); 
+            background: var(--royal-blue); 
+            padding: 0.4vh 1vw; 
+            border-radius: 6px; 
+            display: inline-block; 
+            margin-bottom: 0.6vh;
+            font-weight: 500;
+        }
+
+        .shiur-teacher { 
+            font-size: 1.8vh; 
+            color: #555; 
+            line-height: 1.4;
+        }
+
+        /* ג•ג•ג• Weekday Prayers ג•ג•ג• */
+        .weekday-block { 
+            min-height:95px;
+            margin-bottom: 1.5vh; 
+            background: linear-gradient(135deg, #f9f5ff, #f5f2f8);
+            border-right: 4px solid var(--gold); 
+            padding: 1.2vh 1.1vw; 
+            border-radius: 12px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(212, 175, 55, 0.1);
+        }
+
+        .weekday-block:hover {
+            box-shadow: 0 3px 10px rgba(212, 175, 55, 0.1);
+            transform: translateX(-2px);
+        }
+
+        .time-pill { 
+            font-family: 'Frank Ruhl Libre', serif; 
+            font-size: 2.1vh; 
+            color: var(--soft-white); 
+            background: var(--deep-navy); 
+            padding: 0.5vh 1vw; 
+            border-radius: 8px; 
+            margin: 0.3vh; 
+            display: inline-block;
+            font-weight: 500;
+            transition: background 0.2s ease;
+        }
+
+        .time-pill:hover {
+            background: var(--royal-blue);
+        }
+
+        .weekday-block > div:first-child {
+            color: var(--royal-blue); 
+            margin-bottom: 0.6vh; 
+            font-size: 2.1vh;
+            font-weight: 500;
+        }
+
+        /* ג•ג•ג• Footer ג•ג•ג• */
+        .footer { 
+            background: var(--deep-navy); 
+            padding: 1.2vh 2vw 2.2vh 2vw; 
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between; 
+            flex-shrink: 0;
+            box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .qr-wrapper { 
+            display: flex; 
+            align-items: center; 
+            gap: 1vw;
+        }
+
+        .qr-img { 
+            width: 7vh; 
+            height: 7vh; 
+            background: white; 
+            padding: 2px; 
+            border-radius: 6px; 
+            border: none;
+            transition: transform 0.2s ease;
+        }
+
+        .qr-img:hover {
+            transform: scale(1.05);
+        }
+
+        .qr-icon { 
+            width: 5.5vh; 
+            height: 5.5vh; 
+            object-fit: contain; 
+            border-radius: 8px;
+            transition: transform 0.2s ease;
+        }
+
+        .qr-icon:hover {
+            transform: scale(1.05);
+        }
+        
+        .memorial-display { 
+            flex: 1; 
+            text-align: center; 
+            font-family: 'Frank Ruhl Libre', serif; 
+            font-size: 2.6vh; 
+            color: var(--warm-gold);
+            height: 5vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.8s ease-in-out;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+        }
+
+        .fade-out { opacity: 0; }
+
+        /* ג•ג•ג• Screen Switching ג•ג•ג• */
+        .screen.hidden { display: none; }
+        .screen.visible { display: flex; }
+
+        .azmaut-screen,
+        .jerusalem-screen,
+        .lessons-screen {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #000;
+            padding: 2vh 2vw;
+        }
+
+        .azmaut-image,
+        .jerusalem-screen img,
+        .lessons-screen img {
+            max-width: 95vw;
+            max-height: 95vh;
+            object-fit: contain;
+            border-radius: 12px;
+            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.7);
+        }
+
+        /* ג•ג•ג• Announcement Bar ג•ג•ג• */
+        .announcement-bar {
+            background: linear-gradient(90deg, rgba(244, 228, 193, 0.95), rgba(212, 175, 55, 0.95));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.8vh 2vw;
+            min-height: 6vh;
+            text-align: center;
+            flex-shrink: 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .announcement-highlight {
+            font-family: 'Frank Ruhl Libre', serif;
+            font-size: 3.8vh;
+            color: var(--deep-navy);
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: 0.5px;
+        }
+
+        /* ג•ג•ג• Responsive Adjustments ג•ג•ג• */
+        @media (max-width: 1600px) {
+            .main-content {
+                grid-template-columns: 1fr 1fr 1.3fr;
+                gap: 1.5vw;
+                padding: 1.8vh 1.5vw;
+            }
+            
+            .synagogue-title { font-size: 3.8vh; }
+            .card-title { font-size: 2.6vh; }
+        }
+    </style>
+</head>
+<body onclick="initInteraction();">
+
+    <div class="screen visible" id="truma-screen">
+        <div class="azmaut-screen">
+            <img class="azmaut-image" src="Truma_Keva.png" alt="׳×׳¨׳•׳׳× ׳§׳‘׳¢ ">
+        </div>
+    </div>
+
+    <div class="screen hidden" id="main-screen">
+        <header class="hero">
+            <div class="header-right">
+                <div class="synagogue-title">׳‘׳™׳× ׳”׳›׳ ׳¡׳× ׳”׳׳¨׳›׳–׳™</div>
+                <div class="location">׳›׳₪׳¨ ׳×׳₪׳•׳—</div>
+            </div>
+            
+            <div class="header-center">
+                <div class="parsha-label">׳₪׳¨׳©׳× ׳”׳©׳‘׳•׳¢</div>
+                <div id="parsha-name">׳˜׳•׳¢׳...</div>
+            </div>
+
+            <div class="header-left">
+                <div id="live-clock">--:--:--</div>
+                <div id="live-date"></div>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <!-- ׳¢׳׳•׳“׳” ׳¨׳׳©׳•׳ ׳”: ׳×׳₪׳™׳׳•׳× ׳©׳‘׳× -->
+            <div class="column-card">
+                <div class="card-header"><span>נ•</span><h2 class="card-title">׳×׳₪׳™׳׳•׳× ׳©׳‘׳×</h2></div>
+                <div class="scrolling-content">
+                    <div class="scroll-wrapper" id="shabbat-scroll">
+                        <div id="shabbat-content" class="shabbat-grid">
+                            <div class="shabbat-section">
+                                <div class="right-column-section-title">׳¢׳¨׳‘ ׳©׳‘׳×</div>
+                                <div class="right-column-item"><span>׳׳ ׳—׳” ׳’׳“׳•׳׳”</span><span class="time-value">13:30</span></div>
+                                <div class="right-column-item"><span>׳§׳‘׳׳× ׳©׳‘׳× ׳׳•׳§׳“׳׳×</span><span class="time-value">17:25</span></div>
+                                <div class="right-column-item"><span>׳”׳“׳׳§׳× ׳ ׳¨׳•׳×</span><span class="time-value">18:39</span></div>
+                                <div class="right-column-item"><span>׳׳ ׳—׳” ׳¢׳¨׳‘ ׳©׳‘׳×</span><span class="time-value">18:53</span></div>
+                                <div class="right-column-item"><span>׳¦׳׳× ׳”׳›׳•׳›׳‘׳™׳</span><span class="time-value">19:27</span></div>
+                                <div class="right-column-item"><span>׳׳¢׳¨׳™׳‘ ׳•׳׳•׳¦׳׳™ ׳©׳‘׳×</span><span class="time-value">20:00</span></div>
+                            </div>
+                            <div class="shabbat-section">
+                                <div class="right-column-section-title">׳™׳•׳ ׳”׳©׳‘׳×</div>
+                                <div class="right-column-item"><span>׳©׳—׳¨׳™׳×</span><span class="time-value">08:00</span></div>
+                                <div class="right-column-item"><span>׳—׳–׳ ׳•׳×</span><span class="time-value">09:30</span></div>
+                                <div class="right-column-item"><span>׳׳ ׳—׳” ׳’׳“׳•׳׳”</span><span class="time-value">13:30</span></div>
+                                <div class="right-column-item"><span>׳׳ ׳—׳” ׳©׳ ׳©׳‘׳×</span><span class="time-value">17:33</span></div>
+                                <div class="right-column-item"><span>׳©׳™׳¢׳•׳¨ ׳”׳¨׳‘ ׳©׳׳¢׳•׳</span><span class="time-value">׳׳—׳¨׳™ ׳׳ ׳—׳”</span></div>
+                                <div class="right-column-item"><span>׳©׳§׳™׳¢׳”</span><span class="time-value">19:10</span></div>
+                                <div class="right-column-item"><span>׳¦׳׳× ׳©׳‘׳× ׳•׳¢׳¨׳‘׳™׳×</span><span class="time-value">19:50</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ׳¢׳׳•׳“׳” ׳©׳ ׳™׳™׳”: ׳©׳™׳¢׳•׳¨׳™׳ -->
+            <div class="column-card">
+                <div class="card-header"><span>נ“</span><h2 class="card-title">׳©׳™׳¢׳•׳¨׳™׳</h2></div>
+                <div class="scrolling-content">
+                    <div class="scroll-wrapper">
+                        <div class="shiur-block">
+                            <div class="shiur-title">׳©׳™׳¢׳•׳¨ ׳‘׳“׳£ ׳”׳™׳•׳׳™</div>
+                            <div class="shiur-time">׳' - ׳”' | 20:30</div>
+                            <div class="shiur-teacher">׳׳׳¢׳“ ׳׳׳¡׳˜׳¨׳“׳</div>
+                        </div>
+                        <div class="shiur-block">
+                            <div class="shiur-title">׳©׳™׳¢׳•׳¨ ׳‘׳׳•׳¨׳•׳×</div>
+                            <div class="shiur-time">׳™׳•׳ ׳¨׳‘׳™׳¢׳™ | 21:15</div>
+                            <div class="shiur-teacher">׳”׳¨׳‘ ׳©׳׳¢׳•׳ ׳¨׳•׳–׳ ׳¦׳•׳•׳™׳™׳’</div>
+                        </div>
+                        <div class="shiur-block">
+                            <div class="shiur-title">׳›׳•׳׳ ׳™׳•׳ ׳©׳™׳©׳™</div>
+                            <div class="shiur-time">09:00 - 11:00</div>
+                            <div class="shiur-teacher">׳¡׳•׳’׳™׳” ׳‘׳₪׳¨׳©׳× ׳©׳‘׳•׳¢ | ׳”׳¨׳‘ ׳¦׳‘׳™׳§׳” ׳”׳¨׳¥</div>
+                        </div>
+                        <div class="shiur-block">
+                            <div class="shiur-title">׳§׳‘׳•׳¦׳× ׳©׳™׳—׳” ׳‘׳”׳׳›׳”</div>
+                            <div class="shiur-time">׳©׳ ׳™ | 19:00</div>
+                            <div class="shiur-teacher">׳₪׳×׳•׳— ׳׳›׳ ׳”׳§׳”׳™׳׳”</div>
+                        </div>
+                        <div class="shiur-block">
+                            <div class="shiur-title">׳©׳™׳¢׳•׳¨ ׳§׳•׳“׳© ׳‘׳¢׳¨׳‘</div>
+                            <div class="shiur-time">׳—׳׳™׳©׳™ | 22:00</div>
+                            <div class="shiur-teacher">׳©׳™׳¢׳•׳¨ ׳–׳•׳׳</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ׳¢׳׳•׳“׳” ׳©׳׳™׳©׳™׳×: ׳×׳₪׳™׳׳•׳× ׳—׳•׳ -->
+            <div class="column-card">
+                <div class="card-header"><span>ג¨</span><h2 class="card-title">׳×׳₪׳™׳׳•׳× ׳—׳•׳</h2></div>
+                <div class="scrolling-content">
+                    <div class="scroll-wrapper">
+                        <div class="weekday-block">
+                            <div>׳©׳—׳¨׳™׳×</div>
+                            <div class="time-pill">06:15</div>
+                            <div class="time-pill">07:50</div>
+                            <div class="time-pill">08:00</div>
+                        </div>
+                        <div class="weekday-block">
+                            <div>׳׳ ׳—׳”</div>
+                            <div class="time-pill">13:15</div>
+                            <div class="time-pill">18:55</div>
+                        </div>
+                        <div class="weekday-block">
+                            <div>׳¢׳¨׳‘׳™׳×</div>
+                            <div class="time-pill">19:30</div>
+                            <div class="time-pill">21:00</div>
+                        </div>
+                        <div class="weekday-block">
+                            <div>׳™׳•׳ ׳©׳™׳©׳™</div>
+                            <div class="time-pill">07:00</div>
+                            <div class="time-pill">08:00</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="announcement-bar">
+            <div class="announcement-highlight">
+                ׳׳ ׳—׳” ׳™"׳– ׳‘׳×׳׳•׳– - 19:20
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="qr-wrapper">
+                <img class="qr-img" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=paybox" alt="PayBox QR">
+                <img class="qr-icon" src="https://media.glassdoor.com/sqll/4573583/paybox-israel-squareLogo-1640762021095.png" alt="PayBox Icon">
+            </div>
+            
+            <div id="memorial-text" class="memorial-display"></div>
+            
+            <div class="qr-wrapper">
+                <img class="qr-icon" src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp Icon">
+                <img class="qr-img" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=whatsapp" alt="WhatsApp QR">
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        const names = ['׳©׳׳׳” ׳–׳׳׳ ׳‘׳ ׳׳¨׳“׳›׳™ ׳׳׳¢׳–׳¨ ׳”׳׳•׳™', '׳¨׳—׳ ׳‘׳× ׳™׳•׳¡׳£ ׳”׳›׳”׳', '׳¡׳¢׳“׳™׳” ׳‘׳ ׳™׳—׳™׳', '׳¢׳•׳•׳׳“ ׳‘׳ ׳™׳—׳™׳', '׳˜׳¨׳ ׳’\'׳” ׳‘׳× ׳—׳‘׳™׳‘׳”'];
+        let nameIndex = 0;
+        let jsonData = {};
+
+        async function loadDataFromJson() {
+            try {
+                const response = await fetch('./data.json?v=' + Date.now());
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                jsonData = await response.json();
+                console.log('Data loaded successfully:', jsonData);
+                updatePageFromData();
+            } catch (error) {
+                console.error('Error loading data.json:', error);
+                document.getElementById('parsha-name').textContent = '׳©׳’׳™׳׳” ׳‘׳˜׳¢׳™׳ ׳”';
+            }
+        }
+
+        function updateMemorial() {
+            const display = document.getElementById('memorial-text');
+            if(!display) return;
+            display.classList.add('fade-out');
+            
+            setTimeout(() => {
+                display.textContent = `נ•¯ן¸ ׳׳¢׳™׳׳•׳™ ׳ ׳©׳׳× ${names[nameIndex]} נ•¯ן¸`;
+                display.classList.remove('fade-out');
+                nameIndex = (nameIndex + 1) % names.length;
+            }, 800);
+        }
+
+        function toGematria(n) {
+            if (n === 15) return '׳˜׳´׳•'; if (n === 16) return '׳˜׳´׳–';
+            const vals = [400,300,200,100,90,80,70,60,50,40,30,20,10,9,8,7,6,5,4,3,2,1];
+            const chars = ['׳×','׳©','׳¨','׳§','׳¦','׳₪','׳¢','׳¡','׳ ','׳','׳','׳›','׳™','׳˜','׳—','׳–','׳•','׳”','׳“','׳’','׳‘','׳'];
+            let s = '', rem = n;
+            for (let i = 0; i < vals.length; i++) {
+                while (rem >= vals[i]) { s += chars[i]; rem -= vals[i]; }
+            }
+            if (s.length === 1) return s + '׳³';
+            return s.slice(0, -1) + '׳´' + s.slice(-1);
+        }
+
+        function updateClock() {
+            const now = new Date();
+            const clockEl = document.getElementById('live-clock');
+            if(clockEl) clockEl.textContent = now.toLocaleTimeString('he-IL', {hour12: false});
+            
+            const options = {day:'numeric', month:'long', year:'numeric'};
+            const parts = new Intl.DateTimeFormat('he-IL-u-ca-hebrew', options).formatToParts(now);
+            
+            const dayNum = parseInt(parts.find(p => p.type === 'day').value);
+            const monthName = parts.find(p => p.type === 'month').value;
+            const yearNum = parseInt(parts.find(p => p.type === 'year').value);
+            
+            const dayGematria = toGematria(dayNum);
+            const yearGematria = "׳×׳©" + toGematria(yearNum % 100).replace('׳³', '').replace('׳´', '');
+            
+            const days = ['׳¨׳׳©׳•׳','׳©׳ ׳™','׳©׳׳™׳©׳™','׳¨׳‘׳™׳¢׳™','׳—׳׳™׳©׳™','׳©׳™׳©׳™','׳©׳‘׳×'];
+            const dateEl = document.getElementById('live-date');
+            if(dateEl) dateEl.textContent = `׳™׳•׳ ${days[now.getDay()]} | ${dayGematria} ${monthName} ${yearGematria}`;
+        }
+
+        function initInteraction() {
+            const v = document.getElementById('preventSleepVideo');
+            if(v) v.play().catch(() => {});
+        }
+
+        function showScreen(screenId) {
+            const screens = document.querySelectorAll('.screen');
+            screens.forEach(screen => {
+                screen.classList.toggle('visible', screen.id === screenId);
+                screen.classList.toggle('hidden', screen.id !== screenId);
+            });
+        }
+
+        let currentScreen = 'main-screen';
+        const Truma_keva = 'Truma_Keva.png';
+        let screenToggleInterval = null;
+
+        function cycleThroughScreens() {
+            if (screenToggleInterval) {
+                clearTimeout(screenToggleInterval);
+            }
+
+            if (currentScreen === 'main-screen') {
+                showScreen('truma-screen');
+                currentScreen = 'truma-screen';
+                screenToggleInterval = setTimeout(cycleThroughScreens, 10000);
+            } else {
+                showScreen('main-screen');
+                currentScreen = 'main-screen';
+                screenToggleInterval = setTimeout(cycleThroughScreens, 30000);
+            }
+        }
+
+        window.addEventListener('load', () => {
+            showScreen('main-screen');
+            currentScreen = 'main-screen';
+            screenToggleInterval = setTimeout(cycleThroughScreens, 30000);
+        });
+
+        function updatePageFromData() {
+            if (jsonData.parsha) {
+                document.getElementById('parsha-name').textContent = jsonData.parsha;
+            }
+
+            function addMinutesToTimeStr(timeStr, mins) {
+                const parts = String(timeStr).split(':');
+                if (parts.length < 2) return timeStr;
+                let h = parseInt(parts[0], 10);
+                let m = parseInt(parts[1], 10);
+                if (isNaN(h) || isNaN(m)) return timeStr;
+                let total = h * 60 + m + mins;
+                total = (total + 24 * 60) % (24 * 60);
+                const nh = Math.floor(total / 60);
+                const nm = total % 60;
+                return String(nh).padStart(2, '0') + ':' + String(nm).padStart(2, '0');
+            }
+
+            if (jsonData.shabbat_times && jsonData.shabbat_times.erev_shabbat) {
+                const erevShabbatData = jsonData.shabbat_times.erev_shabbat;
+                const shabbatItems = document.querySelectorAll('.column-card')[0].querySelectorAll('.right-column-item');
+
+                shabbatItems.forEach(item => {
+                    const label = item.querySelector('span').textContent;
+                    if (label === '׳§׳‘׳׳× ׳©׳‘׳× ׳׳•׳§׳“׳׳×' && erevShabbatData.kablat_shabbat_mukdemet) {
+                        item.querySelector('.time-value').textContent = erevShabbatData.kablat_shabbat_mukdemet;
+                    }
+                    if (label === '׳”׳“׳׳§׳× ׳ ׳¨׳•׳×' && erevShabbatData.candle_lighting) {
+                        item.querySelector('.time-value').textContent = erevShabbatData.candle_lighting;
+                    }
+                    if (label === '׳׳ ׳—׳” ׳¢׳¨׳‘ ׳©׳‘׳×') {
+                        if (erevShabbatData.mincha_erev_shabbat) {
+                            item.querySelector('.time-value').textContent = erevShabbatData.mincha_erev_shabbat;
+                        } else if (erevShabbatData.candle_lighting) {
+                            item.querySelector('.time-value').textContent = addMinutesToTimeStr(erevShabbatData.candle_lighting, 14);
+                        }
+                    }
+                    if (label === '׳¦׳׳× ׳”׳›׳•׳›׳‘׳™׳' && erevShabbatData.tzeit_hakochavim) {
+                        item.querySelector('.time-value').textContent = erevShabbatData.tzeit_hakochavim;
+                    }
+                });
+            }
+
+            if (jsonData.shabbat_times && jsonData.shabbat_times.shabbat_day) {
+                const shabbatDayData = jsonData.shabbat_times.shabbat_day;
+                const shabbatItems = document.querySelectorAll('.column-card')[0].querySelectorAll('.right-column-item');
+
+                shabbatItems.forEach(item => {
+                    const label = item.querySelector('span').textContent;
+                    if (label === '׳©׳§׳™׳¢׳”' && shabbatDayData.shkiya) {
+                        item.querySelector('.time-value').textContent = shabbatDayData.shkiya;
+                    }
+                    if (label === '׳¦׳׳× ׳©׳‘׳× ׳•׳¢׳¨׳‘׳™׳×' && shabbatDayData.tzeit_shabbat) {
+                        item.querySelector('.time-value').textContent = shabbatDayData.tzeit_shabbat;
+                    }
+                    if (label === '׳׳ ׳—׳” ׳©׳ ׳©׳‘׳×' && shabbatDayData.tzeit_shabbat) {
+                        item.querySelector('.time-value').textContent = addMinutesToTimeStr(shabbatDayData.tzeit_shabbat, -130);
+                    }
+                });
+            }
+
+            if (jsonData.weekday_times) {
+                const shacharitTimes = jsonData.weekday_times.shacharit || ["06:15", "07:50", "08:00"];
+                const minchaeTimes = jsonData.weekday_times.mincha || ["13:15", "18:55"];
+                const arvitTimes = jsonData.weekday_times.arvit || ["19:30", "21:00"];
+                
+                const shacharitBlock = document.querySelectorAll('.weekday-block')[0];
+                if (shacharitBlock) {
+                    const timePills = shacharitBlock.querySelectorAll('.time-pill');
+                    timePills.forEach((pill, index) => {
+                        if (index < shacharitTimes.length) {
+                            pill.textContent = shacharitTimes[index];
+                        }
+                    });
+                }
+
+                const minchaBlock = document.querySelectorAll('.weekday-block')[1];
+                if (minchaBlock) {
+                    const timePills = minchaBlock.querySelectorAll('.time-pill');
+                    timePills.forEach((pill, index) => {
+                        if (index < minchaeTimes.length) {
+                            pill.textContent = minchaeTimes[index];
+                        }
+                    });
+                }
+
+                const arvitBlock = document.querySelectorAll('.weekday-block')[2];
+                if (arvitBlock) {
+                    const timePills = arvitBlock.querySelectorAll('.time-pill');
+                    timePills.forEach((pill, index) => {
+                        if (index < arvitTimes.length) {
+                            pill.textContent = arvitTimes[index];
+                        }
+                    });
+                }
+            }
+        }
+        
+        loadDataFromJson();
+        setInterval(loadDataFromJson, 300000);
+
+        setInterval(updateClock, 1000);
+        setInterval(updateMemorial, 5000);
+        updateClock();
+        updateMemorial();
+    </script>
+</body>
+</html>
