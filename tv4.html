@@ -186,7 +186,13 @@
 </head>
 <body onclick="initInteraction();">
 
-    <div class="screen visible" id="main-screen">
+    <div class="screen visible" id="truma-screen">
+        <div class="azmaut-screen">
+            <img class="azmaut-image" src="Truma_Keva.png" alt="תרומת קבע ">
+        </div>
+    </div>
+
+    <div class="screen hidden" id="main-screen">
         <header class="hero">
             <div class="header-right">
                 <div class="synagogue-title">בית הכנסת המרכזי</div>
@@ -368,9 +374,9 @@
         const Truma_keva = 'Truma_Keva.png';
         let screenToggleInterval = null;
 
-        // המסך הראשי יישאר גלוי בלבד ללא מעבר אוטומטי בין מסכים.
+        // מציגים את מסך התרומת קבע כבר בטעינה, ללא מעבר אוטומטי בין מסכים.
         window.addEventListener('load', () => {
-            showScreen('main-screen');
+            showScreen('truma-screen');
         });
 
         // ===== ספירת העומר =====
