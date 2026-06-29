@@ -1,3 +1,8 @@
+הורדתי את "שחרית ותיקין" וצמצמתי בחזרה את תפילות השבת לרשימה המקורית והמדויקת, תוך שמירה על המבנה הסימטרי והנוח של שאר העמודות.
+
+הנה הקוד המעודכן:
+
+```html
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
@@ -70,7 +75,7 @@
         .main-content { 
             flex: 1; 
             display: grid; 
-            grid-template-columns: 2fr 1fr 1fr; /* חלוקה מחדש: שבת מורחבת (50%), חול ושיעורים סימטריים (25% ו-25%) */
+            grid-template-columns: 1.6fr 1fr 1fr; /* יחס סימטרי מושלם לעמודות השמאליות, שבת מותאמת לשני טורים פנימיים */
             gap: 1.5vw; 
             padding: 1.5vh 1.5vw;
             align-items: stretch; 
@@ -99,7 +104,7 @@
         .shabbat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2vw; height: 100%; }
         .shabbat-section { min-width: 0; }
 
-        /* עיצוב סימטרי ומורחב לשיעורים ותפילות חול */
+        /* מכולה אנכית גמישה לשיעורים ותפילות חול */
         .flex-column-container {
             display: flex;
             flex-direction: column;
@@ -108,7 +113,7 @@
         }
 
         .shiur-block, .weekday-block { 
-            flex: 1; /* מחלק את הגובה שווה בשווה */
+            flex: 1; 
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -233,14 +238,11 @@
                                 <div class="right-column-item"><span>קבלת שבת מוקדמת</span><span class="time-value">17:25</span></div>
                                 <div class="right-column-item"><span>הדלקת נרות</span><span class="time-value">18:39</span></div>
                                 <div class="right-column-item"><span>מנחה ערב שבת</span><span class="time-value">18:53</span></div>
-                                <div class="right-column-item"><span>שיר השירים</span><span class="time-value">19:10</span></div>
                                 <div class="right-column-item"><span>צאת הכוכבים</span><span class="time-value">19:27</span></div>
                             </div>
                             <div class="shabbat-section">
                                 <div class="right-column-section-title">יום השבת</div>
-                                <div class="right-column-item"><span>שחרית ותיקין</span><span class="time-value">05:30</span></div>
                                 <div class="right-column-item"><span>שחרית</span><span class="time-value">08:00</span></div>
-                                <div class="right-column-item"><span>סוף זמן קריאת שמע</span><span class="time-value">09:12</span></div>
                                 <div class="right-column-item"><span>מנחה גדולה</span><span class="time-value">13:30</span></div>
                                 <div class="right-column-item"><span>מנחה של שבת</span><span class="time-value">17:33</span></div>
                                 <div class="right-column-item"><span>שיעור הרב שליט"א</span><span class="time-value">אחרי מנחה</span></div>
@@ -372,7 +374,7 @@
         function toGematria(n) {
             if (n === 15) return 'ט״ו'; if (n === 16) return 'ט״ז';
             const vals = [400,300,200,100,90,80,70,60,50,40,30,20,10,9,8,7,6,5,4,3,2,1];
-            const chars = ['ת','ש','ר','ק','צ','פ','ע','ס','נ','מ','ל','כ','י','ט','ח','ז','ו','ה','ד','ג','ב','א'];
+            const chars = ['ת','ש','ר','ק','צ','פ','ע','ס','נ','מ','防','כ','י','ט','ח','ז','ו','ה','ד','ג','ב','א'];
             let s = '', rem = n;
             for (let i = 0; i < vals.length; i++) {
                 while (rem >= vals[i]) { s += chars[i]; rem -= vals[i]; }
@@ -472,9 +474,6 @@
                     if (label === 'שקיעה' && shabbatDayData.shkiya) {
                         item.querySelector('.time-value').textContent = shabbatDayData.shkiya;
                     }
-                    if (label === 'סוף זמן קריאת שמע' && shabbatDayData.sof_zman_shema) {
-                        item.querySelector('.time-value').textContent = shabbatDayData.sof_zman_shema;
-                    }
                     if (label === 'צאת שבת וערבית' && shabbatDayData.tzeit_shabbat) {
                         item.querySelector('.time-value').textContent = shabbatDayData.tzeit_shabbat;
                     }
@@ -534,3 +533,5 @@
     </script>
 </body>
 </html>
+
+```
