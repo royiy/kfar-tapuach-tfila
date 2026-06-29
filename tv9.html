@@ -68,14 +68,14 @@
         #live-date { font-size: 2vh; color: var(--soft-white); }
 
         .main-content { 
-            flex: 1; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.2vw; padding: 1.5vh 1.2vw;
-            align-items: start; overflow: hidden;
+            flex: 1; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr); gap: 1.2vw; padding: 1.5vh 1.2vw;
+            align-items: stretch; justify-content: center; overflow: hidden;
         }
         
         .column-card { 
             background: var(--soft-white); border-radius: 15px; padding: 1.2vh 1.2vw; 
             box-shadow: 0 8px 25px var(--shadow-blue); display: flex; flex-direction: column;
-            border-top: 5px solid var(--gold); height: 64vh; overflow: hidden;
+            border-top: 5px solid var(--gold); height: 100%; min-height: 0; overflow: hidden;
         }
 
         .card-header { 
@@ -84,9 +84,8 @@
         }
         .card-title { font-family: 'Frank Ruhl Libre', serif; font-size: 2.8vh; color: var(--royal-blue); }
 
-        .scrolling-content { flex: 1; overflow: hidden; position: relative; }
-        .scroll-wrapper { position: absolute; width: 100%; animation: autoScroll 18s linear infinite; }
-        @keyframes autoScroll { 0% { transform: translateY(0); } 100% { transform: translateY(-50%); } }
+        .scrolling-content { flex: 1; overflow: visible; position: relative; }
+        .scroll-wrapper { position: static; width: 100%; animation: none; transform: none; }
 
         .right-column-item { display: flex; justify-content: space-between; align-items: center; padding: 1vh 0; border-bottom: 1px solid #f5f2e8; gap: 0.8vw; }
         .time-value { font-family: 'Frank Ruhl Libre', serif; font-size: 2.4vh; color: var(--royal-blue); background: #e8f2ff; padding: 0.3vh 0.7vw; border-radius: 6px; min-width: 5vw; text-align: center; white-space: nowrap; }
