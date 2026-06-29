@@ -370,26 +370,29 @@
         }
 
         let currentScreen = 'main-screen';
-        // קבוע לתמונה הקבועה (תמונה ברירת מחדל)
         const Truma_keva = 'Truma_Keva.png';
         let screenToggleInterval = null;
 
         function cycleThroughScreens() {
+            if (screenToggleInterval) {
+                clearTimeout(screenToggleInterval);
+            }
+
             if (currentScreen === 'main-screen') {
-                // הצג את main-screen למשך 30 שניות, ואז עבור ל-truma-screen
+                showScreen('truma-screen');
+                currentScreen = 'truma-screen';
+                screenToggleInterval = setTimeout(cycleThroughScreens, 10000);
+            } else {
                 showScreen('main-screen');
-                setTimeout(() => {
-                    showScreen('truma-screen');
-                    currentScreen = 'truma-screen';
-                    // הצג את truma-screen למשך 15 שניות, ואז חזור ל-main-screen
-                    setTimeout(cycleThroughScreens, 15000);
-                }, 30000);
+                currentScreen = 'main-screen';
+                screenToggleInterval = setTimeout(cycleThroughScreens, 30000);
             }
         }
 
         window.addEventListener('load', () => {
             showScreen('main-screen');
-            cycleThroughScreens();
+            currentScreen = 'main-screen';
+            screenToggleInterval = setTimeout(cycleThroughScreens, 30000);
         });
 
         // ===== ספירת העומר =====
