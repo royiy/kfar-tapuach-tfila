@@ -369,14 +369,19 @@
             });
         }
 
-        let currentScreen = 'main-screen';
+        let currentScreen = 'truma-screen';
         // קבוע לתמונה הקבועה (תמונה ברירת מחדל)
         const Truma_keva = 'Truma_Keva.png';
         let screenToggleInterval = null;
 
-        // מציגים את מסך התרומת קבע כבר בטעינה, ללא מעבר אוטומטי בין מסכים.
+        function toggleBetweenScreens() {
+            currentScreen = currentScreen === 'truma-screen' ? 'main-screen' : 'truma-screen';
+            showScreen(currentScreen);
+        }
+
         window.addEventListener('load', () => {
-            showScreen('truma-screen');
+            showScreen(currentScreen);
+            screenToggleInterval = setInterval(toggleBetweenScreens, 20000);
         });
 
         // ===== ספירת העומר =====
