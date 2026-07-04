@@ -1,16 +1,16 @@
 {
-  "parsha": "פנחס",
+  "parsha": "מטות מסעי",
   "shabbat_times": {
     "erev_shabbat": {
       "mincha_gedola": "13:30",
-      "kablat_shabbat_mukdemet": "18:05",
-      "candle_lighting": "19:24",
-      "tzeit_hakochavim": "20:12"
+      "kablat_shabbat_mukdemet": "18:00",
+      "candle_lighting": "19:23",
+      "tzeit_hakochavim": "20:11"
     },
     "shabbat_day": {
       "mincha_gedola": "13:30",
-      "shkiya": "19:54",
-      "tzeit_shabbat": "20:32"
+      "shkiya": "19:53",
+      "tzeit_shabbat": "20:30"
     }
   },
   "weekday_times": {
