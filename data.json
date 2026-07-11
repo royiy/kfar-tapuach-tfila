@@ -1,16 +1,16 @@
 {
-  "parsha": "מטות מסעי",
+  "parsha": "דברים",
   "shabbat_times": {
     "erev_shabbat": {
       "mincha_gedola": "13:30",
       "kablat_shabbat_mukdemet": "18:00",
-      "candle_lighting": "19:23",
-      "tzeit_hakochavim": "20:11"
+      "candle_lighting": "19:20",
+      "tzeit_hakochavim": "20:09"
     },
     "shabbat_day": {
       "mincha_gedola": "13:30",
-      "shkiya": "19:53",
-      "tzeit_shabbat": "20:30"
+      "shkiya": "19:50",
+      "tzeit_shabbat": "20:27"
     }
   },
   "weekday_times": {
