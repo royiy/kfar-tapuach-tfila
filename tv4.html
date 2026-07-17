@@ -192,6 +192,12 @@
         </div>
     </div>
 
+    <div class="screen hidden" id="tisha-screen">
+        <div class="azmaut-screen">
+            <img class="azmaut-image" src="TIshaBehav.png" alt="Tisha Behav">
+        </div>
+    </div>
+
     <div class="screen hidden" id="main-screen">
         <header class="hero">
             <div class="header-right">
@@ -385,26 +391,27 @@
         let currentScreen = 'main-screen';
         const Truma_keva = 'Truma_Keva.png';
         let screenToggleInterval = null;
+        const screenCycle = ['main-screen', 'truma-screen', 'main-screen', 'tisha-screen'];
+        let screenCycleIndex = 0;
 
         function cycleThroughScreens() {
             if (screenToggleInterval) {
                 clearTimeout(screenToggleInterval);
             }
 
-            if (currentScreen === 'main-screen') {
-                showScreen('truma-screen');
-                currentScreen = 'truma-screen';
-                screenToggleInterval = setTimeout(cycleThroughScreens, 10000);
-            } else {
-                showScreen('main-screen');
-                currentScreen = 'main-screen';
-                screenToggleInterval = setTimeout(cycleThroughScreens, 30000);
-            }
+            screenCycleIndex = (screenCycleIndex + 1) % screenCycle.length;
+            const nextScreenId = screenCycle[screenCycleIndex];
+            showScreen(nextScreenId);
+            currentScreen = nextScreenId;
+
+            const nextDelay = nextScreenId === 'main-screen' ? 30000 : 10000;
+            screenToggleInterval = setTimeout(cycleThroughScreens, nextDelay);
         }
 
         window.addEventListener('load', () => {
             showScreen('main-screen');
             currentScreen = 'main-screen';
+            screenCycleIndex = 0;
             screenToggleInterval = setTimeout(cycleThroughScreens, 30000);
         });
 
