@@ -186,12 +186,6 @@
 </head>
 <body onclick="initInteraction();">
 
-    <div class="screen visible" id="truma-screen">
-        <div class="azmaut-screen">
-            <img class="azmaut-image" src="Kidush.jpeg" alt="קידוש">
-        </div>
-    </div>
-
     <div class="screen hidden" id="tisha-screen">
         <div class="azmaut-screen">
             <img class="azmaut-image" src="TIshaBehav.png" alt="Tisha Behav">
@@ -389,9 +383,8 @@
         }
 
         let currentScreen = 'main-screen';
-        const Truma_keva = 'Truma_Keva.png';
         let screenToggleInterval = null;
-        const screenCycle = ['main-screen', 'truma-screen', 'main-screen', 'tisha-screen'];
+        const screenCycle = ['main-screen', 'tisha-screen'];
         let screenCycleIndex = 0;
 
         function cycleThroughScreens() {
