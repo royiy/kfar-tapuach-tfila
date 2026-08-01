@@ -1,21 +1,21 @@
 {
-  "parsha": "עקב",
+  "parsha": "ראה",
   "shabbat_times": {
     "erev_shabbat": {
       "mincha_gedola": "13:30",
-      "kablat_shabbat_mukdemet": "17:55",
-      "candle_lighting": "19:11",
-      "tzeit_hakochavim": "20:00"
+      "kablat_shabbat_mukdemet": "17:50",
+      "candle_lighting": "19:05",
+      "tzeit_hakochavim": "19:54"
     },
     "shabbat_day": {
       "mincha_gedola": "13:30",
-      "shkiya": "19:41",
-      "tzeit_shabbat": "20:17"
+      "shkiya": "19:35",
+      "tzeit_shabbat": "20:10"
     }
   },
   "weekday_times": {
     "shacharit": ["06:15", "07:50", "08:00 (ביום שישי)"],
-    "mincha": ["13:20", "19:25"],
-    "arvit": ["20:05", "21:00"]
+    "mincha": ["13:20", "19:20"],
+    "arvit": ["20:00", "21:00"]
   }
 }
