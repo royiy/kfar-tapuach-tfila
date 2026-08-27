@@ -175,26 +175,14 @@
             position: relative;
         }
 
-        .marquee-track {
-            display: flex;
-            align-items: center;
-            white-space: nowrap;
-            animation: marqueeScroll 32s linear infinite;
-            will-change: transform;
-        }
-
-        .marquee-copy {
+        .announcement-highlight {
             font-family: 'Frank Ruhl Libre', serif;
-            font-size: 2.8vh;
+            font-size: 5vh;
             color: var(--royal-blue);
             font-weight: 800;
             line-height: 1.1;
-            padding-inline-end: 6vw;
-        }
-
-        @keyframes marqueeScroll {
-            0% { transform: translateX(-50%); }
-            100% { transform: translateX(0); }
+            white-space: nowrap;
+            text-align: center;
         }
     </style>
 </head>
@@ -299,10 +287,7 @@
         </div>
 
         <div class="announcement-bar">
-            <div class="marquee-track">
-                <span class="marquee-copy">שְׁעָרֶיךָ הֵם דּוֹפְקִים כַּעֲנִיִּים וְדַלִּים &nbsp;&nbsp; צָקוּן לַחֲשָׁם קְשׁוֹב יָהּ שׁוֹכֵן מְעֻלִּים &nbsp;&nbsp; כִּי-אַתָּה רַב סְלִיחוֹת וּבַעַל הָרַחֲמִים &nbsp;&nbsp; שַׁעֲרֵי שָׁמַיִם פְּתַח וְאוצָרְךָ הַטּוב לָנוּ תִפְתַּח</span>
-                <span class="marquee-copy">שְׁעָרֶיךָ הֵם דּוֹפְקִים כַּעֲנִיִּים וְדַלִּים &nbsp;&nbsp; צָקוּן לַחֲשָׁם קְשׁוֹב יָהּ שׁוֹכֵן מְעֻלִּים &nbsp;&nbsp; כִּי-אַתָּה רַב סְלִיחוֹת וּבַעַל הָרַחֲמִים &nbsp;&nbsp; שַׁעֲרֵי שָׁמַיִם פְּתַח וְאוצָרְךָ הַטּוב לָנוּ תִפְתַּח</span>
-            </div>
+            <div class="announcement-highlight">שַׁעֲרֵי שָׁמַיִם פְּתַח וְאוצָרְךָ הַטּוב לָנוּ תִפְתַּח</div>
         </div>
 
         <footer class="footer">
