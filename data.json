@@ -1,16 +1,16 @@
 {
-  "parsha": "כי תבוא",
+  "parsha": "ניצבים וילך",
   "shabbat_times": {
     "erev_shabbat": {
       "mincha_gedola": "13:30",
-      "kablat_shabbat_mukdemet": "17:30",
-      "candle_lighting": "18:42",
-      "tzeit_hakochavim": "19:31"
+      "kablat_shabbat_mukdemet": "17:20",
+      "candle_lighting": "18:34",
+      "tzeit_hakochavim": "19:22"
     },
     "shabbat_day": {
       "mincha_gedola": "13:30",
-      "shkiya": "19:12",
-      "tzeit_shabbat": "19:45"
+      "shkiya": "19:03",
+      "tzeit_shabbat": "19:36"
     }
   },
   "weekday_times": {
