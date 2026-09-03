@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>אזור פנימי - בית הכנסת המרכזי כפר תפוח</title>
+<link href="https://fonts.googleapis.com/css2?family=Alef:wght@400;700&family=Frank+Ruhl+Libre:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+--deep-navy:#0a1628;
+--royal-blue:#1e3a5f;
+--gold:#d4af37;
+--warm-gold:#f4e4c1;
+--cream:#faf8f3;
+--charcoal:#2a2a2a;
+--shadow-blue:rgba(30,58,95,0.15);
+--danger:#c0392b;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Alef',sans-serif;background:var(--cream);color:var(--charcoal);line-height:1.8}
+button{font-family:inherit;cursor:pointer}
+input,textarea,select{font-family:inherit}
+.hidden{display:none !important}
+
+/* ===== שער כניסה ===== */
+.gate{
+min-height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+padding:2rem;
+background:linear-gradient(165deg,var(--deep-navy),var(--royal-blue));
+}
+.gate-card{
+background:white;
+border-radius:20px;
+border-top:6px solid var(--gold);
+box-shadow:0 20px 60px rgba(0,0,0,.35);
+padding:2.5rem;
+width:100%;
+max-width:420px;
+text-align:center;
+}
+.gate-card h1{
+font-family:'Frank Ruhl Libre',serif;
+font-size:1.8rem;
+color:var(--royal-blue);
+}
+.gate-card .sub{color:#777;font-size:.95rem;margin-bottom:1.8rem}
+.field{margin-bottom:1rem;text-align:right}
+.field label{display:block;font-size:.9rem;color:#555;margin-bottom:.3rem}
+.field input{
+width:100%;
+padding:.8rem 1rem;
+border:2px solid #e6e6e6;
+border-radius:10px;
+font-size:1rem;
+}
+.field input:focus{outline:none;border-color:var(--gold)}
+.btn{
+border:none;
+border-radius:50px;
+padding:.85rem 2rem;
+font-weight:700;
+font-size:1rem;
+transition:transform .15s,box-shadow .15s;
+}
+.btn:hover{transform:translateY(-2px)}
+.btn-primary{background:linear-gradient(135deg,var(--royal-blue),var(--deep-navy));color:white;width:100%}
+.btn-gold{background:linear-gradient(135deg,var(--gold),#b8860b);color:#2a2a2a}
+.btn-ghost{background:transparent;border:2px solid #ddd;color:#555;border-radius:10px;padding:.5rem 1rem;font-size:.85rem}
+.btn-danger{background:transparent;border:2px solid var(--danger);color:var(--danger);border-radius:10px;padding:.4rem .9rem;font-size:.85rem}
+.divider{display:flex;align-items:center;gap:1rem;margin:1.6rem 0;color:#aaa;font-size:.85rem}
+.divider::before,.divider::after{content:"";flex:1;height:1px;background:#e6e6e6}
+.error-msg{color:var(--danger);font-size:.9rem;margin-top:.8rem;min-height:1.2rem}
+#google-btn-wrap{display:flex;justify-content:center}
+.gsi-note{font-size:.8rem;color:#999;margin-top:.5rem}
+
+/* ===== אזור העבודה ===== */
+.topbar{
+background:linear-gradient(165deg,var(--deep-navy),var(--royal-blue));
+color:white;
+padding:1.5rem 2rem;
+display:flex;
+align-items:center;
+justify-content:space-between;
+flex-wrap:wrap;
+gap:1rem;
+}
+.topbar h1{font-family:'Frank Ruhl Libre',serif;font-size:1.6rem}
+.topbar .who{color:var(--warm-gold);font-size:.9rem}
+.topbar-actions{display:flex;gap:.6rem;align-items:center;flex-wrap:wrap}
+.topbar .btn-ghost{border-color:rgba(255,255,255,.4);color:var(--warm-gold)}
+
+.container{max-width:1200px;margin:auto;padding:2rem}
+.section{
+background:white;
+border-radius:20px;
+padding:2rem;
+margin-bottom:2rem;
+box-shadow:0 10px 40px var(--shadow-blue);
+border-top:6px solid var(--gold);
+}
+.section-header{
+display:flex;
+align-items:center;
+gap:.8rem;
+margin-bottom:1.5rem;
+border-bottom:2px solid #eee;
+padding-bottom:.8rem;
+}
+.section-title{font-family:'Frank Ruhl Libre',serif;font-size:1.5rem;color:var(--royal-blue)}
+
+/* העלאה */
+.dropzone{
+border:3px dashed #d8d8d8;
+border-radius:16px;
+padding:2.5rem 1.5rem;
+text-align:center;
+color:#888;
+transition:.2s;
+background:#fcfcfc;
+}
+.dropzone.drag{border-color:var(--gold);background:#fff8e6;color:var(--royal-blue)}
+.dropzone .big{font-size:2.5rem;display:block;margin-bottom:.5rem}
+.upload-note{margin-top:1rem;display:flex;gap:.6rem;flex-wrap:wrap;align-items:center;justify-content:center}
+.upload-note input{
+padding:.6rem 1rem;border:2px solid #e6e6e6;border-radius:10px;min-width:260px;
+}
+
+/* רשימת קבצים */
+.toolbar{display:flex;gap:.8rem;flex-wrap:wrap;margin-bottom:1.2rem}
+.toolbar input{flex:1;min-width:200px;padding:.7rem 1rem;border:2px solid #e6e6e6;border-radius:10px}
+.file-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem}
+.file-card{
+background:#fff8e6;
+border-right:5px solid var(--gold);
+border-radius:12px;
+padding:1.1rem 1.2rem;
+cursor:pointer;
+transition:.15s;
+}
+.file-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px var(--shadow-blue)}
+.file-name{
+font-family:'Frank Ruhl Libre',serif;font-weight:700;color:var(--royal-blue);
+font-size:1.05rem;word-break:break-word;display:flex;gap:.5rem;align-items:flex-start;
+}
+.file-meta{font-size:.82rem;color:#777;margin-top:.4rem}
+.file-badge{
+display:inline-block;background:var(--royal-blue);color:white;border-radius:20px;
+padding:.1rem .6rem;font-size:.75rem;margin-top:.5rem;
+}
+.empty{text-align:center;color:#aaa;padding:2rem}
+
+/* פאנל פרטים */
+.overlay{
+position:fixed;inset:0;background:rgba(10,22,40,.6);
+display:flex;justify-content:flex-start;z-index:50;
+}
+.drawer{
+background:var(--cream);width:min(640px,100%);height:100%;overflow-y:auto;
+box-shadow:-10px 0 40px rgba(0,0,0,.3);padding:1.8rem;
+}
+.drawer-head{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;margin-bottom:1rem}
+.drawer-head h3{font-family:'Frank Ruhl Libre',serif;color:var(--royal-blue);word-break:break-word}
+.close-x{background:none;border:none;font-size:1.6rem;color:#888;line-height:1}
+.preview{
+background:white;border-radius:12px;padding:1rem;margin-bottom:1.2rem;text-align:center;
+border:1px solid #eee;
+}
+.preview img{max-width:100%;max-height:340px;border-radius:8px}
+.preview iframe{width:100%;height:420px;border:none;border-radius:8px}
+.preview pre{
+text-align:right;white-space:pre-wrap;word-break:break-word;max-height:340px;overflow:auto;
+font-size:.85rem;background:#fafafa;padding:1rem;border-radius:8px;line-height:1.6;
+}
+.drawer-actions{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:1.5rem}
+
+/* הערות */
+.comment{
+background:white;border-radius:12px;padding:.9rem 1.1rem;margin-bottom:.7rem;
+border-right:4px solid var(--royal-blue);box-shadow:0 2px 8px rgba(0,0,0,.04);
+}
+.comment-head{display:flex;justify-content:space-between;gap:.8rem;font-size:.82rem;color:#888}
+.comment-author{font-weight:700;color:var(--royal-blue)}
+.comment-body{margin-top:.3rem;white-space:pre-wrap;word-break:break-word}
+.comment-del{background:none;border:none;color:#bbb;font-size:.9rem}
+.comment-del:hover{color:var(--danger)}
+.comment-form{display:flex;flex-direction:column;gap:.6rem;margin-top:1rem}
+.comment-form textarea{
+padding:.8rem 1rem;border:2px solid #e6e6e6;border-radius:10px;resize:vertical;min-height:80px;
+}
+.comment-form textarea:focus{outline:none;border-color:var(--gold)}
+.comment-form .btn{align-self:flex-start;padding:.6rem 1.6rem;width:auto}
+
+.toast{
+position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%);
+background:var(--deep-navy);color:var(--warm-gold);padding:.8rem 1.6rem;border-radius:50px;
+box-shadow:0 8px 30px rgba(0,0,0,.3);z-index:100;font-size:.9rem;
+}
+.footer{background:var(--royal-blue);color:var(--warm-gold);text-align:center;padding:1.5rem;font-size:.9rem}
+@media(max-width:600px){
+.container{padding:1rem}
+.section{padding:1.3rem}
+.drawer{padding:1.2rem}
+}
+</style>
+</head>
+
+<body>
+
+<!-- ========== שער כניסה ========== -->
+<div id="gate" class="gate">
+<div class="gate-card">
+<h1>אזור פנימי</h1>
+<p class="sub">בית הכנסת המרכזי כפר תפוח</p>
+
+<form id="pw-form">
+<div class="field">
+<label for="pw">סיסמת גבאים</label>
+<input type="password" id="pw" autocomplete="current-password" placeholder="הזינו סיסמה">
+</div>
+<div class="field">
+<label for="pw-name">שם (יופיע ליד ההערות)</label>
+<input type="text" id="pw-name" autocomplete="name" placeholder="לדוגמה: יוסי כהן">
+</div>
+<button type="submit" class="btn btn-primary">כניסה</button>
+</form>
+
+<div id="google-wrap">
+<div class="divider">או</div>
+<div id="google-btn-wrap"></div>
+<p id="gsi-note" class="gsi-note"></p>
+</div>
+
+<div id="gate-error" class="error-msg"></div>
+</div>
+</div>
+
+<!-- ========== אזור עבודה ========== -->
+<div id="app" class="hidden">
+
+<header class="topbar">
+<div>
+<h1>אזור פנימי</h1>
+<div class="who" id="who"></div>
+</div>
+<div class="topbar-actions">
+<button class="btn btn-ghost" id="btn-export">גיבוי לקובץ</button>
+<button class="btn btn-ghost" id="btn-import">שחזור מגיבוי</button>
+<button class="btn btn-ghost" id="btn-logout">יציאה</button>
+</div>
+</header>
+
+<div class="container">
+
+<!-- העלאת קבצים -->
+<section class="section">
+<div class="section-header">
+<span>📁</span>
+<h2 class="section-title">העלאת קבצים</h2>
+</div>
+
+<div class="dropzone" id="dropzone">
+<span class="big">⬆️</span>
+גררו קבצים לכאן, או
+<button type="button" class="btn btn-gold" id="btn-pick" style="padding:.5rem 1.4rem">בחרו קבצים</button>
+<input type="file" id="file-input" multiple class="hidden">
+<div class="upload-note">
+<input type="text" id="upload-desc" placeholder="תיאור קצר (לא חובה) - יצורף לקבצים הבאים">
+</div>
+</div>
+</section>
+
+<!-- קבצים -->
+<section class="section">
+<div class="section-header">
+<span>🗂️</span>
+<h2 class="section-title">קבצים</h2>
+</div>
+
+<div class="toolbar">
+<input type="text" id="search" placeholder="חיפוש לפי שם קובץ / מעלה / תיאור">
+<select id="sort" class="btn-ghost" style="padding:.6rem 1rem">
+<option value="new">החדשים ראשונים</option>
+<option value="old">הישנים ראשונים</option>
+<option value="name">לפי שם</option>
+<option value="size">לפי גודל</option>
+</select>
+</div>
+
+<div class="file-grid" id="file-grid"></div>
+<div class="empty hidden" id="files-empty">עדיין לא הועלו קבצים</div>
+</section>
+
+<!-- לוח הערות כללי -->
+<section class="section">
+<div class="section-header">
+<span>💬</span>
+<h2 class="section-title">לוח הערות כללי</h2>
+</div>
+<div id="general-comments"></div>
+<form class="comment-form" id="general-form">
+<textarea id="general-text" placeholder="כתבו הערה לגבאים..."></textarea>
+<button type="submit" class="btn btn-primary">הוספת הערה</button>
+</form>
+</section>
+
+</div>
+
+<footer class="footer">
+אזור פנימי - הנתונים נשמרים בדפדפן זה בלבד. מומלץ לגבות מדי פעם.
+</footer>
+</div>
+
+<!-- פאנל פרטי קובץ -->
+<div id="overlay" class="overlay hidden">
+<div class="drawer" id="drawer"></div>
+</div>
+
+<input type="file" id="import-input" accept="application/json" class="hidden">
+
+<script>
+/* =========================================================
+   הגדרות - ערכו כאן
+   ========================================================= */
+const CONFIG = {
+  // סיסמה: נשמר רק ה-hash. ברירת מחדל: tapuach2026
+  // ליצירת hash לסיסמה חדשה, פתחו קונסול בדף הזה והריצו:
+  //   await sha256("kfar-tapuach-internal-v1:" + "הסיסמה-החדשה")
+  passwordHash: "b6df1e3d41d430b60a41427852af2c4dd0a5dfdf34215bf67e51fc36d809b03d",
+  salt: "kfar-tapuach-internal-v1",
+
+  // כניסה עם חשבון Google (SSO). השאירו ריק כדי להסתיר את הכפתור.
+  // יוצרים ב-Google Cloud Console > APIs & Services > Credentials > OAuth client ID (Web)
+  // ומוסיפים ל-Authorized JavaScript origins את כתובת האתר, למשל https://royiy.github.io
+  googleClientId: "",
+
+  // מי מורשה להיכנס עם Google. שתי הרשימות ריקות = כל חשבון Google מאומת.
+  allowedEmails: [],    // לדוגמה: ["gabai@gmail.com","rav@gmail.com"]
+  allowedDomains: [],   // לדוגמה: ["kfartapuach.org"]
+
+  sessionHours: 12,     // תוקף החיבור
+  maxFileMB: 40         // קבצים גדולים מזה לא יועלו
+};
+
+const SESSION_KEY = "kt_internal_session";
+const GENERAL = "__general__";
+
+/* =========================================================
+   עזרים
+   ========================================================= */
+async function sha256(str){
+  const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(str));
+  return [...new Uint8Array(buf)].map(b => b.toString(16).padStart(2,"0")).join("");
+}
+const $ = id => document.getElementById(id);
+const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2,9);
+
+function esc(s){
+  return String(s).replace(/[&<>"']/g, c =>
+    ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[c]);
+}
+function fmtSize(b){
+  if(b < 1024) return b + " B";
+  if(b < 1048576) return (b/1024).toFixed(1) + " KB";
+  return (b/1048576).toFixed(1) + " MB";
+}
+function fmtDate(ts){
+  return new Date(ts).toLocaleString("he-IL",
+    {day:"2-digit",month:"2-digit",year:"numeric",hour:"2-digit",minute:"2-digit"});
+}
+function fileIcon(type,name){
+  const t = (type||"") + " " + (name||"").toLowerCase();
+  if(/image|\.(png|jpe?g|gif|webp|svg)/.test(t)) return "🖼️";
+  if(/pdf/.test(t)) return "📕";
+  if(/word|\.docx?/.test(t)) return "📘";
+  if(/sheet|excel|\.xlsx?|\.csv/.test(t)) return "📗";
+  if(/presentation|\.pptx?/.test(t)) return "📙";
+  if(/audio|\.(mp3|wav|m4a)/.test(t)) return "🎵";
+  if(/video|\.(mp4|mov|avi)/.test(t)) return "🎬";
+  if(/zip|rar|compressed/.test(t)) return "🗜️";
+  if(/text|json|\.(txt|md)/.test(t)) return "📄";
+  return "📎";
+}
+let toastTimer;
+function toast(msg){
+  let el = document.querySelector(".toast");
+  if(!el){ el = document.createElement("div"); el.className = "toast"; document.body.appendChild(el); }
+  el.textContent = msg;
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.remove(), 2800);
+}
+
+/* =========================================================
+   מסד נתונים מקומי (IndexedDB)
+   ========================================================= */
+let dbPromise;
+function db(){
+  if(!dbPromise){
+    dbPromise = new Promise((res,rej) => {
+      const req = indexedDB.open("kt-internal", 1);
+      req.onupgradeneeded = e => {
+        const d = e.target.result;
+        if(!d.objectStoreNames.contains("files")) d.createObjectStore("files",{keyPath:"id"});
+        if(!d.objectStoreNames.contains("comments")) d.createObjectStore("comments",{keyPath:"id"});
+      };
+      req.onsuccess = () => res(req.result);
+      req.onerror = () => rej(req.error);
+    });
+  }
+  return dbPromise;
+}
+function tx(store, mode, fn){
+  return db().then(d => new Promise((res,rej) => {
+    const t = d.transaction(store, mode);
+    const req = fn(t.objectStore(store));
+    t.onerror = () => rej(t.error);
+    t.onabort = () => rej(t.error);
+    t.oncomplete = () => res(req ? req.result : undefined);
+  }));
+}
+const dbAll = s      => tx(s,"readonly",  st => st.getAll());
+const dbGet = (s,id) => tx(s,"readonly",  st => st.get(id));
+const dbPut = (s,v)  => tx(s,"readwrite", st => st.put(v));
+const dbDel = (s,id) => tx(s,"readwrite", st => st.delete(id));
+
+/* =========================================================
+   כניסה והרשאות
+   ========================================================= */
+let currentUser = null;
+
+function saveSession(user){
+  localStorage.setItem(SESSION_KEY,
+    JSON.stringify({...user, exp: Date.now() + CONFIG.sessionHours*3600*1000}));
+}
+function loadSession(){
+  try{
+    const s = JSON.parse(localStorage.getItem(SESSION_KEY) || "null");
+    if(s && s.exp > Date.now()) return s;
+  }catch(e){}
+  localStorage.removeItem(SESSION_KEY);
+  return null;
+}
+function gateError(msg){ $("gate-error").textContent = msg || ""; }
+
+$("pw-form").addEventListener("submit", async e => {
+  e.preventDefault();
+  gateError("");
+  const pw = $("pw").value;
+  if(!pw) return gateError("נא להזין סיסמה");
+  const hash = await sha256(CONFIG.salt + ":" + pw);
+  if(hash !== CONFIG.passwordHash){
+    $("pw").value = "";
+    return gateError("סיסמה שגויה");
+  }
+  enter({name: $("pw-name").value.trim() || "גבאי", email:"", method:"password"});
+});
+
+function emailAllowed(email){
+  const e = (email || "").toLowerCase();
+  const {allowedEmails, allowedDomains} = CONFIG;
+  if(!allowedEmails.length && !allowedDomains.length) return true;
+  if(allowedEmails.some(x => x.toLowerCase() === e)) return true;
+  return allowedDomains.some(d => e.endsWith("@" + d.toLowerCase()));
+}
+
+function decodeJwt(token){
+  const part = token.split(".")[1].replace(/-/g,"+").replace(/_/g,"/");
+  const json = decodeURIComponent(atob(part).split("").map(c =>
+    "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2)).join(""));
+  return JSON.parse(json);
+}
+
+function onGoogleCredential(response){
+  try{
+    const p = decodeJwt(response.credential);
+    if(!p.email_verified) return gateError("כתובת המייל אינה מאומתת בגוגל");
+    if(!emailAllowed(p.email)) return gateError("החשבון " + p.email + " אינו מורשה לאזור זה");
+    enter({name: p.name || p.email, email: p.email, method:"google"});
+  }catch(err){
+    gateError("שגיאה בכניסה עם Google");
+  }
+}
+
+function initGoogle(){
+  if(!CONFIG.googleClientId){
+    $("google-wrap").classList.add("hidden");
+    return;
+  }
+  $("gsi-note").textContent = "טוען כניסה עם Google...";
+  const s = document.createElement("script");
+  s.src = "https://accounts.google.com/gsi/client";
+  s.async = true;
+  s.onload = () => {
+    try{
+      google.accounts.id.initialize({
+        client_id: CONFIG.googleClientId,
+        callback: onGoogleCredential
+      });
+      google.accounts.id.renderButton($("google-btn-wrap"),
+        {theme:"outline", size:"large", text:"signin_with", locale:"he", width:320});
+      $("gsi-note").textContent = "";
+    }catch(err){
+      $("gsi-note").textContent = "לא ניתן לטעון כניסה עם Google";
+    }
+  };
+  s.onerror = () => { $("gsi-note").textContent = "לא ניתן לטעון כניסה עם Google"; };
+  document.head.appendChild(s);
+}
+
+function enter(user){
+  currentUser = user;
+  saveSession(user);
+  $("gate").classList.add("hidden");
+  $("app").classList.remove("hidden");
+  $("who").textContent = user.name +
+    (user.email ? " · " + user.email : "") +
+    (user.method === "google" ? " (Google)" : "");
+  refreshFiles();
+  renderComments(GENERAL, $("general-comments"));
+}
+
+$("btn-logout").addEventListener("click", () => {
+  localStorage.removeItem(SESSION_KEY);
+  if(window.google && CONFIG.googleClientId){
+    try{ google.accounts.id.disableAutoSelect(); }catch(e){}
+  }
+  location.reload();
+});
+
+/* =========================================================
+   קבצים
+   ========================================================= */
+let allFiles = [];
+
+async function refreshFiles(){
+  allFiles = await dbAll("files");
+  renderFiles();
+}
+
+function renderFiles(){
+  const q = $("search").value.trim().toLowerCase();
+  const sort = $("sort").value;
+
+  const list = allFiles.filter(f =>
+    !q || (f.name + " " + (f.uploadedBy||"") + " " + (f.desc||"")).toLowerCase().includes(q));
+
+  list.sort((a,b) => {
+    if(sort === "new")  return b.uploadedAt - a.uploadedAt;
+    if(sort === "old")  return a.uploadedAt - b.uploadedAt;
+    if(sort === "name") return a.name.localeCompare(b.name,"he");
+    return b.size - a.size;
+  });
+
+  const grid = $("file-grid");
+  grid.innerHTML = list.map(f =>
+    '<div class="file-card" data-id="' + f.id + '">' +
+      '<div class="file-name"><span>' + fileIcon(f.type,f.name) + '</span><span>' + esc(f.name) + '</span></div>' +
+      (f.desc ? '<div class="file-meta">' + esc(f.desc) + '</div>' : '') +
+      '<div class="file-meta">' + fmtSize(f.size) + ' · ' + esc(f.uploadedBy||"") + ' · ' + fmtDate(f.uploadedAt) + '</div>' +
+      '<span class="file-badge" data-count="' + f.id + '">💬 ...</span>' +
+    '</div>').join("");
+
+  $("files-empty").classList.toggle("hidden", list.length > 0);
+  $("files-empty").textContent = allFiles.length
+    ? "לא נמצאו קבצים מתאימים לחיפוש"
+    : "עדיין לא הועלו קבצים";
+
+  grid.querySelectorAll(".file-card").forEach(c =>
+    c.addEventListener("click", () => openDrawer(c.dataset.id)));
+
+  updateCommentCounts();
+}
+
+async function updateCommentCounts(){
+  const comments = await dbAll("comments");
+  document.querySelectorAll("[data-count]").forEach(el => {
+    const n = comments.filter(c => c.fileId === el.dataset.count).length;
+    el.textContent = n ? "💬 " + n + " הערות" : "💬 אין הערות";
+  });
+}
+
+async function addFiles(fileList){
+  const desc = $("upload-desc").value.trim();
+  let added = 0;
+  for(const file of fileList){
+    if(file.size > CONFIG.maxFileMB * 1048576){
+      toast('הקובץ "' + file.name + '" גדול מ-' + CONFIG.maxFileMB + 'MB ולא הועלה');
+      continue;
+    }
+    try{
+      await dbPut("files", {
+        id: uid(),
+        name: file.name,
+        type: file.type || "",
+        size: file.size,
+        desc: desc,
+        blob: file,
+        uploadedBy: currentUser.name,
+        uploadedEmail: currentUser.email || "",
+        uploadedAt: Date.now()
+      });
+      added++;
+    }catch(err){
+      toast("שמירת הקובץ נכשלה: " + file.name);
+    }
+  }
+  if(added){
+    $("upload-desc").value = "";
+    toast(added === 1 ? "הקובץ נשמר" : added + " קבצים נשמרו");
+    refreshFiles();
+  }
+}
+
+$("btn-pick").addEventListener("click", () => $("file-input").click());
+$("file-input").addEventListener("change", e => { addFiles(e.target.files); e.target.value = ""; });
+$("search").addEventListener("input", renderFiles);
+$("sort").addEventListener("change", renderFiles);
+
+const dz = $("dropzone");
+["dragenter","dragover"].forEach(ev => dz.addEventListener(ev, e => {
+  e.preventDefault(); dz.classList.add("drag");
+}));
+["dragleave","drop"].forEach(ev => dz.addEventListener(ev, e => {
+  e.preventDefault(); dz.classList.remove("drag");
+}));
+dz.addEventListener("drop", e => {
+  if(e.dataTransfer.files.length) addFiles(e.dataTransfer.files);
+});
+
+/* =========================================================
+   פאנל פרטי קובץ + תצוגה מקדימה
+   ========================================================= */
+let previewUrl = null;
+
+async function openDrawer(id){
+  const f = await dbGet("files", id);
+  if(!f) return;
+
+  $("drawer").innerHTML =
+    '<div class="drawer-head">' +
+      '<h3>' + fileIcon(f.type,f.name) + ' ' + esc(f.name) + '</h3>' +
+      '<button class="close-x" id="drawer-close">&times;</button>' +
+    '</div>' +
+    '<div class="file-meta" style="margin-bottom:1rem">' +
+      fmtSize(f.size) + ' · הועלה על ידי ' + esc(f.uploadedBy||"") + ' · ' + fmtDate(f.uploadedAt) +
+      (f.desc ? '<br>' + esc(f.desc) : '') +
+    '</div>' +
+    '<div class="preview" id="preview">טוען תצוגה מקדימה...</div>' +
+    '<div class="drawer-actions">' +
+      '<button class="btn btn-gold" id="btn-download">הורדה</button>' +
+      '<button class="btn btn-danger" id="btn-delete">מחיקת הקובץ</button>' +
+    '</div>' +
+    '<div class="section-header"><span>💬</span><h2 class="section-title">הערות לקובץ</h2></div>' +
+    '<div id="file-comments"></div>' +
+    '<form class="comment-form" id="file-comment-form">' +
+      '<textarea id="file-comment-text" placeholder="הוספת הערה לקובץ זה..."></textarea>' +
+      '<button type="submit" class="btn btn-primary">הוספת הערה</button>' +
+    '</form>';
+
+  $("overlay").classList.remove("hidden");
+  renderPreview(f);
+  renderComments(f.id, $("file-comments"));
+
+  $("drawer-close").addEventListener("click", closeDrawer);
+
+  $("btn-download").addEventListener("click", () => {
+    const url = URL.createObjectURL(f.blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = f.name;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 4000);
+  });
+
+  $("btn-delete").addEventListener("click", async () => {
+    if(!confirm('למחוק את "' + f.name + '" ואת ההערות שלו?')) return;
+    const comments = await dbAll("comments");
+    for(const c of comments.filter(c => c.fileId === f.id)) await dbDel("comments", c.id);
+    await dbDel("files", f.id);
+    closeDrawer();
+    toast("הקובץ נמחק");
+    refreshFiles();
+  });
+
+  $("file-comment-form").addEventListener("submit", async e => {
+    e.preventDefault();
+    const text = $("file-comment-text").value.trim();
+    if(!text) return;
+    await addComment(f.id, text);
+    $("file-comment-text").value = "";
+    renderComments(f.id, $("file-comments"));
+    updateCommentCounts();
+  });
+}
+
+function renderPreview(f){
+  const box = $("preview");
+  if(previewUrl){ URL.revokeObjectURL(previewUrl); previewUrl = null; }
+  const type = f.type || "";
+
+  if(type.startsWith("image/")){
+    previewUrl = URL.createObjectURL(f.blob);
+    box.innerHTML = '<img src="' + previewUrl + '" alt="">';
+  }else if(type === "application/pdf"){
+    previewUrl = URL.createObjectURL(f.blob);
+    box.innerHTML = '<iframe src="' + previewUrl + '"></iframe>';
+  }else if(type.startsWith("audio/")){
+    previewUrl = URL.createObjectURL(f.blob);
+    box.innerHTML = '<audio controls style="width:100%" src="' + previewUrl + '"></audio>';
+  }else if(type.startsWith("video/")){
+    previewUrl = URL.createObjectURL(f.blob);
+    box.innerHTML = '<video controls style="max-width:100%;max-height:340px" src="' + previewUrl + '"></video>';
+  }else if(type.startsWith("text/") || /json|csv|xml/.test(type) || /\.(txt|md|csv|json)$/i.test(f.name)){
+    f.blob.slice(0, 100000).text()
+      .then(t => { box.innerHTML = "<pre>" + esc(t) + "</pre>"; })
+      .catch(() => { box.textContent = "לא ניתן להציג תצוגה מקדימה"; });
+  }else{
+    box.textContent = "אין תצוגה מקדימה לסוג קובץ זה - ניתן להוריד אותו";
+  }
+}
+
+function closeDrawer(){
+  $("overlay").classList.add("hidden");
+  if(previewUrl){ URL.revokeObjectURL(previewUrl); previewUrl = null; }
+  $("drawer").innerHTML = "";
+}
+$("overlay").addEventListener("click", e => { if(e.target === $("overlay")) closeDrawer(); });
+document.addEventListener("keydown", e => {
+  if(e.key === "Escape" && !$("overlay").classList.contains("hidden")) closeDrawer();
+});
+
+/* =========================================================
+   הערות
+   ========================================================= */
+function addComment(fileId, text){
+  return dbPut("comments", {
+    id: uid(),
+    fileId: fileId,
+    text: text,
+    author: currentUser.name,
+    email: currentUser.email || "",
+    createdAt: Date.now()
+  });
+}
+
+async function renderComments(fileId, container){
+  const list = (await dbAll("comments"))
+    .filter(c => c.fileId === fileId)
+    .sort((a,b) => b.createdAt - a.createdAt);
+
+  if(!list.length){
+    container.innerHTML = '<div class="empty">אין עדיין הערות</div>';
+    return;
+  }
+
+  container.innerHTML = list.map(c =>
+    '<div class="comment">' +
+      '<div class="comment-head">' +
+        '<span class="comment-author">' + esc(c.author) + '</span>' +
+        '<span>' + fmtDate(c.createdAt) +
+          ' <button class="comment-del" data-del="' + c.id + '" title="מחיקה">🗑️</button>' +
+        '</span>' +
+      '</div>' +
+      '<div class="comment-body">' + esc(c.text) + '</div>' +
+    '</div>').join("");
+
+  container.querySelectorAll("[data-del]").forEach(b =>
+    b.addEventListener("click", async () => {
+      if(!confirm("למחוק את ההערה?")) return;
+      await dbDel("comments", b.dataset.del);
+      renderComments(fileId, container);
+      updateCommentCounts();
+    }));
+}
+
+$("general-form").addEventListener("submit", async e => {
+  e.preventDefault();
+  const text = $("general-text").value.trim();
+  if(!text) return;
+  await addComment(GENERAL, text);
+  $("general-text").value = "";
+  renderComments(GENERAL, $("general-comments"));
+});
+
+/* =========================================================
+   גיבוי ושחזור
+   ========================================================= */
+function blobToDataUrl(blob){
+  return new Promise((res,rej) => {
+    const r = new FileReader();
+    r.onload = () => res(r.result);
+    r.onerror = () => rej(r.error);
+    r.readAsDataURL(blob);
+  });
+}
+function dataUrlToBlob(url){ return fetch(url).then(r => r.blob()); }
+
+$("btn-export").addEventListener("click", async () => {
+  toast("מכין גיבוי...");
+  const files = await dbAll("files");
+  const payload = {
+    version: 1,
+    exportedAt: new Date().toISOString(),
+    comments: await dbAll("comments"),
+    files: []
+  };
+  for(const f of files){
+    const rec = {...f, data: await blobToDataUrl(f.blob)};
+    delete rec.blob;
+    payload.files.push(rec);
+  }
+  const url = URL.createObjectURL(new Blob([JSON.stringify(payload)], {type:"application/json"}));
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "kt-internal-backup-" + new Date().toISOString().slice(0,10) + ".json";
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 4000);
+  toast("הגיבוי הורד");
+});
+
+$("btn-import").addEventListener("click", () => $("import-input").click());
+$("import-input").addEventListener("change", async e => {
+  const file = e.target.files[0];
+  e.target.value = "";
+  if(!file) return;
+  if(!confirm("שחזור יוסיף את הקבצים וההערות מהגיבוי לנתונים הקיימים. להמשיך?")) return;
+  try{
+    const data = JSON.parse(await file.text());
+    for(const f of (data.files || [])){
+      const rec = {...f, blob: await dataUrlToBlob(f.data)};
+      delete rec.data;
+      await dbPut("files", rec);
+    }
+    for(const c of (data.comments || [])) await dbPut("comments", c);
+    toast("השחזור הושלם");
+    refreshFiles();
+    renderComments(GENERAL, $("general-comments"));
+  }catch(err){
+    toast("קובץ הגיבוי אינו תקין");
+  }
+});
+
+/* =========================================================
+   אתחול
+   ========================================================= */
+(function init(){
+  const s = loadSession();
+  if(s) enter(s);
+  else initGoogle();
+})();
+</script>
+</body>
+</html>
