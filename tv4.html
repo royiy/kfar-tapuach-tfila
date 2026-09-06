@@ -196,8 +196,8 @@
 </head>
 <body onclick="initInteraction();">
 
-    <div class="screen hidden" id="rosh-hashana-screen">
-        <iframe class="page-frame" src="Rosh_Hashana.html" title="לוח זמנים לראש השנה" scrolling="no"></iframe>
+    <div class="screen visible" id="rosh-hashana-screen">
+        <iframe class="page-frame" src="Rosh_Hashana%20(1).html" title="לוח זמנים לראש השנה" scrolling="no"></iframe>
     </div>
 
     <div class="screen hidden" id="main-screen">
@@ -393,30 +393,12 @@
             });
         }
 
-        let currentScreen = 'main-screen';
-        let screenToggleInterval = null;
-        const screenCycle = ['main-screen', 'rosh-hashana-screen'];
-        let screenCycleIndex = 0;
-
-        function cycleThroughScreens() {
-            if (screenToggleInterval) {
-                clearTimeout(screenToggleInterval);
-            }
-
-            screenCycleIndex = (screenCycleIndex + 1) % screenCycle.length;
-            const nextScreenId = screenCycle[screenCycleIndex];
-            showScreen(nextScreenId);
-            currentScreen = nextScreenId;
-
-            const nextDelay = nextScreenId === 'main-screen' ? 30000 : 10000;
-            screenToggleInterval = setTimeout(cycleThroughScreens, nextDelay);
-        }
+        // מצב ראש השנה: מסך יחיד קבוע, ללא החלפת מסכים
+        let currentScreen = 'rosh-hashana-screen';
 
         window.addEventListener('load', () => {
-            showScreen('main-screen');
-            currentScreen = 'main-screen';
-            screenCycleIndex = 0;
-            screenToggleInterval = setTimeout(cycleThroughScreens, 30000);
+            showScreen('rosh-hashana-screen');
+            currentScreen = 'rosh-hashana-screen';
         });
 
         // ===== ספירת העומר =====
