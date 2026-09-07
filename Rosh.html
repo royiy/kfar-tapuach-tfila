@@ -32,12 +32,19 @@
     height:100vh;
     display:flex;
     flex-direction:column;
+    padding:14.6px 42px;
     padding:clamp(8px,1.35vh,15px) clamp(18px,2.6vw,42px);
-    gap:clamp(5px,0.85vh,10px);
   }
 
+  /* תחליף ל-flex gap, שלא נתמך בדפדפני טלוויזיה ישנים */
+  .shell > * + *{ margin-top:9.2px; }
+  .illustrated-col{ margin-left:28px; }
+  .schedule-card + .schedule-card{ margin-right:28px; }
+  .weekday-group + .weekday-group{ margin-right:18px; }
+  .pill-row .pill{ margin:4.5px; }
+
   .page-header{ display:flex; align-items:center; justify-content:center; }
-  .page-title{ margin:0; color:var(--navy); font-weight:800; font-size:clamp(22px,3.6vh,36px); text-align:center; }
+  .page-title{ margin:0; color:var(--navy); font-weight:800; font-size:36px; font-size:clamp(22px,3.6vh,36px); text-align:center; }
   .header-rule{ height:2px; background:linear-gradient(90deg, var(--gold) 0%, rgba(201,162,39,0) 100%); }
 
   .page{
@@ -45,11 +52,11 @@
     display:flex;
     flex-direction:row-reverse; /* first child (illustrated col) -> physical left */
     align-items:stretch;
-    gap:clamp(14px,2vw,28px);
   }
 
   /* ================= LEFT ILLUSTRATED COLUMN ================= */
   .illustrated-col{
+    flex:0 0 480px;
     flex:0 0 clamp(260px,32vw,480px);
     min-width:0;
     display:flex;
@@ -65,12 +72,13 @@
     position:relative;
     width:100%;
     flex:0 0 auto;
-    aspect-ratio:462 / 455;
+    height:455px;
     max-height:462px;
+    aspect-ratio:462 / 455;
     overflow:hidden;
   }
-  .photo-frame img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:32% 45%; display:block; }
-  .photo-scrim{ position:absolute; inset:0; background:linear-gradient(180deg, rgba(15,27,66,0) 62%, rgba(11,19,54,0.75) 100%); }
+  .photo-frame img{ position:absolute; top:0; right:0; bottom:0; left:0; width:100%; height:100%; object-fit:cover; object-position:32% 45%; display:block; }
+  .photo-scrim{ position:absolute; top:0; right:0; bottom:0; left:0; background:linear-gradient(180deg, rgba(15,27,66,0) 62%, rgba(11,19,54,0.75) 100%); }
 
   /* לוח המשך בצבע אחיד — ממלא את שאר גובה העמוד בלי מתיחת תמונה */
   .tagline-panel{
@@ -80,19 +88,19 @@
     display:flex;
     align-items:center;
     justify-content:center;
+    padding:28.1px 16px;
     padding:clamp(16px,2.6vh,30px) 16px;
   }
   .tagline{ width:100%; text-align:center; }
-  .tagline-rule{ width:55%; height:1px; background:var(--gold); margin:0 auto clamp(5px,0.9vh,9px); }
-  .tagline-text{ color:#fff; font-weight:700; font-size:clamp(13px,1.9vh,19px); line-height:1.5; }
-  .tagline-rule.bottom{ margin:clamp(5px,0.9vh,9px) auto 0; }
+  .tagline-rule{ width:55%; height:1px; background:var(--gold); margin:0 auto 9px; margin:0 auto clamp(5px,0.9vh,9px); }
+  .tagline-text{ color:#fff; font-weight:700; font-size:19px; font-size:clamp(13px,1.9vh,19px); line-height:1.5; }
+  .tagline-rule.bottom{ margin:9px auto 0; margin:clamp(5px,0.9vh,9px) auto 0; }
 
   /* ================= RIGHT: SCHEDULE COLUMNS ================= */
   .schedule-columns{
     flex:1;
     display:flex;
     align-items:stretch;
-    gap:clamp(14px,2vw,28px);
     min-width:0;
   }
 
@@ -107,7 +115,7 @@
     flex-direction:column;
   }
 
-  .day-section + .day-section{ margin-top:clamp(6px,0.85vh,11px); }
+  .day-section + .day-section{ margin-top:9.2px; margin-top:clamp(6px,0.85vh,11px); }
 
   .day-header{
     position:relative;
@@ -115,6 +123,7 @@
     display:flex;
     align-items:center;
     justify-content:center;
+    padding:10.3px 68px;
     padding:clamp(6px,0.95vh,11px) clamp(52px,5.2vw,68px);
   }
   .day-header .accent-tab{
@@ -122,16 +131,18 @@
     background:var(--gold); border-radius:4px 0 0 4px;
   }
   .day-header .icon-sun{
-    position:absolute; right:clamp(16px,1.8vw,24px); top:50%; transform:translateY(-50%);
-    width:clamp(17px,2vw,23px); height:clamp(17px,2vw,23px); color:var(--gold);
+    position:absolute; right:24px; right:clamp(16px,1.8vw,24px); top:50%; transform:translateY(-50%);
+    width:23px;
+    width:clamp(17px,2vw,23px); height:23px; height:clamp(17px,2vw,23px); color:var(--gold);
   }
-  .day-title{ color:#fff; font-weight:700; font-size:clamp(15px,2.2vh,22px); text-align:center; }
-  .day-title .sub{ font-weight:400; color:var(--gold-soft); margin-inline-start:6px; }
+  .day-title{ color:#fff; font-weight:700; font-size:22px; font-size:clamp(15px,2.2vh,22px); text-align:center; }
+  .day-title .sub{ font-weight:400; color:var(--gold-soft); margin-right:6px; margin-inline-start:6px; }
 
   .day-rows{ display:flex; flex-direction:column; flex:1; }
   .day-row{
     display:flex;
     align-items:center;
+    padding:7.3px 24px;
     padding:clamp(3px,0.68vh,8px) clamp(16px,1.8vw,24px);
     border-bottom:1px solid var(--divider);
   }
@@ -142,22 +153,27 @@
     flex:1;
     text-align:right;
     color:var(--ink-soft);
+    font-size:19px;
     font-size:clamp(14.5px,1.9vh,19px);
   }
   .day-row .label .approx{ color:var(--ink-muted); font-weight:400; font-size:0.86em; }
   .day-row .leader-slot{
+    flex:0 0 128px;
     flex:0 0 clamp(82px,8.5vw,128px);
     text-align:center;
     color:var(--gold);
     font-weight:500;
+    font-size:15px;
     font-size:clamp(11.5px,1.5vh,15px);
   }
-  .row-divider{ width:1px; align-self:stretch; background:var(--divider); margin:0 clamp(9px,1.1vw,15px); }
+  .row-divider{ width:1px; align-self:stretch; background:var(--divider); margin:0 15px; margin:0 clamp(9px,1.1vw,15px); }
   .day-row .time{
+    flex:0 0 82px;
     flex:0 0 clamp(62px,6vw,82px);
     text-align:center;
     color:var(--ink);
     font-weight:700;
+    font-size:21px;
     font-size:clamp(15.5px,2.05vh,21px);
     font-variant-numeric:tabular-nums;
   }
@@ -185,15 +201,16 @@
     display:flex;
     align-items:center;
     justify-content:center;
-    gap:clamp(8px,1.4vw,18px);
+    padding:10.8px 16px;
     padding:clamp(6px,1vh,11px) clamp(8px,1.2vw,16px);
   }
   .weekday-groups > .weekday-group:nth-child(odd){ background:var(--stripe); }
-  .weekday-group:not(:first-child){ border-inline-start:1px solid var(--divider); }
+  .weekday-group:not(:first-child){ border-right:1px solid var(--divider); border-inline-start:1px solid var(--divider); }
 
   .weekday-label{
     color:var(--ink-soft);
     font-weight:600;
+    font-size:15.5px;
     font-size:clamp(12px,1.45vh,15.5px);
     white-space:nowrap;
   }
@@ -202,15 +219,16 @@
     display:flex;
     align-items:center;
     justify-content:center;
-    gap:clamp(5px,0.7vw,9px);
     flex-wrap:wrap;
   }
   .pill{
     background:var(--navy-deep);
     color:#fff;
     border-radius:8px;
+    padding:6.5px 13px;
     padding:clamp(4px,0.6vh,7px) clamp(8px,1vw,13px);
     font-weight:700;
+    font-size:15.5px;
     font-size:clamp(11.5px,1.5vh,15.5px);
     font-variant-numeric:tabular-nums;
     white-space:nowrap;
@@ -223,11 +241,13 @@
 
   @media (max-width:900px){
     .page{ flex-direction:column; }
-    .illustrated-col{ flex:0 0 auto; height:auto; }
-    .photo-frame{ max-height:min(34vh,300px); aspect-ratio:auto; height:min(34vh,300px); }
+    .illustrated-col{ flex:0 0 auto; height:auto; margin-left:0; margin-bottom:28px; }
+    .schedule-card + .schedule-card{ margin-right:0; margin-top:28px; }
+    .weekday-group + .weekday-group{ margin-right:0; }
+    .photo-frame{ max-height:300px; height:300px; }
     .schedule-columns{ flex-direction:column; }
     .weekday-groups{ flex-direction:column; }
-    .weekday-group:not(:first-child){ border-inline-start:none; border-top:1px solid var(--divider); }
+    .weekday-group:not(:first-child){ border-right:none; border-inline-start:none; border-top:1px solid var(--divider); }
   }
 </style>
 </head>
@@ -262,7 +282,7 @@
         <div class="day-section">
           <div class="day-header">
             <span class="accent-tab"></span>
-            <svg class="icon-sun" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
+            <svg class="icon-sun" width="23" height="23" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
               <circle cx="15" cy="15" r="6" fill="currentColor"/>
               <g stroke="currentColor" stroke-width="2" stroke-linecap="round">
                 <line x1="15" y1="1" x2="15" y2="5"/><line x1="15" y1="25" x2="15" y2="29"/>
@@ -282,7 +302,7 @@
         <div class="day-section">
           <div class="day-header">
             <span class="accent-tab"></span>
-            <svg class="icon-sun" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
+            <svg class="icon-sun" width="23" height="23" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
               <circle cx="15" cy="15" r="6" fill="currentColor"/>
               <g stroke="currentColor" stroke-width="2" stroke-linecap="round">
                 <line x1="15" y1="1" x2="15" y2="5"/><line x1="15" y1="25" x2="15" y2="29"/>
@@ -314,7 +334,7 @@
         <div class="day-section">
           <div class="day-header">
             <span class="accent-tab"></span>
-            <svg class="icon-sun" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
+            <svg class="icon-sun" width="23" height="23" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
               <circle cx="15" cy="15" r="6" fill="currentColor"/>
               <g stroke="currentColor" stroke-width="2" stroke-linecap="round">
                 <line x1="15" y1="1" x2="15" y2="5"/><line x1="15" y1="25" x2="15" y2="29"/>
@@ -350,7 +370,7 @@
     <div class="weekday-card">
       <div class="day-header">
         <span class="accent-tab"></span>
-        <svg class="icon-sun" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
+        <svg class="icon-sun" width="23" height="23" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
           <circle cx="15" cy="15" r="6" fill="currentColor"/>
           <g stroke="currentColor" stroke-width="2" stroke-linecap="round">
             <line x1="15" y1="1" x2="15" y2="5"/><line x1="15" y1="25" x2="15" y2="29"/>
