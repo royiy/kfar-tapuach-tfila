@@ -29,22 +29,22 @@
   }
 
   .shell{
-    height:100vh;
+    min-height:100vh;
     display:flex;
     flex-direction:column;
-    padding:14.6px 42px;
+    padding:1.35vh 2.6vw;
     padding:clamp(8px,1.35vh,15px) clamp(18px,2.6vw,42px);
   }
 
   /* תחליף ל-flex gap, שלא נתמך בדפדפני טלוויזיה ישנים */
-  .shell > * + *{ margin-top:9.2px; }
-  .illustrated-col{ margin-left:28px; }
-  .schedule-card + .schedule-card{ margin-right:28px; }
-  .weekday-group + .weekday-group{ margin-right:18px; }
-  .pill-row .pill{ margin:4.5px; }
+  .shell > * + *{ margin-top:0.85vh; }
+  .illustrated-col{ margin-left:2vw; }
+  .schedule-card + .schedule-card{ margin-right:2vw; }
+  .weekday-group + .weekday-group{ margin-right:1.4vw; }
+  .pill-row .pill{ margin:0.35vw; }
 
   .page-header{ display:flex; align-items:center; justify-content:center; }
-  .page-title{ margin:0; color:var(--navy); font-weight:800; font-size:36px; font-size:clamp(22px,3.6vh,36px); text-align:center; }
+  .page-title{ margin:0; color:var(--navy); font-weight:800; font-size:3.6vh; font-size:clamp(22px,3.6vh,36px); text-align:center; }
   .header-rule{ height:2px; background:linear-gradient(90deg, var(--gold) 0%, rgba(201,162,39,0) 100%); }
 
   .page{
@@ -56,7 +56,7 @@
 
   /* ================= LEFT ILLUSTRATED COLUMN ================= */
   .illustrated-col{
-    flex:0 0 480px;
+    flex:0 0 32vw;
     flex:0 0 clamp(260px,32vw,480px);
     min-width:0;
     display:flex;
@@ -72,7 +72,7 @@
     position:relative;
     width:100%;
     flex:0 0 auto;
-    height:455px;
+    height:42vh;
     max-height:462px;
     aspect-ratio:462 / 455;
     overflow:hidden;
@@ -88,13 +88,13 @@
     display:flex;
     align-items:center;
     justify-content:center;
-    padding:28.1px 16px;
+    padding:2.6vh 16px;
     padding:clamp(16px,2.6vh,30px) 16px;
   }
   .tagline{ width:100%; text-align:center; }
-  .tagline-rule{ width:55%; height:1px; background:var(--gold); margin:0 auto 9px; margin:0 auto clamp(5px,0.9vh,9px); }
-  .tagline-text{ color:#fff; font-weight:700; font-size:19px; font-size:clamp(13px,1.9vh,19px); line-height:1.5; }
-  .tagline-rule.bottom{ margin:9px auto 0; margin:clamp(5px,0.9vh,9px) auto 0; }
+  .tagline-rule{ width:55%; height:1px; background:var(--gold); margin:0 auto 0.9vh; margin:0 auto clamp(5px,0.9vh,9px); }
+  .tagline-text{ color:#fff; font-weight:700; font-size:1.9vh; font-size:clamp(13px,1.9vh,19px); line-height:1.5; }
+  .tagline-rule.bottom{ margin:0.9vh auto 0; margin:clamp(5px,0.9vh,9px) auto 0; }
 
   /* ================= RIGHT: SCHEDULE COLUMNS ================= */
   .schedule-columns{
@@ -115,7 +115,7 @@
     flex-direction:column;
   }
 
-  .day-section + .day-section{ margin-top:9.2px; margin-top:clamp(6px,0.85vh,11px); }
+  .day-section + .day-section{ margin-top:0.85vh; margin-top:clamp(6px,0.85vh,11px); }
 
   .day-header{
     position:relative;
@@ -123,7 +123,7 @@
     display:flex;
     align-items:center;
     justify-content:center;
-    padding:10.3px 68px;
+    padding:0.95vh 5.2vw;
     padding:clamp(6px,0.95vh,11px) clamp(52px,5.2vw,68px);
   }
   .day-header .accent-tab{
@@ -131,18 +131,18 @@
     background:var(--gold); border-radius:4px 0 0 4px;
   }
   .day-header .icon-sun{
-    position:absolute; right:24px; right:clamp(16px,1.8vw,24px); top:50%; transform:translateY(-50%);
-    width:23px;
-    width:clamp(17px,2vw,23px); height:23px; height:clamp(17px,2vw,23px); color:var(--gold);
+    position:absolute; right:1.8vw; right:clamp(16px,1.8vw,24px); top:50%; transform:translateY(-50%);
+    width:2vw;
+    width:clamp(17px,2vw,23px); height:2vw; height:clamp(17px,2vw,23px); color:var(--gold);
   }
-  .day-title{ color:#fff; font-weight:700; font-size:22px; font-size:clamp(15px,2.2vh,22px); text-align:center; }
+  .day-title{ color:#fff; font-weight:700; font-size:2.2vh; font-size:clamp(15px,2.2vh,22px); text-align:center; }
   .day-title .sub{ font-weight:400; color:var(--gold-soft); margin-right:6px; margin-inline-start:6px; }
 
   .day-rows{ display:flex; flex-direction:column; flex:1; }
   .day-row{
     display:flex;
     align-items:center;
-    padding:7.3px 24px;
+    padding:0.68vh 1.8vw;
     padding:clamp(3px,0.68vh,8px) clamp(16px,1.8vw,24px);
     border-bottom:1px solid var(--divider);
   }
@@ -153,27 +153,27 @@
     flex:1;
     text-align:right;
     color:var(--ink-soft);
-    font-size:19px;
+    font-size:1.9vh;
     font-size:clamp(14.5px,1.9vh,19px);
   }
   .day-row .label .approx{ color:var(--ink-muted); font-weight:400; font-size:0.86em; }
   .day-row .leader-slot{
-    flex:0 0 128px;
+    flex:0 0 8.5vw;
     flex:0 0 clamp(82px,8.5vw,128px);
     text-align:center;
     color:var(--gold);
     font-weight:500;
-    font-size:15px;
+    font-size:1.5vh;
     font-size:clamp(11.5px,1.5vh,15px);
   }
-  .row-divider{ width:1px; align-self:stretch; background:var(--divider); margin:0 15px; margin:0 clamp(9px,1.1vw,15px); }
+  .row-divider{ width:1px; align-self:stretch; background:var(--divider); margin:0 1.1vw; margin:0 clamp(9px,1.1vw,15px); }
   .day-row .time{
-    flex:0 0 82px;
+    flex:0 0 6vw;
     flex:0 0 clamp(62px,6vw,82px);
     text-align:center;
     color:var(--ink);
     font-weight:700;
-    font-size:21px;
+    font-size:2.05vh;
     font-size:clamp(15.5px,2.05vh,21px);
     font-variant-numeric:tabular-nums;
   }
@@ -201,7 +201,7 @@
     display:flex;
     align-items:center;
     justify-content:center;
-    padding:10.8px 16px;
+    padding:1vh 1.2vw;
     padding:clamp(6px,1vh,11px) clamp(8px,1.2vw,16px);
   }
   .weekday-groups > .weekday-group:nth-child(odd){ background:var(--stripe); }
@@ -210,7 +210,7 @@
   .weekday-label{
     color:var(--ink-soft);
     font-weight:600;
-    font-size:15.5px;
+    font-size:1.45vh;
     font-size:clamp(12px,1.45vh,15.5px);
     white-space:nowrap;
   }
@@ -225,10 +225,10 @@
     background:var(--navy-deep);
     color:#fff;
     border-radius:8px;
-    padding:6.5px 13px;
+    padding:0.6vh 1vw;
     padding:clamp(4px,0.6vh,7px) clamp(8px,1vw,13px);
     font-weight:700;
-    font-size:15.5px;
+    font-size:1.5vh;
     font-size:clamp(11.5px,1.5vh,15.5px);
     font-variant-numeric:tabular-nums;
     white-space:nowrap;
@@ -414,5 +414,44 @@
     </div>
 
 </div>
+
+<script>
+/* התאמה אוטומטית למסך: אם התוכן גבוה מהמסך — מקטינים אותו עד שהוא
+   נכנס במלואו, כך ששום זמן תפילה לא נחתך בתחתית, בכל רזולוציה. */
+(function () {
+  var shell = document.querySelector('.shell');
+  if (!shell) return;
+
+  function fit() {
+    /* איפוס מלא לפני מדידה — fit() רצה כמה פעמים */
+    shell.style.transform = '';
+    shell.style.width = '';
+    shell.style.marginLeft = '';
+    shell.style.transformOrigin = 'top center';
+
+    var have = window.innerHeight;
+    var need = Math.max(
+      shell.scrollHeight,
+      document.body.scrollHeight,
+      document.documentElement.scrollHeight
+    );
+    if (!have || !need) return;
+
+    if (need > have + 1) {
+      /* מקטינים בלבד, בלי לגעת ברוחב — כך המדידה נשארת נכונה
+         והתוכן יושב בדיוק בגובה המסך */
+      var scale = have / need;
+      if (scale < 0.4) scale = 0.4;
+      shell.style.transform = 'scale(' + scale + ')';
+    }
+  }
+
+  if (document.readyState === 'complete') fit();
+  else window.addEventListener('load', fit);
+  window.addEventListener('resize', fit);
+  setTimeout(fit, 400);   /* אחרי טעינת הגופנים */
+  setTimeout(fit, 1500);
+})();
+</script>
 </body>
 </html>
