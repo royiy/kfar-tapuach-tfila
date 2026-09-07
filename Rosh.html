@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <title>לוח זמנים לראש השנה</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&display=swap');
@@ -442,6 +445,12 @@
       shell.style.transform = 'scale(' + scale + ')';
     }
   }
+
+  /* רענון עצמי כל 10 דקות עם מניעת cache — דפדפני טלוויזיה
+     מחזיקים גרסאות ישנות ימים, והמסך רץ בלי שאף אחד נוגע בו */
+  setTimeout(function () {
+    location.replace(location.href.split('?')[0] + '?t=' + new Date().getTime());
+  }, 600000);
 
   if (document.readyState === 'complete') fit();
   else window.addEventListener('load', fit);
