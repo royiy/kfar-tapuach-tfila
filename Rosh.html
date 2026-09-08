@@ -116,6 +116,9 @@
   }
 
   .day-section + .day-section{ margin-top:0.85vh; margin-top:clamp(6px,0.85vh,11px); }
+  /* a section marked .grow absorbs the card's leftover height, stretching its rows evenly */
+  .day-section.grow{ flex:1; display:flex; flex-direction:column; min-height:0; }
+  .day-section.grow > .day-rows > .day-row{ flex:1; }
 
   .day-header{
     position:relative;
@@ -157,6 +160,7 @@
     font-size:clamp(14.5px,1.9vh,19px);
   }
   .day-row .label .approx{ color:var(--ink-muted); font-weight:400; font-size:0.86em; }
+  .day-row .label.emph{ color:var(--ink); font-weight:800; }
   .day-row .time.two-lines{ line-height:1.15; font-size:1.7vh; font-size:clamp(13px,1.7vh,17px); }
   .day-row .leader-slot{
     flex:0 0 8.5vw;
@@ -300,7 +304,7 @@
           </div>
         </div>
 
-        <div class="day-section">
+        <div class="day-section grow">
           <div class="day-header">
             <span class="accent-tab"></span>
             <svg class="icon-sun" width="23" height="23" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
@@ -378,7 +382,7 @@
             <span class="day-title">צום גדליה<span class="sub">(יום שני)</span></span>
           </div>
           <div class="day-rows">
-            <div class="day-row"><span class="label">כניסת הצום</span><span class="leader-slot"></span><span class="row-divider"></span><span class="time">4:51</span></div>
+            <div class="day-row"><span class="label emph">כניסת הצום</span><span class="leader-slot"></span><span class="row-divider"></span><span class="time">4:51</span></div>
             <div class="day-row"><span class="label">סליחות <span class="approx">(7:05 – במידה ויהיה מניין)</span></span><span class="leader-slot"></span><span class="row-divider"></span><span class="time two-lines">5:35<br>7:05</span></div>
             <div class="day-row"><span class="label">מנחה</span><span class="leader-slot"></span><span class="row-divider"></span><span class="time two-lines">13:15<br>18:15</span></div>
             <div class="day-row closing"><span class="label">צאת הצום וערבית</span><span class="leader-slot"></span><span class="row-divider"></span><span class="time">19:09</span></div>
