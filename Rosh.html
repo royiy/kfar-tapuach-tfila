@@ -449,28 +449,36 @@
   var shell = document.querySelector('.shell');
   if (!shell) return;
 
+  /* מודדים את גובה התוכן, ואם הוא גבוה מהמסך מקטינים בקנה מידה אחיד.
+     הקטנה אחידה מצרה גם את הרוחב, ולכן במקביל מרחיבים את ה-shell פי 1/scale
+     כדי שאחרי ההקטנה הוא יכסה בדיוק את רוחב המסך — בלי שוליים בצדדים.
+     שינוי הרוחב משנה את גובה התוכן, אז מתכנסים בכמה איטרציות. */
   function fit() {
-    /* איפוס מלא לפני מדידה — fit() רצה כמה פעמים */
-    shell.style.transform = '';
-    shell.style.width = '';
-    shell.style.marginLeft = '';
-    shell.style.transformOrigin = 'top center';
+    var vw = document.documentElement.clientWidth || window.innerWidth;
+    var vh = window.innerHeight;
+    if (!vw || !vh) return;
 
-    var have = window.innerHeight;
-    var need = Math.max(
-      shell.scrollHeight,
-      document.body.scrollHeight,
-      document.documentElement.scrollHeight
-    );
-    if (!have || !need) return;
+    shell.style.position = 'fixed';
+    shell.style.top = '0';
+    shell.style.left = '0';
+    shell.style.transformOrigin = 'top left';
 
-    if (need > have + 1) {
-      /* מקטינים בלבד, בלי לגעת ברוחב — כך המדידה נשארת נכונה
-         והתוכן יושב בדיוק בגובה המסך */
-      var scale = have / need;
-      if (scale < 0.4) scale = 0.4;
-      shell.style.transform = 'scale(' + scale + ')';
+    var scale = 1, i, need, next;
+    for (i = 0; i < 6; i++) {
+      shell.style.width = Math.round(vw / scale) + 'px';
+      shell.style.transform = '';            /* מדידה תמיד ללא טרנספורם */
+      need = shell.scrollHeight;
+      next = need > vh ? vh / need : 1;
+      if (next < 0.4) next = 0.4;
+      if (Math.abs(next - scale) < 0.004) { scale = next; break; }
+      scale = next;
     }
+
+    /* מעבר אחרון: לוודא ששום שורה לא נחתכת בתחתית */
+    shell.style.width = Math.round(vw / scale) + 'px';
+    need = shell.scrollHeight;
+    if (need * scale > vh) scale = vh / need;
+    shell.style.transform = 'scale(' + scale + ')';
   }
 
   /* רענון עצמי כל 10 דקות עם מניעת cache — דפדפני טלוויזיה
