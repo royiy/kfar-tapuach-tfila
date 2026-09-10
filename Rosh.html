@@ -466,7 +466,7 @@
     var scale = 1, i, need, next;
     for (i = 0; i < 6; i++) {
       shell.style.width = Math.round(vw / scale) + 'px';
-      shell.style.transform = '';            /* מדידה תמיד ללא טרנספורם */
+      setScale(1);                           /* מדידה תמיד ללא טרנספורם */
       need = shell.scrollHeight;
       next = need > vh ? vh / need : 1;
       if (next < 0.4) next = 0.4;
@@ -478,7 +478,33 @@
     shell.style.width = Math.round(vw / scale) + 'px';
     need = shell.scrollHeight;
     if (need * scale > vh) scale = vh / need;
-    shell.style.transform = 'scale(' + scale + ')';
+    setScale(scale);
+    report(scale);
+  }
+
+  /* דפדפני טלוויזיה ישנים דורשים את הקידומת -webkit- */
+  function setScale(v) {
+    var t = v === 1 ? '' : 'scale(' + v + ')';
+    shell.style.webkitTransform = t;
+    shell.style.transform = t;
+  }
+
+  /* אבחון זמני — מציג בפינה את מידות המסך והקנה־מידה בפועל.
+     אחרי שמאתרים את הבעיה בטלוויזיה אפשר למחוק את הבלוק הזה. */
+  var dbg = document.createElement('div');
+  dbg.style.cssText = 'position:fixed;left:3px;bottom:1px;z-index:9999;' +
+    'font:11px/1.2 monospace;color:#16265A;background:rgba(255,255,255,0.7);' +
+    'padding:1px 5px;border-radius:4px;direction:ltr;';
+  document.body.appendChild(dbg);
+
+  function report(v) {
+    var r = shell.getBoundingClientRect();
+    dbg.textContent = 'v7 win' + window.innerWidth + 'x' + window.innerHeight +
+      ' cw' + document.documentElement.clientWidth +
+      ' scr' + (screen.width || 0) + 'x' + (screen.height || 0) +
+      ' dpr' + (window.devicePixelRatio || 1) +
+      ' s' + v.toFixed(3) +
+      ' box' + Math.round(r.left) + '..' + Math.round(r.right) + '/' + Math.round(r.bottom);
   }
 
   /* רענון עצמי כל 10 דקות עם מניעת cache — דפדפני טלוויזיה
