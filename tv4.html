@@ -405,7 +405,7 @@
             showScreen(nextScreenId);
             currentScreen = nextScreenId;
 
-            const nextDelay = nextScreenId === 'main-screen' ? 30000 : 10000;
+            const nextDelay = nextScreenId === 'main-screen' ? 30000 : 5000;
             screenToggleInterval = setTimeout(cycleThroughScreens, nextDelay);
         }
 
