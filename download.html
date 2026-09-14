@@ -300,12 +300,13 @@
         <div class="sheet-quote">וּתְשׁוּבָה וּתְפִלָּה וּצְדָקָה מַעֲבִירִין אֶת רוֹעַ הַגְּזֵרָה</div>
 
         <footer class="sheet-footer">
-            בית הכנסת המרכזי כפר תפוח &nbsp;|&nbsp; הזמנים מתעדכנים מדי שבוע
+            בית הכנסת המרכזי כפר תפוח
         </footer>
     </div>
 
     <script>
         const DEFAULT_SHACHARIT_SHABBAT = '08:00';
+        const DEFAULT_DRASHA_TITLE = 'דרשת הרב';
         let jsonData = {};
 
         /* ---------- עזרים ---------- */
@@ -353,8 +354,10 @@
             dayHtml += rowHtml('מנחה גדולה', day.mincha_gedola);
             dayHtml += rowHtml('מנחה של שבת',
                 day.mincha_shabbat || (day.tzeit_shabbat ? addMinutesToTimeStr(day.tzeit_shabbat, -130) : ''));
-            if (jsonData.special_event && jsonData.special_event.title) {
-                dayHtml += rowHtml(jsonData.special_event.title, jsonData.special_event.time, true);
+            // דרשת/שיעור הרב – נשלט מ-data.json, כמחרוזת שעה או כאובייקט {title, time}
+            if (day.drasha) {
+                const drasha = (typeof day.drasha === 'string') ? { time: day.drasha } : day.drasha;
+                dayHtml += rowHtml(drasha.title || DEFAULT_DRASHA_TITLE, drasha.time, true);
             }
             dayHtml += rowHtml('שקיעה', day.shkiya);
             dayHtml += rowHtml('צאת שבת וערבית', day.tzeit_shabbat);
