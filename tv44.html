@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>לוח זמנים להורדה – בית הכנסת המרכזי כפר תפוח</title>
+    <link href="https://fonts.googleapis.com/css2?family=Alef:wght@400;700&family=Frank+Ruhl+Libre:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --deep-navy: #0a1628;
+            --royal-blue: #1e3a5f;
+            --gold: #d4af37;
+            --warm-gold: #f4e4c1;
+            --cream: #faf8f3;
+            --soft-white: #ffffff;
+            --charcoal: #2a2a2a;
+            --shadow-blue: rgba(30, 58, 95, 0.15);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Alef', sans-serif;
+            background: #e9e5db;
+            color: var(--charcoal);
+            padding: 24px 16px 60px;
+        }
+
+        /* ---------- סרגל הכלים ---------- */
+        .toolbar {
+            max-width: 210mm;
+            margin: 0 auto 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--deep-navy);
+            border-radius: 14px;
+            padding: 14px 20px;
+            box-shadow: 0 8px 25px var(--shadow-blue);
+        }
+        .toolbar-title {
+            font-family: 'Frank Ruhl Libre', serif;
+            font-size: 20px;
+            color: var(--warm-gold);
+        }
+        .toolbar-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+        .btn {
+            font-family: 'Alef', sans-serif;
+            font-size: 16px;
+            border: none;
+            border-radius: 10px;
+            padding: 11px 22px;
+            cursor: pointer;
+            transition: transform .12s ease, box-shadow .12s ease, opacity .12s ease;
+        }
+        .btn:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(0,0,0,.25); }
+        .btn:disabled { opacity: .6; cursor: default; transform: none; box-shadow: none; }
+        .btn-primary { background: var(--gold); color: var(--deep-navy); font-weight: 700; }
+        .btn-secondary { background: rgba(255,255,255,.12); color: var(--soft-white); border: 1px solid rgba(212,175,55,.45); }
+
+        .status-msg {
+            max-width: 210mm;
+            margin: -10px auto 16px;
+            font-size: 14px;
+            color: var(--royal-blue);
+            text-align: center;
+            min-height: 18px;
+        }
+        .status-msg.error { color: #b3261e; }
+
+        /* ---------- הדף להדפסה ---------- */
+        .sheet {
+            width: 210mm;
+            min-height: 297mm;
+            margin: 0 auto;
+            background: var(--cream);
+            box-shadow: 0 10px 40px rgba(0,0,0,.22);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .sheet-hero {
+            background: linear-gradient(165deg, var(--deep-navy) 0%, var(--royal-blue) 100%);
+            border-bottom: 5px solid var(--gold);
+            padding: 20px 26px;
+            text-align: center;
+            color: var(--soft-white);
+        }
+        .sheet-title { font-family: 'Frank Ruhl Libre', serif; font-size: 30px; line-height: 1.15; }
+        .sheet-location { font-family: 'Frank Ruhl Libre', serif; font-size: 17px; color: var(--warm-gold); margin-top: 2px; }
+        .sheet-parsha {
+            display: inline-block;
+            margin-top: 12px;
+            background: rgba(255,255,255,.1);
+            border: 1px solid rgba(212,175,55,.35);
+            border-radius: 50px;
+            padding: 6px 26px;
+        }
+        .sheet-parsha .label { font-size: 13px; color: var(--warm-gold); }
+        .sheet-parsha .value { font-family: 'Frank Ruhl Libre', serif; font-size: 22px; }
+        .sheet-date { font-size: 13px; color: var(--warm-gold); margin-top: 10px; }
+
+        .sheet-body {
+            flex: 1;
+            padding: 20px 26px 12px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            align-content: start;
+        }
+        .card-full { grid-column: 1 / -1; }
+
+        .card {
+            background: var(--soft-white);
+            border-top: 4px solid var(--gold);
+            border-radius: 12px;
+            padding: 12px 16px 14px;
+            box-shadow: 0 4px 14px var(--shadow-blue);
+        }
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            border-bottom: 2px solid #f0ede3;
+            padding-bottom: 8px;
+            margin-bottom: 8px;
+        }
+        .card-title { font-family: 'Frank Ruhl Libre', serif; font-size: 20px; color: var(--royal-blue); }
+
+        .section-title {
+            font-family: 'Frank Ruhl Libre', serif;
+            font-size: 16px;
+            color: var(--royal-blue);
+            border-bottom: 2px solid var(--gold);
+            padding-bottom: 3px;
+            margin: 10px 0 4px;
+        }
+        .section-title:first-child { margin-top: 0; }
+
+        .row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 6px 0;
+            border-bottom: 1px solid #f5f2e8;
+            font-size: 15px;
+        }
+        .row:last-child { border-bottom: none; }
+        .time {
+            font-family: 'Frank Ruhl Libre', serif;
+            font-size: 16px;
+            color: var(--royal-blue);
+            background: #e8f2ff;
+            border-radius: 6px;
+            padding: 2px 12px;
+            min-width: 62px;
+            text-align: center;
+            direction: ltr;
+        }
+        .row.emphasis {
+            background: var(--warm-gold);
+            border-right: 4px solid var(--gold);
+            border-bottom: none;
+            border-radius: 6px;
+            padding: 7px 8px;
+            margin: 4px 0;
+        }
+        .row.emphasis .label { font-weight: 700; color: var(--deep-navy); }
+        .row.emphasis .time { background: var(--gold); color: var(--soft-white); font-weight: 700; }
+
+        .weekday-block {
+            background: #f9f5ff;
+            border-right: 4px solid var(--gold);
+            border-radius: 10px;
+            padding: 8px 10px;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+        .weekday-block:last-child { margin-bottom: 0; }
+        .weekday-name { color: var(--royal-blue); font-size: 15px; margin-bottom: 5px; }
+        .pill {
+            font-family: 'Frank Ruhl Libre', serif;
+            font-size: 15px;
+            color: var(--soft-white);
+            background: var(--deep-navy);
+            border-radius: 8px;
+            padding: 3px 12px;
+            margin: 2px;
+            display: inline-block;
+        }
+
+        .shiur-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+        .shiur-block {
+            background: linear-gradient(135deg, #f5f9ff 0%, #eef5ff 100%);
+            border-right: 4px solid var(--royal-blue);
+            border-radius: 10px;
+            padding: 9px 11px;
+        }
+        .shiur-title { font-family: 'Frank Ruhl Libre', serif; font-size: 16px; color: var(--royal-blue); margin-bottom: 3px; }
+        .shiur-time {
+            font-family: 'Frank Ruhl Libre', serif;
+            font-size: 13px;
+            color: var(--soft-white);
+            background: var(--royal-blue);
+            border-radius: 4px;
+            padding: 1px 8px;
+            display: inline-block;
+            margin-bottom: 4px;
+        }
+        .shiur-teacher { font-size: 13px; color: var(--charcoal); }
+
+        .sheet-quote {
+            margin: 4px 26px 0;
+            text-align: center;
+            font-family: 'Frank Ruhl Libre', serif;
+            font-size: 17px;
+            color: var(--royal-blue);
+            border-top: 2px solid var(--gold);
+            border-bottom: 2px solid var(--gold);
+            padding: 8px 0;
+        }
+
+        .sheet-footer {
+            background: var(--deep-navy);
+            color: var(--warm-gold);
+            text-align: center;
+            padding: 10px 26px;
+            margin-top: 12px;
+            font-size: 13px;
+        }
+
+        /* ---------- הדפסה ---------- */
+        @page { size: A4 portrait; margin: 0; }
+        @media print {
+            body { background: var(--soft-white); padding: 0; }
+            .toolbar, .status-msg { display: none !important; }
+            .sheet { box-shadow: none; margin: 0; width: 210mm; min-height: 297mm; }
+            .card, .shiur-block, .weekday-block, .sheet-hero, .sheet-footer, .row.emphasis, .time, .pill {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+
+        @media (max-width: 240mm) {
+            .sheet { width: 100%; max-width: 210mm; min-height: 0; }
+        }
+        @media (max-width: 700px) {
+            body { padding: 14px 10px 40px; }
+            .sheet-body { grid-template-columns: 1fr; }
+            .shiur-grid { grid-template-columns: 1fr; }
+            .toolbar { flex-direction: column; align-items: stretch; text-align: center; }
+            .toolbar-actions { justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-title">לוח זמני התפילות – להורדה והדפסה</div>
+        <div class="toolbar-actions">
+            <button class="btn btn-primary" id="download-btn" onclick="downloadPdf()">⬇️ הורדת PDF</button>
+            <button class="btn btn-secondary" onclick="window.print()">🖨️ הדפסה</button>
+        </div>
+    </div>
+
+    <div class="status-msg" id="status"></div>
+
+    <div class="sheet" id="sheet">
+        <header class="sheet-hero">
+            <div class="sheet-title">בית הכנסת המרכזי</div>
+            <div class="sheet-location">כפר תפוח</div>
+            <div class="sheet-parsha">
+                <span class="label">פרשת השבוע</span>
+                <span class="value" id="parsha-name">טוען...</span>
+            </div>
+            <div class="sheet-date" id="hebrew-date"></div>
+        </header>
+
+        <div class="sheet-body">
+            <section class="card">
+                <div class="card-header"><span>🕍</span><h2 class="card-title">תפילות שבת</h2></div>
+                <div id="shabbat-times"></div>
+            </section>
+
+            <section class="card">
+                <div class="card-header"><span>✨</span><h2 class="card-title">תפילות חול</h2></div>
+                <div id="weekday-times"></div>
+            </section>
+
+            <section class="card card-full">
+                <div class="card-header"><span>📚</span><h2 class="card-title">שיעורים</h2></div>
+                <div class="shiur-grid" id="shiurim"></div>
+            </section>
+        </div>
+
+        <div class="sheet-quote">וּתְשׁוּבָה וּתְפִלָּה וּצְדָקָה מַעֲבִירִין אֶת רוֹעַ הַגְּזֵרָה</div>
+
+        <footer class="sheet-footer">
+            בית הכנסת המרכזי כפר תפוח &nbsp;|&nbsp; הזמנים מתעדכנים מדי שבוע &nbsp;|&nbsp; <span id="generated-on"></span>
+        </footer>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script>
+        /* ברירות מחדל – משמשות אם השדה חסר ב-data.json */
+        const DEFAULTS = {
+            shacharit_shabbat: '08:00',
+            shiurim: [
+                { title: 'שיעור בדף היומי', time: 'א׳ - ה׳ | 20:30', teacher: 'אלעד אמסטרדם' },
+                { title: 'שיעור באורות', time: 'יום רביעי | 21:15', teacher: 'הרב שמעון רוזנצווייג' },
+                { title: 'כולל יום שישי', time: '09:00 - 11:00', teacher: 'סוגיה בפרשת שבוע | הרב צביקה הרץ' }
+            ]
+        };
+
+        let jsonData = {};
+
+        /* ---------- עזרים ---------- */
+        function addMinutesToTimeStr(timeStr, mins) {
+            const parts = String(timeStr).split(':');
+            if (parts.length < 2) return timeStr;
+            const h = parseInt(parts[0], 10);
+            const m = parseInt(parts[1], 10);
+            if (isNaN(h) || isNaN(m)) return timeStr;
+            const total = (h * 60 + m + mins + 24 * 60) % (24 * 60);
+            return String(Math.floor(total / 60)).padStart(2, '0') + ':' + String(total % 60).padStart(2, '0');
+        }
+
+        function escapeHtml(value) {
+            return String(value)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;');
+        }
+
+        function rowHtml(label, time, emphasis) {
+            if (!time) return '';
+            return '<div class="row' + (emphasis ? ' emphasis' : '') + '">' +
+                   '<span class="label">' + escapeHtml(label) + '</span>' +
+                   '<span class="time">' + escapeHtml(time) + '</span></div>';
+        }
+
+        function toGematria(n) {
+            if (n === 15) return 'ט״ו';
+            if (n === 16) return 'ט״ז';
+            const vals = [400,300,200,100,90,80,70,60,50,40,30,20,10,9,8,7,6,5,4,3,2,1];
+            const chars = ['ת','ש','ר','ק','צ','פ','ע','ס','נ','מ','ל','כ','י','ט','ח','ז','ו','ה','ד','ג','ב','א'];
+            let s = '', rem = n;
+            for (let i = 0; i < vals.length; i++) {
+                while (rem >= vals[i]) { s += chars[i]; rem -= vals[i]; }
+            }
+            if (s.length === 1) return s + '׳';
+            return s.slice(0, -1) + '״' + s.slice(-1);
+        }
+
+        function hebrewDateString(now) {
+            const parts = new Intl.DateTimeFormat('he-IL-u-ca-hebrew', {day:'numeric', month:'long', year:'numeric'}).formatToParts(now);
+            const dayNum = parseInt(parts.find(p => p.type === 'day').value, 10);
+            const monthName = parts.find(p => p.type === 'month').value;
+            const yearNum = parseInt(parts.find(p => p.type === 'year').value, 10);
+            const yearGematria = 'תש' + toGematria(yearNum % 100).replace('׳', '').replace('״', '');
+            return toGematria(dayNum) + ' ' + monthName + ' ' + yearGematria;
+        }
+
+        /* ---------- הצגת הנתונים ---------- */
+        function renderShabbat() {
+            const st = jsonData.shabbat_times || {};
+            const erev = st.erev_shabbat || {};
+            const day = st.shabbat_day || {};
+            let html = '';
+
+            html += '<div class="section-title">ערב שבת</div>';
+            html += rowHtml('מנחה גדולה', erev.mincha_gedola);
+            html += rowHtml('קבלת שבת מוקדמת', erev.kablat_shabbat_mukdemet);
+            html += rowHtml('הדלקת נרות', erev.candle_lighting);
+            html += rowHtml('מנחה ערב שבת',
+                erev.mincha_erev_shabbat || (erev.candle_lighting ? addMinutesToTimeStr(erev.candle_lighting, 14) : ''));
+            html += rowHtml('צאת הכוכבים', erev.tzeit_hakochavim);
+
+            html += '<div class="section-title">יום השבת</div>';
+            html += rowHtml('שחרית', day.shacharit || DEFAULTS.shacharit_shabbat);
+            html += rowHtml('מנחה גדולה', day.mincha_gedola);
+            html += rowHtml('מנחה של שבת',
+                day.mincha_shabbat || (day.tzeit_shabbat ? addMinutesToTimeStr(day.tzeit_shabbat, -130) : ''));
+            if (jsonData.special_event && jsonData.special_event.title) {
+                html += rowHtml(jsonData.special_event.title, jsonData.special_event.time, true);
+            }
+            html += rowHtml('שקיעה', day.shkiya);
+            html += rowHtml('צאת שבת וערבית', day.tzeit_shabbat);
+
+            document.getElementById('shabbat-times').innerHTML = html;
+        }
+
+        function renderWeekday() {
+            const wt = jsonData.weekday_times || {};
+            const blocks = [
+                ['סליחות', wt.selichot],
+                ['שחרית', wt.shacharit],
+                ['מנחה', wt.mincha],
+                ['ערבית', wt.arvit]
+            ];
+            let html = '';
+            blocks.forEach(function (block) {
+                const name = block[0], times = block[1];
+                if (!times || !times.length) return;
+                html += '<div class="weekday-block"><div class="weekday-name">' + name + '</div>' +
+                        times.map(function (t) { return '<span class="pill">' + escapeHtml(t) + '</span>'; }).join('') +
+                        '</div>';
+            });
+            document.getElementById('weekday-times').innerHTML = html;
+        }
+
+        function renderShiurim() {
+            const shiurim = (jsonData.shiurim && jsonData.shiurim.length) ? jsonData.shiurim : DEFAULTS.shiurim;
+            document.getElementById('shiurim').innerHTML = shiurim.map(function (s) {
+                return '<div class="shiur-block">' +
+                       '<div class="shiur-title">' + escapeHtml(s.title || '') + '</div>' +
+                       (s.time ? '<div class="shiur-time">' + escapeHtml(s.time) + '</div>' : '') +
+                       (s.teacher ? '<div class="shiur-teacher">' + escapeHtml(s.teacher) + '</div>' : '') +
+                       '</div>';
+            }).join('');
+        }
+
+        function renderAll() {
+            document.getElementById('parsha-name').textContent = jsonData.parsha || '';
+            const now = new Date();
+            document.getElementById('hebrew-date').textContent = hebrewDateString(now);
+            document.getElementById('generated-on').textContent = 'עודכן: ' + now.toLocaleDateString('he-IL');
+            renderShabbat();
+            renderWeekday();
+            renderShiurim();
+        }
+
+        async function loadDataFromJson() {
+            try {
+                const response = await fetch('./data.json?v=' + Date.now());
+                if (!response.ok) throw new Error('HTTP error! status: ' + response.status);
+                jsonData = await response.json();
+                renderAll();
+            } catch (error) {
+                console.error('Error loading data.json:', error);
+                setStatus('שגיאה בטעינת הזמנים. נסו לרענן את העמוד.', true);
+                document.getElementById('parsha-name').textContent = 'שגיאה בטעינה';
+            }
+        }
+
+        /* ---------- יצירת PDF ---------- */
+        function setStatus(msg, isError) {
+            const el = document.getElementById('status');
+            el.textContent = msg || '';
+            el.classList.toggle('error', !!isError);
+        }
+
+        function pdfFileName() {
+            const parsha = String(jsonData.parsha || '').replace(/[\\/:*?"<>|]/g, '').trim();
+            return 'זמני-תפילות-כפר-תפוח' + (parsha ? ' - ' + parsha : '') + '.pdf';
+        }
+
+        function downloadPdf() {
+            const btn = document.getElementById('download-btn');
+
+            if (typeof html2pdf === 'undefined') {
+                setStatus('לא ניתן ליצור PDF אוטומטית – נפתח חלון הדפסה, בחרו "שמירה כ-PDF".', true);
+                window.print();
+                return;
+            }
+
+            const originalText = btn.textContent;
+            btn.disabled = true;
+            btn.textContent = 'מכין PDF...';
+            setStatus('מכין את הקובץ, רגע אחד...');
+
+            html2pdf()
+                .set({
+                    margin: 0,
+                    filename: pdfFileName(),
+                    image: { type: 'jpeg', quality: 0.98 },
+                    html2canvas: { scale: 2, useCORS: true, backgroundColor: '#faf8f3' },
+                    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+                })
+                .from(document.getElementById('sheet'))
+                .save()
+                .then(function () {
+                    setStatus('הקובץ הורד בהצלחה.');
+                })
+                .catch(function (err) {
+                    console.error('PDF generation failed:', err);
+                    setStatus('יצירת ה-PDF נכשלה – נפתח חלון הדפסה, בחרו "שמירה כ-PDF".', true);
+                    window.print();
+                })
+                .then(function () {
+                    btn.disabled = false;
+                    btn.textContent = originalText;
+                });
+        }
+
+        /* ---------- אתחול ---------- */
+        loadDataFromJson();
+    </script>
+</body>
+</html>
