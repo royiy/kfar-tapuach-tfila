@@ -3,213 +3,469 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0a1628">
+<meta name="description" content="זמני תפילות, שיעורים ופרטי תרומות - בית הכנסת המרכזי, כפר תפוח.">
+<meta name="color-scheme" content="light">
 
 <title>בית הכנסת המרכזי כפר תפוח</title>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Alef:wght@400;700&family=Frank+Ruhl+Libre:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="background.jpg">
 
 <style>
 
 :root{
 --deep-navy:#0a1628;
 --royal-blue:#1e3a5f;
---gold:#d4af37;
+--blue-tint:#eaf1fa;
+--gold:#c9a227;
+--gold-text:#8a6a12;
 --warm-gold:#f4e4c1;
---cream:#faf8f3;
+--cream:#faf7f0;
 --soft-white:#ffffff;
---charcoal:#2a2a2a;
---shadow-blue:rgba(30,58,95,0.15);
+--ink:#1b2433;
+--muted:#5c6678;
+--line:#e9e3d6;
+--radius:20px;
+--radius-sm:12px;
+--shadow-sm:0 1px 2px rgba(10,22,40,.05),0 3px 10px rgba(10,22,40,.05);
+--shadow-md:0 4px 14px rgba(10,22,40,.07),0 18px 44px rgba(10,22,40,.09);
 }
 
 *{margin:0;padding:0;box-sizing:border-box}
 
+html{scroll-behavior:smooth}
+
 body{
 font-family:'Alef',sans-serif;
-background:var(--cream);
-color:var(--charcoal);
-line-height:1.8;
+background:
+  radial-gradient(70rem 40rem at 100% -10%,rgba(201,162,39,.09),transparent 60%),
+  radial-gradient(60rem 40rem at 0% 10%,rgba(30,58,95,.07),transparent 60%),
+  var(--cream);
+color:var(--ink);
+line-height:1.75;
+-webkit-font-smoothing:antialiased;
 }
 
 /* HERO */
 
 .hero{
-background:linear-gradient(165deg,var(--deep-navy),var(--royal-blue));
-padding:5rem 2rem;
+position:relative;
+isolation:isolate;
+overflow:hidden;
 text-align:center;
+color:#fff;
+background:var(--deep-navy);
+padding:clamp(3.5rem,9vw,6rem) 1.25rem clamp(3rem,7vw,4.5rem);
+}
+
+.hero::before{
+content:"";
+position:absolute;
+inset:-2%;
+z-index:-2;
+background:url("background.jpg") center 42%/cover no-repeat;
+transform:scale(1.04);
+}
+
+.hero::after{
+content:"";
+position:absolute;
+inset:0;
+z-index:-1;
+background:
+  linear-gradient(180deg,rgba(10,22,40,.80) 0%,rgba(10,22,40,.62) 42%,rgba(10,22,40,.93) 100%),
+  radial-gradient(120% 70% at 50% 0%,rgba(201,162,39,.3),transparent 62%);
+}
+
+.hero-eyebrow{
+font-size:.85rem;
+letter-spacing:.32em;
+color:var(--warm-gold);
+opacity:.85;
+margin-bottom:.6rem;
 }
 
 .synagogue-title{
 font-family:'Frank Ruhl Libre',serif;
-font-size:3rem;
+font-size:clamp(2.1rem,7vw,3.6rem);
 font-weight:900;
-color:white;
+line-height:1.15;
+color:#fff;
+text-shadow:0 2px 24px rgba(0,0,0,.45);
 }
 
 .location{
 font-family:'Frank Ruhl Libre',serif;
 color:var(--warm-gold);
-font-size:1.4rem;
+font-size:clamp(1.05rem,3.4vw,1.45rem);
+letter-spacing:.12em;
+}
+
+.hero-rule{
+display:flex;
+align-items:center;
+justify-content:center;
+gap:.9rem;
+margin:1.6rem auto .5rem;
+max-width:22rem;
+color:var(--gold);
+}
+
+.hero-rule span{
+flex:1;
+height:1px;
+background:linear-gradient(90deg,transparent,rgba(212,175,55,.75),transparent);
+}
+
+.hero-chips{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:.75rem;
+margin-top:1.6rem;
+}
+
+.chip{
+display:flex;
+flex-direction:column;
+gap:.1rem;
+min-width:8.5rem;
+padding:.7rem 1.2rem;
+border-radius:14px;
+background:rgba(255,255,255,.09);
+border:1px solid rgba(244,228,193,.22);
+backdrop-filter:blur(6px);
+}
+
+.chip-label{
+font-size:.75rem;
+letter-spacing:.1em;
+color:var(--warm-gold);
+opacity:.9;
+}
+
+.chip-value{
+font-family:'Frank Ruhl Libre',serif;
+font-size:1.25rem;
+font-weight:700;
+color:#fff;
+unicode-bidi:isolate;
+font-variant-numeric:tabular-nums;
 }
 
 .container{
-max-width:1200px;
+max-width:1080px;
 margin:auto;
-padding:2rem;
+padding:clamp(1.5rem,4vw,3rem) 1.25rem;
 }
 
 /* SECTION */
 
 .section{
-background:white;
-border-radius:20px;
-padding:2.5rem;
-margin-bottom:2rem;
-box-shadow:0 10px 40px var(--shadow-blue);
-border-top:6px solid var(--gold);
+position:relative;
+background:var(--soft-white);
+border-radius:var(--radius);
+padding:clamp(1.5rem,4vw,2.5rem);
+margin-bottom:clamp(1.25rem,3vw,2rem);
+box-shadow:var(--shadow-md);
+border:1px solid rgba(233,227,214,.9);
+overflow:hidden;
+}
+
+.section::before{
+content:"";
+position:absolute;
+inset:0 0 auto;
+height:4px;
+background:linear-gradient(90deg,var(--gold),var(--warm-gold) 45%,var(--gold));
 }
 
 .section-header{
 display:flex;
 align-items:center;
-gap:1rem;
-margin-bottom:2rem;
-border-bottom:2px solid #eee;
+gap:.9rem;
+margin-bottom:1.75rem;
 padding-bottom:1rem;
+border-bottom:1px solid var(--line);
+}
+
+.section-icon{
+display:grid;
+place-items:center;
+flex:0 0 auto;
+width:2.9rem;
+height:2.9rem;
+font-size:1.35rem;
+line-height:1;
+border-radius:50%;
+background:linear-gradient(145deg,#fdf6e3,#f6ebcf);
+border:1px solid rgba(201,162,39,.35);
+box-shadow:inset 0 1px 0 #fff;
 }
 
 .section-title{
 font-family:'Frank Ruhl Libre',serif;
-font-size:2rem;
+font-size:clamp(1.4rem,4vw,2rem);
+font-weight:700;
 color:var(--royal-blue);
+line-height:1.3;
 }
 
 /* SHABBAT */
 
 .shabbat-grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-gap:2rem;
+grid-template-columns:repeat(auto-fit,minmax(min(100%,20rem),1fr));
+align-items:start;
+gap:clamp(1.25rem,3vw,2.5rem);
 }
 
-.shabbat-column h4{
+.shabbat-column{
+background:linear-gradient(180deg,#fcfbf7,#fff);
+border:1px solid var(--line);
+border-radius:var(--radius-sm);
+padding:1.25rem 1.4rem 1rem;
+}
+
+.column-title{
+display:flex;
+align-items:center;
+gap:.55rem;
 font-family:'Frank Ruhl Libre',serif;
-color:var(--gold);
-margin-bottom:1rem;
+font-size:1.2rem;
+font-weight:700;
+color:var(--royal-blue);
+margin-bottom:.9rem;
+}
+
+.column-title::before{
+content:"";
+width:.5rem;
+height:.5rem;
+border-radius:50%;
+background:var(--gold);
+box-shadow:0 0 0 3px rgba(201,162,39,.18);
 }
 
 .time-item{
 display:flex;
-justify-content:space-between;
-padding:.8rem 0;
-border-bottom:1px solid #f0f0f0;
+align-items:center;
+gap:.75rem;
+padding:.6rem 0;
+}
+
+.time-item+.time-item{border-top:1px solid #f3efe6}
+
+.time-item>span:first-child{order:0;flex:0 1 auto;color:var(--muted)}
+
+.time-item::before{
+content:"";
+order:1;
+flex:1 1 1.5rem;
+min-width:1rem;
+align-self:flex-end;
+margin-bottom:.65em;
+border-bottom:1px dotted #d9d2c2;
 }
 
 .time-value{
+order:2;
+flex:0 0 auto;
 font-family:'Frank Ruhl Libre',serif;
 font-weight:700;
 color:var(--royal-blue);
-background:#e8f2ff;
-padding:.3rem .8rem;
-border-radius:6px;
+background:var(--blue-tint);
+padding:.25rem .75rem;
+border-radius:8px;
+unicode-bidi:isolate;
+font-variant-numeric:tabular-nums;
 }
 
 .highlight-time{
-background:#fff4d6;
-color:#b8860b;
+background:#fdf3d8;
+color:#8a6a12;
+box-shadow:inset 0 0 0 1px rgba(201,162,39,.3);
+}
+
+.highlight-lesson{
+color:var(--gold-text)!important;
+font-weight:700;
+font-family:'Frank Ruhl Libre',serif;
+}
+
+.time-value.lesson-time{
+background:linear-gradient(135deg,var(--gold),#b8901c);
+color:#fff;
+box-shadow:0 2px 8px rgba(201,162,39,.35);
 }
 
 /* WEEKDAY */
 
-.schedule-grid{display:grid;gap:1rem}
+.schedule-grid{display:grid;gap:.85rem}
 
 .schedule-row{
-background:#fafafa;
-border-right:4px solid var(--royal-blue);
-padding:1rem 1.2rem;
-border-radius:10px;
 display:flex;
+flex-wrap:wrap;
+align-items:center;
 justify-content:space-between;
+gap:.75rem;
+background:linear-gradient(90deg,#fbfaf6,#fff);
+border:1px solid var(--line);
+border-right:4px solid var(--royal-blue);
+border-radius:var(--radius-sm);
+padding:.9rem 1.1rem;
+transition:transform .18s ease,box-shadow .18s ease;
 }
 
+.schedule-row:hover{transform:translateY(-2px);box-shadow:var(--shadow-sm)}
+
+.schedule-row.is-selichot{border-right-color:var(--gold);background:linear-gradient(90deg,#fdf9ee,#fff)}
+
+.schedule-label{font-weight:700;color:var(--ink)}
+
 .schedule-times{
+display:flex;
+flex-wrap:wrap;
+gap:.4rem;
 font-family:'Frank Ruhl Libre',serif;
 font-weight:700;
 color:var(--royal-blue);
 }
 
+.pill{
+background:var(--blue-tint);
+border-radius:8px;
+padding:.2rem .7rem;
+unicode-bidi:isolate;
+font-variant-numeric:tabular-nums;
+}
+
 /* SHIURIM */
 
-.shiur-card{
-background:#fff8e6;
-border-right:5px solid var(--gold);
-padding:1.5rem;
-border-radius:12px;
-margin-bottom:1rem;
+.shiur-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(min(100%,15rem),1fr));
+gap:1rem;
 }
+
+.shiur-card{
+display:flex;
+flex-direction:column;
+gap:.35rem;
+background:linear-gradient(160deg,#fffaee,#fff6e0);
+border:1px solid rgba(201,162,39,.28);
+border-right:5px solid var(--gold);
+padding:1.25rem 1.35rem;
+border-radius:var(--radius-sm);
+transition:transform .18s ease,box-shadow .18s ease;
+}
+
+.shiur-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-sm)}
 
 .shiur-title{
 font-family:'Frank Ruhl Libre',serif;
 font-weight:700;
 color:var(--royal-blue);
-font-size:1.3rem;
+font-size:1.25rem;
+line-height:1.3;
+}
+
+.shiur-when{
+align-self:flex-start;
+background:rgba(201,162,39,.16);
+color:var(--gold-text);
+font-weight:700;
+font-size:.95rem;
+padding:.15rem .7rem;
+border-radius:8px;
+unicode-bidi:isolate;
 }
 
 .shiur-teacher{
-font-size:.9rem;
-color:#666;
-}
-
-.highlight-lesson{
-color:var(--gold);
-font-weight:700;
-font-size:1.1em;
-font-family:'Frank Ruhl Libre',serif;
-}
-
-.time-value.lesson-time{
-background:var(--gold);
-color:var(--soft-white);
+font-size:.92rem;
+color:var(--muted);
+margin-top:auto;
+padding-top:.35rem;
 }
 
 /* DONATION */
 
 .donation-section{
-background:linear-gradient(165deg,var(--royal-blue),var(--deep-navy));
-color:white;
+color:#fff;
 text-align:center;
+background:
+  radial-gradient(90% 70% at 50% 0%,rgba(201,162,39,.22),transparent 60%),
+  linear-gradient(165deg,var(--royal-blue),var(--deep-navy));
+border-color:rgba(244,228,193,.18);
 }
 
-.donation-section .section-title{
-color:white;
+.donation-section .section-header{
+justify-content:center;
+border-bottom-color:rgba(244,228,193,.22);
+}
+
+.donation-section .section-title{color:#fff}
+
+.donation-section .section-icon{
+background:rgba(255,255,255,.1);
+border-color:rgba(244,228,193,.3);
+box-shadow:none;
 }
 
 .donation-intro{
-font-size:1.2rem;
-margin-bottom:2rem;
+font-size:1.1rem;
+color:rgba(255,255,255,.88);
+margin-bottom:1.75rem;
 }
 
 .bank-details{
-background:rgba(255,255,255,.1);
+background:rgba(255,255,255,.08);
+border:1px solid rgba(244,228,193,.2);
 border-radius:16px;
-padding:2rem;
-margin:2rem auto;
-max-width:450px;
-line-height:2;
+padding:1.5rem 1.75rem;
+margin:0 auto 1.75rem;
+max-width:26rem;
+text-align:right;
 }
 
-.bank-details strong{
+.bank-details dl{
+display:grid;
+grid-template-columns:auto 1fr;
+gap:.55rem 1rem;
+}
+
+.bank-details dt{color:var(--warm-gold);font-size:.95rem}
+
+.bank-details dd{font-weight:700;unicode-bidi:isolate}
+
+.bank-title{
+display:block;
+font-family:'Frank Ruhl Libre',serif;
+font-weight:700;
 color:var(--warm-gold);
+margin-bottom:.9rem;
+padding-bottom:.6rem;
+border-bottom:1px solid rgba(244,228,193,.2);
 }
 
 .paybox-button{
 display:inline-block;
-background:linear-gradient(135deg,#00a0e9,#0077b6);
-color:white;
-padding:1rem 2.5rem;
+background:linear-gradient(135deg,#00a0e9,#0069a8);
+color:#fff;
+padding:.9rem 2.4rem;
 border-radius:50px;
 text-decoration:none;
 font-weight:700;
-margin-top:1rem;
+box-shadow:0 8px 22px rgba(0,105,168,.4);
+transition:transform .18s ease,box-shadow .18s ease;
+}
+
+.paybox-button:hover,.paybox-button:focus-visible{
+transform:translateY(-2px);
+box-shadow:0 12px 28px rgba(0,105,168,.5);
 }
 
 /* MEMORIAL */
@@ -217,18 +473,32 @@ margin-top:1rem;
 .memorial-section{
 background:var(--deep-navy);
 color:var(--warm-gold);
-padding:3rem;
+padding:clamp(2.25rem,6vw,3.25rem) 1.25rem;
 text-align:center;
+border-top:1px solid rgba(244,228,193,.14);
+}
+
+.memorial-title{
+font-family:'Frank Ruhl Libre',serif;
+font-weight:400;
+font-size:1.15rem;
+letter-spacing:.22em;
+opacity:.75;
+margin-bottom:.75rem;
 }
 
 .memorial-container{
 position:relative;
-height:60px;
+height:3.5rem;
 }
 
 .memorial-item{
 position:absolute;
-width:100%;
+inset:0;
+display:grid;
+place-items:center;
+font-family:'Frank Ruhl Libre',serif;
+font-size:clamp(1.05rem,3.6vw,1.4rem);
 opacity:0;
 animation:cycle 25s infinite;
 }
@@ -240,18 +510,34 @@ animation:cycle 25s infinite;
 .memorial-item:nth-child(5){animation-delay:20s}
 
 @keyframes cycle{
-0%{opacity:0}
-5%{opacity:1}
-15%{opacity:1}
-20%{opacity:0}
-100%{opacity:0}
+0%{opacity:0;transform:translateY(6px)}
+4%{opacity:1;transform:translateY(0)}
+16%{opacity:1;transform:translateY(0)}
+20%{opacity:0;transform:translateY(-6px)}
+100%{opacity:0;transform:translateY(-6px)}
 }
 
 .footer{
 background:var(--royal-blue);
 color:var(--warm-gold);
 text-align:center;
-padding:2rem;
+padding:2rem 1.25rem;
+font-size:.95rem;
+}
+
+.footer a{
+color:rgba(244,228,193,.55);
+font-size:.8rem;
+text-decoration:none;
+}
+
+.footer a:hover{color:var(--warm-gold)}
+
+@media (prefers-reduced-motion:reduce){
+html{scroll-behavior:auto}
+*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+.memorial-container{height:auto}
+.memorial-item{position:static;opacity:1;padding:.15rem 0}
 }
 
 </style>
@@ -260,8 +546,17 @@ padding:2rem;
 <body>
 
 <header class="hero">
+<p class="hero-eyebrow">ברוכים הבאים</p>
 <h1 class="synagogue-title">בית הכנסת המרכזי</h1>
 <p class="location">כפר תפוח</p>
+
+<div class="hero-rule" aria-hidden="true"><span></span>✦<span></span></div>
+
+<div class="hero-chips">
+<div class="chip"><span class="chip-label">פרשת השבוע</span><span class="chip-value" id="hero-parsha">—</span></div>
+<div class="chip"><span class="chip-label">הדלקת נרות</span><span class="chip-value" id="hero-candles">--:--</span></div>
+<div class="chip"><span class="chip-label">צאת שבת</span><span class="chip-value" id="hero-tzeit">--:--</span></div>
+</div>
 </header>
 
 <div class="container">
@@ -269,7 +564,7 @@ padding:2rem;
 <section class="section">
 
 <div class="section-header">
-<span>🕯️</span>
+<span class="section-icon">🕯️</span>
 <h2 id="parsha-title" class="section-title">זמני שבת</h2>
 </div>
 
@@ -277,7 +572,7 @@ padding:2rem;
 
 <div class="shabbat-column">
 
-<h4>ערב שבת</h4>
+<h3 class="column-title">ערב שבת</h3>
 
 <div class="time-item">
 <span>מנחה גדולה</span>
@@ -303,7 +598,7 @@ padding:2rem;
 
 <div class="shabbat-column">
 
-<h4>יום שבת</h4>
+<h3 class="column-title">יום שבת</h3>
 
 <div class="time-item"><span>שחרית</span><span class="time-value">08:00</span></div>
 
@@ -347,24 +642,29 @@ padding:2rem;
 <section class="section">
 
 <div class="section-header">
-<span>📅</span>
+<span class="section-icon">📅</span>
 <h2 class="section-title">תפילות חול</h2>
 </div>
 
 <div class="schedule-grid">
 
-<div class="schedule-row">
-<span>שחרית</span>
-<span class="schedule-times">06:15 | 07:50 | 08:00 (בשישי)</span>
+<div class="schedule-row is-selichot" id="selichot-row" hidden>
+<span class="schedule-label">סליחות</span>
+<span id="weekday_selichot" class="schedule-times"></span>
 </div>
 
 <div class="schedule-row">
-<span>מנחה</span>
+<span class="schedule-label">שחרית</span>
+<span id="weekday_shacharit" class="schedule-times"></span>
+</div>
+
+<div class="schedule-row">
+<span class="schedule-label">מנחה</span>
 <span id="weekday_mincha" class="schedule-times"></span>
 </div>
 
 <div class="schedule-row">
-<span>ערבית</span>
+<span class="schedule-label">ערבית</span>
 <span id="weekday_arvit" class="schedule-times"></span>
 </div>
 
@@ -374,55 +674,61 @@ padding:2rem;
 <section class="section">
 
 <div class="section-header">
-<span>📚</span>
+<span class="section-icon">📚</span>
 <h2 class="section-title">שיעורים בימות השבוע</h2>
 </div>
 
+<div class="shiur-grid">
+
 <div class="shiur-card">
 <div class="shiur-title">שיעור בדף היומי</div>
-<div>ראשון-חמישי 20:30</div>
+<div class="shiur-when">ראשון-חמישי 20:30</div>
 <div class="shiur-teacher">אלעד אמסטרדם</div>
 </div>
 
 <div class="shiur-card">
 <div class="shiur-title">שיעור באורות</div>
-<div>יום רביעי 21:15</div>
+<div class="shiur-when">יום רביעי 21:15</div>
 <div class="shiur-teacher">הרב שמעון רוזנצוויג</div>
 </div>
 
 <div class="shiur-card">
 <div class="shiur-title">כולל יום שישי</div>
-<div>09:00-11:00</div>
+<div class="shiur-when">09:00-11:00</div>
 <div class="shiur-teacher">הרב צביקה הרץ</div>
 </div>
 
+</div>
 </section>
 
 <!-- תרומות -->
-        <section class="section donation-section">
-            <div class="section-header">
-                <span class="section-icon">💎</span>
-                <h2 class="section-title">תרומות לבית הכנסת</h2>
-            </div>
+<section class="section donation-section">
 
-            <p class="donation-intro">נודה לכל תרומה להחזקת ופיתוח בית הכנסת</p>
+<div class="section-header">
+<span class="section-icon">💎</span>
+<h2 class="section-title">תרומות לבית הכנסת</h2>
+</div>
 
-            <div class="bank-details">
-                <strong>העברה בנקאית:</strong><br>
-                בנק מזרחי (20)<br>
-                סניף 483<br>
-                מספר חשבון: <strong>437738</strong><br>
-                ע"ש בית הכנסת מרכזי כפר תפוח
-            </div>
-<a href="https://links.payboxapp.com/rBbQDcbaPVb" target="_blank" class="paybox-button">
-                לתרומה ב-PayBox 💳
-            </a>
-        </section>
-    </div>
+<p class="donation-intro">נודה לכל תרומה להחזקת ופיתוח בית הכנסת</p>
+
+<div class="bank-details">
+<span class="bank-title">העברה בנקאית</span>
+<dl>
+<dt>בנק</dt><dd>מזרחי (20)</dd>
+<dt>סניף</dt><dd>483</dd>
+<dt>חשבון</dt><dd>437738</dd>
+<dt>על שם</dt><dd>בית הכנסת מרכזי כפר תפוח</dd>
+</dl>
+</div>
+
+<a href="https://links.payboxapp.com/rBbQDcbaPVb" target="_blank" rel="noopener" class="paybox-button">לתרומה ב-PayBox 💳</a>
+
+</section>
+</div>
 
 <section class="memorial-section">
 
-<h3>לעילוי נשמת</h3>
+<h2 class="memorial-title">לעילוי נשמת</h2>
 
 <div class="memorial-container">
 <div class="memorial-item">🕯️ שלמה זלמן בן מרדכי אלעזר הלוי</div>
@@ -437,7 +743,7 @@ padding:2rem;
 <footer class="footer">
 נבנה באהבה לרווחת המתפללים
 <br>
-<a href="internal.html" style="color:rgba(244,228,193,.55);font-size:.8rem;text-decoration:none">אזור פנימי</a>
+<a href="internal.html">אזור פנימי</a>
 </footer>
 
 <script>
@@ -457,8 +763,19 @@ const el=document.getElementById(id);
 if(el)el.textContent=val;
 }
 
-function formatTimes(arr){
-return Array.isArray(arr)?arr.join(" | "):arr;
+/* כל זמן מוצג בגלולה נפרדת */
+function setPills(id,val){
+const el=document.getElementById(id);
+if(!el)return 0;
+const list=(Array.isArray(val)?val:[val]).filter(Boolean);
+el.textContent="";
+list.forEach(t=>{
+const pill=document.createElement("span");
+pill.className="pill";
+pill.textContent=t;
+el.appendChild(pill);
+});
+return list.length;
 }
 
 async function loadData(){
@@ -467,6 +784,7 @@ const res=await fetch(DATA_URL+"?v="+Date.now());
 const data=await res.json();
 
 document.getElementById("parsha-title").textContent="זמני השבת - "+data.parsha;
+setText("hero-parsha",data.parsha);
 
 const erev=data.shabbat_times.erev_shabbat;
 const day=data.shabbat_times.shabbat_day;
@@ -485,8 +803,18 @@ setText("shkiya",day.shkiya);
 setText("tzeit_shabbat",day.tzeit_shabbat);
 setText("mincha_shabbat",day.mincha_shabbat||addMinutes(day.tzeit_shabbat,-143));
 
-setText("weekday_mincha",formatTimes(data.weekday_times.mincha));
-setText("weekday_arvit",formatTimes(data.weekday_times.arvit));
+setText("hero-candles",candles);
+setText("hero-tzeit",day.tzeit_shabbat);
+
+const weekday=data.weekday_times||{};
+
+/* שורת הסליחות מוצגת רק כשיש סליחות ב-data.json */
+const selichotCount=setPills("weekday_selichot",weekday.selichot);
+document.getElementById("selichot-row").hidden=!selichotCount;
+
+setPills("weekday_shacharit",weekday.shacharit);
+setPills("weekday_mincha",weekday.mincha);
+setPills("weekday_arvit",weekday.arvit);
 
 }
 
