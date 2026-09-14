@@ -315,13 +315,13 @@ padding:2rem;
 </div>
 
 <div class="time-item">
-<span class="highlight-lesson">דרשת הרב לשבת תשובה</span>
-<span class="time-value lesson-time">17:15</span>
+<span>מנחה של שבת</span>
+<span id="mincha_shabbat" class="time-value">--:--</span>
 </div>
 
 <div class="time-item">
-<span>מנחה של שבת</span>
-<span id="mincha_shabbat" class="time-value">--:--</span>
+<span class="highlight-lesson">דרשת הרב לשבת תשובה</span>
+<span class="time-value lesson-time">17:15</span>
 </div>
 
 <div class="time-item">
@@ -483,7 +483,7 @@ setText("mincha_additional",candles);
 
 setText("shkiya",day.shkiya);
 setText("tzeit_shabbat",day.tzeit_shabbat);
-setText("mincha_shabbat",addMinutes(day.tzeit_shabbat,-143));
+setText("mincha_shabbat",day.mincha_shabbat||addMinutes(day.tzeit_shabbat,-143));
 
 setText("weekday_mincha",formatTimes(data.weekday_times.mincha));
 setText("weekday_arvit",formatTimes(data.weekday_times.arvit));
