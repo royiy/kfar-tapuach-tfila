@@ -191,12 +191,6 @@
 </head>
 <body onclick="initInteraction();">
 
-    <div class="screen hidden" id="truma-screen">
-        <div class="azmaut-screen">
-            <img class="azmaut-image" src="Truma_Keva.png" alt="Truma Keva">
-        </div>
-    </div>
-
     <div class="screen hidden" id="kipur-screen">
         <div class="azmaut-screen">
             <img class="azmaut-image" src="Kipur2026.jpeg" alt="Kipur 2026">
@@ -398,7 +392,7 @@
 
         let currentScreen = 'main-screen';
         let screenToggleInterval = null;
-        const screenCycle = ['main-screen', 'truma-screen', 'main-screen', 'kipur-screen'];
+        const screenCycle = ['main-screen', 'kipur-screen'];
         let screenCycleIndex = 0;
 
         function cycleThroughScreens() {
@@ -411,7 +405,7 @@
             showScreen(nextScreenId);
             currentScreen = nextScreenId;
 
-            const nextDelay = nextScreenId === 'main-screen' ? 30000 : 5000;
+            const nextDelay = nextScreenId === 'main-screen' ? 30000 : 10000;
             screenToggleInterval = setTimeout(cycleThroughScreens, nextDelay);
         }
 
