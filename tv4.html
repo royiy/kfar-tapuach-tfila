@@ -197,6 +197,12 @@
         </div>
     </div>
 
+    <div class="screen hidden" id="kipur-screen">
+        <div class="azmaut-screen">
+            <img class="azmaut-image" src="Kipur2026.jpeg" alt="Kipur 2026">
+        </div>
+    </div>
+
     <div class="screen hidden" id="main-screen">
         <header class="hero">
             <div class="header-right">
@@ -392,7 +398,7 @@
 
         let currentScreen = 'main-screen';
         let screenToggleInterval = null;
-        const screenCycle = ['main-screen', 'truma-screen'];
+        const screenCycle = ['main-screen', 'truma-screen', 'main-screen', 'kipur-screen'];
         let screenCycleIndex = 0;
 
         function cycleThroughScreens() {
