@@ -390,14 +390,22 @@
             });
         }
 
-        let currentScreen = 'main-screen';
+        let currentScreen = 'kipur-screen';
         let screenToggleInterval = null;
-        const screenCycle = ['main-screen', 'kipur-screen'];
+        const screenCycle = ['kipur-screen'];
         let screenCycleIndex = 0;
+
+        function screenDuration(screenId) {
+            return screenId === 'main-screen' ? 30000 : 10000;
+        }
 
         function cycleThroughScreens() {
             if (screenToggleInterval) {
                 clearTimeout(screenToggleInterval);
+            }
+
+            if (screenCycle.length < 2) {
+                return;
             }
 
             screenCycleIndex = (screenCycleIndex + 1) % screenCycle.length;
@@ -405,15 +413,17 @@
             showScreen(nextScreenId);
             currentScreen = nextScreenId;
 
-            const nextDelay = nextScreenId === 'main-screen' ? 30000 : 10000;
-            screenToggleInterval = setTimeout(cycleThroughScreens, nextDelay);
+            screenToggleInterval = setTimeout(cycleThroughScreens, screenDuration(nextScreenId));
         }
 
         window.addEventListener('load', () => {
-            showScreen('main-screen');
-            currentScreen = 'main-screen';
             screenCycleIndex = 0;
-            screenToggleInterval = setTimeout(cycleThroughScreens, 30000);
+            currentScreen = screenCycle[0];
+            showScreen(currentScreen);
+
+            if (screenCycle.length > 1) {
+                screenToggleInterval = setTimeout(cycleThroughScreens, screenDuration(currentScreen));
+            }
         });
 
         // ===== ספירת העומר =====
