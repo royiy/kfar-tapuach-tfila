@@ -25,11 +25,7 @@
 
         body {
             font-family: 'Alef', sans-serif;
-            /* רקע ארבעת המינים – טקסטורה עדינה */
-            background-color: var(--cream);
-            background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22200%22%20height%3D%22214%22%20viewBox%3D%220%200%20200%20214%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%232f6b3a%22%20stroke-width%3D%223%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.10%22%3E%3Cpath%20d%3D%22M120%20178%20L120%2034%22%2F%3E%3Cpath%20d%3D%22M120%20150%20C108%20144%20101%20136%2098%20122%22%2F%3E%3Cpath%20d%3D%22M120%20150%20C132%20144%20139%20136%20142%20122%22%2F%3E%3Cpath%20d%3D%22M120%20118%20C108%20112%20101%20104%2098%2090%22%2F%3E%3Cpath%20d%3D%22M120%20118%20C132%20112%20139%20104%20142%2090%22%2F%3E%3Cpath%20d%3D%22M120%2086%20C108%2080%20101%2072%2098%2058%22%2F%3E%3Cpath%20d%3D%22M120%2086%20C132%2080%20139%2072%20142%2058%22%2F%3E%3Cpath%20d%3D%22M104%20178%20C101%20150%20100%20126%20101%20108%22%2F%3E%3Cpath%20d%3D%22M136%20178%20C139%20150%20140%20126%20139%20108%22%2F%3E%3C%2Fg%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23c9a227%22%20stroke-width%3D%223%22%20stroke-linecap%3D%22round%22%20opacity%3D%220.12%22%3E%3Crect%20x%3D%2296%22%20y%3D%22156%22%20width%3D%2248%22%20height%3D%228%22%20rx%3D%224%22%2F%3E%3Cellipse%20cx%3D%2254%22%20cy%3D%22150%22%20rx%3D%2222%22%20ry%3D%2228%22%2F%3E%3Cpath%20d%3D%22M54%20122%20L54%20112%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
-            background-size: 200px 214px;
-            background-repeat: repeat;
+            background: var(--cream);
             color: var(--charcoal);
             height: 100vh;
             width: 100vw;
@@ -79,7 +75,7 @@
         .column-card {
             background: var(--soft-white); border-radius: 15px; padding: 1.2vh 1.2vw;
             box-shadow: 0 8px 25px var(--shadow-blue); display: flex; flex-direction: column;
-            border-top: 5px solid var(--gold); height: 64vh; overflow: hidden;
+            border-top: 5px solid var(--gold); height: 57vh; overflow: hidden;
         }
 
         .card-header {
@@ -127,18 +123,20 @@
         }
         .fade-out { opacity: 0; }
 
-        /* ארבעת המינים בפס ההכרזה */
+        /* תמונת ארבעת המינים */
         .announcement-highlight { position: relative; z-index: 1; }
-        .sukkot-deco {
+        .sukkot-photo {
             position: absolute;
             top: 50%;
-            height: 9.5vh;
+            transform: translateY(-50%);
+            height: 19vh;
             width: auto;
-            opacity: 0.6;
-            pointer-events: none;
+            border-radius: 14px;
+            border: 3px solid var(--gold);
+            box-shadow: 0 6px 22px var(--shadow-blue);
+            object-fit: cover;
         }
-        .sukkot-deco.deco-right { right: 4vw; transform: translateY(-50%); }
-        .sukkot-deco.deco-left { left: 4vw; transform: translateY(-50%) scaleX(-1); }
+        .sukkot-photo.photo-right { right: 3vw; }
 
         /* Screen Switching */
         .screen.hidden { display: none; }
@@ -207,67 +205,6 @@
     </style>
 </head>
 <body onclick="initInteraction();">
-
-    <!-- ארבעת המינים -->
-    <svg style="display:none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <symbol id="arba-minim" viewBox="0 0 300 320">
-            <g fill="none" stroke-linecap="round" stroke-linejoin="round">
-                <g stroke="#2f6b3a" stroke-width="4">
-                    <path d="M150 296 L150 24"/>
-                        <path d="M150 252 C130 244 118 232 112 208"/>
-                        <path d="M150 252 C170 244 182 232 188 208"/>
-                        <path d="M150 226 C130 218 118 206 112 182"/>
-                        <path d="M150 226 C170 218 182 206 188 182"/>
-                        <path d="M150 200 C130 192 118 180 112 156"/>
-                        <path d="M150 200 C170 192 182 180 188 156"/>
-                        <path d="M150 174 C130 166 118 154 112 130"/>
-                        <path d="M150 174 C170 166 182 154 188 130"/>
-                        <path d="M150 148 C130 140 118 128 112 104"/>
-                        <path d="M150 148 C170 140 182 128 188 104"/>
-                        <path d="M150 122 C130 114 118 102 112 78"/>
-                        <path d="M150 122 C170 114 182 102 188 78"/>
-                        <path d="M150 96 C130 88 118 76 112 52"/>
-                        <path d="M150 96 C170 88 182 76 188 52"/>
-                        <path d="M150 70 C130 62 118 50 112 26"/>
-                        <path d="M150 70 C170 62 182 50 188 26"/>
-                        <path d="M150 44 C130 36 118 24 112 0"/>
-                        <path d="M150 44 C170 36 182 24 188 0"/>
-                </g>
-                <g stroke="#1f5c33" stroke-width="3">
-                    <path d="M196 292 C200 250 202 212 204 178"/>
-                    <path d="M212 292 C214 252 214 214 212 184"/>
-                </g>
-                <g stroke="#1f5c33" stroke-width="2.5">
-                        <ellipse cx="198" cy="196" rx="7.5" ry="12" transform="rotate(-30 198 196)"/>
-                        <ellipse cx="212" cy="178" rx="7.5" ry="12" transform="rotate(28 212 178)"/>
-                        <ellipse cx="196" cy="166" rx="7.5" ry="12" transform="rotate(-32 196 166)"/>
-                        <ellipse cx="214" cy="148" rx="7.5" ry="12" transform="rotate(30 214 148)"/>
-                        <ellipse cx="200" cy="132" rx="7.5" ry="12" transform="rotate(-28 200 132)"/>
-                </g>
-                <g stroke="#3f7d4a" stroke-width="3">
-                    <path d="M104 292 C100 250 98 212 100 178"/>
-                    <path d="M90 292 C88 252 88 214 92 184"/>
-                </g>
-                <g stroke="#3f7d4a" stroke-width="2.5">
-                        <ellipse cx="104" cy="198" rx="4.5" ry="17" transform="rotate(22 104 198)"/>
-                        <ellipse cx="88" cy="180" rx="4.5" ry="17" transform="rotate(-20 88 180)"/>
-                        <ellipse cx="106" cy="166" rx="4.5" ry="17" transform="rotate(24 106 166)"/>
-                        <ellipse cx="90" cy="148" rx="4.5" ry="17" transform="rotate(-22 90 148)"/>
-                        <ellipse cx="102" cy="132" rx="4.5" ry="17" transform="rotate(20 102 132)"/>
-                </g>
-                <g stroke="#a8812a" stroke-width="3.5">
-                    <rect x="86" y="256" width="128" height="12" rx="6"/>
-                    <rect x="86" y="276" width="128" height="12" rx="6"/>
-                </g>
-                <g stroke="#c9a227" stroke-width="4">
-                    <ellipse cx="52" cy="244" rx="38" ry="48"/>
-                    <path d="M52 196 L52 180"/>
-                    <path d="M44 180 C48 172 56 172 60 180"/>
-                    <path d="M30 232 C38 222 48 220 56 226"/>
-                </g>
-            </g>
-        </symbol>
-    </svg>
 
     <div class="screen hidden" id="kipur-screen">
         <div class="azmaut-screen">
@@ -372,8 +309,8 @@
         </div>
 
         <div class="announcement-bar">
-            <svg class="sukkot-deco deco-right" viewBox="0 0 300 320" aria-hidden="true"><use href="#arba-minim"/></svg>
-            <svg class="sukkot-deco deco-left" viewBox="0 0 300 320" aria-hidden="true"><use href="#arba-minim"/></svg>
+            <!-- ארבעת המינים – צילום: Sarashira, ויקישיתוף, CC BY-SA 4.0 -->
+            <img class="sukkot-photo photo-right" src="ArbaMinim.jpg" alt="ארבעת המינים">
             <div class="announcement-highlight">וּתְשׁוּבָה וּתְפִלָּה וּצְדָקָה מַעֲבִירִין אֶת רועַ הַגְּזֵרָה</div>
         </div>
 
