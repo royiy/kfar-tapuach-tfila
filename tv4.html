@@ -25,7 +25,12 @@
 
         body {
             font-family: 'Alef', sans-serif;
-            background: var(--cream);
+            /* רקע ארבעת המינים */
+            background-color: var(--cream);
+            background-image: linear-gradient(rgba(250, 248, 243, 0.45), rgba(250, 248, 243, 0.45)), url("ArbaMinim.jpg");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
             color: var(--charcoal);
             height: 100vh;
             width: 100vw;
@@ -73,9 +78,9 @@
         }
 
         .column-card {
-            background: var(--soft-white); border-radius: 15px; padding: 1.2vh 1.2vw;
+            background: rgba(255, 255, 255, 0.93); border-radius: 15px; padding: 1.2vh 1.2vw;
             box-shadow: 0 8px 25px var(--shadow-blue); display: flex; flex-direction: column;
-            border-top: 5px solid var(--gold); height: 57vh; overflow: hidden;
+            border-top: 5px solid var(--gold); height: 60vh; overflow: hidden;
         }
 
         .card-header {
@@ -123,20 +128,7 @@
         }
         .fade-out { opacity: 0; }
 
-        /* תמונת ארבעת המינים */
         .announcement-highlight { position: relative; z-index: 1; }
-        .sukkot-photo {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            height: 19vh;
-            width: auto;
-            border-radius: 14px;
-            border: 3px solid var(--gold);
-            box-shadow: 0 6px 22px var(--shadow-blue);
-            object-fit: cover;
-        }
-        .sukkot-photo.photo-right { right: 3vw; }
 
         /* Screen Switching */
         .screen.hidden { display: none; }
@@ -309,8 +301,6 @@
         </div>
 
         <div class="announcement-bar">
-            <!-- ארבעת המינים – צילום: Sarashira, ויקישיתוף, CC BY-SA 4.0 -->
-            <img class="sukkot-photo photo-right" src="ArbaMinim.jpg" alt="ארבעת המינים">
             <div class="announcement-highlight">וּתְשׁוּבָה וּתְפִלָּה וּצְדָקָה מַעֲבִירִין אֶת רועַ הַגְּזֵרָה</div>
         </div>
 
