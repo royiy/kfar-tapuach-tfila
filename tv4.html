@@ -25,12 +25,7 @@
 
         body {
             font-family: 'Alef', sans-serif;
-            /* רקע ארבעת המינים */
-            background-color: var(--cream);
-            background-image: linear-gradient(rgba(250, 248, 243, 0.45), rgba(250, 248, 243, 0.45)), url("ArbaMinim.jpg");
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
+            background: var(--cream);
             color: var(--charcoal);
             height: 100vh;
             width: 100vw;
@@ -78,9 +73,9 @@
         }
 
         .column-card {
-            background: rgba(255, 255, 255, 0.93); border-radius: 15px; padding: 1.2vh 1.2vw;
+            background: var(--soft-white); border-radius: 15px; padding: 1.2vh 1.2vw;
             box-shadow: 0 8px 25px var(--shadow-blue); display: flex; flex-direction: column;
-            border-top: 5px solid var(--gold); height: 60vh; overflow: hidden;
+            border-top: 5px solid var(--gold); height: 55vh; overflow: hidden;
         }
 
         .card-header {
@@ -128,7 +123,13 @@
         }
         .fade-out { opacity: 0; }
 
-        .announcement-highlight { position: relative; z-index: 1; }
+        .sukkot-banner {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px var(--shadow-blue);
+        }
 
         /* Screen Switching */
         .screen.hidden { display: none; }
@@ -179,21 +180,12 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 0.4vh 0;
+            padding: 0.6vh 1.2vw 1.2vh 1.2vw;
             flex: 1;
             overflow: hidden;
             position: relative;
         }
 
-        .announcement-highlight {
-            font-family: 'Frank Ruhl Libre', serif;
-            font-size: 5vh;
-            color: var(--royal-blue);
-            font-weight: 800;
-            line-height: 1.1;
-            white-space: nowrap;
-            text-align: center;
-        }
     </style>
 </head>
 <body onclick="initInteraction();">
@@ -281,10 +273,6 @@
 
             <div class="column-card">
                 <div class="card-header"><span>✨</span><h2 class="card-title">תפילות חול</h2></div>
-                <div class="weekday-block" id="selichot-block">
-                    <div style="color:var(--royal-blue); margin-bottom: 4px; font-size: 2vh;">סליחות אשכנזים</div>
-                    <div class="time-pill">05:50</div>
-                </div>
                 <div class="weekday-block" id="shacharit-block">
                     <div style="color:var(--royal-blue); margin-bottom: 4px; font-size: 2vh;">שחרית</div>
                     <div class="time-pill">06:15</div><div class="time-pill">07:50</div><div class="time-pill">08:00 (ביום שישי)</div>
@@ -301,7 +289,7 @@
         </div>
 
         <div class="announcement-bar">
-            <div class="announcement-highlight">וּתְשׁוּבָה וּתְפִלָּה וּצְדָקָה מַעֲבִירִין אֶת רועַ הַגְּזֵרָה</div>
+            <img class="sukkot-banner" src="ArbaMinimBanner.jpg" alt="ארבעת המינים">
         </div>
 
         <footer class="footer">
@@ -523,18 +511,6 @@
                 const shacharitTimes = jsonData.weekday_times.shacharit || ["06:15", "07:50", "08:00 (ביום שישי)"];
                 const minchaeTimes = jsonData.weekday_times.mincha || ["13:15", "18:55"];
                 const arvitTimes = jsonData.weekday_times.arvit || ["19:30", "21:00"];
-                const selichotTimes = jsonData.weekday_times.selichot || ["05:50"];
-
-                // Update Selichot times
-                const selichotBlock = document.getElementById('selichot-block');
-                if (selichotBlock) {
-                    const timePills = selichotBlock.querySelectorAll('.time-pill');
-                    timePills.forEach((pill, index) => {
-                        if (index < selichotTimes.length) {
-                            pill.textContent = selichotTimes[index];
-                        }
-                    });
-                }
 
                 // Update Shacharit times
                 const shacharitBlock = document.getElementById('shacharit-block');
