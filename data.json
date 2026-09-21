@@ -1,27 +1,24 @@
 {
-  "parsha": "האזינו - שבת שובה",
+  "parsha": "שבת סוכות",
   "shabbat_times": {
     "erev_shabbat": {
       "mincha_gedola": "13:30",
-      "kablat_shabbat_mukdemet": "17:05",
-      "candle_lighting": "18:16",
-      "tzeit_hakochavim": "19:04"
+      "kablat_shabbat_mukdemet": "17:00",
+      "candle_lighting": "18:06",
+      "tzeit_hakochavim": "18:54"
     },
     "shabbat_day": {
       "mincha_gedola": "13:30",
-      "shkiya": "19:03",
+      "shkiya": "18:35",
       "mincha_shabbat": "16:55",
       "drasha": {
-        "title": "דרשת הרב לשבת תשובה",
+        "title": "שיעור הרב שמעון רוזנצוויג",
         "time": "17:15"
       },
-      "tzeit_shabbat": "19:16"
+      "tzeit_shabbat": "19:07"
     }
   },
   "weekday_times": {
-    "selichot": [
-      "05:45"
-    ],
     "shacharit": [
       "06:15",
       "07:50",
