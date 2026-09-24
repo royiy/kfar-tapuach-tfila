@@ -34,7 +34,7 @@
   li .t{font-weight:800;color:var(--date);font-variant-numeric:tabular-nums;white-space:nowrap}
   li .est{font-weight:500;color:var(--muted);font-size:.72em}
   li.note{font-weight:600;color:var(--muted)}
-  li.highlight{background:#FFF6D6;margin:0 -.65em;padding-inline:.65em;border-radius:.35em;border-bottom:none;color:var(--ink)}
+  li.highlight{background:#FFF6D6;margin:0 -.65em;padding-left:.65em;padding-right:.65em;border-radius:.35em;border-bottom:none;color:var(--ink)}
   .learn{margin:auto 1.4em 1.2em;background:var(--palm);color:#fff;border-radius:.9em;padding:1.1em 1.3em;position:relative;z-index:1}
   .learn h3{font-family:"Frank Ruhl Libre",serif;font-size:1.7em;line-height:1.2;color:var(--etrog)}
   .learn .when{font-size:2em;font-weight:800;direction:ltr;text-align:right;margin:.15em 0}
@@ -101,5 +101,21 @@
     </section>
   </main>
 </div>
+<script>
+  // Size the 16:9 stage in px so older TV browsers without CSS min() still fit the screen
+  (function(){
+    var stage=document.querySelector('.stage');
+    function fit(){
+      var w=window.innerWidth||document.documentElement.clientWidth;
+      var h=window.innerHeight||document.documentElement.clientHeight;
+      var sw=Math.min(w,h*16/9);
+      stage.style.width=sw+'px';
+      stage.style.height=(sw*9/16)+'px';
+      stage.style.fontSize=(sw/100)+'px';
+    }
+    fit();
+    window.addEventListener('resize',fit);
+  })();
+</script>
 </body>
 </html>
