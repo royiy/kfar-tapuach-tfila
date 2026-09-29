@@ -20,6 +20,9 @@
   header{background:var(--palm);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:1em 2.5em;
     border-bottom:.5em solid var(--etrog)}
   header h1{font-family:"Frank Ruhl Libre",serif;font-weight:900;font-size:3em;line-height:1}
+  .clock{text-align:left;line-height:1.1}
+  #live-clock{font-family:"Frank Ruhl Libre",serif;font-weight:900;font-size:3em;color:var(--etrog);direction:ltr;font-variant-numeric:tabular-nums}
+  #live-date{font-size:1.6em;font-weight:700}
   main{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.8em;padding:1.6em 2.2em 1.8em;min-height:0}
   .col{background:var(--paper);border-radius:1.2em;display:flex;flex-direction:column;overflow:hidden;
     box-shadow:0 .3em 0 rgba(30,77,43,.18);position:relative}
@@ -49,6 +52,10 @@
 <div class="stage">
   <header>
     <h1>זמני תפילות – חול המועד ושמחת תורה</h1>
+    <div class="clock">
+      <div id="live-clock">--:--</div>
+      <div id="live-date"></div>
+    </div>
   </header>
   <main>
     <section class="col">
@@ -115,6 +122,35 @@
     }
     fit();
     window.addEventListener('resize',fit);
+  })();
+
+  // Live clock and Hebrew date
+  (function(){
+    function toGematria(n){
+      if(n===15) return 'ט״ו'; if(n===16) return 'ט״ז';
+      var vals=[400,300,200,100,90,80,70,60,50,40,30,20,10,9,8,7,6,5,4,3,2,1];
+      var chars=['ת','ש','ר','ק','צ','פ','ע','ס','נ','מ','ל','כ','י','ט','ח','ז','ו','ה','ד','ג','ב','א'];
+      var s='',rem=n;
+      for(var i=0;i<vals.length;i++){ while(rem>=vals[i]){ s+=chars[i]; rem-=vals[i]; } }
+      if(s.length===1) return s+'׳';
+      return s.slice(0,-1)+'״'+s.slice(-1);
+    }
+    function pad(n){ return (n<10?'0':'')+n; }
+    var days=['ראשון','שני','שלישי','רביעי','חמישי','שישי','שבת'];
+    function update(){
+      var now=new Date();
+      document.getElementById('live-clock').textContent=pad(now.getHours())+':'+pad(now.getMinutes());
+      var text='יום '+days[now.getDay()];
+      try{
+        var parts=new Intl.DateTimeFormat('he-IL-u-ca-hebrew',{day:'numeric',month:'long',year:'numeric'}).formatToParts(now);
+        var get=function(t){ for(var i=0;i<parts.length;i++) if(parts[i].type===t) return parts[i].value; return ''; };
+        var day=parseInt(get('day'),10), month=get('month'), year=parseInt(get('year'),10);
+        if(day&&month&&year) text+=' | '+toGematria(day)+' '+month+' '+toGematria(year%1000);
+      }catch(e){}
+      document.getElementById('live-date').textContent=text;
+    }
+    update();
+    setInterval(update,1000);
   })();
 </script>
 </body>
