@@ -1,16 +1,16 @@
 {
-  "parsha": "שבת סוכות",
+  "parsha": "בראשית",
   "shabbat_times": {
     "erev_shabbat": {
       "mincha_gedola": "13:30",
-      "kablat_shabbat_mukdemet": "17:00",
-      "candle_lighting": "18:06",
-      "tzeit_hakochavim": "18:54"
+      "kablat_shabbat_mukdemet": "16:45",
+      "candle_lighting": "17:48",
+      "tzeit_hakochavim": "18:36"
     },
     "shabbat_day": {
       "mincha_gedola": "13:30",
-      "shkiya": "18:35",
-      "tzeit_shabbat": "19:07"
+      "shkiya": "18:17",
+      "tzeit_shabbat": "18:49"
     }
   },
   "weekday_times": {
@@ -20,12 +20,12 @@
       "08:00 (ביום שישי)"
     ],
     "mincha": [
-      "18:20",
+      "17:55",
       "13:15"
     ],
     "arvit": [
       "21:00",
-      "19:00"
+      "18:35"
     ]
   }
 }
