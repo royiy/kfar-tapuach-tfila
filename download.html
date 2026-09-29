@@ -196,20 +196,12 @@
             background: var(--deep-navy);
             border-radius: 8px;
             padding: 4px 12px;
-            margin: 4px 2px;
+            margin: 6px 2px;
             display: block;
+            white-space: nowrap;
+            font-variant-numeric: tabular-nums;
         }
-
-        .sheet-quote {
-            margin: 8px 30px 0;
-            text-align: center;
-            font-family: 'Frank Ruhl Libre', serif;
-            font-size: 21px;
-            color: var(--royal-blue);
-            border-top: 2px solid var(--gold);
-            border-bottom: 2px solid var(--gold);
-            padding: 12px 0;
-        }
+        .pill .pill-note { font-size: 13px; opacity: .85; margin-right: 4px; }
 
         .sheet-footer {
             background: var(--deep-navy);
@@ -297,8 +289,6 @@
             </section>
         </div>
 
-        <div class="sheet-quote">וְשָׂמַחְתָּ בְּחַגֶּךָ וְהָיִיתָ אַךְ שָׂמֵחַ</div>
-
         <footer class="sheet-footer">
             בית הכנסת המרכזי כפר תפוח
         </footer>
@@ -372,15 +362,31 @@
                 ['מנחה', wt.mincha],
                 ['ערבית', wt.arvit]
             ];
-            let html = '';
+            // מיון לפי שעה, והפרדת הערה בסוגריים (למשל "08:00 (ביום שישי)") מהשעה עצמה
+            function toMinutes(t) {
+                const m = String(t).match(/(\d{1,2}):(\d{2})/);
+                return m ? parseInt(m[1], 10) * 60 + parseInt(m[2], 10) : 9999;
+            }
+            function pillHtml(t) {
+                const m = String(t).match(/^([^(]*?)\s*(\(.*\))\s*$/);
+                if (!m) return '<span class="pill">' + escapeHtml(t) + '</span>';
+                return '<span class="pill">' + escapeHtml(m[1]) + '<span class="pill-note">' + escapeHtml(m[2]) + '</span></span>';
+            }
+            let html = '', count = 0;
             blocks.forEach(function (block) {
                 const name = block[0], times = block[1];
                 if (!times || !times.length) return;
+                count++;
+                const sorted = times.slice().sort(function (a, b) { return toMinutes(a) - toMinutes(b); });
                 html += '<div class="weekday-block"><div class="weekday-name">' + name + '</div>' +
-                        times.map(function (t) { return '<span class="pill">' + escapeHtml(t) + '</span>'; }).join('') +
+                        sorted.map(pillHtml).join('') +
                         '</div>';
             });
-            document.getElementById('weekday-times').innerHTML = html;
+            const grid = document.getElementById('weekday-times');
+            grid.innerHTML = html;
+            // מספר העמודות לפי מספר הבלוקים בפועל, כדי שלא יישאר מקום ריק
+            grid.style.gridTemplateColumns = window.matchMedia('(max-width: 700px)').matches
+                ? '' : 'repeat(' + Math.max(count, 1) + ', 1fr)';
         }
 
         function renderAll() {
