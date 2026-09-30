@@ -230,6 +230,8 @@
                 print-color-adjust: exact;
             }
             .card, .weekday-block, .row { break-inside: avoid; }
+            /* הקטנת התוכן כדי שהכול ייכנס בעמוד אחד (מחושב ב-fitToPage) */
+            .sheet-body { zoom: var(--print-scale, 1); }
         }
 
         @media (max-width: 240mm) {
@@ -346,7 +348,7 @@
             dayHtml += rowHtml('מנחה גדולה', day.mincha_gedola);
             dayHtml += rowHtml('מנחה של שבת',
                 day.mincha_shabbat || (day.tzeit_shabbat ? addMinutesToTimeStr(day.tzeit_shabbat, -130) : ''));
-            dayHtml += rowHtml(RAV_SHIUR_TITLE, RAV_SHIUR_TIME, true);
+            dayHtml += rowHtml(RAV_SHIUR_TITLE, RAV_SHIUR_TIME);
             // דרשת/שיעור הרב – נשלט מ-data.json, כמחרוזת שעה או כאובייקט {title, time}
             if (day.drasha) {
                 const drasha = (typeof day.drasha === 'string') ? { time: day.drasha } : day.drasha;
@@ -396,7 +398,23 @@
             document.getElementById('parsha-name').textContent = jsonData.parsha || '';
             renderShabbat();
             renderWeekday();
+            fitToPage();
         }
+
+        // אם התוכן גבוה מדף A4 – מקטינים את גוף הדף בהדפסה כדי שהשורה התחתונה לא תיחתך
+        function fitToPage() {
+            const sheet = document.getElementById('sheet');
+            const body = sheet.querySelector('.sheet-body');
+            const PAGE_PX = 297 * 96 / 25.4 - 6; // גובה A4 בפיקסלים, עם מרווח ביטחון
+            const prevMin = sheet.style.minHeight;
+            sheet.style.minHeight = '0';
+            const natural = sheet.offsetHeight;
+            const fixed = natural - body.offsetHeight; // כותרת + כותרת תחתונה
+            sheet.style.minHeight = prevMin;
+            const scale = natural > PAGE_PX ? (PAGE_PX - fixed) / (natural - fixed) : 1;
+            document.documentElement.style.setProperty('--print-scale', Math.max(scale, 0.5).toFixed(3));
+        }
+        window.addEventListener('beforeprint', fitToPage);
 
         async function loadDataFromJson() {
             try {
