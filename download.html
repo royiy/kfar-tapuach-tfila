@@ -297,6 +297,8 @@
     <script>
         const DEFAULT_SHACHARIT_SHABBAT = '08:00';
         const DEFAULT_DRASHA_TITLE = 'דרשת הרב';
+        const RAV_SHIUR_TITLE = 'שיעור הרב שמעון רוזנצוויג שליט"א';
+        const RAV_SHIUR_TIME = 'אחרי מנחה';
         let jsonData = {};
 
         /* ---------- עזרים ---------- */
@@ -344,6 +346,7 @@
             dayHtml += rowHtml('מנחה גדולה', day.mincha_gedola);
             dayHtml += rowHtml('מנחה של שבת',
                 day.mincha_shabbat || (day.tzeit_shabbat ? addMinutesToTimeStr(day.tzeit_shabbat, -130) : ''));
+            dayHtml += rowHtml(RAV_SHIUR_TITLE, RAV_SHIUR_TIME, true);
             // דרשת/שיעור הרב – נשלט מ-data.json, כמחרוזת שעה או כאובייקט {title, time}
             if (day.drasha) {
                 const drasha = (typeof day.drasha === 'string') ? { time: day.drasha } : day.drasha;
