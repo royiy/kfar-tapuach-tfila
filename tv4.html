@@ -187,6 +187,23 @@
             display: block;
         }
 
+        .rain-banner {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Frank Ruhl Libre', serif;
+            font-size: 6vh;
+            font-weight: 700;
+            color: var(--soft-white);
+            background: linear-gradient(165deg, var(--deep-navy) 0%, var(--royal-blue) 100%);
+            border: 3px solid var(--gold);
+            border-radius: 15px;
+            box-shadow: 0 8px 25px var(--shadow-blue);
+            text-align: center;
+        }
+
         .announcement-bar {
             background: transparent;
             display: flex;
@@ -305,7 +322,7 @@
         </div>
 
         <div class="announcement-bar">
-            <img class="sukkot-banner" src="ArbaMinimBanner.jpg" alt="ארבעת המינים">
+            <div class="rain-banner">מַשִּׁיב הָרוּחַ וּמוֹרִיד הַגֶּשֶׁם</div>
         </div>
 
         <footer class="footer">
@@ -403,7 +420,7 @@
 
         let currentScreen = 'main-screen';
         let screenToggleInterval = null;
-        const screenCycle = ['simhat-tora-screen'];
+        const screenCycle = ['main-screen'];
         let screenCycleIndex = 0;
 
         const screenDurations = {
