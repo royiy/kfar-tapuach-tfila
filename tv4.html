@@ -319,7 +319,7 @@
         </div>
 
         <div class="announcement-bar">
-            <div class="rain-banner">מַשִּׁיב הָרוּחַ וּמוֹרִיד הַגֶּשֶׁם&nbsp;|&nbsp;יַעֲלֶה וְיָבוֹא</div>
+            <div class="rain-banner">מַשִּׁיב הָרוּחַ וּמוֹרִיד הַגֶּשֶׁם<span id="yaale-veyavo">&nbsp;|&nbsp;יַעֲלֶה וְיָבוֹא</span></div>
         </div>
 
         <footer class="footer">
@@ -565,6 +565,15 @@
                 renderPills('arvit-block', arvitTimes);
             }
         }
+
+        // הסתרת "יעלה ויבוא" בסוף ראש חודש: 12.10.2026 בשעה 18:30
+        const YAALE_VEYAVO_END = new Date(2026, 9, 12, 18, 30);
+        function updateYaaleVeyavo() {
+            const el = document.getElementById('yaale-veyavo');
+            if (el && new Date() >= YAALE_VEYAVO_END) el.style.display = 'none';
+        }
+        updateYaaleVeyavo();
+        setInterval(updateYaaleVeyavo, 60000);
 
         loadDataFromJson();
         setInterval(loadDataFromJson, 300000);
