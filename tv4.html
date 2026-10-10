@@ -547,38 +547,22 @@
                 const minchaeTimes = jsonData.weekday_times.mincha || ["13:15", "18:55"];
                 const arvitTimes = jsonData.weekday_times.arvit || ["19:30", "21:00"];
 
-                // Update Shacharit times
-                const shacharitBlock = document.getElementById('shacharit-block');
-                if (shacharitBlock) {
-                    const timePills = shacharitBlock.querySelectorAll('.time-pill');
-                    timePills.forEach((pill, index) => {
-                        if (index < shacharitTimes.length) {
-                            pill.textContent = shacharitTimes[index];
-                        }
+                // Rebuild pills so every time in the JSON is shown (not limited to the pills in the HTML)
+                const renderPills = (blockId, times) => {
+                    const block = document.getElementById(blockId);
+                    if (!block) return;
+                    block.querySelectorAll('.time-pill').forEach(pill => pill.remove());
+                    times.forEach(time => {
+                        const pill = document.createElement('div');
+                        pill.className = 'time-pill';
+                        pill.textContent = time;
+                        block.appendChild(pill);
                     });
-                }
+                };
 
-                // Update Mincha times
-                const minchaBlock = document.getElementById('mincha-block');
-                if (minchaBlock) {
-                    const timePills = minchaBlock.querySelectorAll('.time-pill');
-                    timePills.forEach((pill, index) => {
-                        if (index < minchaeTimes.length) {
-                            pill.textContent = minchaeTimes[index];
-                        }
-                    });
-                }
-
-                // Update Arvit times
-                const arvitBlock = document.getElementById('arvit-block');
-                if (arvitBlock) {
-                    const timePills = arvitBlock.querySelectorAll('.time-pill');
-                    timePills.forEach((pill, index) => {
-                        if (index < arvitTimes.length) {
-                            pill.textContent = arvitTimes[index];
-                        }
-                    });
-                }
+                renderPills('shacharit-block', shacharitTimes);
+                renderPills('mincha-block', minchaeTimes);
+                renderPills('arvit-block', arvitTimes);
             }
         }
 
