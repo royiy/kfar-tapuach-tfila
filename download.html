@@ -447,6 +447,19 @@
             d.setHours(0, 0, 0, 0);
             return addDays(d, (6 - d.getDay() + 7) % 7);
         }
+        function gematria(n) {
+            const letters = [[400,'ת'],[300,'ש'],[200,'ר'],[100,'ק'],[90,'צ'],[80,'פ'],[70,'ע'],[60,'ס'],[50,'נ'],[40,'מ'],[30,'ל'],[20,'כ'],[10,'י'],[9,'ט'],[8,'ח'],[7,'ז'],[6,'ו'],[5,'ה'],[4,'ד'],[3,'ג'],[2,'ב'],[1,'א']];
+            let s = '';
+            for (const [v, l] of letters) while (n >= v) { s += l; n -= v; }
+            s = s.replace('יה', 'טו').replace('יו', 'טז');
+            return s.length > 1 ? s.slice(0, -1) + '"' + s.slice(-1) : s + "'";
+        }
+        function hebrewDate(d) {
+            const parts = {};
+            new Intl.DateTimeFormat('he-IL-u-ca-hebrew', { day: 'numeric', month: 'long', year: 'numeric' })
+                .formatToParts(d).forEach(p => parts[p.type] = p.value);
+            return gematria(+parts.day) + ' ב' + parts.month + ' ' + gematria(+parts.year % 1000);
+        }
         function isUpcoming(d) { return toIso(d) === toIso(upcomingShabbat()); }
         async function fetchJson(path) {
             try {
@@ -493,7 +506,7 @@
 
             document.getElementById('prev-week').disabled = true;
             document.getElementById('next-week').disabled = true;
-            document.getElementById('shabbat-date').textContent = 'שבת ' + date.toLocaleDateString('he-IL');
+            document.getElementById('shabbat-date').textContent = 'שבת ' + hebrewDate(date);
 
             const hint = document.getElementById('hint');
             const sheet = document.getElementById('sheet');
@@ -505,7 +518,7 @@
                 sheet.style.visibility = '';
                 renderAll();
             } else {
-                hint.textContent = 'לא נמצאו זמנים לשבת ' + date.toLocaleDateString('he-IL') + '.';
+                hint.textContent = 'לא נמצאו זמנים לשבת ' + hebrewDate(date) + '.';
                 hint.classList.add('error');
                 sheet.style.visibility = 'hidden';
             }
