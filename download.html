@@ -60,6 +60,9 @@
         }
         .btn:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(0,0,0,.25); }
         .btn-primary { background: var(--gold); color: var(--deep-navy); font-weight: 700; }
+        .btn-nav { background: transparent; color: var(--warm-gold); border: 1px solid rgba(212,175,55,.5); }
+        .btn:disabled { opacity: .35; cursor: default; }
+        .btn:disabled:hover { transform: none; box-shadow: none; }
 
         .hint {
             max-width: 210mm;
@@ -102,6 +105,7 @@
         }
         .sheet-parsha .label { font-size: 15px; color: var(--warm-gold); }
         .sheet-parsha .value { font-family: 'Frank Ruhl Libre', serif; font-size: 26px; margin-right: 8px; }
+        .sheet-date { margin-top: 10px; font-size: 16px; color: var(--warm-gold); }
 
         .sheet-body {
             flex: 1;
@@ -252,6 +256,8 @@
     <div class="toolbar">
         <div class="toolbar-title">לוח זמני התפילות – להורדה והדפסה</div>
         <div class="toolbar-actions">
+            <button class="btn btn-nav" id="prev-week" onclick="changeWeek(-7)" disabled>→ שבת קודמת</button>
+            <button class="btn btn-nav" id="next-week" onclick="changeWeek(7)" disabled>שבת הבאה ←</button>
             <button class="btn btn-primary" onclick="window.print()">⬇️ הורדת PDF</button>
         </div>
     </div>
@@ -268,6 +274,7 @@
                 <span class="label">פרשת השבוע</span>
                 <span class="value" id="parsha-name">טוען...</span>
             </div>
+            <div class="sheet-date" id="shabbat-date"></div>
         </header>
 
         <div class="sheet-body">
@@ -416,22 +423,96 @@
         }
         window.addEventListener('beforeprint', fitToPage);
 
-        async function loadDataFromJson() {
+        /* ---------- בחירת שבת ----------
+           כל שבת נשמרת בקובץ weeks/YYYY-MM-DD.json לפי תאריך השבת.
+           לשבת הקרובה, אם אין לה קובץ, נטען data.json (הקובץ של מסכי הטלוויזיה).
+           data_next.json משמש לשבת שהתאריך שלה רשום בשדה shabbat_date. */
+        let currentShabbat;
+        const hintHtml = document.getElementById('hint').innerHTML;
+
+        function toIso(d) {
+            return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+        }
+        function parseIso(s) {
+            const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(s || '');
+            return m ? new Date(+m[1], +m[2] - 1, +m[3]) : null;
+        }
+        function addDays(d, n) {
+            const r = new Date(d);
+            r.setDate(r.getDate() + n);
+            return r;
+        }
+        function upcomingShabbat() {
+            const d = new Date();
+            d.setHours(0, 0, 0, 0);
+            return addDays(d, (6 - d.getDay() + 7) % 7);
+        }
+        function isUpcoming(d) { return toIso(d) === toIso(upcomingShabbat()); }
+        async function fetchJson(path) {
             try {
-                const response = await fetch('./data.json?v=' + Date.now());
-                if (!response.ok) throw new Error('HTTP error! status: ' + response.status);
-                jsonData = await response.json();
-                renderAll();
-            } catch (error) {
-                console.error('Error loading data.json:', error);
-                const hint = document.getElementById('hint');
-                hint.textContent = 'שגיאה בטעינת הזמנים. נסו לרענן את העמוד.';
-                hint.classList.add('error');
-                document.getElementById('parsha-name').textContent = 'שגיאה בטעינה';
+                const r = await fetch(path + '?v=' + Date.now(), { cache: 'no-store' });
+                return r.ok ? await r.json() : null;
+            } catch (e) {
+                console.error('Error loading ' + path + ':', e);
+                return null;
             }
         }
 
-        loadDataFromJson();
+        async function loadWeekData(d) {
+            const iso = toIso(d);
+            const week = await fetchJson('./weeks/' + iso + '.json');
+            if (week) return week;
+            if (isUpcoming(d)) return fetchJson('./data.json');
+            const next = await fetchJson('./data_next.json');
+            return next && next.shabbat_date === iso ? next : null;
+        }
+
+        async function weekExists(d) {
+            return (await loadWeekData(d)) !== null;
+        }
+
+        async function updateNav() {
+            const [hasPrev, hasNext] = await Promise.all([
+                weekExists(addDays(currentShabbat, -7)),
+                weekExists(addDays(currentShabbat, 7))
+            ]);
+            document.getElementById('prev-week').disabled = !hasPrev;
+            document.getElementById('next-week').disabled = !hasNext;
+        }
+
+        function changeWeek(days) {
+            loadWeek(addDays(currentShabbat, days));
+        }
+
+        async function loadWeek(date) {
+            currentShabbat = date;
+            const url = new URL(location.href);
+            if (isUpcoming(date)) url.searchParams.delete('shabbat');
+            else url.searchParams.set('shabbat', toIso(date));
+            history.replaceState(null, '', url);
+
+            document.getElementById('prev-week').disabled = true;
+            document.getElementById('next-week').disabled = true;
+            document.getElementById('shabbat-date').textContent = 'שבת ' + date.toLocaleDateString('he-IL');
+
+            const hint = document.getElementById('hint');
+            const sheet = document.getElementById('sheet');
+            const data = await loadWeekData(date);
+            if (data) {
+                jsonData = data;
+                hint.innerHTML = hintHtml;
+                hint.classList.remove('error');
+                sheet.style.visibility = '';
+                renderAll();
+            } else {
+                hint.textContent = 'לא נמצאו זמנים לשבת ' + date.toLocaleDateString('he-IL') + '.';
+                hint.classList.add('error');
+                sheet.style.visibility = 'hidden';
+            }
+            updateNav();
+        }
+
+        loadWeek(parseIso(new URLSearchParams(location.search).get('shabbat')) || upcomingShabbat());
     </script>
 </body>
 </html>
