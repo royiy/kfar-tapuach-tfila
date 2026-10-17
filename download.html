@@ -425,9 +425,11 @@
 
         /* ---------- בחירת שבת ----------
            כל שבת נשמרת בקובץ weeks/YYYY-MM-DD.json לפי תאריך השבת.
-           לשבת הקרובה, אם אין לה קובץ, נטען data.json (הקובץ של מסכי הטלוויזיה).
+           ברירת המחדל היא השבת שרשומה ב-shabbat_date של data.json (הקובץ של מסכי הטלוויזיה),
+           ואם אין שם תאריך – השבת הקרובה. לשבת זו, אם אין לה קובץ, נטען data.json.
            data_next.json משמש לשבת שהתאריך שלה רשום בשדה shabbat_date. */
         let currentShabbat;
+        let defaultShabbat = upcomingShabbat();
         const hintHtml = document.getElementById('hint').innerHTML;
 
         function toIso(d) {
@@ -460,7 +462,7 @@
                 .formatToParts(d).forEach(p => parts[p.type] = p.value);
             return gematria(+parts.day) + ' ב' + parts.month + ' ' + gematria(+parts.year % 1000);
         }
-        function isUpcoming(d) { return toIso(d) === toIso(upcomingShabbat()); }
+        function isUpcoming(d) { return toIso(d) === toIso(defaultShabbat); }
         async function fetchJson(path) {
             try {
                 const r = await fetch(path + '?v=' + Date.now(), { cache: 'no-store' });
@@ -525,7 +527,11 @@
             updateNav();
         }
 
-        loadWeek(parseIso(new URLSearchParams(location.search).get('shabbat')) || upcomingShabbat());
+        (async () => {
+            const current = await fetchJson('./data.json');
+            defaultShabbat = parseIso(current && current.shabbat_date) || defaultShabbat;
+            loadWeek(parseIso(new URLSearchParams(location.search).get('shabbat')) || defaultShabbat);
+        })();
     </script>
 </body>
 </html>
