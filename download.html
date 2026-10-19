@@ -234,6 +234,8 @@
                 print-color-adjust: exact;
             }
             .card, .weekday-block, .row { break-inside: avoid; }
+            /* מרווח מתחתית הדף – מדפסות לא מדפיסות עד הקצה */
+            .sheet-footer { margin-bottom: 10mm; }
             /* הקטנת התוכן כדי שהכול ייכנס בעמוד אחד (מחושב ב-fitToPage) */
             .sheet-body { zoom: var(--print-scale, 1); }
         }
@@ -412,7 +414,7 @@
         function fitToPage() {
             const sheet = document.getElementById('sheet');
             const body = sheet.querySelector('.sheet-body');
-            const PAGE_PX = 297 * 96 / 25.4 - 6; // גובה A4 בפיקסלים, עם מרווח ביטחון
+            const PAGE_PX = (297 - 10) * 96 / 25.4 - 6; // גובה A4 בפיקסלים, פחות המרווח מתחת לכותרת התחתונה ומרווח ביטחון
             const prevMin = sheet.style.minHeight;
             sheet.style.minHeight = '0';
             const natural = sheet.offsetHeight;
