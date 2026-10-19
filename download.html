@@ -313,6 +313,10 @@
         let jsonData = {};
 
         /* ---------- עזרים ---------- */
+        // מנחה של שבת לא לפני 15:20
+        function earliestMincha(timeStr) {
+            return timeStr < '15:20' ? '15:20' : timeStr;
+        }
         function addMinutesToTimeStr(timeStr, mins) {
             const parts = String(timeStr).split(':');
             if (parts.length < 2) return timeStr;
@@ -356,7 +360,7 @@
             dayHtml += rowHtml('שחרית', day.shacharit || DEFAULT_SHACHARIT_SHABBAT);
             dayHtml += rowHtml('מנחה גדולה', day.mincha_gedola);
             dayHtml += rowHtml('מנחה של שבת',
-                day.mincha_shabbat || (day.tzeit_shabbat ? addMinutesToTimeStr(day.tzeit_shabbat, -130) : ''));
+                day.mincha_shabbat || (day.tzeit_shabbat ? earliestMincha(addMinutesToTimeStr(day.tzeit_shabbat, -130)) : ''));
             dayHtml += rowHtml(RAV_SHIUR_TITLE, RAV_SHIUR_TIME);
             // דרשת/שיעור הרב – נשלט מ-data.json, כמחרוזת שעה או כאובייקט {title, time}
             if (day.drasha) {

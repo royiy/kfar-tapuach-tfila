@@ -531,12 +531,13 @@
                     if (label === 'צאת שבת וערבית' && shabbatDayData.tzeit_shabbat) {
                         item.querySelector('.time-value').textContent = shabbatDayData.tzeit_shabbat;
                     }
-                    // מנחה של שבת: לפי mincha_shabbat אם צוין, אחרת 2:10 לפני צאת שבת וערבית
+                    // מנחה של שבת: לפי mincha_shabbat אם צוין, אחרת 2:10 לפני צאת שבת וערבית, ולא לפני 15:20
                     if (label === 'מנחה של שבת') {
                         if (shabbatDayData.mincha_shabbat) {
                             item.querySelector('.time-value').textContent = shabbatDayData.mincha_shabbat;
                         } else if (shabbatDayData.tzeit_shabbat) {
-                            item.querySelector('.time-value').textContent = addMinutesToTimeStr(shabbatDayData.tzeit_shabbat, -130);
+                            const minchaCalc = addMinutesToTimeStr(shabbatDayData.tzeit_shabbat, -130);
+                            item.querySelector('.time-value').textContent = minchaCalc < '15:20' ? '15:20' : minchaCalc;
                         }
                     }
                 });
