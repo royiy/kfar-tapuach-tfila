@@ -474,71 +474,48 @@
                 return String(nh).padStart(2, '0') + ':' + String(nm).padStart(2, '0');
             }
 
-            if (jsonData.shabbat_times && jsonData.shabbat_times.erev_shabbat) {
-                const erevShabbatData = jsonData.shabbat_times.erev_shabbat;
-                const shabbatItems = document.querySelectorAll('.column-card')[0].querySelectorAll('.right-column-item');
+            // תפילות שבת: נבנות מ-data.json באותם כללים כמו download.html, כדי שהזמנים יהיו זהים
+            if (jsonData.shabbat_times) {
+                const erev = jsonData.shabbat_times.erev_shabbat || {};
+                const day = jsonData.shabbat_times.shabbat_day || {};
+                const escapeHtml = value => String(value)
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;');
+                const rowHtml = (label, time) => time
+                    ? '<div class="right-column-item"><span>' + escapeHtml(label) + '</span><span class="time-value">' + escapeHtml(time) + '</span></div>'
+                    : '';
+                const titleHtml = title => '<div class="right-column-section-title">' + title + '</div>';
 
-                function addMinutesToTimeStr(timeStr, mins) {
-                    const parts = timeStr.split(':');
-                    if (parts.length < 2) return timeStr;
-                    let h = parseInt(parts[0], 10);
-                    let m = parseInt(parts[1], 10);
-                    if (isNaN(h) || isNaN(m)) return timeStr;
-                    let total = h * 60 + m + mins;
-                    total = (total + 24 * 60) % (24 * 60);
-                    const nh = Math.floor(total / 60);
-                    const nm = total % 60;
-                    return String(nh).padStart(2, '0') + ':' + String(nm).padStart(2, '0');
+                let html = titleHtml('ערב שבת');
+                html += rowHtml('מנחה גדולה', erev.mincha_gedola);
+                html += rowHtml('קבלת שבת מוקדמת', erev.kablat_shabbat_mukdemet);
+                html += rowHtml('הדלקת נרות', erev.candle_lighting);
+                // מנחה ערב שבת: 14 דקות אחרי הדלקת נרות אם לא צוין במפורש
+                html += rowHtml('מנחה ערב שבת',
+                    erev.mincha_erev_shabbat || (erev.candle_lighting ? addMinutesToTimeStr(erev.candle_lighting, 14) : ''));
+                html += rowHtml('צאת הכוכבים', erev.tzeit_hakochavim);
+
+                html += titleHtml('יום השבת');
+                html += rowHtml('שחרית', day.shacharit || '08:00');
+                html += rowHtml('מנחה גדולה', day.mincha_gedola);
+                // מנחה של שבת: לפי mincha_shabbat אם צוין, אחרת 2:10 לפני צאת שבת וערבית, ולא לפני 15:20
+                let minchaShabbat = day.mincha_shabbat;
+                if (!minchaShabbat && day.tzeit_shabbat) {
+                    const minchaCalc = addMinutesToTimeStr(day.tzeit_shabbat, -130);
+                    minchaShabbat = minchaCalc < '15:20' ? '15:20' : minchaCalc;
                 }
+                html += rowHtml('מנחה של שבת', minchaShabbat);
+                html += rowHtml('שיעור הרב שמעון רוזנצוויג שליט"א', 'אחרי מנחה');
+                if (day.drasha) {
+                    const drasha = (typeof day.drasha === 'string') ? { time: day.drasha } : day.drasha;
+                    html += rowHtml(drasha.title || 'דרשת הרב', drasha.time);
+                }
+                html += rowHtml('שקיעה', day.shkiya);
+                html += rowHtml('צאת שבת וערבית', day.tzeit_shabbat);
 
-                shabbatItems.forEach(item => {
-                    const label = item.querySelector('span').textContent;
-                    if (label === 'קבלת שבת מוקדמת' && erevShabbatData.kablat_shabbat_mukdemet) {
-                        item.querySelector('.time-value').textContent = erevShabbatData.kablat_shabbat_mukdemet;
-                    }
-                    if (label === 'הדלקת נרות' && erevShabbatData.candle_lighting) {
-                        item.querySelector('.time-value').textContent = erevShabbatData.candle_lighting;
-                    }
-                    // מנחה נוספת (בחדר לימוד) צריך להיות בדיוק בזמן הדלקת נרות
-                    if (label === 'מנחה נוספת (בחדר לימוד)' && erevShabbatData.candle_lighting) {
-                        item.querySelector('.time-value').textContent = erevShabbatData.candle_lighting;
-                    }
-                    if (label === 'מנחה ערב שבת') {
-                        // קבע את מנחה ערב שבת ל-14 דקות אחרי הדלקת נרות אם לא צוין במפורש ב-JSON
-                        if (erevShabbatData.mincha_erev_shabbat) {
-                            item.querySelector('.time-value').textContent = erevShabbatData.mincha_erev_shabbat;
-                        } else if (erevShabbatData.candle_lighting) {
-                            item.querySelector('.time-value').textContent = addMinutesToTimeStr(erevShabbatData.candle_lighting, 14);
-                        }
-                    }
-                    if (label === 'צאת הכוכבים' && erevShabbatData.tzeit_hakochavim) {
-                        item.querySelector('.time-value').textContent = erevShabbatData.tzeit_hakochavim;
-                    }
-                });
-            }
-
-            if (jsonData.shabbat_times && jsonData.shabbat_times.shabbat_day) {
-                const shabbatDayData = jsonData.shabbat_times.shabbat_day;
-                const shabbatItems = document.querySelectorAll('.column-card')[0].querySelectorAll('.right-column-item');
-
-                shabbatItems.forEach(item => {
-                    const label = item.querySelector('span').textContent;
-                    if (label === 'שקיעה' && shabbatDayData.shkiya) {
-                        item.querySelector('.time-value').textContent = shabbatDayData.shkiya;
-                    }
-                    if (label === 'צאת שבת וערבית' && shabbatDayData.tzeit_shabbat) {
-                        item.querySelector('.time-value').textContent = shabbatDayData.tzeit_shabbat;
-                    }
-                    // מנחה של שבת: לפי mincha_shabbat אם צוין, אחרת 2:10 לפני צאת שבת וערבית, ולא לפני 15:20
-                    if (label === 'מנחה של שבת') {
-                        if (shabbatDayData.mincha_shabbat) {
-                            item.querySelector('.time-value').textContent = shabbatDayData.mincha_shabbat;
-                        } else if (shabbatDayData.tzeit_shabbat) {
-                            const minchaCalc = addMinutesToTimeStr(shabbatDayData.tzeit_shabbat, -130);
-                            item.querySelector('.time-value').textContent = minchaCalc < '15:20' ? '15:20' : minchaCalc;
-                        }
-                    }
-                });
+                // פעמיים – בשביל הגלילה הרציפה
+                document.getElementById('shabbat-content').innerHTML = html + html;
             }
 
             if (jsonData.weekday_times) {
@@ -546,12 +523,18 @@
                 const minchaeTimes = jsonData.weekday_times.mincha || ["13:15", "18:55"];
                 const arvitTimes = jsonData.weekday_times.arvit || ["19:30", "21:00"];
 
+                // מיון לפי שעה, כמו ב-download.html
+                const toMinutes = t => {
+                    const m = String(t).match(/(\d{1,2}):(\d{2})/);
+                    return m ? parseInt(m[1], 10) * 60 + parseInt(m[2], 10) : 9999;
+                };
+
                 // Rebuild pills so every time in the JSON is shown (not limited to the pills in the HTML)
                 const renderPills = (blockId, times) => {
                     const block = document.getElementById(blockId);
                     if (!block) return;
                     block.querySelectorAll('.time-pill').forEach(pill => pill.remove());
-                    times.forEach(time => {
+                    times.slice().sort((a, b) => toMinutes(a) - toMinutes(b)).forEach(time => {
                         const pill = document.createElement('div');
                         pill.className = 'time-pill';
                         pill.textContent = time;
