@@ -1,0 +1,32 @@
+{
+  "shabbat_date": "2026-11-07",
+  "parsha": "חיי שרה",
+  "shabbat_times": {
+    "erev_shabbat": {
+      "mincha_gedola": "12:30",
+      "candle_lighting": "16:19",
+      "tzeit_hakochavim": "17:07"
+    },
+    "shabbat_day": {
+      "mincha_gedola": "12:30",
+      "shkiya": "16:48",
+      "tzeit_shabbat": "17:22"
+    }
+  },
+  "weekday_times": {
+    "shacharit": [
+      "06:15",
+      "07:50",
+      "08:00 (ביום שישי)"
+    ],
+    "mincha": [
+      "16:35",
+      "13:15"
+    ],
+    "arvit": [
+      "21:00",
+      "20:00",
+      "17:15"
+    ]
+  }
+}
