@@ -344,8 +344,9 @@
 
         async function loadDataFromJson() {
             try {
-                const response = await fetch('./data.json?v=' + Date.now());
+                const response = await fetch('./data.json?v=' + Date.now(), {cache: 'no-store'});
                 if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                syncClockFromResponse(response);
                 jsonData = await response.json();
                 console.log('Data loaded successfully:', jsonData);
                 updatePageFromData();
@@ -379,12 +380,23 @@
             return s.slice(0, -1) + '״' + s.slice(-1);
         }
 
-        function updateClock() {
-            const now = new Date();
-            const clockEl = document.getElementById('live-clock');
-            if(clockEl) clockEl.textContent = now.toLocaleTimeString('he-IL', {hour12: false});
+        // השעון מוצג תמיד בשעון ישראל (כולל מעבר שעון קיץ/חורף), ומתוקן לפי שעת השרת
+        // כדי שלא יושפע מאזור זמן או שעון שגויים במכשיר הטלוויזיה
+        const TIME_ZONE = 'Asia/Jerusalem';
+        let clockOffsetMs = 0;
 
-            const options = {day:'numeric', month:'long', year:'numeric'};
+        function syncClockFromResponse(response) {
+            const serverDate = Date.parse(response.headers.get('Date'));
+            // כותרת Date מדויקת לשנייה בלבד, לכן מתקנים רק סטייה משמעותית
+            if (!isNaN(serverDate) && Math.abs(serverDate - Date.now()) > 30000) clockOffsetMs = serverDate - Date.now();
+        }
+
+        function updateClock() {
+            const now = new Date(Date.now() + clockOffsetMs);
+            const clockEl = document.getElementById('live-clock');
+            if(clockEl) clockEl.textContent = now.toLocaleTimeString('he-IL', {hour12: false, timeZone: TIME_ZONE});
+
+            const options = {day:'numeric', month:'long', year:'numeric', timeZone: TIME_ZONE};
             const parts = new Intl.DateTimeFormat('he-IL-u-ca-hebrew', options).formatToParts(now);
 
             const dayNum = parseInt(parts.find(p => p.type === 'day').value);
@@ -396,7 +408,8 @@
 
             const days = ['ראשון','שני','שלישי','רביעי','חמישי','שישי','שבת'];
             const dateEl = document.getElementById('live-date');
-            if(dateEl) dateEl.textContent = `יום ${days[now.getDay()]} | ${dayGematria} ${monthName} ${yearGematria}`;
+            const weekday = new Date(now.toLocaleString('en-US', {timeZone: TIME_ZONE})).getDay();
+            if(dateEl) dateEl.textContent = `יום ${days[weekday]} | ${dayGematria} ${monthName} ${yearGematria}`;
 
         }
 
