@@ -362,6 +362,8 @@
             dayHtml += rowHtml('מנחה של שבת',
                 day.mincha_shabbat || (day.tzeit_shabbat ? earliestMincha(addMinutesToTimeStr(day.tzeit_shabbat, -130)) : ''));
             dayHtml += rowHtml(RAV_SHIUR_TITLE, RAV_SHIUR_TIME);
+            // מנחה נוספת לאחר שיעור הרב: 5 דקות אחרי זמן הדלקת הנרות
+            dayHtml += rowHtml('מנחה נוספת', erev.candle_lighting ? addMinutesToTimeStr(erev.candle_lighting, 5) : '');
             // דרשת/שיעור הרב – נשלט מ-data.json, כמחרוזת שעה או כאובייקט {title, time}
             if (day.drasha) {
                 const drasha = (typeof day.drasha === 'string') ? { time: day.drasha } : day.drasha;

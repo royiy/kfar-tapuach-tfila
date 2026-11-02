@@ -520,6 +520,8 @@
                 }
                 html += rowHtml('מנחה של שבת', minchaShabbat);
                 html += rowHtml('שיעור הרב שמעון רוזנצוויג שליט"א', 'אחרי מנחה');
+                // מנחה נוספת לאחר שיעור הרב: 5 דקות אחרי זמן הדלקת הנרות
+                html += rowHtml('מנחה נוספת', erev.candle_lighting ? addMinutesToTimeStr(erev.candle_lighting, 5) : '');
                 if (day.drasha) {
                     const drasha = (typeof day.drasha === 'string') ? { time: day.drasha } : day.drasha;
                     html += rowHtml(drasha.title || 'דרשת הרב', drasha.time);
