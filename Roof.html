@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>פרויקט איטום הגג</title>
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@500;700;900&family=Assistant:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --deep-navy:#0a1628; --royal-blue:#1e3a5f; --gold:#d4af37; --warm-gold:#f4e4c1; --cream:#faf8f3;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{width:100%;height:100%;overflow:hidden;background:var(--deep-navy)}
+  body{font-family:"Assistant",Arial,sans-serif;display:flex;align-items:center;justify-content:center}
+  /* 16:9 stage that always fits the screen */
+  .stage{width:min(100vw,177.78vh);height:min(56.25vw,100vh);font-size:min(1vw,1.778vh);
+    background:linear-gradient(165deg,var(--deep-navy) 0%,var(--royal-blue) 100%);
+    position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;color:#fff;padding:3em 6em}
+  .frame{position:absolute;inset:2em;border:.3em solid var(--gold);border-radius:2em;pointer-events:none}
+  .roof{width:34em;height:auto;margin-bottom:1.5em}
+  .kicker{font-size:2.6em;font-weight:700;color:var(--warm-gold);letter-spacing:.05em;margin-bottom:.3em}
+  h1{font-family:"Frank Ruhl Libre",serif;font-weight:900;font-size:7.5em;line-height:1.05;color:#fff}
+  h1 span{color:var(--gold)}
+  .cost{font-family:"Frank Ruhl Libre",serif;font-weight:700;font-size:3.6em;color:var(--warm-gold);margin-top:.5em}
+  .cost b{color:var(--gold);font-weight:900}
+  .ask{font-size:4em;font-weight:800;margin-top:.9em;line-height:1.25}
+  .contact{display:inline-block;margin-top:1em;background:var(--gold);color:var(--deep-navy);font-weight:800;
+    font-size:3.6em;padding:.35em 1.3em;border-radius:.6em;box-shadow:0 .3em 1em rgba(0,0,0,.35)}
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="frame"></div>
+
+  <svg class="roof" viewBox="0 0 340 130" aria-hidden="true">
+    <!-- roof -->
+    <path d="M20 78 L170 12 L320 78" fill="none" stroke="#d4af37" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- building -->
+    <rect x="62" y="70" width="216" height="56" rx="4" fill="none" stroke="#f4e4c1" stroke-width="6"/>
+    <!-- arched windows -->
+    <path d="M110 126 V98 a14 14 0 0 1 28 0 V126" fill="none" stroke="#f4e4c1" stroke-width="5"/>
+    <path d="M202 126 V98 a14 14 0 0 1 28 0 V126" fill="none" stroke="#f4e4c1" stroke-width="5"/>
+    <!-- drops held off by the roof -->
+    <path d="M70 6 q-6 10 0 14 q6 -4 0 -14z M120 0 q-6 10 0 14 q6 -4 0 -14z M220 0 q-6 10 0 14 q6 -4 0 -14z M270 6 q-6 10 0 14 q6 -4 0 -14z" fill="#8fb4dc"/>
+  </svg>
+
+  <div class="kicker">בית הכנסת המרכזי – כפר תפוח</div>
+  <h1>יצאנו ב<span>פרויקט איטום</span> לגג</h1>
+  <div class="cost">הפרויקט עומד על <b>כמה עשרות אלפי שקלים</b></div>
+  <div class="ask">נשמח לעזרת הציבור</div>
+  <div class="contact">לתרומות נא לפנות לגבאים</div>
+</div>
+</body>
+</html>

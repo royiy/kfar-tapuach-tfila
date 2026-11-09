@@ -226,6 +226,10 @@
         <iframe src="Simhat-Tora.html" title="זמני תפילות - חול המועד ושמחת תורה" scrolling="no"></iframe>
     </div>
 
+    <div class="screen hidden frame-screen" id="roof-screen">
+        <iframe src="Roof.html" title="פרויקט איטום הגג" scrolling="no"></iframe>
+    </div>
+
     <div class="screen hidden" id="main-screen">
         <header class="hero">
             <div class="header-right">
@@ -428,7 +432,7 @@
 
         let currentScreen = 'main-screen';
         let screenToggleInterval = null;
-        const screenCycle = ['main-screen'];
+        const screenCycle = ['main-screen', 'roof-screen'];
         let screenCycleIndex = 0;
 
         const screenDurations = {
