@@ -1,16 +1,16 @@
 {
-  "shabbat_date": "2026-11-14",
-  "parsha": "תולדות",
+  "shabbat_date": "2026-11-21",
+  "parsha": "ויצא",
   "shabbat_times": {
     "erev_shabbat": {
       "mincha_gedola": "12:20",
-      "candle_lighting": "16:14",
-      "tzeit_hakochavim": "17:02"
+      "candle_lighting": "16:10",
+      "tzeit_hakochavim": "16:59"
     },
     "shabbat_day": {
       "mincha_gedola": "12:30",
-      "shkiya": "16:44",
-      "tzeit_shabbat": "17:18"
+      "shkiya": "16:41",
+      "tzeit_shabbat": "17:15"
     }
   },
   "weekday_times": {
@@ -20,13 +20,13 @@
       "08:00 (ביום שישי)"
     ],
     "mincha": [
-      "16:30",
+      "16:25",
       "13:15"
     ],
     "arvit": [
       "21:00",
       "20:00",
-      "17:10"
+      "17:05"
     ]
   }
 }
